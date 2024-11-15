@@ -49,6 +49,7 @@ CREATE TABLE citizen (
 CREATE TABLE police_station (
     id INT PRIMARY KEY AUTO_INCREMENT,
     station_name VARCHAR(100) NOT NULL,
+    station_code int NOT NULL,
     address VARCHAR(250) NOT NULL,
     pincode VARCHAR(6) NOT NULL,
     latitude VARCHAR(10),
