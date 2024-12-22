@@ -1,15 +1,17 @@
 
-import Navbar from '../Components/Admin/Navbar'
 import { Outlet } from 'react-router-dom'
-import Footer from '../Components/Footer'
+import Sidebar from '../Components/Admin/Sidebar'
+
 
 function AdminLayout() {
   return (
-    <>
-        <Navbar />
+
+    <div className="flex min-h-screen">
+      <Sidebar />
+      <div className="flex-grow bg-gray-100">
         <Outlet />
-        <Footer />
-    </>
+        </div>
+    </div>
   )
 }
 
