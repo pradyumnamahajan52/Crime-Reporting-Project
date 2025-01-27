@@ -7,22 +7,26 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="police_station_user")
+@Table(name = "police_station_user")
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(callSuper = true)
-public class PoliceStationUser extends BaseEntity{
+@ToString(callSuper = true, exclude = { "policeStation" })
+public class PoliceStationUser extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id")
-    private User user;
+	// police Station user 1 ---> 1 user
+	// eager
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="police_station_id")
-    private PoliceStation policeStation;
+	// police station user * <---> 1 police station
+	// eager
+	@ManyToOne
+	@JoinColumn(name = "police_station_id")
+	private PoliceStation policeStation;
 
-    @Column(name="is_verified",columnDefinition = "boolean default false")
-    private Boolean isVerified;
+	@Column(name = "is_verified", columnDefinition = "boolean default false")
+	private Boolean isVerified;
 
 }

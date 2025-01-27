@@ -29,7 +29,13 @@ const Navbar = () => {
             Home
           </a>
           <a className="mr-5 hover:text-white" href="/about">
-            About
+            Register a Complain
+          </a>
+          <a className="mr-5 hover:text-white" href="/contact">
+            Track Your Complain 
+          </a>
+          <a className="mr-5 hover:text-white" href="/about">
+            About 
           </a>
           <a className="mr-5 hover:text-white" href="/contact">
             Contact Us

@@ -9,19 +9,19 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="audit_trails")
+@Table(name = "audit_trails")
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class AuditTrails extends BaseEntity{
+public class AuditTrails extends BaseEntity {
 
-    @Column(name="message", length = 1200, nullable = true) // not null constraint
-    private String message;
+	@Column(name = "message", length = 1200, nullable = true) // not null constraint
+	private String message;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id")
-    private User user;
-
+	// audit * ---> 1 User
+	@ManyToOne(cascade = CascadeType.ALL) // Updated OneToOne to ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 }

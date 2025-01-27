@@ -1,45 +1,44 @@
 package site.crimereporting.entity;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
-@Table(name="police_station")
+@Table(name = "police_station")
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(callSuper = true)
-public class PoliceStation extends BaseEntity{
+@ToString(callSuper = true, exclude = { "policeStationUserList" })
+public class PoliceStation extends BaseEntity {
 
-    @Column(name="station_code", unique = true ,nullable = false) // not null constraint
-    private Integer stationCode;
+	@Column(name = "station_code", unique = true, nullable = false) // not null constraint
+	private Integer stationCode;
 
-    @Column(name="station_name", length = 100, nullable = false) // not null constraint
-    private String stationName;
+	@Column(name = "station_name", length = 100, nullable = false) // not null constraint
+	private String stationName;
 
-    @Column(name="address", length = 250, nullable = false) // not null constraint
-    private String address;
+	// police station 1 ---> 1 address
+	// eager
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id")
+	private Address address;
 
-    @Column(length = 6, nullable =false) // not null constraint
-    private String pincode;
-
-    @Column(length = 10, nullable =true) // not null constraint
-    private String latitude;
-
-    @Column(length = 10, nullable =true) // not null constraint
-    private String longitude;
-
-    @OneToMany(mappedBy = "policeStation",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+	// police station 1 <---> * policeStation List
+	// lazy
+	@OneToMany(mappedBy = "policeStation", cascade = CascadeType.ALL, orphanRemoval = true)
 //	@JsonIgnore
-    private List<PoliceStationUser> policeStationUserList = new ArrayList<>();
+	private List<PoliceStationUser> policeStationUserList = new ArrayList<>();
 
 }
