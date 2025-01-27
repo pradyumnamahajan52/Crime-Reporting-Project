@@ -1,98 +1,348 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
+import getContacts from "../Services/loader/ContactUs";
 
 function Contact() {
+
+  const [arrOfContacts, setArrOfContacts] = useState([])
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+ 
+
+  useEffect(()=>{
+
+    //const fetchData = async ()=>{
+      // const result = await getContacts();
+
+     // setArrOfContacts(result);
+
+    //}
+
+    //fetchData()
+
+    const fetchdata = async() =>{
+      const data = [
+        {
+            "id":1,
+            "name":"Atharva Jamdar",
+            "state": "Maharashtra",
+            "rank": "Superintendent of Chhichore",
+            "email" : "lucifer.and@nic.in",
+            "contact" : "8900910411"
+        },
+        {
+          "id":2,
+          "name":"John Michael",
+          "state": "ANDHRA PRADESH",
+          "rank": "Superintendent of Police",
+          "email" : "spcid.and@nic.in",
+          "contact" : "8900910411"
+      },
+      {
+        "id":3,
+        "name":"John Michael",
+        "state": "ANDHRA PRADESH",
+        "rank": "Superintendent of Police",
+        "email" : "spcid.and@nic.in",
+        "contact" : "8900910411"
+      },
+      {
+        "id":4,
+        "name":"John Michael",
+        "state": "ANDHRA PRADESH",
+        "rank": "Superintendent of Police",
+        "email" : "spcid.and@nic.in",
+        "contact" : "8900910411"
+      },
+      {
+        "id":4,
+        "name":"John Michael",
+        "state": "ANDHRA PRADESH",
+        "rank": "Superintendent of Police",
+        "email" : "spcid.and@nic.in",
+        "contact" : "8900910411"
+      },
+      {
+        "id":4,
+        "name":"John Michael",
+        "state": "ANDHRA PRADESH",
+        "rank": "Superintendent of Police",
+        "email" : "spcid.and@nic.in",
+        "contact" : "8900910411"
+      },
+      {
+        "id":4,
+        "name":"John Michael",
+        "state": "ANDHRA PRADESH",
+        "rank": "Superintendent of Police",
+        "email" : "spcid.and@nic.in",
+        "contact" : "8900910411"
+      },
+      {
+        "id":4,
+        "name":"John Michael",
+        "state": "ANDHRA PRADESH",
+        "rank": "Superintendent of Police",
+        "email" : "spcid.and@nic.in",
+        "contact" : "8900910411"
+      },
+      {
+        "id":4,
+        "name":"John Michael",
+        "state": "ANDHRA PRADESH",
+        "rank": "Superintendent of Police",
+        "email" : "spcid.and@nic.in",
+        "contact" : "8900910411"
+      },
+      {
+        "id":4,
+        "name":"John Michael",
+        "state": "ANDHRA PRADESH",
+        "rank": "Superintendent of Police",
+        "email" : "spcid.and@nic.in",
+        "contact" : "8900910411"
+      },
+      {
+        "id":4,
+        "name":"John Michael",
+        "state": "ANDHRA PRADESH",
+        "rank": "Superintendent of Police",
+        "email" : "spcid.and@nic.in",
+        "contact" : "8900910411"
+      }
+      ] 
+
+      setArrOfContacts(data)
+    }
+
+    fetchdata()
+    
+  }, [])
+
+  const totalPages = Math.ceil(arrOfContacts.length / itemsPerPage);
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const currentContacts = arrOfContacts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
-    <section className="text-gray-400 bg-gray-900 body-font relative">
-      <div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
-        {/* Map Section */}
-        <div className="lg:w-2/3 md:w-1/2 bg-gray-900 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
-          <iframe
-            title="map"
-            width="100%"
-            height="100%"
-            className="absolute inset-0"
-            frameBorder="0"
-            marginHeight="0"
-            marginWidth="0"
-            scrolling="no"
-            src="https://maps.google.com/maps?q=18.589438179273305,73.70659530224304&hl=en&z=14&output=embed"
-            style={{ filter: "grayscale(1) contrast(1.2) opacity(0.16)" }}
-          ></iframe>
-          <div className="bg-gray-900 relative flex flex-wrap py-6 rounded shadow-md">
-            <div className="lg:w-1/2 px-6">
-              <h2 className="title-font font-semibold text-white tracking-widest text-xs">
-                ADDRESS
-              </h2>
-              <p className="mt-1">
-                Photo booth tattooed prism, portland taiyaki hoodie neutra
-                typewriter
-              </p>
-            </div>
-            <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
-              <h2 className="title-font font-semibold text-white tracking-widest text-xs">
-                EMAIL
-              </h2>
-              <a href="mailto:example@email.com" className="text-indigo-400 leading-relaxed">
-                example@email.com
-              </a>
-              <h2 className="title-font font-semibold text-white tracking-widest text-xs mt-4">
-                PHONE
-              </h2>
-              <p className="leading-relaxed">123-456-7890</p>
-            </div>
+    <section className="text-gray-400 bg-gray-100 body-font relative">
+
+    <div className="container px-5 pt-20 m-0 flex sm:flex-nowrap flex-wrap">
+      {/* <div className="relative flex flex-col w-full h-full text-gray-700 bg-clip-border bg-blue-950	">
+              hey
+      </div>   */}
+
+    </div>
+
+      <div className="container px-5 py-10 mx-auto flex sm:flex-nowrap flex-wrap">
+      <div className="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+  <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
+    <div className="flex items-center justify-between gap-8 mb-8">
+      <div>
+        <h5
+          className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-neutral-950	">
+          State/UT Nodal Officer contact details
+        </h5>
+
+        <span className="block mt-1 font-sans text-sm text-base antialiased font-normal leading-relaxed text-gray-700">
+          Complainant who registered complaint using "Report & Track" option on the National Cyber Crime Reporting Portal,may contact the respective State/UT Nodal Officer or Grievance Officer if the response has not been appropriate.
+        </span>
+      </div>
+    </div>
+    <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+      {/* <div className="block w-full overflow-hidden md:w-max">
+        <nav>
+          <ul role="tablist" className="relative flex flex-row p-1 rounded-lg bg-blue-gray-50 bg-opacity-60">
+            <li role="tab"
+              className="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
+              data-value="all">
+              <div className="z-20 text-inherit">
+                &nbsp;&nbsp;All&nbsp;&nbsp;
+              </div>
+              <div className="absolute inset-0 z-10 h-full bg-white rounded-md shadow"></div>
+            </li>
+            <li role="tab"
+              className="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
+              data-value="monitored">
+              <div className="z-20 text-inherit">
+                &nbsp;&nbsp;Monitored&nbsp;&nbsp;
+              </div>
+            </li>
+            <li role="tab"
+              className="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
+              data-value="unmonitored">
+              <div className="z-20 text-inherit">
+                &nbsp;&nbsp;Unmonitored&nbsp;&nbsp;
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div> */}
+      <div className="w-full md:w-72">
+        <div className="relative h-10 w-full min-w-[200px]">
+          <div className="absolute grid w-5 h-5 top-2/4 right-3 -translate-y-2/4 place-items-center text-blue-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" aria-hidden="true" className="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+            </svg>
           </div>
+          <input
+            className="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 !pr-9 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+            placeholder=" " />
+          <label
+            className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-gray-500 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+            Search officer of your state
+          </label>
         </div>
-        {/* Feedback Form */}
-        <div className="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
-          <h2 className="text-white text-lg mb-1 font-medium title-font">
-            Feedback
-          </h2>
-          <p className="leading-relaxed mb-5">
-            Post-ironic portland shabby chic echo park, banjo fashion axe.
-          </p>
-          <div className="relative mb-4">
-            <label htmlFor="name" className="leading-7 text-sm text-gray-400">
+      </div>
+    </div>
+  </div>
+  <div className="p-6 px-0 overflow-scroll">
+    <table className="w-full mt-4 text-left table-auto min-w-max">
+      <thead>
+        
+        <tr>
+        <th className="p-4 border-y border-blue-gray-100 bg-slate-500">
+            <p className="block font-sans text-sm antialiased font-normal leading-none text-white	 opacity-70 ">
+             S.No.
+            </p>
+          </th>
+          <th className="p-4 border-y border-blue-gray-100 bg-slate-500">
+            <p className="block font-sans text-sm antialiased font-normal leading-none text-white opacity-70 	">
               Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-          </div>
-          <div className="relative mb-4">
-            <label htmlFor="email" className="leading-7 text-sm text-gray-400">
+            </p>
+          </th>
+          <th className="p-4 border-y border-blue-gray-100 bg-slate-500">
+            <p className="block font-sans text-sm antialiased font-normal leading-none text-white opacity-70">
+              State
+            </p>
+          </th>
+          <th className="p-4 border-y border-blue-gray-100 bg-slate-500">
+            <p className="block font-sans text-sm antialiased font-normal leading-none text-white opacity-70">
+              Rank
+            </p>
+          </th>
+          <th className="p-4 border-y border-blue-gray-100 bg-slate-500">
+            <p className="block font-sans text-sm antialiased font-normal leading-none text-white opacity-70">
               Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-          </div>
-          <div className="relative mb-4">
-            <label htmlFor="message" className="leading-7 text-sm text-gray-400">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              className="w-full bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-            ></textarea>
-          </div>
-          <button className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-            Submit
-          </button>
-          <p className="text-xs text-gray-400 text-opacity-90 mt-3">
-            Chicharrones blog helvetica normcore iceland tousled brook viral
-            artisan.
-          </p>
-        </div>
+            </p>
+          </th>
+          <th className="p-4 border-y border-blue-gray-100 bg-slate-500">
+            <p className="block font-sans text-sm antialiased font-normal leading-none text-white opacity-70">
+              Contact
+            </p>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          currentContacts.map((row, index) =>{
+            return(
+            <tr key= {row.id}>
+              <td className="p-4 border-b border-blue-gray-50">
+                <div className="flex items-center gap-3">
+  
+                  <div className="flex flex-col">
+                    <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                        {row.id}
+                    </p>
+        
+                  </div>
+              </div>
+            </td>
+          <td className="p-4 border-b border-blue-gray-50">
+            <div className="flex items-center gap-3">
+  
+              <div className="flex flex-col">
+                <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                  {row.name}
+                </p>
+        
+              </div>
+            </div>
+          </td>
+          <td className="p-4 border-b border-blue-gray-50">
+            <div className="flex flex-col">
+              <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+              {row.state}
+              </p>
+              {/* <p
+                className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
+                Pune
+              </p> */}
+            </div>
+          </td>
+          <td className="p-4 border-b border-blue-gray-50">
+            <div className="w-max">
+              <div
+                className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase">
+                <span className="">{row.rank}</span>
+              </div>
+            </div>
+          </td>
+          <td className="p-4 border-b border-blue-gray-50">
+            <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+            {row.email}
+
+            </p>
+          </td>
+          <td className="p-4 border-b border-blue-gray-50">
+            <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+            {row.contact}
+
+            </p>
+          </td>
+        </tr> 
+        
+            )
+          }
+        )
+      }
+      </tbody>
+    </table>
+  </div>
+  <div className="flex items-center justify-between p-4 border-t border-blue-gray-50">
+    <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+      Page 1 of 10
+    </p>
+    <div className="flex gap-2">
+      <button
+        className="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        type="button" onClick={handlePrevious} disabled={currentPage === 1}>
+        Previous
+      </button>
+      <button
+        className="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        type="button" onClick={handleNext} disabled={currentPage === totalPages}>
+        Next
+      </button>
+    </div>
+  </div>
+</div>
       </div>
     </section>
   );
 }
 
 export default Contact;
+
+
+
