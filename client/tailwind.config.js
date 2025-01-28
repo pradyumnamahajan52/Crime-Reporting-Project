@@ -17,8 +17,10 @@ export default {
         secondary: '#9333EA', // Custom purple
         
       },
+     
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],  // Keep existing sans font
+        quicksand: ['Quicksand', 'sans-serif'],  // Add Quicksand font
       },
     },
   },

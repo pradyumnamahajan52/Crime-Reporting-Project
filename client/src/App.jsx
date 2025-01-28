@@ -6,6 +6,8 @@ import AdminLayout from "./Layout/AdminLayout";
 import Dashboard from "./Screens/Admin/Dashboard";
 import About from "./Screens/About";
 import Contact from "./Screens/Contact";
+import Login from "./Screens/Login";
+import Register from "./Screens/Register";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,21 @@ const router = createBrowserRouter([
       }
     ],
   },
+  {   
+    path: "user",
+    errorElement: <Error />,
+    id: "user",
+    children: [
+    {
+      path:"login",
+      element: <Login />
+    },
+    {
+      path:"register",
+      element: <Register />
+    }
+  ]
+  },
   {
     path: "admin",
     errorElement: <Error />,
@@ -39,7 +56,8 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
     ],
-  },
+  }
+  
 ])
 
 
