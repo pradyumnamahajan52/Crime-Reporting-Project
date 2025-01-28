@@ -6,8 +6,19 @@ import AdminLayout from "./Layout/AdminLayout";
 import Dashboard from "./Screens/Admin/Dashboard";
 import About from "./Screens/About";
 import Contact from "./Screens/Contact";
+
+import Users from "./Screens/Admin/Users";
+import Profile from "./Screens/Admin/Profile";
+import Crime from "./Screens/Admin/Crime";
+import CrimeCategory from "./Screens/Admin/CrimeCategory";
+import Report from "./Screens/Admin/Report";
+import PoliceStation from "./Screens/Admin/PoliceStation";
+import Feedback from "./Screens/Admin/Feedback";
+import AuditLogs from "./Screens/Admin/AuditLogs";
+
 import Login from "./Screens/Login";
 import Register from "./Screens/Register";
+
 
 const router = createBrowserRouter([
   {
@@ -54,6 +65,38 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path:"users",
+        element: <Users />,
+      },
+      {
+        path:"profile",
+        element: <Profile />,
+      },
+      {
+        path:"crime",
+        element: <Crime />,
+      },
+      {
+        path:"crime-category",
+        element: <CrimeCategory />,
+      },
+      {
+        path:"report",
+        element: <Report />,
+      },
+      {
+        path:"police-station",
+        element: <PoliceStation />,
+      },
+      {
+        path:"feedback",
+        element: <Feedback />,
+      },
+      {
+        path:"audit-logs",
+        element: <AuditLogs />,
       },
     ],
   }
