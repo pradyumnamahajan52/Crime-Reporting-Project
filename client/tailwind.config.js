@@ -4,9 +4,24 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  // theme: {
+  //   extend: {},
+  // },
+  // plugins: [],
+
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+       // primary: '#1D4ED8', // Custom blue
+       primary : '#17A2B8',
+        secondary: '#9333EA', // Custom purple
+        
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
+    },
   },
-  plugins: [],
+  
 }
 
