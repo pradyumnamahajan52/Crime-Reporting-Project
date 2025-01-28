@@ -1,4 +1,4 @@
-package site.crimereporting.Service;
+package site.crimereporting.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

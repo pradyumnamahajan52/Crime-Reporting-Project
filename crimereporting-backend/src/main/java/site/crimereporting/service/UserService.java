@@ -1,4 +1,4 @@
-package site.crimereporting.Service;
+package site.crimereporting.service;
 
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.UserRequestDTO;
