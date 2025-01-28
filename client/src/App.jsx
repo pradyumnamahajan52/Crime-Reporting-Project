@@ -6,6 +6,7 @@ import AdminLayout from "./Layout/AdminLayout";
 import Dashboard from "./Screens/Admin/Dashboard";
 import About from "./Screens/About";
 import Contact from "./Screens/Contact";
+
 import Users from "./Screens/Admin/Users";
 import Profile from "./Screens/Admin/Profile";
 import Crime from "./Screens/Admin/Crime";
@@ -14,6 +15,10 @@ import Report from "./Screens/Admin/Report";
 import PoliceStation from "./Screens/Admin/PoliceStation";
 import Feedback from "./Screens/Admin/Feedback";
 import AuditLogs from "./Screens/Admin/AuditLogs";
+
+import Login from "./Screens/Login";
+import Register from "./Screens/Register";
+
 
 const router = createBrowserRouter([
   {
@@ -35,6 +40,21 @@ const router = createBrowserRouter([
         element: <Contact />
       }
     ],
+  },
+  {   
+    path: "user",
+    errorElement: <Error />,
+    id: "user",
+    children: [
+    {
+      path:"login",
+      element: <Login />
+    },
+    {
+      path:"register",
+      element: <Register />
+    }
+  ]
   },
   {
     path: "admin",
@@ -79,7 +99,8 @@ const router = createBrowserRouter([
         element: <AuditLogs />,
       },
     ],
-  },
+  }
+  
 ])
 
 
