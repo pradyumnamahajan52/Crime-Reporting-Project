@@ -20,13 +20,14 @@ import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.PoliceStationUser;
 import site.crimereporting.entity.User;
+import site.crimereporting.service.UserService;
 import site.crimereporting.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 	@Autowired
-	private UserServiceImpl userService;
+	private UserService userService;
 	
 
 	@PostMapping("/signin/email")
