@@ -1,6 +1,5 @@
 package site.crimereporting.controller;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +12,16 @@ import jakarta.validation.Valid;
 import site.crimereporting.custom_exception.ApiException;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.AuthRequest;
+import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.dtos.OtpRequest;
 import site.crimereporting.dtos.PoliceRegisterRequestDTO;
-import site.crimereporting.dtos.RegisterRequestDTO;
-import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.PoliceStationUser;
+
 import site.crimereporting.entity.User;
 import site.crimereporting.service.UserService;
 import site.crimereporting.service.UserServiceImpl;
+
 
 @RestController
 @RequestMapping("/users")
@@ -43,6 +43,7 @@ public class UserController {
 		return ResponseEntity.ok("Login successfully");
 
 	}
+
 
 	@PostMapping("/register/citizen")
 	public ResponseEntity<?> registerCitizen(@RequestBody @Valid CitizenRegisterRequestDTO citizen) {
