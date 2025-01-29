@@ -6,30 +6,117 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import site.crimereporting.custom_exception.ApiException;
+import site.crimereporting.custom_exception.ResourceNotFoundException;
+import site.crimereporting.dao.AadhaarCardDao;
+import site.crimereporting.dao.AddressDao;
+import site.crimereporting.dao.CitizenDao;
+import site.crimereporting.dao.PoliceStationDao;
+import site.crimereporting.dao.PoliceStationUserDao;
 import site.crimereporting.dao.UserDao;
 import site.crimereporting.dtos.ApiResponse;
-import site.crimereporting.dtos.UserRequestDTO;
+import site.crimereporting.dtos.CitizenRegisterRequestDTO;
+import site.crimereporting.dtos.PoliceRegisterRequestDTO;
+import site.crimereporting.dtos.RegisterRequestDTO;
+import site.crimereporting.entity.AadhaarCard;
+import site.crimereporting.entity.Address;
+import site.crimereporting.entity.Citizen;
+import site.crimereporting.entity.PoliceStation;
+import site.crimereporting.entity.PoliceStationUser;
 import site.crimereporting.entity.User;
+import site.crimereporting.entity.UserRole;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private AadhaarCardDao aadhaarCardDao;
+
+	@Autowired
+	private AddressDao addressDao;
+
+	@Autowired
+	private CitizenDao citizenDao;
 	
 	@Autowired
-	private ModelMapper mapper;
+	private PoliceStationDao policeStationDao;
 	
-	public ApiResponse registeruser(UserRequestDTO user) {
+	@Autowired
+	private PoliceStationUserDao policeStationUserDao;
+
+	@Autowired
+	private ModelMapper mapper;
+
+	@Override
+	public ApiResponse<Citizen> registerCitizen(CitizenRegisterRequestDTO citizen) {
+
+		// creating an object for mapping user class
+		RegisterRequestDTO userDto = mapper.map(citizen, RegisterRequestDTO.class);
+		System.out.println(userDto);
+
+		// creating user object
+		User user = mapper.map(userDto, User.class);
+		user.setRole(UserRole.CITIZEN);
 		
-		User requser =  mapper.map(user, User.class);
-		
-		User persistentUser =  userDao.save(requser);
-		
-		if(persistentUser.getId() == null)
-			throw new ApiException("user registration failed!");
-			
-		return new ApiResponse<User>("user registered successfully!" , persistentUser);
-		
+//		//checking if citizen with email already exists
+//		 userDao.findByEmail(user.getEmail()).orElseThrow(() -> new ApiException("citizen with email already exists!!"));
+
+		// creating aadhaar card object
+		AadhaarCard aadhaarCard = mapper.map(citizen, AadhaarCard.class);
+
+		// creating Address object
+		Address address = mapper.map(citizen, Address.class);
+
+		// creating citizen object
+		Citizen citizenWantToRegister = mapper.map(citizen, Citizen.class);
+
+		// adding the reference of user, aaadharcard and address in citizen saving
+		// changes in database
+		citizenWantToRegister.setUser(user);
+		citizenWantToRegister.setAadhaarCard(aadhaarCard);
+		citizenWantToRegister.getAddress().add(address);
+
+		// saving citizen in database
+		Citizen registeredCitizen = citizenDao.save(citizenWantToRegister);
+
+		if (registeredCitizen == null)
+			throw new ApiException("citizen registration failed!");
+
+		return new ApiResponse<Citizen>("citizen registered successfully!", registeredCitizen);
 	}
+
+	@Override
+	public ApiResponse registerPolice(PoliceRegisterRequestDTO police) {
+
+		// creating an object for mapping user class
+		RegisterRequestDTO userDto = mapper.map(police, RegisterRequestDTO.class);
+
+		// creating user object
+		User user = mapper.map(userDto, User.class);
+		user.setRole(UserRole.POLICE);
+		
+//		//checking if police with email already exists
+//		 userDao.findByEmail(user.getEmail()).orElseThrow(() -> new ApiException("police with email already exists!!"));
+
+		
+		//finding the police station  
+		 PoliceStation policeStation =  policeStationDao.findByStationCode(police.getStationCode()).orElseThrow( () -> new ResourceNotFoundException("station code is not valid!"));
+
+		 //creating a police station user
+		 PoliceStationUser policeStationUser = new PoliceStationUser();
+		 policeStationUser.setPoliceStation(policeStation);
+		 policeStationUser.setUser(user);
+		 
+		
+		  PoliceStationUser registeredPolice =  policeStationUserDao.save(policeStationUser);
+		  
+		  if (registeredPolice == null)
+				throw new ApiException("police registration failed!");
+
+			return new ApiResponse<PoliceStationUser>("police registered successfully!", registeredPolice);
+		 
+	}
+
 }
