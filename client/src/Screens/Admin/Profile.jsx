@@ -8,7 +8,7 @@ const Profile = () => {
   <TopBar rightButton="" />
 
 {/* Profile Page Content */}
-<div className="px-4 py-6 grid grid-cols-12 gap-6">
+<div className="px-4 py-4 grid grid-cols-12 gap-6">
   {/* User Information Form */}
   <div className="col-span-8 bg-white shadow rounded-lg p-6">
     <h2 className="text-lg font-semibold text-gray-700 mb-4">My Account</h2>
