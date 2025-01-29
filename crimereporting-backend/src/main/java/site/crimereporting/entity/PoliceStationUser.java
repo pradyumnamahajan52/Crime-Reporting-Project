@@ -13,6 +13,12 @@ import lombok.ToString;
 @Setter
 @ToString(callSuper = true, exclude = { "policeStation" })
 public class PoliceStationUser extends BaseEntity {
+	
+	@Column(name = "name", length = 100, nullable = false) // not null constraint
+	private String name;
+	
+	@Column(length = 100, nullable = false)
+	private String designation;
 
 	// police Station user 1 ---> 1 user
 	// eager
@@ -23,10 +29,10 @@ public class PoliceStationUser extends BaseEntity {
 	// police station user * <---> 1 police station
 	// eager
 	@ManyToOne
-	@JoinColumn(name = "police_station_id")
+	@JoinColumn(name = "police_station_id", nullable=false)
 	private PoliceStation policeStation;
 
 	@Column(name = "is_verified", columnDefinition = "boolean default false")
-	private Boolean isVerified;
+	private Boolean isVerified = false;
 
 }

@@ -60,7 +60,7 @@ public class CrimeReports extends BaseEntity {
 
 	// crime reports * --> 1 police station
 	// eager
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "police_station_id", nullable = true)
 	private PoliceStation policeStation;
 

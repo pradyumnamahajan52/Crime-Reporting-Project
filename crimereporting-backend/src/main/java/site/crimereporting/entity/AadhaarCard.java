@@ -23,6 +23,6 @@ public class AadhaarCard extends BaseEntity {
 
 	@Lob
 	@Column(nullable = false)
-	private Byte[] image;
+	private byte[] image;
 
 }

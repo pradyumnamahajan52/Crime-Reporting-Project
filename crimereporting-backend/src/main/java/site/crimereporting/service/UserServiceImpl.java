@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 		// changes in database
 		citizenWantToRegister.setUser(user);
 		citizenWantToRegister.setAadhaarCard(aadhaarCard);
-		citizenWantToRegister.getAddress().add(address);
+		citizenWantToRegister.setAddress(address);
 
 		// saving citizen in database
 		Citizen registeredCitizen = citizenDao.save(citizenWantToRegister);
