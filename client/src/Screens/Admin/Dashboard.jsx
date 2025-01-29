@@ -4,7 +4,7 @@ import TopBar from "../../Components/Admin/Dashboard/TopBar";
 function Dashboard() {
   return (
     <>
-      <TopBar />
+      <TopBar rightButton="" />
       <Grid />
     </>
   );
