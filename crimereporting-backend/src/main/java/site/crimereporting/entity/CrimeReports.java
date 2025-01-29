@@ -28,9 +28,14 @@ import lombok.ToString;
 @ToString(callSuper = true, exclude = { "evidenceList" })
 public class CrimeReports extends BaseEntity {
 
+	//only citizen can report
+//	@ManyToOne
+//	@JoinColumn(name = "user_id")
+//	private User user;
+	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "citizen_id")
+	private Citizen citizen;
 
 	@Column(name = "description", length = 1200, nullable = true) // not null constraint
 	private String description;
@@ -55,7 +60,7 @@ public class CrimeReports extends BaseEntity {
 
 	// crime reports * --> 1 police station
 	// eager
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "police_station_id", nullable = true)
 	private PoliceStation policeStation;
 
