@@ -48,7 +48,7 @@ public class CitizenRegisterRequestDTO extends RegisterRequestDTO{
 
 	private String pinCode;
 
-	private String latitude;
+	private Double latitude;
 
-	private String longitude;
+	private Double longitude;
 }

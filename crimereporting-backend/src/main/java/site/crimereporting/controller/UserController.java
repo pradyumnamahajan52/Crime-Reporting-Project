@@ -17,7 +17,11 @@ import site.crimereporting.dtos.OtpRequest;
 import site.crimereporting.dtos.PoliceRegisterRequestDTO;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.PoliceStationUser;
+
+import site.crimereporting.entity.User;
 import site.crimereporting.service.UserService;
+import site.crimereporting.service.UserServiceImpl;
+
 
 @RestController
 @RequestMapping("/users")
