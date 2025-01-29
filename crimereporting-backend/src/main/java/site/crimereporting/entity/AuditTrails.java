@@ -20,8 +20,9 @@ public class AuditTrails extends BaseEntity {
 	private String message;
 
 	// audit * ---> 1 User
-	@ManyToOne(cascade = CascadeType.ALL) // Updated OneToOne to ManyToOne
-	@JoinColumn(name = "user_id")
+//	@ManyToOne(cascade = CascadeType.ALL) // Updated OneToOne to ManyToOne 
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
 }
