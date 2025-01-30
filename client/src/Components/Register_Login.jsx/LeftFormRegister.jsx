@@ -3,7 +3,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom'
 
 
-export default function Form({ formFields, isUser , setCitizen , isCitizen}) {
+export default function Form({ formFields, isUser , setCitizen , isCitizen,handleFileChange,evidence,handleSignUpforPolice}) {
 
 
 
@@ -13,12 +13,12 @@ export default function Form({ formFields, isUser , setCitizen , isCitizen}) {
   
   return (
 
-    <div className='mt-20' >
+    <div className='mt-10' >
 
       <div  >
-        <h1 className='font-quicksand text-black text-3xl  ml-10 mt-10' >Create An Account</h1>
+        <h1 className='font-quicksand text-black text-3xl  ml-10 mt-10 text-center' >Create An Account</h1>
          </div>
-      <div className='flex gap-8 ' > 
+      <div className='flex gap-8 justify-center' > 
         <div>
         <button style={{border: !isCitizen && "1.5px solid black " , color: !isCitizen ? "black" : "white" , backgroundColor: isCitizen && "black" }} onClick={()=>{setCitizen(true)}} className="text-base  rounded-lg py-2 px-[57px] mt-4 ">
         Citizen
@@ -30,13 +30,17 @@ export default function Form({ formFields, isUser , setCitizen , isCitizen}) {
       </button>
         </div>
       </div>
+
+      <div className='grid grid-cols-2 gap-4'>
+
+     
    
       {formFields.map((item, index) => {
         return (
 
         
          
-          <div key={index} style={{border:"1.5px solid #17A2B8" , padding:"3% 3%"}} className="flex items-center rounded-lg border-2  w-[350px] mt-4 ">
+          <div key={index} style={{border:"1.5px solid #17A2B8" , padding:"2% 2%"}} className=" rounded-lg border-2  w-[300px] mt-4 ">
 
 
             <input
@@ -44,20 +48,63 @@ export default function Form({ formFields, isUser , setCitizen , isCitizen}) {
               type={item.type}
               placeholder={item.placeholder}
               name={item.name}
-              onChange={item.onChange} // Ensure `onChange` is passed correctly as a prop
+              value={item.value}
+              onChange={item.onchange} // Ensure `onChange` is passed correctly as a prop
             />
      
           </div>
         );
       })}
+       </div>
+       {
+        isCitizen && 
+        <div>
+             <div className="mb-6 mt-2">
+          <label className="block text-lg font-medium mb-2">
+            Upload Aadhaar Image :
+          </label>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleFileChange}
+            className="border border-[#17A2B8] p-2 rounded w-full cursor-pointer"
+          />
+
+          {/* Preview Uploaded Images */}
+          {evidence.length > 0 && (
+            <div className="mt-4">
+              <h3 className="font-semibold text-gray-700 mb-2">Preview:</h3>
+              <div className="flex flex-wrap gap-4">
+                {evidence.map((file, index) => (
+                  file.type.startsWith("image/") ? (
+                    <img
+                      key={index}
+                      src={URL.createObjectURL(file)}
+                      alt={`Uploaded ${index + 1}`}
+                      className="w-24 h-24 object-cover rounded border border-[#17A2B8]"
+                    />
+                  ) : (
+                    <p key={index} className="text-sm text-gray-700">
+                      {file.name}
+                    </p>
+                  )
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+        </div>
+       }
 
   
-    
-          <button className="text-base bg-[#17A2B8] text-white rounded-lg py-3 px-[42%] mt-10">
+      <div className='flex justify-center'>
+      <button className="text-base bg-[#17A2B8] text-white rounded-lg py-3 px-[20%] " onClick={handleSignUpforPolice}>
         Sign up
       </button>
+      </div>
       
-      <span className="text-xl text-center mt-2 ml-6 w-[200px] mx-auto">
+      <span className="text-xl text-center mt-1 ml-6 w-[200px] mx-auto">
    <p>Already Have An Account? <span className=' text-[#17A2B8] cursor-pointer ' onClick={()=> navigate("/user/login") } >Sign In</span> </p> 
       </span> 
 

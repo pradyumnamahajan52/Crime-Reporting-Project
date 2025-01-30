@@ -30,5 +30,8 @@ public class User extends BaseEntity {
 	private LocalDateTime otpCreatedAt;
 	@Column(length = 10, nullable = false) // not null constraint
 	private String password;
+	
+	
+
 
 }

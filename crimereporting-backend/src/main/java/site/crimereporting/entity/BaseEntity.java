@@ -34,4 +34,14 @@ public class BaseEntity {
 
     @Column(name="is_deleted",columnDefinition = "boolean default false")
     private Boolean isDeleted;
+
+	public Long getId() {
+		return Id;
+	}
+
+	public void setId(Long id) {
+		Id = id;
+	}
+    
+    
 }
