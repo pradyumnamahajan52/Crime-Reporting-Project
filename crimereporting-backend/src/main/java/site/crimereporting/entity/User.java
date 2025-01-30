@@ -26,6 +26,10 @@ public class User extends BaseEntity {
 	private String phoneNumber;
 	@Column(length = 6, nullable = true) // not null constraint
 	private String otp;
+	
+	@Column(name = "otp_expiry")
+	private LocalDateTime otpExpiry;
+
 	@Column(name = "otp_created_at", nullable = true) // not null constraint
 	private LocalDateTime otpCreatedAt;
 	@Column(length = 255, nullable = true) // not null constraint

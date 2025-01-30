@@ -1,6 +1,5 @@
 package site.crimereporting.service;
-
-
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 import java.io.IOException;
@@ -60,6 +59,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
     private JwtUtil jwtUtil;
+	
+	@Autowired
+	private EmailService emailService;
 
     private final Random random = new Random();
 
@@ -156,27 +158,75 @@ public class UserServiceImpl implements UserService {
 				return mapper.map(userEntity, AuthResponse.class);
 			}
 
+//	@Override
+//    public String generateOtp(String email) {
+//        String otp = String.valueOf(random.nextInt(900000) + 100000);
+//        Optional<User> existingUser = userDao.findByEmail(email);
+//        if (existingUser.isPresent()) {
+//            User user = existingUser.get();
+//            user.setOtp(otp);
+//            userDao.save(user);
+//            return "OTP sent successfully!";
+//        }
+//        throw new ApiException("User not found!");
+//    }
+	
+	
 	@Override
-    public String generateOtp(String email) {
-        String otp = String.valueOf(random.nextInt(900000) + 100000);
-        Optional<User> existingUser = userDao.findByEmail(email);
-        if (existingUser.isPresent()) {
-            User user = existingUser.get();
-            user.setOtp(otp);
-            userDao.save(user);
-            return "OTP sent successfully!";
-        }
-        throw new ApiException("User not found!");
-    }
+	public String generateOtp(String email) {
+	    String otp = String.valueOf(random.nextInt(900000) + 100000);
+	    Optional<User> existingUser = userDao.findByEmail(email);
 
+	    if (existingUser.isPresent()) {
+	        User user = existingUser.get();
+	        user.setOtp(otp);
+	        user.setOtpExpiry(LocalDateTime.now().plusMinutes(5)); // OTP valid for 5 minutes
+	        userDao.save(user);
+
+	        emailService.sendOtpEmail(email, otp);
+
+	        return "OTP sent successfully!";
+	    }
+	    throw new ApiException("User not found!");
+	}
+
+
+//	@Override
+//    public String verifyOtp(String email, String otp) {
+//        Optional<User> user = userDao.findByEmailAndOtp(email, otp);
+//        if (user.isPresent()) {
+//            String token = jwtUtil.generateToken(email);
+//            user.get().setOtp(null);
+//            return token;
+//        }
+//        throw new AuthenticationException("Invalid OTP!");
+//    }
+	
 	@Override
-    public String verifyOtp(String email, String otp) {
-        Optional<User> user = userDao.findByEmailAndOtp(email, otp);
-        if (user.isPresent()) {
-            String token = jwtUtil.generateToken(email);
-            user.get().setOtp(null);
-            return token;
-        }
-        throw new AuthenticationException("Invalid OTP!");
-    }
+	public String verifyOtp(String email, String otp) {
+	    Optional<User> user = userDao.findByEmailAndOtp(email, otp);
+	    
+	    if (user.isPresent()) {
+	        User existingUser = user.get();
+
+	        // Check if OTP expiry is null or expired
+	        if (existingUser.getOtpExpiry() == null || existingUser.getOtpExpiry().isBefore(LocalDateTime.now())) {
+	            throw new AuthenticationException("OTP expired!");
+	        }
+
+	        // Generate JWT token
+	        String token = jwtUtil.generateToken(email);
+
+	        // Clear OTP and expiry after successful verification
+	        existingUser.setOtp(null);
+	        existingUser.setOtpExpiry(null);
+
+	        // Save the updated user object
+	        userDao.save(existingUser);
+
+	        return token;
+	    }
+	    throw new AuthenticationException("Invalid OTP!");
+	}
+
 }
