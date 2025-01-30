@@ -3,6 +3,7 @@ package site.crimereporting.service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
+import java.io.IOException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,21 +67,25 @@ public class UserServiceImpl implements UserService {
     private final Random random = new Random();
 
 	@Override
-	public ApiResponse<Citizen> registerCitizen(CitizenRegisterRequestDTO citizen) {
+	public ApiResponse<Citizen> registerCitizen(CitizenRegisterRequestDTO citizen) throws IOException {
 
 		// creating an object for mapping user class
 		RegisterRequestDTO userDto = mapper.map(citizen, RegisterRequestDTO.class);
 		System.out.println(userDto);
+				
 
 		// creating user object
 		User user = mapper.map(userDto, User.class);
 		user.setRole(UserRole.CITIZEN);
+		
 		
 //		//checking if citizen with email already exists
 //		 userDao.findByEmail(user.getEmail()).orElseThrow(() -> new ApiException("citizen with email already exists!!"));
 
 		// creating aadhaar card object
 		AadhaarCard aadhaarCard = mapper.map(citizen, AadhaarCard.class);
+		//converting multipartfile image to byte[] and setting image
+		aadhaarCard.setImage(citizen.getImage().getBytes());
 
 		// creating Address object
 		Address address = mapper.map(citizen, Address.class);
@@ -93,6 +98,7 @@ public class UserServiceImpl implements UserService {
 		citizenWantToRegister.setUser(user);
 		citizenWantToRegister.setAadhaarCard(aadhaarCard);
 		citizenWantToRegister.setAddress(address);
+		
 
 		// saving citizen in database
 		Citizen registeredCitizen = citizenDao.save(citizenWantToRegister);
@@ -108,7 +114,8 @@ public class UserServiceImpl implements UserService {
 
 		// creating an object for mapping user class
 		RegisterRequestDTO userDto = mapper.map(police, RegisterRequestDTO.class);
-
+		
+		
 		// creating user object
 		User user = mapper.map(userDto, User.class);
 		user.setRole(UserRole.POLICE);
@@ -124,6 +131,8 @@ public class UserServiceImpl implements UserService {
 		 PoliceStationUser policeStationUser = new PoliceStationUser();
 		 policeStationUser.setPoliceStation(policeStation);
 		 policeStationUser.setUser(user);
+		 policeStationUser.setDesignation(police.getDesignation());
+		 policeStationUser.setName(police.getName());
 		 
 		
 		  PoliceStationUser registeredPolice =  policeStationUserDao.save(policeStationUser);
@@ -133,6 +142,11 @@ public class UserServiceImpl implements UserService {
 
 			return new ApiResponse<PoliceStationUser>("police registered successfully!", registeredPolice);
 		 
+	}
+
+	@Override
+	public Integer getTotalUsers() {
+		return 0;
 	}
 
 	@Override
