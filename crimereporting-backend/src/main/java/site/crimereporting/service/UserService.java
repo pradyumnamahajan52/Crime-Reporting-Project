@@ -12,7 +12,7 @@ public interface UserService {
 
 	String generateOtp(String email);
 
-	String verifyOtp(String email, String otp);
+	AuthResponse verifyOtp(String email, String otp);
 
 	AuthResponse signIn(AuthRequest dto);
 
@@ -21,6 +21,6 @@ public interface UserService {
 	ApiResponse registerPolice(PoliceRegisterRequestDTO police);
 
 
-	Integer getTotalUsers();
+	Long getTotalUsers();
 
 }
