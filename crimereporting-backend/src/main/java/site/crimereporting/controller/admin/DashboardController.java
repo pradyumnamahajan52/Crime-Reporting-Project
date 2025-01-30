@@ -16,8 +16,6 @@ public class DashboardController {
     @GetMapping
     public ResponseEntity<?> renderDashboardHome() {
 
-        User user = new User();
-        user.getEmail();
         HashMap<String, Object> hashmap = new HashMap<>();
         List<String> authors = Arrays.asList("Lalini Shau","Pradyumna Mahajan" , "Jasmine Kispott", "Pawan Gupta","Mitali Gupta");
         hashmap.put("Authors", authors);
