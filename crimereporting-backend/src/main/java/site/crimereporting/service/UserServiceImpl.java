@@ -1,5 +1,8 @@
 package site.crimereporting.service;
 
+
+import java.util.Optional;
+import java.util.Random;
 import java.io.IOException;
 
 import org.modelmapper.ModelMapper;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import site.crimereporting.custom_exception.ApiException;
+import site.crimereporting.custom_exception.AuthenticationException;
 import site.crimereporting.custom_exception.ResourceNotFoundException;
 import site.crimereporting.dao.AadhaarCardDao;
 import site.crimereporting.dao.AddressDao;
@@ -16,6 +20,8 @@ import site.crimereporting.dao.PoliceStationDao;
 import site.crimereporting.dao.PoliceStationUserDao;
 import site.crimereporting.dao.UserDao;
 import site.crimereporting.dtos.ApiResponse;
+import site.crimereporting.dtos.AuthRequest;
+import site.crimereporting.dtos.AuthResponse;
 import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.dtos.PoliceRegisterRequestDTO;
 import site.crimereporting.dtos.RegisterRequestDTO;
@@ -26,6 +32,7 @@ import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.PoliceStationUser;
 import site.crimereporting.entity.User;
 import site.crimereporting.entity.UserRole;
+import site.crimereporting.security.JwtUtil;
 
 @Service
 @Transactional
@@ -50,6 +57,11 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private ModelMapper mapper;
+	
+	@Autowired
+    private JwtUtil jwtUtil;
+
+    private final Random random = new Random();
 
 	@Override
 	public ApiResponse<Citizen> registerCitizen(CitizenRegisterRequestDTO citizen) throws IOException {
@@ -129,4 +141,37 @@ public class UserServiceImpl implements UserService {
 		 
 	}
 
+	@Override
+	public AuthResponse signIn(AuthRequest dto) {
+		// 1. invoke dao's method
+				User userEntity = userDao.findByEmailAndOtp
+						(dto.getEmail(), dto.getOtp())
+						.orElseThrow(() -> new AuthenticationException("Invalid Email or otp !!!!!"));
+				// user entity : persistent -> dto
+				return mapper.map(userEntity, AuthResponse.class);
+			}
+
+	@Override
+    public String generateOtp(String email) {
+        String otp = String.valueOf(random.nextInt(900000) + 100000);
+        Optional<User> existingUser = userDao.findByEmail(email);
+        if (existingUser.isPresent()) {
+            User user = existingUser.get();
+            user.setOtp(otp);
+            userDao.save(user);
+            return "OTP sent successfully!";
+        }
+        throw new ApiException("User not found!");
+    }
+
+	@Override
+    public String verifyOtp(String email, String otp) {
+        Optional<User> user = userDao.findByEmailAndOtp(email, otp);
+        if (user.isPresent()) {
+            String token = jwtUtil.generateToken(email);
+            user.get().setOtp(null);
+            return token;
+        }
+        throw new AuthenticationException("Invalid OTP!");
+    }
 }

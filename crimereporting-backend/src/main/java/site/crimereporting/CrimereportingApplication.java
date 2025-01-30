@@ -16,6 +16,8 @@ public class CrimereportingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrimereportingApplication.class, args);
+		System.out.println("Crime Reporting Application is running...");
+
 	}
 
 	@Bean

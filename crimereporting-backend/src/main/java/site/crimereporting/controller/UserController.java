@@ -33,12 +33,11 @@ public class UserController {
 	private UserService userService;
 	
 
-	@PostMapping("/signin/email")
-	public ResponseEntity<?> userOtpResq(@RequestBody @Valid OtpRequest Otpdto) {
-		System.out.println("for otp request" + Otpdto);
-		return ResponseEntity.ok("Otp request");
-	}
-
+	 @PostMapping("/signin/email")
+	    public ResponseEntity<?> requestOtp(@RequestBody @Valid OtpRequest otpRequest) {
+	        return ResponseEntity.ok(userService.generateOtp(otpRequest.getEmail()));
+	    }
+	 
 	@PostMapping("/signin")
 	public ResponseEntity<?> userSignIn(@RequestBody @Valid AuthRequest dto) {
 		System.out.println("In user sign in " + dto);
