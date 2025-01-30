@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import site.crimereporting.dtos.ApiResponse;
 
 @RestController
-
 public class HomeController {
 
     //
@@ -23,7 +22,6 @@ public class HomeController {
 //    }
     @GetMapping
     public ResponseEntity<?> renderHome() {
-    	
 //    	User user = new User();
 //    	user.getEmail();
         HashMap<String, Object> hashmap = new HashMap<>();

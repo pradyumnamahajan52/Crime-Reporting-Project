@@ -20,12 +20,8 @@ import Login from "./Screens/Login";
 import Register from "./Screens/Register";
 import NotFound from "./Screens/NotFound";
 import FeedbackForm from "./Screens/FeedBackForm";
-<<<<<<< HEAD
-import Report from "./Screens/Citizen/Reports"
 import UpdatePoliceStation from "./Screens/Admin/UpdatePoliceStation";
-=======
 import Reports from "./Screens/Citizen/Reports"
->>>>>>> refs/remotes/origin/main
 
 
 const router = createBrowserRouter([
