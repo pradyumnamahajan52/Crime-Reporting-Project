@@ -17,4 +17,6 @@ public interface UserService {
 	ApiResponse registerCitizen(CitizenRegisterRequestDTO citizen);
 
 	ApiResponse registerPolice(PoliceRegisterRequestDTO police);
+
+	Integer getTotalUsers();
 }
