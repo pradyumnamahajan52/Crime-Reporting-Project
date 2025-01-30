@@ -22,7 +22,7 @@ export default function NotFound() {
     <div className="mt-10">
       <Lottie   options={defaultOptions} height={400} width={400} />
       <p className="font-quicksand text-black text-xl mt-3 text-center  ">
-         The Page you are looking for is not register by US.
+         The Page you are looking for is not register by us.
         </p>
 
         <button onClick={()=> navigate("/")} style={{ marginLeft:"36%"}} className="text-base bg-[#17A2B8] text-white rounded-lg py-3 px-[10%] mt-10 text-center ">
