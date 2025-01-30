@@ -31,8 +31,8 @@ public class PoliceStation extends BaseEntity {
 
 	// police station 1 ---> 1 address
 	// eager
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id")
+	@OneToOne
+	@JoinColumn(name = "address_id", nullable = false)
 	private Address address;
 
 	// police station 1 <---> * policeStation List

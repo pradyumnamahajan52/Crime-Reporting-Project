@@ -28,7 +28,7 @@ public class User extends BaseEntity {
 	private String otp;
 	@Column(name = "otp_created_at", nullable = true) // not null constraint
 	private LocalDateTime otpCreatedAt;
-	@Column(length = 10, nullable = false) // not null constraint
+	@Column(length = 255, nullable = true) // not null constraint
 	private String password;
 
 }

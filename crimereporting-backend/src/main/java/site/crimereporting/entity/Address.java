@@ -24,23 +24,18 @@ public class Address extends BaseEntity {
 	private String state;
 	@Column(length = 20)
 	private String country;
-	@Column(length = 20, name = "pin_code")
+	@Column(length = 7, name = "pin_code")
 	private String pinCode;
 
-	@Column(length = 10, nullable = true) // not null constraint
-	private String latitude;
+	@Column(nullable = true) // not null constraint
+	private Double latitude;
 
-	@Column(length = 10, nullable = true) // not null constraint
-	private String longitude;
+	@Column(nullable = true) // not null constraint
+	private Double longitude;
 
-//	public Address(String adrLine1, String adrLine2, String city, String state, String country, String zipCode) {
-//		super();
-//		this.adrLine1 = adrLine1;
-//		this.adrLine2 = adrLine2;
-//		this.city = city;
-//		this.state = state;
-//		this.country = country;
-//		this.zipCode = zipCode;
-//	}
+// as suggested by chatgpt address *<--->1 citizen
+//	@ManyToOne
+//	@JoinColumn(name="citizen_id", nullable=false)
+//	private Citizen citizen;
 
 }
