@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(DataIntegrityViolationException .class)
-	public ResponseEntity<?> handleAllRemainingException(DataIntegrityViolationException  ex) {
+	public ResponseEntity<?> handleDataIntegrityViolationException(DataIntegrityViolationException  ex) {
 		
 		Pattern pattern = Pattern.compile("Duplicate entry '(.+?)'");
         Matcher matcher = pattern.matcher(ex.getMessage());

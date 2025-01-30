@@ -32,7 +32,7 @@ public class CitizenRegisterRequestDTO extends RegisterRequestDTO{
 	//from aadhaar card
 	private String cardNumber;
 	
-	private Byte[] image;
+	private byte[] image;
 	
 	
 	//from address
@@ -48,7 +48,7 @@ public class CitizenRegisterRequestDTO extends RegisterRequestDTO{
 
 	private String pinCode;
 
-	private String latitude;
+	private Double latitude;
 
-	private String longitude;
+	private Double longitude;
 }
