@@ -3,11 +3,12 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom'
 
 
-export default function Form({ formFields, isUser }) {
+export default function Form({ formFields, isUser , setCitizen , isCitizen}) {
 
 
 
   const navigate = useNavigate();
+
 
   
   return (
@@ -19,13 +20,13 @@ export default function Form({ formFields, isUser }) {
          </div>
       <div className='flex gap-8 ' > 
         <div>
-        <button className="text-base bg-black text-white rounded-lg py-2 px-[57px] mt-4 ">
-        Police
+        <button style={{border: !isCitizen && "1.5px solid black " , color: !isCitizen ? "black" : "white" , backgroundColor: isCitizen && "black" }} onClick={()=>{setCitizen(true)}} className="text-base  rounded-lg py-2 px-[57px] mt-4 ">
+        Citizen
       </button>
         </div>
         <div>
-        <button style={{border:"1.5px solid black"}} className="text-base bg-white border-black text-black rounded-lg py-2 px-[57px] mt-4">
-        Admin
+        <button onClick={()=>{setCitizen(false)}} style={{border: isCitizen && "1.5px solid black " , color: isCitizen ? "black" : "white" , backgroundColor: !isCitizen && "black" }} className="text-base  rounded-lg py-2 px-[57px] mt-4">
+        Police
       </button>
         </div>
       </div>
@@ -50,7 +51,9 @@ export default function Form({ formFields, isUser }) {
         );
       })}
 
-      <button className="text-base bg-[#17A2B8] text-white rounded-lg py-3 px-[42%] mt-10">
+  
+    
+          <button className="text-base bg-[#17A2B8] text-white rounded-lg py-3 px-[42%] mt-10">
         Sign up
       </button>
       

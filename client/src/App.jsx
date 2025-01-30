@@ -18,6 +18,9 @@ import AuditLogs from "./Screens/Admin/AuditLogs";
 
 import Login from "./Screens/Login";
 import Register from "./Screens/Register";
+import NotFound from "./Screens/NotFound";
+import FeedbackForm from "./Screens/FeedBackForm";
+import Report from "./Screens/Citizen/Reports"
 
 
 const router = createBrowserRouter([
@@ -30,7 +33,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-      },
+      }, 
       {
         path: "about",
         element: <About />,
@@ -38,9 +41,27 @@ const router = createBrowserRouter([
       {
         path:"contact",
         element: <Contact />
-      }
+      },
+     
+      {
+        path:"feedback",
+        element: <FeedbackForm />
+      },
+     
+      
+      
     ],
   },
+
+
+  
+   
+    {
+      path:"*",
+      element: <NotFound />
+    },
+
+
   {   
     path: "user",
     errorElement: <Error />,
@@ -53,6 +74,10 @@ const router = createBrowserRouter([
     {
       path:"register",
       element: <Register />
+    },
+    {
+      path:"reports",
+      element: <Report />
     }
   ]
   },
