@@ -22,7 +22,11 @@ public class AadhaarCard extends BaseEntity {
 	private String cardNumber;
 
 	@Lob
+<<<<<<< HEAD
 	@Column(columnDefinition = "LONGBLOB", nullable= false)
+=======
+	@Column(columnDefinition = "LONGBLOB" , nullable = false)
+>>>>>>> 2802963cab1c293d940f05bbcb000e1e0b3f84e4
 	private byte[] image;
 
 }

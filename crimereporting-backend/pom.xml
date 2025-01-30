@@ -51,11 +51,6 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
@@ -92,6 +87,7 @@
 			<artifactId>commons-lang3</artifactId>
 			<!-- <version>3.14.0</version> -->
 		</dependency>
+<<<<<<< HEAD
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -130,6 +126,8 @@
 			<version>0.11.5</version>
 			<scope>runtime</scope>
 		</dependency>
+=======
+>>>>>>> 2802963cab1c293d940f05bbcb000e1e0b3f84e4
 	</dependencies>
 
 	<build>

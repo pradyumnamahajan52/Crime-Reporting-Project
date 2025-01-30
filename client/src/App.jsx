@@ -7,20 +7,20 @@ import Dashboard from "./Screens/Admin/Dashboard";
 import About from "./Screens/About";
 import Contact from "./Screens/Contact";
 
-import Users from "./Screens/Admin/Users";
-import Profile from "./Screens/Admin/Profile";
-import Crime from "./Screens/Admin/Crime";
-import CrimeCategory from "./Screens/Admin/CrimeCategory";
-import Report from "./Screens/Admin/Report";
-import PoliceStation from "./Screens/Admin/PoliceStation";
-import Feedback from "./Screens/Admin/Feedback";
-import AuditLogs from "./Screens/Admin/AuditLogs";
+import AdminUsers from "./Screens/Admin/Users";
+import AdminProfile from "./Screens/Admin/Profile";
+import AdminCrime from "./Screens/Admin/Crime";
+import AdminCrimeCategory from "./Screens/Admin/CrimeCategory";
+import AdminReport from "./Screens/Admin/Report";
+import AdminPoliceStation from "./Screens/Admin/PoliceStation";
+import AdminFeedback from "./Screens/Admin/Feedback";
+import AdminAuditLogs from "./Screens/Admin/AuditLogs";
 
 import Login from "./Screens/Login";
 import Register from "./Screens/Register";
 import NotFound from "./Screens/NotFound";
 import FeedbackForm from "./Screens/FeedBackForm";
-import Report from "./Screens/Citizen/Reports"
+import Reports from "./Screens/Citizen/Reports"
 
 
 const router = createBrowserRouter([
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
     },
     {
       path:"reports",
-      element: <Report />
+      element: <Reports />
     }
   ]
   },
@@ -93,35 +93,35 @@ const router = createBrowserRouter([
       },
       {
         path:"users",
-        element: <Users />,
+        element: <AdminUsers />,
       },
       {
         path:"profile",
-        element: <Profile />,
+        element: <AdminProfile />,
       },
       {
         path:"crime",
-        element: <Crime />,
+        element: <AdminCrime />,
       },
       {
         path:"crime-category",
-        element: <CrimeCategory />,
+        element: <AdminCrimeCategory />,
       },
       {
         path:"report",
-        element: <Report />,
+        element: <AdminReport />,
       },
       {
         path:"police-station",
-        element: <PoliceStation />,
+        element: <AdminPoliceStation />,
       },
       {
         path:"feedback",
-        element: <Feedback />,
+        element: <AdminFeedback />,
       },
       {
         path:"audit-logs",
-        element: <AuditLogs />,
+        element: <AdminAuditLogs />,
       },
     ],
   }

@@ -1,8 +1,12 @@
 package site.crimereporting.controller;
 
+import java.io.IOException;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +16,15 @@ import jakarta.validation.Valid;
 import site.crimereporting.custom_exception.ApiException;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.AuthRequest;
-import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.dtos.OtpRequest;
 import site.crimereporting.dtos.PoliceRegisterRequestDTO;
+import site.crimereporting.dtos.RegisterRequestDTO;
+import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.PoliceStationUser;
+import site.crimereporting.entity.User;
 import site.crimereporting.service.UserService;
+import site.crimereporting.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/users")
@@ -39,9 +46,8 @@ public class UserController {
 
 	}
 
-
 	@PostMapping("/register/citizen")
-	public ResponseEntity<?> registerCitizen(@RequestBody @Valid CitizenRegisterRequestDTO citizen) {
+	public ResponseEntity<?> registerCitizen(@ModelAttribute @Valid CitizenRegisterRequestDTO citizen) throws IOException {
 		
 		System.out.println(citizen);
 				
@@ -55,7 +61,7 @@ public class UserController {
 	
 	
 	@PostMapping("/register/police")
-	public ResponseEntity<?> registerPoliceStationUser(@RequestBody PoliceRegisterRequestDTO police){
+	public ResponseEntity<?> registerPoliceStationUser(@ModelAttribute PoliceRegisterRequestDTO police){
 		
 		ApiResponse<PoliceStationUser> registeredPolice = userService.registerPolice(police);
 

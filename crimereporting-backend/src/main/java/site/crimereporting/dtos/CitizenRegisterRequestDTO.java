@@ -3,6 +3,8 @@ package site.crimereporting.dtos;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
@@ -32,7 +34,11 @@ public class CitizenRegisterRequestDTO extends RegisterRequestDTO{
 	//from aadhaar card
 	private String cardNumber;
 	
+<<<<<<< HEAD
 	private byte[] image;
+=======
+	private MultipartFile image;
+>>>>>>> 2802963cab1c293d940f05bbcb000e1e0b3f84e4
 	
 	
 	//from address
