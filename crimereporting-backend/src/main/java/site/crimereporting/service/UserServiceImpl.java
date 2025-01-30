@@ -142,6 +142,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public Integer getTotalUsers() {
+		return 0;
+	}
+
+	@Override
 	public AuthResponse signIn(AuthRequest dto) {
 		// 1. invoke dao's method
 				User userEntity = userDao.findByEmailAndOtp

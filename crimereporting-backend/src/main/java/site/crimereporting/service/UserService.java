@@ -20,4 +20,7 @@ public interface UserService {
 	
 	ApiResponse registerPolice(PoliceRegisterRequestDTO police);
 
+
+	Integer getTotalUsers();
+
 }
