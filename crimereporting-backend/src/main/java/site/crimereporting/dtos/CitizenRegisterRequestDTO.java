@@ -32,7 +32,7 @@ public class CitizenRegisterRequestDTO extends RegisterRequestDTO{
 	//from aadhaar card
 	private String cardNumber;
 	
-	private Byte[] image;
+	private byte[] image;
 	
 	
 	//from address
