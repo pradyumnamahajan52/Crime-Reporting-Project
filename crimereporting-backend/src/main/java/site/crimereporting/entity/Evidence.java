@@ -20,7 +20,7 @@ public class Evidence extends BaseEntity {
 
 	// evidence * <---> 1 crimeReports
 	@ManyToOne
-	@JoinColumn(name = "crime_report_id")
+	@JoinColumn(name = "crime_report_id", nullable = false)
 	private CrimeReports crimeReports;
 
 	@Column(name = "file_url", length = 2048, nullable = false) // not null constraint

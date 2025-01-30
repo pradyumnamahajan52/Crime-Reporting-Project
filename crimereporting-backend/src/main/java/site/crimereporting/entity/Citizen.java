@@ -25,7 +25,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class Citizen extends BaseEntity {
 
-	@Column(name = "full_name", length = 100, nullable = true) // not null constraint
+	@Column(name = "full_name", length = 100, nullable = false) // not null constraint
 	private String fullName;
 
 	@Column(name = "date_of_birth", nullable = true)
@@ -43,9 +43,13 @@ public class Citizen extends BaseEntity {
 	private AadhaarCard aadhaarCard;
 
 	// eager
-	// citizen 1 ---> * address
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "address_id")
-	private List<Address> address = new ArrayList<Address>();
+	// citizen 1 ---> 1address
+//	@OneToOne
+//	@JoinColumn(name = "address_id")
+//	private List<Address> address = new ArrayList<Address>();
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id", nullable = false)
+	private Address address;
 
 }

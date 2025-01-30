@@ -22,10 +22,10 @@ import lombok.ToString;
 public class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @CreationTimestamp
-    @Column(name="created_at")
+    @Column(name="created_at", updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
@@ -33,15 +33,5 @@ public class BaseEntity {
     private LocalDateTime updatedAt;
 
     @Column(name="is_deleted",columnDefinition = "boolean default false")
-    private Boolean isDeleted;
-
-	public Long getId() {
-		return Id;
-	}
-
-	public void setId(Long id) {
-		Id = id;
-	}
-    
-    
+    private Boolean isDeleted = false;
 }
