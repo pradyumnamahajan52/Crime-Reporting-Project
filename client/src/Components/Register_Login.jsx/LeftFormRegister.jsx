@@ -16,13 +16,13 @@ export default function Form({
   const navigate = useNavigate();
 
   return (
-    <div className="mt-20">
-      <div>
-        <h1 className="font-quicksand text-black text-3xl  ml-10 mt-10 text-center">
-          Create An Account
-        </h1>
-      </div>
-      <div className="flex gap-8 justify-center ">
+
+    <div className='mt-10' >
+
+      <div  >
+        <h1 className='font-quicksand text-black text-3xl  ml-10 mt-10 text-center' >Create An Account</h1>
+         </div>
+      <div className='flex gap-8 justify-center' > 
         <div>
           <button
             style={{

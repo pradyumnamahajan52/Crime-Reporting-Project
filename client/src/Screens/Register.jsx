@@ -243,6 +243,104 @@ export default function Register() {
       }
     },
     {
+      type: "date",
+      placeholder: "Enter your Date of Birth",
+      name: "dateOfBirth",
+    },
+    {
+      type: "text",
+      placeholder: "Enter your Card Number",
+      name: "cardNumber",
+    },
+    {
+      type: "text",
+      placeholder: "Enter your Address line 1",
+      name: "addressline1",
+    },
+    {
+      type: "text",
+      placeholder: "Enter your Address line 2",
+      name: "addressline2",
+    },
+    {
+      type: "text",
+      placeholder: "Enter your City",
+      name: "city",
+    },
+    {
+      type: "text",
+      placeholder: "Enter your State",
+      name: "state",
+    },
+    {
+      type: "text",
+      placeholder: "Enter your Country",
+      name: "country",
+    },
+    {
+      type: "text",
+      placeholder: "Enter your pincode",
+      name: "pincode",
+    },
+  ];
+
+  const [policeformData, setPoliceFormdata] = useState({
+    name: "",
+    designation: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    cpassword: "",
+    stationCode: "",
+  });
+
+  const policeformFields = [
+    {
+      type: "text",
+      placeholder: "Enter your Name",
+      name: "name",
+      value: policeformData.name,
+      onchange: (e) => {
+        setPoliceFormdata({ ...policeformData, name: e.target.value });
+      },
+    },
+    {
+      type: "text",
+      placeholder: "Enter your Designation",
+      name: "designation",
+      value: policeformData.designation,
+      onchange: (e) => {
+        setPoliceFormdata({ ...policeformData, designation: e.target.value });
+      },
+    },
+    {
+      type: "email",
+      placeholder: "Enter your Email",
+      name: "email",
+      value: policeformData.email,
+      onchange: (e) => {
+        setPoliceFormdata({ ...policeformData, email: e.target.value });
+      },
+    },
+    {
+      type: "text",
+      placeholder: "Enter your Phone Number",
+      name: "phoneNumber",
+      value: policeformData.phoneNumber,
+      onchange: (e) => {
+        setPoliceFormdata({ ...policeformData, phoneNumber: e.target.value });
+      },
+    },
+    {
+      type: "password",
+      placeholder: "Enter your Password",
+      name: "password",
+      value: policeformData.password,
+      onchange: (e) => {
+        setPoliceFormdata({ ...policeformData, password: e.target.value });
+      },
+    },
+    {
       type: "password",
       placeholder: "Enter your Confirm Password",
       name: "cpassword",
