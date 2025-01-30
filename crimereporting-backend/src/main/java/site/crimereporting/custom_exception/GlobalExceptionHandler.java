@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(DataIntegrityViolationException .class)
-	public ResponseEntity<?> handleAllRemainingException(DataIntegrityViolationException  ex) {
+	public ResponseEntity<?> handleDataIntegrityViolationException(DataIntegrityViolationException  ex) {
 		
 		Pattern pattern = Pattern.compile("Duplicate entry '(.+?)'");
         Matcher matcher = pattern.matcher(ex.getMessage());
@@ -65,4 +65,5 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiException(ex.getMessage()));
 
 	}
+	
 }
