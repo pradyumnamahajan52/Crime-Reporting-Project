@@ -19,9 +19,9 @@ const SidebarMenu = () => {
       <SidebarMenuItem Icon={FiHome}  selected={currentPath === "/admin/"}  title="Dashboard" url="" />
       <SidebarMenuItem Icon={FiUsers}   selected={currentPath === "/admin/users"} title="User" url="users" />
       <SidebarMenuItem Icon={CgProfile}  selected={currentPath === "/admin/profile"} title="Profile" url="profile" />
-      <SidebarMenuItem Icon={MdOutlineLocalPolice}  selected={currentPath === "/admin/crime"} title="Crime" url="crime" />
+      <SidebarMenuItem Icon={TbReportAnalytics}  selected={currentPath === "/admin/crime-report"} title="Crime Reports" url="crime-report" />
       <SidebarMenuItem Icon={MdCategory}   selected={currentPath === "/admin/crime-category"}  title="Crime Category" url="crime-category" />
-      <SidebarMenuItem Icon={TbReportAnalytics} selected={currentPath === "/admin/report"} title="Report" url="report" />
+      <SidebarMenuItem Icon={MdOutlineLocalPolice} selected={currentPath === "/admin/new-police-station"} title="New Police Station" url="new-police-station" />
       <SidebarMenuItem Icon={FaClipboardList}  selected={currentPath === "/admin/police-station"} title="Police Station" url="police-station" />
       <SidebarMenuItem Icon={MdFeedback}  selected={currentPath === "/admin/feedback"} title="Feedback" url="feedback" />
       <SidebarMenuItem Icon={TbLogs}  selected={currentPath === "/admin/audit-logs"} title="Audit Logs" url="audit-logs" />
