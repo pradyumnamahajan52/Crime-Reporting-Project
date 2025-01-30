@@ -21,15 +21,14 @@ public class CrimereportingApplication {
 	}
 
 	@Bean
-	
 	public ModelMapper getMapper() {
-		
+
 		ModelMapper mapper = new ModelMapper();
-		
-		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT).setPropertyCondition(Conditions.isNotNull());
-		
-		
+
+		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT)
+				.setPropertyCondition(Conditions.isNotNull());
+
 		return mapper;
-		
+
 	}
 }
