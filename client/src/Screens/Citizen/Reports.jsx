@@ -99,15 +99,14 @@ const Report = () => {
         </div>
 
         
-            {/* Evidence Upload */}
             <div className="mb-6">
           <label className="block text-lg font-medium mb-2">
-            Upload Evidence (Images, Videos, Documents):
+            Upload Adhhar Image:
           </label>
           <input
             type="file"
             multiple
-            accept="image/*, video/*, .pdf, .doc, .docx"
+            accept="image/*"
             onChange={handleFileChange}
             className="border border-[#17A2B8] p-2 rounded w-full cursor-pointer"
           />
