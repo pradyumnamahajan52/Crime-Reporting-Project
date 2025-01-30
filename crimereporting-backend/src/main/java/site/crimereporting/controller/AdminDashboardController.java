@@ -1,8 +1,9 @@
-package site.crimereporting.controller.admin;
+package site.crimereporting.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.entity.User;
@@ -12,7 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-public class DashboardController {
+@RequestMapping("/admin")
+public class AdminDashboardController {
     @GetMapping
     public ResponseEntity<?> renderDashboardHome() {
 
@@ -22,5 +24,6 @@ public class DashboardController {
         hashmap.put("Project Name","Crime Reporting System");
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>("Project is Working! This message is from project creator", hashmap));
     }
+
 
 }
