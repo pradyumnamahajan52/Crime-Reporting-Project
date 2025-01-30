@@ -142,8 +142,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Integer getTotalUsers() {
-		return 0;
+	public Long getTotalUsers() {
+		return userDao.countByIsDeletedFalse();
 	}
 
 	@Override

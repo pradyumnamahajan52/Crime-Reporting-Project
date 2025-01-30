@@ -9,18 +9,23 @@ import Contact from "./Screens/Contact";
 
 import AdminUsers from "./Screens/Admin/Users";
 import AdminProfile from "./Screens/Admin/Profile";
-import AdminCrime from "./Screens/Admin/Crime";
+import AdminCrimeReports from "./Screens/Admin/CrimeReports";
 import AdminCrimeCategory from "./Screens/Admin/CrimeCategory";
-import AdminReport from "./Screens/Admin/Report";
 import AdminPoliceStation from "./Screens/Admin/PoliceStation";
 import AdminFeedback from "./Screens/Admin/Feedback";
 import AdminAuditLogs from "./Screens/Admin/AuditLogs";
+import NewPoliceStation from "./Screens/Admin/NewPoliceStation";
 
 import Login from "./Screens/Login";
 import Register from "./Screens/Register";
 import NotFound from "./Screens/NotFound";
 import FeedbackForm from "./Screens/FeedBackForm";
+<<<<<<< HEAD
+import Report from "./Screens/Citizen/Reports"
+import UpdatePoliceStation from "./Screens/Admin/UpdatePoliceStation";
+=======
 import Reports from "./Screens/Citizen/Reports"
+>>>>>>> refs/remotes/origin/main
 
 
 const router = createBrowserRouter([
@@ -100,16 +105,20 @@ const router = createBrowserRouter([
         element: <AdminProfile />,
       },
       {
-        path:"crime",
-        element: <AdminCrime />,
+        path:"crime-report",
+        element: <AdminCrimeReports />,
       },
       {
         path:"crime-category",
         element: <AdminCrimeCategory />,
       },
       {
-        path:"report",
-        element: <AdminReport />,
+        path:"new-police-station",
+        element: <NewPoliceStation />,
+      },
+      {
+        path:"update-police-station/:id",
+        element: <UpdatePoliceStation />,
       },
       {
         path:"police-station",

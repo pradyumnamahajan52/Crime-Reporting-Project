@@ -12,5 +12,5 @@ public interface UserDao extends JpaRepository<User, Long>{
 
 	Optional<User> findByEmail(String email);
 	Optional<User> findByEmailAndOtp(String email, String otp);
-
+	long countByIsDeletedFalse();
 }
