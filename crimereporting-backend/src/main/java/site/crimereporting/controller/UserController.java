@@ -35,7 +35,8 @@ public class UserController {
 
 	 @PostMapping("/signin/email")
 	    public ResponseEntity<?> requestOtp(@RequestBody @Valid OtpRequest otpRequest) {
-	        return ResponseEntity.ok(userService.generateOtp(otpRequest.getEmail()));
+	        return ResponseEntity.ok(userService.generateOtp(otpRequest
+					.getEmail()));
 	    }
 	 
 	@PostMapping("/signin")
