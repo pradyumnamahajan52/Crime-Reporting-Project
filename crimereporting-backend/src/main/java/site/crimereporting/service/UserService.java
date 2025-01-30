@@ -12,7 +12,7 @@ public interface UserService {
 
 	String generateOtp(String email);
 
-	String verifyOtp(String email, String otp);
+	AuthResponse verifyOtp(String email, String otp);
 
 	AuthResponse signIn(AuthRequest dto);
 
