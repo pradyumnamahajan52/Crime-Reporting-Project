@@ -23,8 +23,8 @@ public class HomeController {
     @GetMapping
     public ResponseEntity<?> renderHome() {
     	
-    	User user = new User();
-    	user.getEmail();
+//    	User user = new User();
+//    	user.getEmail();
         HashMap<String, Object> hashmap = new HashMap<>();
         List<String> authors = Arrays.asList("Lalini Shau","Pradyumna Mahajan" , "Jasmine Kispott", "Pawan Gupta","Mitali Gupta");
         hashmap.put("Authors", authors);
