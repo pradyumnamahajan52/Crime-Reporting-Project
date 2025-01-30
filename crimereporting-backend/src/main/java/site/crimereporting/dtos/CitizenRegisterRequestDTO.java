@@ -24,6 +24,7 @@ public class CitizenRegisterRequestDTO extends RegisterRequestDTO{
 	private String cardNumber;
 	
 	private MultipartFile image;
+
 	
 	
 	//from address

@@ -1,5 +1,4 @@
 package site.crimereporting.service;
-
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
