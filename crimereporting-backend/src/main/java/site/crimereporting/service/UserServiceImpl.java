@@ -1,10 +1,5 @@
 package site.crimereporting.service;
-
-<<<<<<< HEAD
 import java.time.LocalDateTime;
-=======
-
->>>>>>> 2802963cab1c293d940f05bbcb000e1e0b3f84e4
 import java.util.Optional;
 import java.util.Random;
 import java.io.IOException;
