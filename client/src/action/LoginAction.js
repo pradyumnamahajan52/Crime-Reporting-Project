@@ -35,8 +35,9 @@ export async function LoginAction({ request }) {
     // OTP Verification & Login Step
     const authData = {
       email: data.get("email"),
-      password: data.get("otp"),
+      otp: data.get("otp"),
     };
+    console.log(authData)
 
     const response = await fetch(`${API}/users/signin`, {
       method: "POST",
