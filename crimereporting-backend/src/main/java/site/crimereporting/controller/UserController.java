@@ -6,11 +6,7 @@ import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import site.crimereporting.custom_exception.ApiException;
@@ -25,6 +21,7 @@ import site.crimereporting.service.UserService;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("*")
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -38,6 +35,7 @@ public class UserController {
 	 
 	@PostMapping("/signin")
 	public ResponseEntity<?> userSignIn(@RequestBody @Valid AuthRequest dto) {
+		 System.out.println("sigin in working");
 		System.out.println("In user sign in " + dto);
 
 		try {
