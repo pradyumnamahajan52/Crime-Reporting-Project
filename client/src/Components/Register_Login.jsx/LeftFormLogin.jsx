@@ -25,7 +25,7 @@ export default function Form({ formFields, isUser }) {
       {formFields.map((item, index) => {
         return (
 
-         <div style={{marginTop:"-5%"}} >
+         <div className='-mt-5'key={index} >
           {
             item?.label && 
             <div className='mt-8'>
@@ -33,7 +33,7 @@ export default function Form({ formFields, isUser }) {
             </div>
           }
 
-          <div key={index} style={{border:"1.5px solid #17A2B8" , padding:"3% 6%"}} className="flex items-center rounded-lg border-2  w-[350px] mt-4  ">
+          <div key={index} className="flex items-center rounded-lg border border-2 border-primary  w-[350px] mt-4 p-[3%_6%] ">
 
 
             <input
@@ -48,12 +48,12 @@ export default function Form({ formFields, isUser }) {
         );
       })}
 
-      <button className="text-base bg-[#17A2B8] text-white rounded-lg py-3 px-[42%] mt-10">
+      <button className="text-base bg-primary text-white rounded-lg py-3 px-[42%] mt-10">
         {isUser ? "Sign In" : "Sign Up"}
       </button>
       
       <span className="text-xl text-center mt-4 ml-6 w-[200px] mx-auto">
-        {isUser ? <p>Create New Account? <span className=' text-[#17A2B8] cursor-pointer ' onClick={()=> navigate("/user/register") } >Sign Up</span> </p> : <p>Have An Account? <span>Sign In</span> </p>}
+        {isUser ? <p>Create New Account? <span className=' text-primary cursor-pointer ' onClick={()=> navigate("/user/register") } >Sign Up</span> </p> : <p>Have An Account? <span>Sign In</span> </p>}
       </span> 
 
        

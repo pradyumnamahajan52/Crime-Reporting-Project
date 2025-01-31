@@ -59,7 +59,7 @@ const CrimeCategory = () => {
         rightButton={
           <button
             onClick={() => handleOpenModal()}
-            className="flex text-sm items-center gap-2 bg-stone-100 transition-colors hover:bg-violet-100 hover:text-violet-700 px-3 py-1.5 rounded"
+            className="flex text-sm items-center gap-2 bg-primary hover:bg-primary-400 hover:text-black text-white transition-colors  px-3 py-1.5 rounded"
           >
             <span>Add New Category</span>
           </button>
@@ -131,7 +131,7 @@ const TableRow = ({ category, handleOpenModal, handleDelete }) => {
       <td className="p-1.5">{new Date(category.updatedAt).toLocaleString()}</td>
       <td className="w-8 flex flex-row content-center m-2">
         <button
-          className="text-blue-600 hover:underline"
+          className="text-primary-600 hover:underline"
           onClick={() => handleOpenModal(category)}
         >
           <FiEdit size={20} />
@@ -208,7 +208,7 @@ const CategoryForm = ({ category, onClose, onSave }) => {
         >
           Cancel
         </button>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        <button type="submit" className="bg-primary hover:bg-primary-400 hover:text-black text-white px-4 py-2 rounded">
           Save
         </button>
       </div>

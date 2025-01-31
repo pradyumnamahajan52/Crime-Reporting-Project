@@ -81,7 +81,7 @@ const Users = () => {
         rightButton={
           <button
             onClick={() => handleOpenModal()}
-            className="flex text-sm items-center gap-2 bg-stone-100 transition-colors hover:bg-violet-100 hover:text-violet-700 px-3 py-1.5 rounded"
+            className="flex text-sm items-center gap-2 bg-primary transition-colors hover:bg-primary-400 text-stone-50 hover:text-black px-3 py-1.5 rounded"
           >
             <span>Add new User</span>
           </button>
@@ -146,7 +146,7 @@ const TableRow = ({ user, handleOpenModal, handleDelete }) => {
       <td className="p-1.5">
         <a
           href="#"
-          className="text-violet-600 underline flex items-center gap-1"
+          className="text-primary-600 underline flex items-center gap-1"
         >
           {user.id}
         </a>
@@ -157,7 +157,7 @@ const TableRow = ({ user, handleOpenModal, handleDelete }) => {
       <td className="p-1.5">{user.createdAt}</td>
       <td className="w-8 flex flex-row content-center m-2">
         <button
-          className="text-blue-600 hover:underline"
+          className="text-primary-600 hover:underline"
           onClick={() => handleOpenModal(user)}
         >
           <FiEdit size={20} />
