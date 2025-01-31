@@ -60,8 +60,7 @@ export default function Form({
           return (
             <div
               key={index}
-              style={{ border: "1.5px solid #17A2B8", padding: "3% 3%" }}
-              className="flex items-center rounded-lg border-2  w-[350px] mt-4 "
+              className="flex items-center rounded-lg border border-2 border-primary w-[350px] mt-4 p-[3%_3%] "
             >
               <input
                 className="flex-grow outline-none px-2"
@@ -87,7 +86,7 @@ export default function Form({
              
               accept="image/*, video/*, .pdf, .doc, .docx"
               onChange={handleFileChange}
-              className="border border-[#17A2B8] p-2 rounded w-full cursor-pointer"
+              className="border border-primary p-2 rounded w-full cursor-pointer"
             />
 
             {/* Preview Uploaded Images */}
@@ -101,7 +100,7 @@ export default function Form({
                         key={index}
                         src={URL.createObjectURL(file)}
                         alt={`Uploaded ${index + 1}`}
-                        className="w-24 h-24 object-cover rounded border border-[#17A2B8]"
+                        className="w-24 h-24 object-cover rounded border border-primary"
                       />
                     ) : (
                       <p key={index} className="text-sm text-gray-700">
@@ -118,7 +117,7 @@ export default function Form({
 
       <div className="flex justify-center">
         <button
-          className="text-base bg-[#17A2B8] text-white rounded-lg py-3 px-[20%] mt-10"
+          className="text-base bg-primary text-white rounded-lg py-3 px-[20%] mt-10"
           onClick={isCitizen? handleSignUpforcitizen : handleSignUpforPolice}
         >
           {isLoading ? "Signing..." : "Sign Up"}
@@ -129,7 +128,7 @@ export default function Form({
         <p>
           Already Have An Account?{" "}
           <span
-            className=" text-[#17A2B8] cursor-pointer "
+            className=" text-primary cursor-pointer "
             onClick={() => navigate("/user/login")}
           >
             Sign In

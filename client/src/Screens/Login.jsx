@@ -33,11 +33,11 @@ export default function Login() {
   
 <div  className="flex h-screen overflow-hidden">
 
-<div style={{marginTop:"-10%"}} className="w-1/2 flex justify-center items-center ">
+<div className="w-1/2 flex justify-center items-center -mt-10">
 <LeftForm formFields = {formFields} isUser={true} />
 </div>
 
-<div style={{backgroundColor:"#17A2B8" , borderTopLeftRadius:"7%" , borderBottomLeftRadius:"7%"}} className="w-1/2  ">
+<div className="w-1/2  bg-primary rounded-tl-[7%] rounded-bl-[7%]">
 
    <Right /> 
 </div>
