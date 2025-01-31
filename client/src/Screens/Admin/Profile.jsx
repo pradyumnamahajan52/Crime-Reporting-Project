@@ -50,7 +50,7 @@ const Profile = () => {
       </div>
       <button
         type="submit"
-        className="mt-6 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="mt-6 px-6 py-2 bg-primary text-white rounded hover:bg-primary"
       >
         Save Changes
       </button>
@@ -118,7 +118,7 @@ const Profile = () => {
       </div>
       <button
         type="submit"
-        className="mt-6 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="mt-6 px-6 py-2 bg-primary text-white rounded"
       >
         Update Password
       </button>
