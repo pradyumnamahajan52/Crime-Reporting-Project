@@ -1,6 +1,7 @@
 package site.crimereporting.controller;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,15 +32,21 @@ public class UserController {
 
 	 @PostMapping("/signin/email")
 	    public ResponseEntity<?> requestOtp(@RequestBody @Valid OtpRequest otpRequest) {
-	        return ResponseEntity.ok(userService.generateOtp(otpRequest
-					.getEmail()));
+	        return ResponseEntity.ok(new ApiResponse(userService.generateOtp(otpRequest
+					.getEmail()), Collections.emptyList()));
 	    }
 	 
 	@PostMapping("/signin")
 	public ResponseEntity<?> userSignIn(@RequestBody @Valid AuthRequest dto) {
 		System.out.println("In user sign in " + dto);
 
-		return ResponseEntity.ok("Login successfully");
+		try {
+			return ResponseEntity.ok(userService.verifyOtp(dto.getEmail(), dto.getOtp()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error during sign-in");
 
 	}
 

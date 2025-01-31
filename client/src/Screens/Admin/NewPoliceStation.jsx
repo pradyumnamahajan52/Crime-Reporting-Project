@@ -110,7 +110,7 @@ const NewPoliceStation = () => {
           Add New Police Station
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4">z
             {/* Station Code */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -128,7 +128,7 @@ const NewPoliceStation = () => {
                 <button
                   type="button"
                   onClick={generateStationCode}
-                  className="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                  className="ml-2 bg-primary hover:bg-primary-400 hover:text-black text-white px-4 py-2 rounded"
                 >
                   Generate
                 </button>
@@ -315,7 +315,7 @@ const NewPoliceStation = () => {
           <div className="flex justify-end mt-6">
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="bg-primary hover:bg-primary-400 hover:text-black text-white px-4 py-2 rounded"
             >
               Save Police Station
             </button>
