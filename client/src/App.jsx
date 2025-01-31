@@ -6,6 +6,10 @@ import AdminLayout from "./Layout/AdminLayout";
 import Dashboard from "./Screens/Admin/Dashboard";
 import About from "./Screens/About";
 import Contact from "./Screens/Contact";
+import PoliceLayout from "./Layout/PoliceLayout";
+import Sidebar from "./Components/Police/Sidebar";
+import Feedback from "./Components/Police/Feedback";
+
 
 import AdminUsers from "./Screens/Admin/Users";
 import AdminProfile from "./Screens/Admin/Profile";
@@ -30,7 +34,8 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <Error />,
     id: "root",
-    children: [
+    children: 
+    [
       {
         index: true,
         element: <Home />,
@@ -62,7 +67,7 @@ const router = createBrowserRouter([
       element: <NotFound />
     },
 
-
+    
   {   
     path: "user",
     errorElement: <Error />,
@@ -129,7 +134,24 @@ const router = createBrowserRouter([
         element: <AdminAuditLogs />,
       },
     ],
-  }
+  },
+  {
+    path: "police",
+    errorElement: <Error/>,
+    element: <PoliceLayout/>,
+    id: "police",
+    children: [
+      {
+        index: true,
+        errorElement: <Error/>,
+        element: <Dashboard/>
+      },
+      {
+        path: "feedback",
+        element: <Feedback/>
+      }
+    ],
+  },
   
 ])
 
