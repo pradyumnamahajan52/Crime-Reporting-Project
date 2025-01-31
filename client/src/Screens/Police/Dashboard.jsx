@@ -1,12 +1,14 @@
 import React from 'react';
-import Feedback from '../../Components/Police/Feedback';
-import AuditLog from '../../Components/Police/AuditLog';
-import CrimeGraph from '../../Components/Police/CrimeGraph';
+import CrimeGraph from '../../Components/Police/Dashboard/CrimeGraph';
+import TopBar from './../../Components/Police/Dashboard/TopBar';
+import Grid from './../../Components/Police/Dashboard/Grid';
 
 const Dashboard = () => {
   return (
     <>
-      
+      <TopBar rightButton="" />
+      <Grid />
+      <CrimeGraph/>
     </>
   );
 }

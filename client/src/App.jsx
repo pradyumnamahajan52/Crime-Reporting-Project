@@ -3,12 +3,10 @@ import Error from "./Screens/Error";
 import RootLayout from "./Layout/RootLayout";
 import Home from "./Screens/Home";
 import AdminLayout from "./Layout/AdminLayout";
-import Dashboard from "./Screens/Admin/Dashboard";
+import AdminDashboard from "./Screens/Admin/Dashboard";
 import About from "./Screens/About";
 import Contact from "./Screens/Contact";
 import PoliceLayout from "./Layout/PoliceLayout";
-import Sidebar from "./Components/Police/Sidebar";
-import Feedback from "./Components/Police/Feedback";
 
 
 import AdminUsers from "./Screens/Admin/Users";
@@ -26,6 +24,8 @@ import NotFound from "./Screens/NotFound";
 import FeedbackForm from "./Screens/FeedBackForm";
 import UpdatePoliceStation from "./Screens/Admin/UpdatePoliceStation";
 import Reports from "./Screens/Citizen/Reports"
+import PoliceFeedback from "./Components/Police/Sidebar/Feedback"
+import PoliceDashboard from "./Screens/Police/Dashboard"
 
 
 const router = createBrowserRouter([
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
 
 
   
-   
+
     {
       path:"*",
       element: <NotFound />
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <AdminDashboard />,
       },
       {
         path:"users",
@@ -144,12 +144,12 @@ const router = createBrowserRouter([
       {
         index: true,
         errorElement: <Error/>,
-        element: <Dashboard/>
+        element: <PoliceDashboard/>
       },
       {
-        path: "feedback",
-        element: <Feedback/>
-      }
+        path:"feedback",
+        element:<PoliceFeedback/>,
+      },
     ],
   },
   
