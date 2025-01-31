@@ -26,6 +26,8 @@ import NotFound from "./Screens/NotFound";
 import FeedbackForm from "./Screens/FeedBackForm";
 import UpdatePoliceStation from "./Screens/Admin/UpdatePoliceStation";
 import Reports from "./Screens/Citizen/Reports"
+import UserLogin from "./Screens/User/UserLogin";
+import { LoginAction } from "./action/LoginAction";
 
 
 const router = createBrowserRouter([
@@ -75,7 +77,8 @@ const router = createBrowserRouter([
     children: [
     {
       path:"login",
-      element: <Login />
+      element: <UserLogin />,
+      action: LoginAction,
     },
     {
       path:"register",

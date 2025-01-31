@@ -1,6 +1,7 @@
 package site.crimereporting.controller;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +32,8 @@ public class UserController {
 
 	 @PostMapping("/signin/email")
 	    public ResponseEntity<?> requestOtp(@RequestBody @Valid OtpRequest otpRequest) {
-	        return ResponseEntity.ok(userService.generateOtp(otpRequest
-					.getEmail()));
+	        return ResponseEntity.ok(new ApiResponse(userService.generateOtp(otpRequest
+					.getEmail()), Collections.emptyList()));
 	    }
 	 
 	@PostMapping("/signin")
