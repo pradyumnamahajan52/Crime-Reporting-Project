@@ -52,7 +52,7 @@ const SearchMenu = ({ open, setOpen }) => {
             </Command.Item>
           </Command.Group>
 
-          <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-50 hover:bg-stone-700 bg-stone-950 rounded items-center gap-2">
+          <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-50 hover:text-black hover:bg-primary-400 bg-primary rounded items-center gap-2">
             <FiLogOut />
             Sign Out
           </Command.Item>
