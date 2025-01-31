@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<servers>
+  <server auto-publish-setting="2" auto-publish-time="1" com.springsource.tcserver.asf="false" com.springsource.tcserver.version="9.0.33.A.RELEASE" configuration-id="/Servers/VMware tc Server Developer Edition v4.1-config" deployDir="wtpwebapps" hostname="localhost" id="VMware tc Server Developer Edition v4.1" id-set="true" name="VMware tc Server Developer Edition v4.1" runtime-id="VMware tc Server Developer Edition (Runtime) v4.1" saveSeparateContextFiles="true" server-type="com.vmware.server.tc.90" server-type-id="com.vmware.server.tc.90" start-timeout="120" stop-timeout="15" testEnvironment="false" timestamp="0"/>
+</servers>
