@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
  
 const SidebarMenu = () => {
   const location = useLocation(); // Get the current location
-  const currentPath = location.pathname; // e.g., "/users", "/profile"
+  const currentPath = location.pathname; // e.g., "/users", "/profile"  
   console.log('====================================');
   console.log(currentPath);
   console.log('====================================');
