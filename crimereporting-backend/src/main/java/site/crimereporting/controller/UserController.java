@@ -39,7 +39,13 @@ public class UserController {
 	public ResponseEntity<?> userSignIn(@RequestBody @Valid AuthRequest dto) {
 		System.out.println("In user sign in " + dto);
 
-		return ResponseEntity.ok("Login successfully");
+		try {
+			return ResponseEntity.ok(userService.verifyOtp(dto.getEmail(), dto.getOtp()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error during sign-in");
 
 	}
 

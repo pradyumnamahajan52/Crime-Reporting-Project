@@ -235,6 +235,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public AuthResponse verifyOtp(String email, String otp) {
 	    Optional<User> userOptional = userDao.findByEmailAndOtp(email, otp);
+	    
+	    System.out.println(userOptional);
 
 	    if (userOptional.isEmpty()) {
 	        throw new AuthenticationException("Invalid OTP!");
