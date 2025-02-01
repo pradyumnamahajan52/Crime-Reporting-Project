@@ -15,7 +15,6 @@ function Home() {
   return (
    <>
    <div className={styles.container}>
-
    
    <section style={{height:'500px'}} className={styles.slider}>
    <Carousel
