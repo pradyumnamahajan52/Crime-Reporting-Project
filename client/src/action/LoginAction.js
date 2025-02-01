@@ -52,13 +52,16 @@ export async function LoginAction({ request }) {
 
       const expire_time = new Date(responseData.expiration_time).toUTCString();
       document.cookie = `expiration=${expire_time};expires=${expire_time};path=/`;
-      localStorage.setItem("user-info", JSON.stringify(responseData.user));
+      localStorage.setItem("user-info", JSON.stringify(responseData));
       document.cookie = `token=${responseData.token};expires=${expire_time};path=/`;
+      console.log('====================================');
+      console.log(responseData);
+      console.log('====================================');
 
-      if (responseData.user?.role === "police") {
+      if (responseData?.role === "police") {
         return redirect("/police/");
       }
-      if (responseData.user?.role === "admin") {
+      if (responseData?.role === "admin") {
         return redirect("/admin/");
       }
       return redirect("/");
