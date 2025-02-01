@@ -1,13 +1,16 @@
 import React from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel CSS
+
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
-import vid1 from '../assets/videos/homevid1.mp4'
-import vid2 from '../assets/videos/homevid2.mp4'
-import vid3 from '../assets/videos/homevid3.mp4'  
-import vid4 from '../assets/videos/homevid4.mp4'  
+import vid1 from "../assets/videos/homevid1.mp4"
+import vid2 from "../assets/videos/homevid2.mp4"
+import vid3 from "../assets/videos/homevid3.mp4"
+import vid4 from "../assets/videos/homevid4.mp4"
 
-import styles from './Home.module.css'
+
+// import styles from './Home.module.css'
+import styles from '../Screens/Home.module.css'
 import Category from "../Components/Crime-Category/Category";
 import category from "../data/crime_category";
 
@@ -51,7 +54,6 @@ function Home() {
       <video autoPlay muted loop className={styles.video_background}>
           <source src={vid4} type="video/mp4" />
       </video>
-      
       </div>
     </Carousel>
 
