@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { API } from "../API";
+import { API } from "../../API";
 
 export async function LoginAction({ request }) {
   try {
@@ -67,7 +67,7 @@ export async function LoginAction({ request }) {
       return redirect("/");
     } else {
       return new Response(JSON.stringify({ error: "Invalid OTP or credentials" }), {
-        status: 401,
+        status: response.status,
         headers: { "Content-Type": "application/json" },
       });
     }

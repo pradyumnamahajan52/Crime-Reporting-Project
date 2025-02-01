@@ -27,8 +27,10 @@ import Reports from "./Screens/Citizen/Reports"
 import PoliceFeedback from "./Components/Police/Sidebar/Feedback"
 import PoliceDashboard from "./Screens/Police/Dashboard"
 import UserLogin from "./Screens/User/UserLogin";
-import { LoginAction } from "./action/LoginAction";
-
+import { LoginAction } from "./action/user/LoginAction";
+import { LogoutAction } from "./action/user/LogoutAction";
+import { loader as loadAuditLog } from "./loader/admin/AuditLogLoader";
+import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
 
 const router = createBrowserRouter([
   {
@@ -87,7 +89,8 @@ const router = createBrowserRouter([
     {
       path:"reports",
       element: <Reports />
-    }
+    },
+    { path: "logout", action: LogoutAction },
   ]
   },
   {
@@ -131,10 +134,12 @@ const router = createBrowserRouter([
       {
         path:"feedback",
         element: <AdminFeedback />,
+        loader:loadAdminFeedback
       },
       {
         path:"audit-logs",
         element: <AdminAuditLogs />,
+        loader: loadAuditLog
       },
     ],
   },

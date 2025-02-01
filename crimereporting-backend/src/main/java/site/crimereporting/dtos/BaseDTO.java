@@ -3,9 +3,11 @@ package site.crimereporting.dtos;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Setter
@@ -13,9 +15,10 @@ import lombok.ToString;
 public class BaseDTO {
 	
 	private Long id;
-	
-	private LocalDate createdOn;
-	
-	private LocalDateTime updatedOn;
+
+	private LocalDateTime createdAt;
+
+	private LocalDateTime updatedAt;
+
 }
 
