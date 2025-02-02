@@ -58,10 +58,14 @@ export async function LoginAction({ request }) {
       console.log(responseData);
       console.log('====================================');
 
-      if (responseData?.role === "police") {
+      console.log('====================================');
+      console.log("responseData?.role",responseData?.role);
+      console.log('====================================');
+
+      if (responseData?.role === "POLICE") {
         return redirect("/police/");
       }
-      if (responseData?.role === "admin") {
+      if (responseData?.role === "ADMIN") {
         return redirect("/admin/");
       }
       return redirect("/");
