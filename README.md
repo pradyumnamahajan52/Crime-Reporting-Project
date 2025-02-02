@@ -87,8 +87,8 @@ The **Online Crime Reporting System** is a **web-based platform** that enables *
 ### Backend Setup  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-repo/crime-reporting.git
-   cd crime-reporting/backend
+   git clone https://github.com/pradyumnamahajan52/Crime-Reporting-Project.git
+   cd crime-reporting/crimereporting-backend
    ```
 2. Configure **application.properties** for MySQL and environment variables.  
 3. Build and run the backend:  
@@ -100,7 +100,7 @@ The **Online Crime Reporting System** is a **web-based platform** that enables *
 ### Frontend Setup  
 1. Navigate to the frontend directory:  
    ```bash
-   cd crime-reporting/frontend
+   cd crime-reporting/client
    ```
 2. Install dependencies:  
    ```bash
