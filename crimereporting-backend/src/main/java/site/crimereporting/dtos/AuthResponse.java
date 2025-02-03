@@ -21,14 +21,13 @@ public class AuthResponse extends BaseDTO {
 	private Boolean isActive;
 	private String token;
 	private String specialToken;
-	
-	
-	 public AuthResponse(String message, String token, User user) {
-	        //this.name = user.getName();
-	        this.role = user.getRole(); 
-	        this.email = user.getEmail();
-	        //this.isActive = user.getIsActive(); 
-	        this.token = token;
-	        this.specialToken = message;
-	    }
+
+	public AuthResponse(String message, String token, User user) {
+		// this.name = user.getName();
+		this.role = user.getRole();
+		this.email = user.getEmail();
+		// this.isActive = user.getIsActive();
+		this.token = token;
+		this.specialToken = message;
+	}
 }

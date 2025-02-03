@@ -19,10 +19,10 @@ public class AuditServiceImpl implements AuditService {
 
 	@Autowired
 	private CitizenDao citizenDao;
-	
+
 	@Autowired
 	private PoliceStationUserDao policeStationUserDao;
-	
+
 	@Autowired
 	private AuditDao auditDao;
 
@@ -83,42 +83,39 @@ public class AuditServiceImpl implements AuditService {
 //		auditDao.save(auditTrails);
 //		
 //	}
-	
-	
+
 	@Override
 	public void userLogin(ApiResponse<User> user) {
-	    if (user == null || user.getData() == null) {
-	        System.out.println("Invalid user login attempt.");
-	        return;
-	    }
+		if (user == null || user.getData() == null) {
+			System.out.println("Invalid user login attempt.");
+			return;
+		}
 
-	    System.out.println("User login method called.");  // Check if the method is invoked
+		System.out.println("User login method called."); // Check if the method is invoked
 
-	    User userData = user.getData();
-	    String username = "Unknown User"; // Default fallback username
+		User userData = user.getData();
+		String username = "Unknown User"; // Default fallback username
 
-	    // Fetch Citizen or PoliceStationUser based on User reference
-	    Citizen citizen = citizenDao.findByUser(userData);
-	    PoliceStationUser policeUser = policeStationUserDao.findByUser(userData);
+		// Fetch Citizen or PoliceStationUser based on User reference
+		Citizen citizen = citizenDao.findByUser(userData);
+		PoliceStationUser policeUser = policeStationUserDao.findByUser(userData);
 
-	    if (citizen != null) {
-	        username = citizen.getFullName();
-	    } else if (policeUser != null) {
-	        username = policeUser.getName();
-	    }
+		if (citizen != null) {
+			username = citizen.getFullName();
+		} else if (policeUser != null) {
+			username = policeUser.getName();
+		}
 
-	    AuditTrails auditTrails = new AuditTrails();
-	    auditTrails.setUser(userData);
+		AuditTrails auditTrails = new AuditTrails();
+		auditTrails.setUser(userData);
 
-	    // Setting message
-	    String message = userData.getRole() + " " + username + " logged in";
-	    auditTrails.setMessage(message.toUpperCase());
+		// Setting message
+		String message = userData.getRole() + " " + username + " logged in";
+		auditTrails.setMessage(message.toUpperCase());
 
-	    System.out.println(message.toUpperCase());
-	    auditDao.save(auditTrails);
-	    System.out.println("Audit log saved: " + auditTrails.getMessage());
+		System.out.println(message.toUpperCase());
+		auditDao.save(auditTrails);
+		System.out.println("Audit log saved: " + auditTrails.getMessage());
 	}
-
-
 
 }
