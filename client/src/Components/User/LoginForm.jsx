@@ -42,13 +42,13 @@ const LoginForm = () => {
 
       <Form method="post" onSubmit={handleSubmit}>
         {/* Email Input */}
-        <div className="-mt-5">
-          <div className="mt-8">
-            <label className="font-medium text-xl">Email/Phone Number</label>
+        <div className="-mt-3 sm:-mt-5">
+          <div className="mt-6 sm:mt-8">
+            <label className="font-medium text-base sm:text-xl">Email/Phone Number</label>
           </div>
-          <div className="flex items-center rounded-lg border border-2 border-primary w-[350px] mt-4 p-[3%_6%]">
+          <div className="flex items-center rounded-lg border-2 border-primary w-full sm:w-[350px] mt-3 sm:mt-4 p-2 sm:p-[3%_6%]">
             <input
-              className="flex-grow outline-none px-2"
+              className="flex-grow outline-none px-2 text-sm sm:text-base"
               type="text"
               placeholder="Enter Email/Phone number"
               name="email"
@@ -76,22 +76,26 @@ const LoginForm = () => {
         )}
 
         {/* Submit Button */}
+        <div className="flex justify-center" >
         <button
-          className="text-base bg-primary text-white rounded-lg py-3 px-[42%] mt-10 disabled:opacity-50"
+          className=" text-base bg-primary text-white rounded-lg py-2 px-[25%] mt-10 disabled:opacity-50 whitespace-nowrap"
           type="submit"
           disabled={isSubmitting}
         >
           {isSubmitting ? "Please Wait" : isOtpSent ? "Sign In" : "Send OTP"}
         </button>
+        </div>
       </Form>
 
       {/* Signup Link */}
-      <span className="text-xl text-center mt-4 ml-6 w-[200px] mx-auto">
+    
+      <span className="text-sm sm:text-xl  ml-3 sm:ml-10 mt-10 sm:mt-20 mx-auto w-full sm:w-[200px]">
         Create New Account?
         <span className="text-primary cursor-pointer" onClick={() => navigate("/user/register")}>
           Sign Up
         </span>
       </span>
+      
     </div>
   );
 };

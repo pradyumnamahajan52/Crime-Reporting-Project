@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import LeftFormRegister from "../Components/Register_Login.jsx/LeftFormRegister";
 import Right from "../Components/Register_Login.jsx/Right";
-import styles from './Register.module.css'
 import {toast} from 'react-toastify'
 import { ToastContainer } from "react-toastify";
 import { registerCitizen, registerPolice } from "../Services/action/Login";
 
 export default function Register() {
+ 
   const [isCitizen, setCitizen] = useState(true);
   const [isLoading,setisLoading] =useState(false)
 
@@ -74,7 +74,7 @@ export default function Register() {
     },
     {
       type: "password",
-      placeholder: "Enter your Password",
+      placeholder: "Enter Confirm Password",
       name: "cpassword",
       value:citizenformData.cpassword,
       onchange : (e) =>{
@@ -287,10 +287,10 @@ export default function Register() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex flex-col md:flex-row h-screen overflow-hidden">
       <div
         style={{overflow:'auto'}}
-        className={`${styles.container} w-1/2 flex justify-center`}
+        className={`container w-full md:w-1/2 flex justify-center`}
       >
         <LeftFormRegister
           formFields={isCitizen ? citizenformFields : policeformFields}
@@ -306,12 +306,8 @@ export default function Register() {
       </div>
 
       <div
-        style={{
-          backgroundColor: "#17A2B8",
-          borderTopLeftRadius: "7%",
-          borderBottomLeftRadius: "7%",
-        }}
-        className="w-1/2 overflow-hidden"
+      
+        className="hidden md:block w-1/2 overflow-hidden bg-primary rounded-tl-[7%] rounded-bl-[7%]"
       >
        <Right />
       </div>

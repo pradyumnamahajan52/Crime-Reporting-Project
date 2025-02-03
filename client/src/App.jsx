@@ -18,7 +18,7 @@ import AdminFeedback from "./Screens/Admin/Feedback";
 import AdminAuditLogs from "./Screens/Admin/AuditLogs";
 import NewPoliceStation from "./Screens/Admin/NewPoliceStation";
 
-import Login from "./Screens/Login";
+
 import Register from "./Screens/Register";
 import NotFound from "./Screens/NotFound";
 import FeedbackForm from "./Screens/FeedBackForm";
@@ -31,6 +31,7 @@ import { LoginAction } from "./action/user/LoginAction";
 import { LogoutAction } from "./action/user/LogoutAction";
 import { loader as loadAuditLog } from "./loader/admin/AuditLogLoader";
 import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
+import './App.css'
 
 const router = createBrowserRouter([
   {
@@ -52,11 +53,12 @@ const router = createBrowserRouter([
         path:"contact",
         element: <Contact />
       },
-     
       {
         path:"feedback",
         element: <FeedbackForm />
       },
+     
+      
      
       
       
@@ -90,6 +92,7 @@ const router = createBrowserRouter([
       path:"reports",
       element: <Reports />
     },
+   
     { path: "logout", action: LogoutAction },
   ]
   },
