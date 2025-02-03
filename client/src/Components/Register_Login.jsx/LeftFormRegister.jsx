@@ -20,20 +20,19 @@ export default function Form({
     <div >
 
       <div  >
-        <h1 className='font-quicksand text-black text-3xl  ml-10 mt-10 text-center' >Create An Account</h1>
+        <h1 className='font-quicksand text-black text-2xl sm:text-3xl ml-4 sm:ml-10 mt-6 sm:mt-10 text-center' >Create An Account</h1>
          </div>
-      <div className='flex gap-8 justify-center' > 
+      <div className='flex gap-4 sm:gap-8 justify-center mt-4 sm:mt-6' > 
         <div>
           <button
-            style={{
-              border: !isCitizen && "1.5px solid black ",
-              color: !isCitizen ? "black" : "white",
-              backgroundColor: isCitizen && "black",
-            }}
+           className={`
+            ${!isCitizen ? "border-[1.5px] border-black text-black" : "bg-black text-white"}
+            text-sm sm:text-base rounded-lg py-2 px-6 sm:px-14 mt-4
+          `}
             onClick={() => {
               setCitizen(true);
             }}
-            className="text-base  rounded-lg py-2 px-[57px] mt-4 "
+           
           >
             Citizen
           </button>
@@ -43,27 +42,25 @@ export default function Form({
             onClick={() => {
               setCitizen(false);
             }}
-            style={{
-              border: isCitizen && "1.5px solid black ",
-              color: isCitizen ? "black" : "white",
-              backgroundColor: !isCitizen && "black",
-            }}
-            className="text-base  rounded-lg py-2 px-[57px] mt-4"
+            className={`
+              ${isCitizen ? "border-[1.5px] border-black text-black" : "bg-black text-white"}
+              text-sm sm:text-base rounded-lg py-2 px-6 sm:px-14 mt-4
+            `}
           >
             Police
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full px-4">
         {formFields.map((item, index) => {
           return (
             <div
               key={index}
-              className="flex items-center rounded-lg border border-2 border-primary w-[350px] mt-4 p-[3%_3%] "
+              className="flex items-center rounded-lg border border-2 border-primary w-full p-3 sm:p-4 mt-4 h-10 sm:h-12"
             >
               <input
-                className="flex-grow outline-none px-2"
+                className="flex-grow outline-none px-2 text-sm sm:text-base w-full h-full"
                 type={item.type}
                 placeholder={item.placeholder}
                 name={item.name}
@@ -128,7 +125,7 @@ export default function Form({
         <p>
           Already Have An Account?{" "}
           <span
-            className=" text-primary cursor-pointer "
+            className="text-primary cursor-pointer "
             onClick={() => navigate("/user/login")}
           >
             Sign In
