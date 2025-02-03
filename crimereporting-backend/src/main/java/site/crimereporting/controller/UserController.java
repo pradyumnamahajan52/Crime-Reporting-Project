@@ -25,17 +25,16 @@ import site.crimereporting.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
 
-	 @PostMapping("/signin/email")
-	    public ResponseEntity<?> requestOtp(@RequestBody @Valid OtpRequest otpRequest) {
-	        return ResponseEntity.ok(new ApiResponse(userService.generateOtp(otpRequest
-					.getEmail()), Collections.emptyList()));
-	    }
-	 
+	@PostMapping("/signin/email")
+	public ResponseEntity<?> requestOtp(@RequestBody @Valid OtpRequest otpRequest) {
+		return ResponseEntity
+				.ok(new ApiResponse(userService.generateOtp(otpRequest.getEmail()), Collections.emptyList()));
+	}
+
 	@PostMapping("/signin")
 	public ResponseEntity<?> userSignIn(@RequestBody @Valid AuthRequest dto) {
-		 System.out.println("sigin in working");
+		System.out.println("sigin in working");
 		System.out.println("In user sign in " + dto);
 
 		try {
@@ -49,10 +48,11 @@ public class UserController {
 	}
 
 	@PostMapping("/register/citizen")
-	public ResponseEntity<?> registerCitizen(@ModelAttribute @Valid CitizenRegisterRequestDTO citizen) throws IOException {
-		
+	public ResponseEntity<?> registerCitizen(@ModelAttribute @Valid CitizenRegisterRequestDTO citizen)
+			throws IOException {
+
 		System.out.println(citizen);
-				
+
 		ApiResponse<Citizen> registeredCitizen = userService.registerCitizen(citizen);
 
 		if (registeredCitizen == null)
@@ -60,21 +60,17 @@ public class UserController {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(registeredCitizen);
 	}
-	
-	
+
 	@PostMapping("/register/police")
-	public ResponseEntity<?> registerPoliceStationUser(@ModelAttribute PoliceRegisterRequestDTO police){
-		
+	public ResponseEntity<?> registerPoliceStationUser(@ModelAttribute PoliceRegisterRequestDTO police) {
+
 		ApiResponse<PoliceStationUser> registeredPolice = userService.registerPolice(police);
 
 		if (registeredPolice == null)
 			throw new ApiException("police registration failed!!");
 
 		return ResponseEntity.status(HttpStatus.CREATED).body("police registration successfull!!");
-			
+
 	}
-	
-	
-	
 
 }
