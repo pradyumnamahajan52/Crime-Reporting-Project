@@ -28,8 +28,6 @@ public class GlobalExceptionHandler {
 
 	}
 
-
-
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
 
@@ -41,29 +39,27 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(map);
 
 	}
-	
-	@ExceptionHandler(DataIntegrityViolationException .class)
-	public ResponseEntity<?> handleDataIntegrityViolationException(DataIntegrityViolationException  ex) {
-		
-		Pattern pattern = Pattern.compile("Duplicate entry '(.+?)'");
-        Matcher matcher = pattern.matcher(ex.getMessage());
-        
-        String duplicateValue = null;
-        if (matcher.find()) {
-            duplicateValue = matcher.group(1);  // 'jasmine123'
-            System.out.println("Duplicate value: " + duplicateValue);
-        }
 
-        
-		return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiException( duplicateValue +" already exists!"));
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<?> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+
+		Pattern pattern = Pattern.compile("Duplicate entry '(.+?)'");
+		Matcher matcher = pattern.matcher(ex.getMessage());
+
+		String duplicateValue = null;
+		if (matcher.find()) {
+			duplicateValue = matcher.group(1); // 'jasmine123'
+			System.out.println("Duplicate value: " + duplicateValue);
+		}
+
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiException(duplicateValue + " already exists!"));
 
 	}
-	
 
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<?> handleAllRemainingException(RuntimeException ex) {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiException(ex.getMessage()));
 
 	}
-	
+
 }

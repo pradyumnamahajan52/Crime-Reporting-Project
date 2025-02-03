@@ -14,7 +14,7 @@ public class AuthRequest {
 	@NotBlank(message = "Email must be not null and not blank !!")
 	@Email(message = "Invalid email format")
 	private String email;
-	
+
 	@NotBlank
 	private String otp;
 }
