@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { API } from "../API";
+import { API } from "../../API";
 
 export async function LoginAction({ request }) {
   try {
@@ -52,19 +52,26 @@ export async function LoginAction({ request }) {
 
       const expire_time = new Date(responseData.expiration_time).toUTCString();
       document.cookie = `expiration=${expire_time};expires=${expire_time};path=/`;
-      localStorage.setItem("user-info", JSON.stringify(responseData.user));
+      localStorage.setItem("user-info", JSON.stringify(responseData));
       document.cookie = `token=${responseData.token};expires=${expire_time};path=/`;
+      console.log('====================================');
+      console.log(responseData);
+      console.log('====================================');
 
-      if (responseData.user?.role === "police") {
+      console.log('====================================');
+      console.log("responseData?.role",responseData?.role);
+      console.log('====================================');
+
+      if (responseData?.role === "POLICE") {
         return redirect("/police/");
       }
-      if (responseData.user?.role === "admin") {
+      if (responseData?.role === "ADMIN") {
         return redirect("/admin/");
       }
       return redirect("/");
     } else {
       return new Response(JSON.stringify({ error: "Invalid OTP or credentials" }), {
-        status: 401,
+        status: response.status,
         headers: { "Content-Type": "application/json" },
       });
     }

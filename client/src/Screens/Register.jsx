@@ -243,47 +243,25 @@ export default function Register() {
       }
     },
     {
-      type: "date",
-      placeholder: "Enter your Date of Birth",
-      name: "dateOfBirth",
+      type: "password",
+      placeholder: "Enter your Confirm Password",
+      name: "cpassword",
+      value:policeformData.cpassword,
+      onchange : (e) =>{
+        setpoliceformData({...policeformData,cpassword:e.target.value})
+      }
     },
     {
-      type: "text",
-      placeholder: "Enter your Card Number",
-      name: "cardNumber",
-    },
-    {
-      type: "text",
-      placeholder: "Enter your Address line 1",
-      name: "addressline1",
-    },
-    {
-      type: "text",
-      placeholder: "Enter your Address line 2",
-      name: "addressline2",
-    },
-    {
-      type: "text",
-      placeholder: "Enter your City",
-      name: "city",
-    },
-    {
-      type: "text",
-      placeholder: "Enter your State",
-      name: "state",
-    },
-    {
-      type: "text",
-      placeholder: "Enter your Country",
-      name: "country",
-    },
-    {
-      type: "text",
-      placeholder: "Enter your pincode",
-      name: "pincode",
+      type: "number",
+      placeholder: "Enter your Station Code",
+      name: "stationCode",
+      value:policeformData.stationCode,
+      onchange : (e) =>{
+        setpoliceformData({...policeformData,stationCode:e.target.value})
+      }
     },
   ];
-
+ 
 
   //handlesubmit for police register
   const handleSignUpforPolice = async ()=>{
@@ -312,10 +290,10 @@ export default function Register() {
     <div className="flex h-screen overflow-hidden">
       {/* <div
         style={{overflow:'auto'}}
+<<<<<<< HEAD
         className={`${styles.container} w-1/2 flex justify-center items-center`}
       > */}
       <div className="w-1/2 flex justify-center items-center overflow-auto scrollbar-thin scrollbar-track-rounded-md scrollbar-thumb-rounded-lg scrollbar-thumb-transparent hover:scrollbar-thumb-gray-400">
- 
         <LeftFormRegister
           formFields={isCitizen ? citizenformFields : policeformFields}
           setCitizen={setCitizen}
@@ -335,9 +313,9 @@ export default function Register() {
           borderTopLeftRadius: "7%",
           borderBottomLeftRadius: "7%",
         }}
-        className="w-1/2 overflow-hidden   "
+        className="w-1/2 overflow-hidden"
       >
-        <Right />
+       <Right />
       </div>
       <ToastContainer/>
     </div>

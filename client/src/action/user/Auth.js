@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { getCookie } from "./Cookie";
+import { getCookie } from "../../utils/Cookie";
 
 
 export function getUserInfo() {

@@ -7,7 +7,7 @@ function RootLayout() {
     <>
         <Navbar />
         <Outlet />
-        <Footer />
+        {/* <Footer /> */}
     </>
   )
 }

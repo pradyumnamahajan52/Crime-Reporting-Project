@@ -54,7 +54,7 @@ const NewPoliceStation = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
+  
     if (name.startsWith("address.")) {
       const addressField = name.split(".")[1];
       setFormData((prevData) => ({
@@ -67,9 +67,10 @@ const NewPoliceStation = () => {
     } else {
       setFormData((prevData) => ({ ...prevData, [name]: value }));
     }
-
+  
     validateField(name, value);
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,7 +111,7 @@ const NewPoliceStation = () => {
           Add New Police Station
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 gap-4">z
+          <div className="grid grid-cols-2 gap-4">
             {/* Station Code */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">

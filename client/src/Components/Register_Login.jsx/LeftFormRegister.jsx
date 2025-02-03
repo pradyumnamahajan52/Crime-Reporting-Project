@@ -17,7 +17,7 @@ export default function Form({
 
   return (
 
-    <div className='mt-10' >
+    <div >
 
       <div  >
         <h1 className='font-quicksand text-black text-3xl  ml-10 mt-10 text-center' >Create An Account</h1>
