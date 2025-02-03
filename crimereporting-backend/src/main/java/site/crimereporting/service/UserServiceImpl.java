@@ -1,5 +1,6 @@
 package site.crimereporting.service;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.io.IOException;
@@ -150,6 +151,7 @@ public class UserServiceImpl implements UserService {
 	public Long getTotalUsers() {
 		return userDao.countByIsDeletedFalse();
 	}
+	
 
 	@Override
 	public AuthResponse signIn(AuthRequest dto) {
