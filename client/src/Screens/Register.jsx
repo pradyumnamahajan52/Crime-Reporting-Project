@@ -310,10 +310,12 @@ export default function Register() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <div
+      {/* <div
         style={{overflow:'auto'}}
         className={`${styles.container} w-1/2 flex justify-center items-center`}
-      >
+      > */}
+      <div className="w-1/2 flex justify-center items-center overflow-auto scrollbar-thin scrollbar-track-rounded-md scrollbar-thumb-rounded-lg scrollbar-thumb-transparent hover:scrollbar-thumb-gray-400">
+ 
         <LeftFormRegister
           formFields={isCitizen ? citizenformFields : policeformFields}
           setCitizen={setCitizen}
