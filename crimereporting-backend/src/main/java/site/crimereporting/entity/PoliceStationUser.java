@@ -14,8 +14,8 @@ import lombok.ToString;
 @ToString(callSuper = true, exclude = { "policeStation" })
 public class PoliceStationUser extends BaseEntity {
 	
-	@Column(name = "name", length = 100, nullable = false) // not null constraint
-	private String name;
+//	@Column(name = "name", length = 100, nullable = false) // not null constraint
+//	private String name;
 	
 	@Column(length = 100, nullable = false)
 	private String designation;

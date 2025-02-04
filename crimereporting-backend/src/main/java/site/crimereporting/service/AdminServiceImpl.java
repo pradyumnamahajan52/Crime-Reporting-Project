@@ -10,10 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import site.crimereporting.dao.AuditDao;
 import site.crimereporting.dao.FeedbackDao;
+import site.crimereporting.dao.PoliceStationDao;
 import site.crimereporting.dao.UserDao;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.AuditTrailsResponse;
 import site.crimereporting.dtos.FeedbackResponse;
+import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.User;
 
 @Service
@@ -23,6 +25,9 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
+	private PoliceStationDao policeStationDao;
+	
 	@Autowired
 	private AuditDao auditDao;
 
@@ -57,6 +62,11 @@ public class AdminServiceImpl implements AdminService {
 		}).collect(Collectors.toList());
 
 		return new ApiResponse("Audit logs retrieved successfully", auditLogs);
+	}
+
+	@Override
+	public List<PoliceStation> getAllPoliceStations() {
+		return policeStationDao.findAll();
 	}
 
 }

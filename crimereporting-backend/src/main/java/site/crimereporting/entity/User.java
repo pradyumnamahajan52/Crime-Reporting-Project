@@ -16,12 +16,18 @@ import java.time.LocalDateTime;
 @Setter
 @ToString(callSuper = true, exclude = { "password", "otp", "otpCreatedAt" })
 public class User extends BaseEntity {
+	
+	
 
 	@Enumerated(EnumType.STRING)
 	@Column(length = 15)
 	private UserRole role;
 	@Column(length = 160, unique = true) // adds unique constraint
 	private String email;
+	
+	@Column(name = "full_name", length = 125, nullable = false) // not null constraint
+	private String fullName;
+	
 	@Column(name = "phone_number", length = 10, nullable = true) // not null constraint
 	private String phoneNumber;
 	@Column(length = 6, nullable = true) // not null constraint
