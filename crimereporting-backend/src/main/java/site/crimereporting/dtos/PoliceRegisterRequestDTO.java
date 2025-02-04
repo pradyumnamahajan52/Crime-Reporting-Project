@@ -20,8 +20,6 @@ public class PoliceRegisterRequestDTO extends RegisterRequestDTO{
 		//from police station user
 		private Integer stationCode;
 		
-		private String name;
-		
 		private String designation;
 
 		

@@ -15,6 +15,7 @@ import site.crimereporting.dtos.AuthRequest;
 import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.dtos.OtpRequest;
 import site.crimereporting.dtos.PoliceRegisterRequestDTO;
+import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.PoliceStationUser;
 import site.crimereporting.service.UserService;
@@ -53,7 +54,7 @@ public class UserController {
 
 		System.out.println(citizen);
 
-		ApiResponse<Citizen> registeredCitizen = userService.registerCitizen(citizen);
+		ApiResponse<RegisterResponseDTO> registeredCitizen = userService.registerCitizen(citizen);
 
 		if (registeredCitizen == null)
 			throw new ApiException("citizen registration failed!!");
@@ -64,12 +65,12 @@ public class UserController {
 	@PostMapping("/register/police")
 	public ResponseEntity<?> registerPoliceStationUser(@ModelAttribute PoliceRegisterRequestDTO police) {
 
-		ApiResponse<PoliceStationUser> registeredPolice = userService.registerPolice(police);
+		ApiResponse<RegisterResponseDTO> registeredPolice = userService.registerPolice(police);
 
 		if (registeredPolice == null)
 			throw new ApiException("police registration failed!!");
 
-		return ResponseEntity.status(HttpStatus.CREATED).body("police registration successfull!!");
+		return ResponseEntity.status(HttpStatus.CREATED).body(registeredPolice);
 
 	}
 

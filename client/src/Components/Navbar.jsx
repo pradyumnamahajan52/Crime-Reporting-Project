@@ -32,10 +32,10 @@
 //             Register a Complain
 //           </a>
 //           <a className="mr-5 hover:text-white" href="/contact">
-//             Track Your Complain 
+//             Track Your Complain
 //           </a>
 //           <a className="mr-5 hover:text-white" href="/about">
-//             About 
+//             About
 //           </a>
 //           <a className="mr-5 hover:text-white" href="/contact">
 //             Contact Us
@@ -66,36 +66,33 @@
 
 // export default Navbar;
 
-
 import React from "react";
+import { getAuthToken } from "../action/user/Auth";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const token = getAuthToken();
+
   return (
     <nav className="bg-white shadow-md p-4 flex items-center justify-between">
       {/* Left - Logo */}
       <div className="flex items-center space-x-2">
-        <img src="https://tailwindcss.com/favicons/favicon.ico" alt="Logo" className="w-6 h-6" />
+        <h1 className="decoration-double">crimereport.live</h1>
       </div>
 
       {/* Center - Navigation Links */}
       <div className="flex space-x-6">
-        <button className="bg-gray-100 text-black font-semibold px-4 py-2 rounded-lg">
-          Dashboard
-        </button>
-        <button className="text-black font-medium hover:text-gray-500">
-          Team
-        </button>
-        <button className="text-black font-medium hover:text-gray-500">
-          Projects
-        </button>
-        <button className="text-black font-medium hover:text-gray-500">
-          Calendar
-        </button>
+        <Link to="/" className="bg-gray-100 text-black font-semibold px-4 py-2 rounded-lg">
+          Home
+        </Link>
+        <Link to="/contact" className="text-black font-medium hover:text-gray-500 px-4 py-2">
+          contact
+        </Link>
       </div>
 
       {/* Right - Search, Bell Icon, Profile Image */}
       <div className="flex items-center space-x-4">
-        <div className="relative">
+        {/* <div className="relative">
           <input
             type="text"
             placeholder="Search"
@@ -104,17 +101,23 @@ export default function Navbar() {
           <span className="absolute left-3 top-2 text-gray-400">
             🔍
           </span>
-        </div>
+        </div> */}
 
-        <button className="text-gray-400 hover:text-gray-600">
+        {/* <button className="text-gray-400 hover:text-gray-600">
           🔔
-        </button>
+        </button> */}
 
-        <img
-          src="https://randomuser.me/api/portraits/men/75.jpg"
-          alt="Profile"
-          className="w-8 h-8 rounded-full border"
-        />
+        {token ? (
+          <Link to="/user/login" className="bg-gray-100 text-black font-semibold px-4 py-2 rounded-lg">
+            Login
+          </Link>
+        ) : (
+          <img
+            src="https://api.dicebear.com/9.x/avataaars-neutral/svg?backgroundColor=b6e3f4,c0aede,d1d4f9"
+            alt="Profile"
+            className="w-8 h-8 rounded-full border"
+          />
+        )}
       </div>
     </nav>
   );
