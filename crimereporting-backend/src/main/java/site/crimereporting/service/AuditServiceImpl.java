@@ -77,23 +77,23 @@ public class AuditServiceImpl implements AuditService {
 		System.out.println("User login method called."); // Check if the method is invoked
 
 		User userData = user.getData();
-		String username = "Unknown User"; // Default fallback username
+//		String username = "Unknown User"; // Default fallback username
 
 		// Fetch Citizen or PoliceStationUser based on User reference
-		Citizen citizen = citizenDao.findByUser(userData);
-		PoliceStationUser policeUser = policeStationUserDao.findByUser(userData);
+//		Citizen citizen = citizenDao.findByUser(userData);
+//		PoliceStationUser policeUser = policeStationUserDao.findByUser(userData);
 
-		if (citizen != null) {
-			username = citizen.getFullName();
-		} else if (policeUser != null) {
-			username = policeUser.getName();
-		}
+//		if (citizen != null) {
+//			username = citizen.getFullName();
+//		} else if (policeUser != null) {
+//			username = policeUser.getName();
+//		}
 
 		AuditTrails auditTrails = new AuditTrails();
 		auditTrails.setUser(userData);
 
 		// Setting message
-		String message = userData.getRole() + " " + username + " logged in";
+		String message = userData.getRole() + " " + userData.getFullName() + " logged in";
 		auditTrails.setMessage(message.toUpperCase());
 
 		System.out.println(message.toUpperCase());

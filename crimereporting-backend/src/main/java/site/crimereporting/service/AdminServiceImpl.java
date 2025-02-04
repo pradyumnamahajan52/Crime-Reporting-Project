@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import site.crimereporting.dao.AuditDao;
+import site.crimereporting.dao.CrimeCategoryDao;
+import site.crimereporting.dao.CrimeReportsDao;
 import site.crimereporting.dao.FeedbackDao;
 import site.crimereporting.dao.PoliceStationDao;
 import site.crimereporting.dao.UserDao;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.AuditTrailsResponse;
 import site.crimereporting.dtos.FeedbackResponse;
+import site.crimereporting.entity.CrimeCategory;
+import site.crimereporting.entity.CrimeReports;
 import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.User;
 
@@ -27,6 +31,12 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	private PoliceStationDao policeStationDao;
+	
+	@Autowired
+	private CrimeCategoryDao crimeCategoryDao;
+	
+	@Autowired
+	private CrimeReportsDao crimeReportsDao;
 	
 	@Autowired
 	private AuditDao auditDao;
@@ -67,6 +77,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<PoliceStation> getAllPoliceStations() {
 		return policeStationDao.findAll();
+	}
+
+	@Override
+	public List<CrimeCategory> getAllCrime() {
+		return crimeCategoryDao.findAll();
+	}
+
+	@Override
+	public List<CrimeReports> getAllReports() {
+		return crimeReportsDao.findAll() ;
 	}
 
 }
