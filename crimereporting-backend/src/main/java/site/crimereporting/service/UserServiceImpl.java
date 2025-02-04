@@ -291,6 +291,7 @@ import site.crimereporting.dtos.AuthResponse;
 import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.dtos.PoliceRegisterRequestDTO;
 import site.crimereporting.dtos.RegisterRequestDTO;
+import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.entity.AadhaarCard;
 import site.crimereporting.entity.Address;
 import site.crimereporting.entity.Citizen;
@@ -340,13 +341,14 @@ public class UserServiceImpl implements UserService {
     private static final int OTP_EXPIRY_MINUTES = 5;
 
     @Override
-    public ApiResponse<Citizen> registerCitizen(CitizenRegisterRequestDTO citizen) throws IOException {
+    public ApiResponse<RegisterResponseDTO> registerCitizen(CitizenRegisterRequestDTO citizen) throws IOException {
         // Create and map user DTO
         RegisterRequestDTO userDto = mapper.map(citizen, RegisterRequestDTO.class);
 
         // Create user object and set role as CITIZEN
         User user = mapper.map(userDto, User.class);
         user.setRole(UserRole.CITIZEN);
+ 
 
         // Create Aadhaar card and Address objects
         AadhaarCard aadhaarCard = mapper.map(citizen, AadhaarCard.class);
@@ -366,12 +368,14 @@ public class UserServiceImpl implements UserService {
         if (registeredCitizen == null) {
             throw new ApiException("Citizen registration failed!");
         }
+        
+        
 
-        return new ApiResponse<>("Citizen registered successfully!", registeredCitizen);
+        return new ApiResponse<>("Citizen registered successfully!", new RegisterResponseDTO(user.getFullName(), user.getEmail(), user.getRole()));
     }
 
     @Override
-    public ApiResponse registerPolice(PoliceRegisterRequestDTO police) {
+    public ApiResponse<RegisterResponseDTO> registerPolice(PoliceRegisterRequestDTO police) {
         // Create and map user DTO
         RegisterRequestDTO userDto = mapper.map(police, RegisterRequestDTO.class);
 
@@ -397,7 +401,7 @@ public class UserServiceImpl implements UserService {
             throw new ApiException("Police registration failed!");
         }
 
-        return new ApiResponse<>("Police registered successfully!", registeredPolice);
+        return new ApiResponse<>("Police registered successfully!",  new RegisterResponseDTO(user.getFullName(), user.getEmail(), user.getRole()));
     }
 
     @Override
