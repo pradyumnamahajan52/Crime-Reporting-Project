@@ -1,4 +1,5 @@
 import React from 'react'
+import { Form } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -8,10 +9,11 @@ const Footer = () => {
           <p className="font-bold">Crime Report Admin Panel</p>
 
         </div>
-
-        <button className="px-2 py-1.5 font-medium bg-stone-200 hover:bg-stone-300 transition-colors rounded">
+        <Form method="POST" action="/user/logout">
+        <button type="submit"  className="px-2 py-1.5 font-medium bg-stone-200 hover:bg-stone-300 transition-colors rounded" >
           Logout
         </button>
+        </Form>
       </div>
     </div>
   )

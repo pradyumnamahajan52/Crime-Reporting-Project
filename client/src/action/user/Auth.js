@@ -41,9 +41,29 @@ export function checkAuthLoader() {
   const token = getAuthToken();
 
   if (!token) {
-    return redirect("/login");
+    return redirect("/user/login");
   }
 
   return token;
 }
+
+export function checkAdminAuthLoader() {
+  const token = getAuthToken();
+  const userInfo =  getUserInfo();
+
+  if (!token) {
+    return redirect("/user/login");
+  }
+
+  if(userInfo.role !== "ADMIN")
+  {
+    return redirect("/user/login");
+  }
+
+  return token;
+}
+
+
+
+
 

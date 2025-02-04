@@ -83,10 +83,8 @@ public class AuditServiceImpl implements AuditService {
 		Citizen citizen = citizenDao.findByUser(userData);
 		PoliceStationUser policeUser = policeStationUserDao.findByUser(userData);
 
-		if (citizen != null) {
-			username = citizen.getFullName();
-		} else if (policeUser != null) {
-			username = policeUser.getName();
+		if (!userData.getFullName().isEmpty()) {
+			username = userData.getFullName();
 		}
 
 		AuditTrails auditTrails = new AuditTrails();

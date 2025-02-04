@@ -4,18 +4,18 @@ import { API } from "../../API";
 
 export async function LogoutAction() {
   try {
-    // Send a request to your backend to log out the user
-    const response = await fetch(`${API}/user/logout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getAuthToken()}`,
-      },
-    });
+    // // Send a request to your backend to log out the user
+    // const response = await fetch(`${API}/user/logout`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${getAuthToken()}`,
+    //   },
+    // });
 
-    if (!response.ok) {
-      throw new Error("Logout Error");
-    }
+    // if (!response.ok) {
+    //   throw new Error("Logout Error");
+    // }
 
     // If the logout was successful, remove token and user info from localStorage
     localStorage.removeItem("user-info");
