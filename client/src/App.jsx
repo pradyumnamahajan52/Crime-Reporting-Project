@@ -32,6 +32,7 @@ import { LogoutAction } from "./action/user/LogoutAction";
 import { loader as loadAuditLog } from "./loader/admin/AuditLogLoader";
 import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
 import './App.css'
+import { checkAdminAuthLoader } from "./action/user/Auth";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,7 @@ const router = createBrowserRouter([
     path: "admin",
     errorElement: <Error />,
     element: <AdminLayout/>,
+    loader: checkAdminAuthLoader,
     id: "admin",
     children: [
       {
