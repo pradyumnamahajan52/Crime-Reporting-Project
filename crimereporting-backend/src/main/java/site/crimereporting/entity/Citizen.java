@@ -25,8 +25,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class Citizen extends BaseEntity {
 
-	@Column(name = "full_name", length = 100, nullable = false) // not null constraint
-	private String fullName;
+//	@Column(name = "full_name", length = 100, nullable = false) // not null constraint
+//	private String fullName;
 
 	@Column(name = "date_of_birth", nullable = true)
 	private LocalDate dateOfBirth;
