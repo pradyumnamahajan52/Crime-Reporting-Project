@@ -49,19 +49,36 @@ export function checkAuthLoader() {
 
 export function checkAdminAuthLoader() {
   const token = getAuthToken();
-  const userInfo =  getUserInfo();
+  const userInfo = getUserInfo();
 
   if (!token) {
     return redirect("/user/login");
   }
 
-  if(userInfo.role !== "ADMIN")
-  {
+  if (userInfo.role !== "ADMIN") {
     return redirect("/user/login");
   }
 
   return token;
 }
+
+
+
+export function checkPoliceAuthLoader() {
+  const token = getAuthToken();
+  const userInfo = getUserInfo();
+
+  if (!token) {
+    return redirect("/user/login");
+  }
+
+  if (userInfo.role !== "POLICE") {
+    return redirect("/user/login");
+  }
+
+  return token;
+}
+
 
 
 

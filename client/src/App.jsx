@@ -32,7 +32,7 @@ import { LogoutAction } from "./action/user/LogoutAction";
 import { loader as loadAuditLog } from "./loader/admin/AuditLogLoader";
 import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
 import './App.css'
-import { checkAdminAuthLoader } from "./action/user/Auth";
+import { checkAdminAuthLoader, checkPoliceAuthLoader } from "./action/user/Auth";
 
 const router = createBrowserRouter([
   {
@@ -58,10 +58,7 @@ const router = createBrowserRouter([
         path:"feedback",
         element: <FeedbackForm />
       },
-     
-      
-     
-      
+        
       
     ],
   },
@@ -153,6 +150,7 @@ const router = createBrowserRouter([
     errorElement: <Error/>,
     element: <PoliceLayout/>,
     id: "police",
+    loader: checkPoliceAuthLoader,
     children: [
       {
         index: true,
