@@ -39,7 +39,7 @@ public class AuditServiceImpl implements AuditService {
 			auditTrails.setUser(user);
 
 		// setting message
-		String message = user.getRole() + " " + gotCitizen.getFullName() + " registered";
+		String message = user.getRole() + " " + user.getFullName() + " registered";
 		auditTrails.setMessage(message.toUpperCase());
 
 		System.out.println(message.toUpperCase());
@@ -58,31 +58,14 @@ public class AuditServiceImpl implements AuditService {
 		auditTrails.setUser(user);
 
 		// setting message
-		String message = user.getRole() + " " + gotPolice.getName() + " registered";
+		String message = user.getRole() + " " + user.getFullName() + " registered";
 		auditTrails.setMessage(message.toUpperCase());
 
 		System.out.println(message.toUpperCase());
 		auditDao.save(auditTrails);
 	}
 
-//	@Override
-//	public void userLogin(ApiResponse<User> user) {
-//		User userData = user.getData();
-//
-//		AuditTrails auditTrails = new AuditTrails();
-//
-//
-//		// setting user
-//		auditTrails.setUser(userData);
-//
-//		// setting message
-//		String message = userData.getRole() + " " + " registered";
-//		auditTrails.setMessage(message.toUpperCase());
-//
-//		System.out.println(message.toUpperCase());
-//		auditDao.save(auditTrails);
-//		
-//	}
+
 
 	@Override
 	public void userLogin(ApiResponse<User> user) {
