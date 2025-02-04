@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import site.crimereporting.dtos.ApiResponse;
+import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.PoliceStationUser;
 import site.crimereporting.entity.User;
@@ -21,13 +22,13 @@ public class AuditTrailAspect {
 	private AuditService auditService;
 
 	@AfterReturning(value = "execution(* site.crimereporting.service.UserServiceImpl.registerCitizen(..))", returning = "returnedCitizen")
-	public void citizenRegisterTrail(JoinPoint joinPoint, ApiResponse<Citizen> returnedCitizen) {
+	public void citizenRegisterTrail(JoinPoint joinPoint, ApiResponse<RegisterResponseDTO> returnedCitizen) {
 		auditService.citizenRegistration(returnedCitizen);
 	}
 
 	@AfterReturning(value = "execution(* site.crimereporting.service.UserServiceImpl.registerPolice(..))", returning = "returnedPolice")
-	public void PoliceRegisterTrail(JoinPoint joinPoint, ApiResponse<PoliceStationUser> returnedPolice) {
-		auditService.policeRegistration(returnedPolice);
+	public void PoliceRegisterTrail(JoinPoint joinPoint, ApiResponse<RegisterResponseDTO> returnedPolice) {
+		auditService.citizenRegistration(returnedPolice);
 	}
 
 	@AfterReturning(value = "execution(* site.crimereporting.service.UserServiceImpl.verifyOtp(..))", returning = "returnedUser")

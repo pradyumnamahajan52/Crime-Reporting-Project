@@ -7,7 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import site.crimereporting.dao.AuditDao;
 import site.crimereporting.dao.CitizenDao;
 import site.crimereporting.dao.PoliceStationUserDao;
+import site.crimereporting.dao.UserDao;
 import site.crimereporting.dtos.ApiResponse;
+import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.entity.AuditTrails;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.PoliceStationUser;
@@ -25,45 +27,48 @@ public class AuditServiceImpl implements AuditService {
 
 	@Autowired
 	private AuditDao auditDao;
+	
+	@Autowired 
+	private UserDao userDao;
 
 	@Override
-	public void citizenRegistration(ApiResponse<Citizen> citizen) {
-		Citizen gotCitizen = citizen.getData();
+	public void citizenRegistration(ApiResponse<RegisterResponseDTO> user) {
+		RegisterResponseDTO gotCitizen = user.getData();
 
 		AuditTrails auditTrails = new AuditTrails();
 
-		User user = gotCitizen.getUser();
+		User registereduser = userDao.findByEmail(gotCitizen.getEmail()).orElse(null);
 		// setting user
 
-		if (user != null)
-			auditTrails.setUser(user);
+		if (registereduser != null)
+			auditTrails.setUser(registereduser);
 
 		// setting message
-		String message = user.getRole() + " " + user.getFullName() + " registered";
+		String message = registereduser.getRole() + " " + registereduser.getFullName() + " registered";
 		auditTrails.setMessage(message.toUpperCase());
 
 		System.out.println(message.toUpperCase());
 		auditDao.save(auditTrails);
 	}
 
-	@Override
-	public void policeRegistration(ApiResponse<PoliceStationUser> police) {
-		PoliceStationUser gotPolice = police.getData();
-
-		AuditTrails auditTrails = new AuditTrails();
-
-		User user = gotPolice.getUser();
-
-		// setting user
-		auditTrails.setUser(user);
-
-		// setting message
-		String message = user.getRole() + " " + user.getFullName() + " registered";
-		auditTrails.setMessage(message.toUpperCase());
-
-		System.out.println(message.toUpperCase());
-		auditDao.save(auditTrails);
-	}
+//	@Override
+//	public void policeRegistration(ApiResponse<PoliceStationUser> police) {
+//		PoliceStationUser gotPolice = police.getData();
+//
+//		AuditTrails auditTrails = new AuditTrails();
+//
+//		User user = gotPolice.getUser();
+//
+//		// setting user
+//		auditTrails.setUser(user);
+//
+//		// setting message
+//		String message = user.getRole() + " " + user.getFullName() + " registered";
+//		auditTrails.setMessage(message.toUpperCase());
+//
+//		System.out.println(message.toUpperCase());
+//		auditDao.save(auditTrails);
+//	}
 
 
 

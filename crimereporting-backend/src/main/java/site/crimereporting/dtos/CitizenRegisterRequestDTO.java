@@ -16,8 +16,6 @@ public class CitizenRegisterRequestDTO extends RegisterRequestDTO{
 	
 	
 	//from citizen
-	private String fullName;
-
 	private LocalDate dateOfBirth;
 	
 	//from aadhaar card
