@@ -56,6 +56,18 @@ public class GlobalExceptionHandler {
 
 	}
 
+//	@ExceptionHandler(ImageUploadException.class)
+//	public ResponseEntity<?> handleImageException(ImageUploadException ex) {
+//		System.out.println("Image uploading error in aws s3: "+ex);
+//		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiException(ex.getMessage()));
+//	}
+
+	@ExceptionHandler(ImageUploadException.class)
+	public void handleImageException(ImageUploadException ex) {
+		System.out.println("Image uploading error in aws s3: "+ex);
+	}
+
+
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<?> handleAllRemainingException(RuntimeException ex) {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiException(ex.getMessage()));
