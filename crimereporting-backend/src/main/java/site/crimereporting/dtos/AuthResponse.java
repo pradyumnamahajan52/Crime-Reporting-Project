@@ -23,7 +23,7 @@ public class AuthResponse extends BaseDTO {
 	private String specialToken;
 
 	public AuthResponse(String message, String token, User user) {
-		 this.name = user.getFullName();
+		this.name = user.getFullName();
 		this.role = user.getRole();
 		this.email = user.getEmail();
 		// this.isActive = user.getIsActive();

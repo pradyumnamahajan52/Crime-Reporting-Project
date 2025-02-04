@@ -54,4 +54,14 @@ public class AdminController {
 	public ResponseEntity<?> viewPoliceStations() {
 		return ResponseEntity.ok(adminService.getAllPoliceStations());
 	}
+	
+	@GetMapping("/crimeList")
+	public ResponseEntity<?> viewCrimeList() {
+		return ResponseEntity.ok(adminService.getAllCrime());
+	}
+	
+	@GetMapping("/reports")
+	public ResponseEntity<?> viewReports() {
+		return ResponseEntity.ok(adminService.getAllReports());
+	}
 }
