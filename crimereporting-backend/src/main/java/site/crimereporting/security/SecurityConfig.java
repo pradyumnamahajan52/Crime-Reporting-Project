@@ -65,6 +65,7 @@ public class SecurityConfig {
                                "/users/register/citizen",
                                "/users/register/police", 
                                "/",
+                               "/crimereport/newreport",
                                "/admin/*",
                                "/v*/api-doc*/**",
                                "/swagger-ui/**")
