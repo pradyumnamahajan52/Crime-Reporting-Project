@@ -2,7 +2,7 @@ import React from "react";
 import { Command } from "cmdk";
 import { FiEye, FiLink, FiLogOut, FiPhone, FiPlus } from "react-icons/fi";
 
-const SearchMenu = ({ open, setOpen }) => {
+const AdminSearchMenu = ({ open, setOpen }) => {
   const [value, setValue] = React.useState("");
 
   return (
@@ -62,4 +62,4 @@ const SearchMenu = ({ open, setOpen }) => {
   );
 };
 
-export default SearchMenu;
+export default AdminSearchMenu;

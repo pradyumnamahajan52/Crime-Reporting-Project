@@ -1,7 +1,11 @@
 import React from 'react';
+import TopBar from '../../Components/Dashboard/Topbar/TopBar';
 
 const AuditLog = () => {
   return (
+    <>
+    <TopBar />
+
     <div className="bg-white p-4 rounded shadow-md">
       <h2 className="text-xl font-semibold mb-4">Audit Log</h2>
       <ul>
@@ -10,6 +14,7 @@ const AuditLog = () => {
         <li>Log entry 3</li>
       </ul>
     </div>
+    </>
   );
 }
 

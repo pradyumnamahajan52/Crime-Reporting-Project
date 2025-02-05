@@ -68,10 +68,13 @@
 
 import React from "react";
 import { getAuthToken } from "../action/user/Auth";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 
 export default function Navbar() {
   const token = getAuthToken();
+  console.log('====================================');
+  console.log("token navabr",token);
+  console.log('====================================');
 
   return (
     <nav className="bg-white shadow-md p-4 flex items-center justify-between">
@@ -107,16 +110,21 @@ export default function Navbar() {
           🔔
         </button> */}
 
-        {token ? (
+        {token ===null ? (
           <Link to="/user/login" className="bg-gray-100 text-black font-semibold px-4 py-2 rounded-lg">
             Login
           </Link>
         ) : (
-          <img
-            src="https://api.dicebear.com/9.x/avataaars-neutral/svg?backgroundColor=b6e3f4,c0aede,d1d4f9"
-            alt="Profile"
-            className="w-8 h-8 rounded-full border"
-          />
+          <Form method="POST" action="/user/logout">
+          <button type="submit"  className="px-2 py-1.5 font-medium bg-stone-200 hover:bg-stone-300 transition-colors rounded" >
+            Logout
+          </button>
+          </Form>
+          // <img
+          //   src="https://api.dicebear.com/9.x/avataaars-neutral/svg?backgroundColor=b6e3f4,c0aede,d1d4f9"
+          //   alt="Profile"
+          //   className="w-8 h-8 rounded-full border"
+          // />
         )}
       </div>
     </nav>

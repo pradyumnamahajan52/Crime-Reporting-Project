@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import for navigation
 import { FiEdit, FiTrash } from "react-icons/fi";
-import TopBar from "../../Components/Admin/Dashboard/TopBar";
+import TopBar from "../../Components/Dashboard/Topbar/TopBar";
 
 const PoliceStation = () => {
   const [stations, setStations] = useState([

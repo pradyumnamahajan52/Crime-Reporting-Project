@@ -24,7 +24,7 @@ import NotFound from "./Screens/NotFound";
 import FeedbackForm from "./Screens/FeedBackForm";
 import UpdatePoliceStation from "./Screens/Admin/UpdatePoliceStation";
 import Reports from "./Screens/Citizen/Reports"
-import PoliceFeedback from "./Components/Police/Sidebar/Feedback"
+
 import PoliceDashboard from "./Screens/Police/Dashboard"
 import UserLogin from "./Screens/User/UserLogin";
 import { LoginAction } from "./action/user/LoginAction";
@@ -33,6 +33,7 @@ import { loader as loadAuditLog } from "./loader/admin/AuditLogLoader";
 import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
 import './App.css'
 import { checkAdminAuthLoader, checkPoliceAuthLoader } from "./action/user/Auth";
+import PoliceFeedback from "./Screens/Police/PoliceFeedback";
 
 const router = createBrowserRouter([
   {
