@@ -13,5 +13,6 @@ import java.util.List;
 public interface PoliceStationDao extends JpaRepository<PoliceStation, Long> {
 
 	Optional<PoliceStation> findByStationCode(Integer stationCode);
-	
+	long countByIsDeletedFalse();
+
 }
