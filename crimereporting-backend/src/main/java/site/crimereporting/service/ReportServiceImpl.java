@@ -57,8 +57,12 @@ public class ReportServiceImpl implements ReportService {
         String loggedInEmail = authentication.getName();
         //find User by logged in email
         User user = userDao.findByEmail(loggedInEmail).orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+
         //finding citizen by using user
         Citizen citizen = citizenDao.findByUser(user);
+        
+        if(citizen == null)
+        	throw new ApiException("cannot find Citizen");
         crimeReports.setCitizen(citizen);
         // Mapping address to address to entity and setting it crime reports
         Address address = modelMapper.map(crimereport,Address.class);
@@ -66,6 +70,9 @@ public class ReportServiceImpl implements ReportService {
         // finding crime category and setting it crime category
         CrimeCategory crimeCategory = crimeCategoryDao.findById(crimereport.getCrimeCategoryId()).orElseThrow(() -> new ResourceNotFoundException("Invalid Crime Category"));
         crimeReports.setCrimeCategory(crimeCategory);
+        
+        //setting default status of crime reported
+        crimeReports.setReportStatus(Status.SUBMITTED);
         CrimeReports persistentCrimeReports = crimeReportsDao.save(crimeReports);
 
         if(persistentCrimeReports == null)
