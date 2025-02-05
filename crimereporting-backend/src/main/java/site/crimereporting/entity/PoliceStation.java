@@ -3,6 +3,8 @@ package site.crimereporting.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +40,7 @@ public class PoliceStation extends BaseEntity {
 	// police station 1 <---> * policeStation List
 	// lazy
 	@OneToMany(mappedBy = "policeStation", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonIgnore
+	@JsonIgnore
 	private List<PoliceStationUser> policeStationUserList = new ArrayList<>();
 
 	
