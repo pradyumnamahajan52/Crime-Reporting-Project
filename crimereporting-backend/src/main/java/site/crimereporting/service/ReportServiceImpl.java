@@ -2,16 +2,25 @@ package site.crimereporting.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import site.crimereporting.custom_exception.ApiException;
 import site.crimereporting.custom_exception.ImageUploadException;
-import site.crimereporting.dao.AuditDao;
-import site.crimereporting.dao.CrimeReportsDao;
+import site.crimereporting.custom_exception.ResourceNotFoundException;
+import site.crimereporting.dao.*;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.CrimeReportDTO;
-import site.crimereporting.entity.CrimeReports;
+import site.crimereporting.dtos.CrimeReportResponseDTO;
+import site.crimereporting.dtos.FileUploadInfoDTO;
+import site.crimereporting.entity.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -21,6 +30,18 @@ public class ReportServiceImpl implements ReportService {
     private CrimeReportsDao crimeReportsDao;
 
     @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private CitizenDao citizenDao;
+
+    @Autowired
+    private EvidenceDao evidenceDao;
+
+    @Autowired
+    private CrimeCategoryDao crimeCategoryDao;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
@@ -28,16 +49,55 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public ApiResponse<?> newReport(CrimeReportDTO crimereport) {
+        //Mapping Reports
         CrimeReports crimeReports = modelMapper.map(crimereport,CrimeReports.class);
 
-        String fileName ="";
+        // Get Current logged In Email from security Context Holder
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInEmail = authentication.getName();
+        //find User by logged in email
+        User user = userDao.findByEmail(loggedInEmail).orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+        //finding citizen by using user
+        Citizen citizen = citizenDao.findByUser(user);
+        crimeReports.setCitizen(citizen);
+        // Mapping address to address to entity and setting it crime reports
+        Address address = modelMapper.map(crimereport,Address.class);
+        crimeReports.setAddress(address);
+        // finding crime category and setting it crime category
+        CrimeCategory crimeCategory = crimeCategoryDao.findById(crimereport.getCrimeCategoryId()).orElseThrow(() -> new ResourceNotFoundException("Invalid Crime Category"));
+        crimeReports.setCrimeCategory(crimeCategory);
+        CrimeReports persistentCrimeReports = crimeReportsDao.save(crimeReports);
 
-        if(crimereport.getEvidences().length > 0)
+        if(persistentCrimeReports == null)
         {
-            fileName = s3ImageUploader.uploadImage(crimereport.getEvidences()[0]);
-//            throw  new ImageUploadException("Evidence not present");
+            throw new ApiException("Crime Reporting failed");
         }
 
-        return new ApiResponse<>("Report Controller working and evidences uploaded", fileName);
+
+        if(crimereport.getEvidences() != null)
+        {
+            for (MultipartFile file : crimereport.getEvidences()) {
+                FileUploadInfoDTO fileUploadInfoDTO = s3ImageUploader.uploadImage(file);
+                Evidence evidence = new Evidence();
+                evidence.setCrimeReports(persistentCrimeReports);
+                evidence.setFileUrl(fileUploadInfoDTO.getFileUrl());
+                evidence.setFileType(fileUploadInfoDTO.getFileType());
+                evidenceDao.save(evidence);
+            }
+
+        }
+
+        return new ApiResponse<>("Crime Report Uploaded Successfully", new CrimeReportResponseDTO(
+                persistentCrimeReports.getDescription(),
+                persistentCrimeReports.getCrimeCategory(),
+                persistentCrimeReports.getCrimeDate(),
+                persistentCrimeReports.getReportStatus(),
+                persistentCrimeReports.getAddress().getAddressLine1(),
+                persistentCrimeReports.getAddress().getAddressLine2(),
+                persistentCrimeReports.getAddress().getCity(),
+                persistentCrimeReports.getAddress().getState(),
+                persistentCrimeReports.getAddress().getCountry(),
+                persistentCrimeReports.getAddress().getPinCode(),
+                null));
     }
 }
