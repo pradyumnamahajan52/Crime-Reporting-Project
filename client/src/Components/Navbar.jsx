@@ -65,58 +65,155 @@
 // };
 
 // export default Navbar;
-
-import React from "react";
+import React, { useState } from "react";
 import { getAuthToken } from "../action/user/Auth";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const token = getAuthToken();
+  const navigate = useNavigate();
+  
+  // State to toggle the mobile menu, initialized to false (closed state)
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Navigation handler functions
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsOpen(false); // Close the menu when a link is clicked
+  };
 
   return (
-    <nav className="bg-white shadow-md p-4 flex items-center justify-between">
+    <nav className="bg-primary shadow-lg p-4 flex items-center justify-between text-white relative">
       {/* Left - Logo */}
       <div className="flex items-center space-x-2">
-        <h1 className="decoration-double">crimereport.live</h1>
+        <h1
+          className="text-2xl font-bold cursor-pointer"
+          onClick={() => handleNavigation("/")}
+        >
+          crimereport.live
+        </h1>
       </div>
 
-      {/* Center - Navigation Links */}
-      <div className="flex space-x-6">
-        <Link to="/" className="bg-gray-100 text-black font-semibold px-4 py-2 rounded-lg">
+      {/* Center - Navigation Links for Larger Screens */}
+      <div className="hidden md:flex space-x-6">
+        <span
+          className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+          onClick={() => handleNavigation("/")}
+        >
           Home
-        </Link>
-        <Link to="/contact" className="text-black font-medium hover:text-gray-500 px-4 py-2">
-          contact
-        </Link>
+        </span>
+        <span
+          className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+          onClick={() => handleNavigation("/about")}
+        >
+          About Us
+        </span>
+        <span
+          className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+          onClick={() => handleNavigation("/contact")}
+        >
+          Contact Us
+        </span>
+        <span
+          className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+          onClick={() => handleNavigation("/reports")}
+        >
+          Report Crime
+        </span>
+        <span
+          className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+          onClick={() => handleNavigation("/feedback")}
+        >
+          Feedback
+        </span>
       </div>
 
-      {/* Right - Search, Bell Icon, Profile Image */}
-      <div className="flex items-center space-x-4">
-        {/* <div className="relative">
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-gray-100 pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          <span className="absolute left-3 top-2 text-gray-400">
-            🔍
+      {/* Mobile Menu Toggle */}
+      <div className="md:hidden flex items-center space-x-4">
+        <button
+          className="text-white"
+          onClick={() => setIsOpen(!isOpen)} // Toggle menu visibility
+        >
+          ☰
+        </button>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <div className="md:hidden absolute top-16 left-0 w-full bg-primary text-white flex flex-col items-center space-y-4 py-4 z-50">
+          <span
+            className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+            onClick={() => handleNavigation("/")}
+          >
+            Home
           </span>
-        </div> */}
+          <span
+            className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+            onClick={() => handleNavigation("/about")}
+          >
+            About Us
+          </span>
+          <span
+            className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+            onClick={() => handleNavigation("/contact")}
+          >
+            Contact Us
+          </span>
+          <span
+            className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+            onClick={() => handleNavigation("/reports")}
+          >
+            Report Crime
+          </span>
+          <span
+            className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+            onClick={() => handleNavigation("/feedback")}
+          >
+            Feedback
+          </span>
+          {!token && (
+            <span
+              onClick={() => handleNavigation("/user/register")}
+              className="text-white hover:bg-primary bg-white hover:text-white text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+            >
+              SIGNUP
+            </span>
+          )}
+          {token && (
+            <span
+              onClick={() => handleNavigation("/user/login")}
+              className="bg-white text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+            >
+              Login
+            </span>
+          )}
+        </div>
+      )}
 
-        {/* <button className="text-gray-400 hover:text-gray-600">
-          🔔
-        </button> */}
-
+      {/* Right - Profile Image or Register/Login Button */}
+      <div className="flex items-center space-x-4">
         {token ? (
-          <Link to="/user/login" className="bg-gray-100 text-black font-semibold px-4 py-2 rounded-lg">
+          <span
+            onClick={() => handleNavigation("/user/login")}
+            className="bg-white text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+          >
             Login
-          </Link>
+          </span>
         ) : (
           <img
             src="https://api.dicebear.com/9.x/avataaars-neutral/svg?backgroundColor=b6e3f4,c0aede,d1d4f9"
             alt="Profile"
-            className="w-8 h-8 rounded-full border"
+            className="w-8 h-8 rounded-full border border-white cursor-pointer"
+            onClick={() => handleNavigation("/user/profile")}
           />
+        )}
+        {!token && (
+          <span
+            onClick={() => handleNavigation("/user/register")}
+            className="hover:bg-primary bg-white hover:text-white text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+          >
+            SIGNUP
+          </span>
         )}
       </div>
     </nav>
