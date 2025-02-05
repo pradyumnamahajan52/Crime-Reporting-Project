@@ -1,6 +1,8 @@
 package site.crimereporting.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -50,6 +52,21 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<User> getAllUsers() {
 		return userDao.findAll();
+	}
+
+	@Override
+	public ApiResponse getDashboardDetails() {
+
+		long userCount = userDao.countByIsDeletedFalse();
+		long policeStationCount = policeStationDao.countByIsDeletedFalse();
+		long cimeRegisteredCount = crimeReportsDao.countByIsDeletedFalse();
+		Map<String, Long> counts = new HashMap<>();
+		counts.put("userCount", userCount);
+		counts.put("policeStationCount", policeStationCount);
+		counts.put("cimeRegisteredCount", cimeRegisteredCount);
+		return  new ApiResponse("Dashboard Data fetched successfully",counts);
+
+
 	}
 
 	@Override

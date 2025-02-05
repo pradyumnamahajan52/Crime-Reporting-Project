@@ -11,6 +11,8 @@ import site.crimereporting.entity.User;
 public interface AdminService {
 
 	List<User> getAllUsers();
+
+	ApiResponse getDashboardDetails();
 	
 	List<CrimeReports> getAllReports();
 	

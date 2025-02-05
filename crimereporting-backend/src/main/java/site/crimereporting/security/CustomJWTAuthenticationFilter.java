@@ -34,10 +34,11 @@ public class CustomJWTAuthenticationFilter extends OncePerRequestFilter {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             // 3. Extract JWT
             String jwt = authHeader.substring(7);
+            System.out.println("Bearer "+jwt);
             
             // 4. Use JwtUtil to validate token and get Authentication object
             Authentication authentication = jwtUtil.getAuthenticationFromToken(jwt);
-            
+            System.out.println("authentication "+authentication);
             // 5. If authentication is valid, store it in SecurityContextHolder
             if (authentication != null) {
                 SecurityContextHolder.getContext().setAuthentication(authentication);

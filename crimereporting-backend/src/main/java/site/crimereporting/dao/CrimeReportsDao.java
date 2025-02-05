@@ -7,5 +7,5 @@ import site.crimereporting.entity.CrimeReports;
 
 @Repository
 public interface CrimeReportsDao extends JpaRepository<CrimeReports, Long> {
-
+    long countByIsDeletedFalse();
 }

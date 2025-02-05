@@ -33,16 +33,12 @@ public class AdminController {
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.getAuditLogs());
 	}
 
-	@GetMapping
+	@GetMapping("/dashboard")
 	public ResponseEntity<?> renderAdminHome() {
 
-		HashMap<String, Object> hashmap = new HashMap<>();
-		List<String> authors = Arrays.asList("Lalini Sahu", "Pradyumna Mahajan", "Jasmine Kispott", "Pawan Gupta",
-				"Mitali Gupta");
-		hashmap.put("Authors", authors);
-		hashmap.put("Project Name", "Crime Reporting System");
+
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(new ApiResponse<>("Project is Working! This message is from project creator", hashmap));
+				.body(adminService.getDashboardDetails());
 	}
 
 	@GetMapping("/users")
