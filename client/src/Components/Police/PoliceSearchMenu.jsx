@@ -2,7 +2,7 @@ import React from "react";
 import { Command } from "cmdk";
 import { FiEye, FiLink, FiLogOut, FiPhone, FiPlus } from "react-icons/fi";
 
-const SearchMenu = ({ open, setOpen }) => {
+const PoliceSearchMenu = ({ open, setOpen }) => {
   const [value, setValue] = React.useState("");
 
   return (
@@ -31,7 +31,7 @@ const SearchMenu = ({ open, setOpen }) => {
           <Command.Group heading="User" className="text-sm mb-3 text-stone-400">
             <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
 
-              View User
+              View Reports
             </Command.Item>
             <Command.Item className="flex cursor-pointer transition-colors p-2 text-sm text-stone-950 hover:bg-stone-200 rounded items-center gap-2">
               See logs 
@@ -62,4 +62,4 @@ const SearchMenu = ({ open, setOpen }) => {
   );
 };
 
-export default SearchMenu;
+export default PoliceSearchMenu;
