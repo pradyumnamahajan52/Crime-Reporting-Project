@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import site.crimereporting.dtos.ApiResponse;
+import site.crimereporting.dtos.CrimeReportResponseDTO;
 import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.PoliceStationUser;
@@ -37,4 +38,10 @@ public class AuditTrailAspect {
 			auditService.userLogin(returnedUser);
 		}
 	}
+	
+	@AfterReturning(value = "execution(* site.crimereporting.service.ReportServiceImpl.newReport(..))", returning = "returnedCrimeReport")
+	public void crimeReportTrail(JoinPoint joinPoint, ApiResponse<CrimeReportResponseDTO> returnedCrimeReport) {
+		auditService.newCrimeReport(returnedCrimeReport);
+	}
+	
 }

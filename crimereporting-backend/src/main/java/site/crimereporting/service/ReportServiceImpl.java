@@ -48,7 +48,7 @@ public class ReportServiceImpl implements ReportService {
     private S3ImageUploader s3ImageUploader;
 
     @Override
-    public ApiResponse<?> newReport(CrimeReportDTO crimereport) {
+    public ApiResponse<CrimeReportResponseDTO> newReport(CrimeReportDTO crimereport) {
         //Mapping Reports
         CrimeReports crimeReports = modelMapper.map(crimereport,CrimeReports.class);
 
@@ -94,7 +94,7 @@ public class ReportServiceImpl implements ReportService {
 
         }
 
-        return new ApiResponse<>("Crime Report Uploaded Successfully", new CrimeReportResponseDTO(
+        return new ApiResponse<>("Crime Report Uploaded Successfully", new CrimeReportResponseDTO(persistentCrimeReports.getCitizen().getId(),
                 persistentCrimeReports.getDescription(),
                 persistentCrimeReports.getCrimeCategory(),
                 persistentCrimeReports.getCrimeDate(),

@@ -15,6 +15,9 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 public class CrimeReportResponseDTO {
+	
+	private Long citizenId;
+	
     private String description;
 
 
