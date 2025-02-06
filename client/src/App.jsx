@@ -36,6 +36,10 @@ import { loader as loadAdminDashboard } from "./loader/admin/DashboardLoader";
 import { loader as loadAdminUsers } from "./loader/admin/UsersLoader";
 import { loader as loadAdminUserDetails} from "./loader/admin/UserDetailsLoader";
 
+// citizen
+import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
+
+
 import './App.css'
 import { checkAdminAuthLoader, checkPoliceAuthLoader } from "./action/user/Auth";
 import PoliceFeedback from "./Screens/Police/PoliceFeedback";
@@ -68,7 +72,8 @@ const router = createBrowserRouter([
       },
       {
         path:"reports",
-        element: <Reports />
+        element: <Reports />,
+        loader:loadCrimeCategory
       }
       
     ],
