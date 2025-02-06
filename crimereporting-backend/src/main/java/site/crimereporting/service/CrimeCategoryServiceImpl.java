@@ -39,4 +39,27 @@ public class CrimeCategoryServiceImpl implements CrimeCategoryService {
 		return new ApiResponse<List<CrimeCategoryDTO>>("successfully get all crime categories", crimeCategoryDTOList);
 	}
 
+	@Override
+	public ApiResponse<CrimeCategoryDTO> addCategory(CrimeCategoryDTO crimeCategoryDTO) {
+		// Create and map crime category entity
+		CrimeCategory crimeCategory = new CrimeCategory();
+		crimeCategory.setCategory(crimeCategoryDTO.getCategory());
+		crimeCategory.setSubCategory(crimeCategoryDTO.getSubCategory());
+
+		// Save crime category in the database
+		CrimeCategory savedCategory = crimeCategoryDao.save(crimeCategory);
+
+		if (savedCategory == null) {
+			throw new ApiException("Crime category addition failed!");
+		}
+
+		// Map saved entity to DTO
+		CrimeCategoryDTO savedCategoryDTO = new CrimeCategoryDTO();
+		savedCategoryDTO.setCategoryId(savedCategory.getId());
+		savedCategoryDTO.setCategory(savedCategory.getCategory());
+		savedCategoryDTO.setSubCategory(savedCategory.getSubCategory());
+
+		return new ApiResponse<>("Crime category added successfully!", savedCategoryDTO);
+	}
+
 }

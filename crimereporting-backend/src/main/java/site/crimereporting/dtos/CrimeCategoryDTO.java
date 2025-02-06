@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CrimeCategoryDTO {
-	private Long catergoryId;
+	private Long categoryId;
 	private String category;
 	private String subCategory;
 }
