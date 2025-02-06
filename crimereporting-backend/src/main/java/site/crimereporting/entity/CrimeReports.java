@@ -40,8 +40,8 @@ public class CrimeReports extends BaseEntity {
 	@Column(name = "description", length = 1200, nullable = true) // not null constraint
 	private String description;
 
-	// crime report 1 ---> 1 crimeCategory
-	@OneToOne // eager
+	// crime report * ---> 1 crimeCategory
+	@ManyToOne // eager
 	@JoinColumn(name = "crime_category_id")
 	private CrimeCategory crimeCategory;
 

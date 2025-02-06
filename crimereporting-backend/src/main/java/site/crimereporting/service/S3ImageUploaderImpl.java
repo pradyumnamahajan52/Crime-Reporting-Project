@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import site.crimereporting.custom_exception.ImageUploadException;
+import site.crimereporting.dtos.FileUploadInfoDTO;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +27,7 @@ public class S3ImageUploaderImpl implements S3ImageUploader {
     private String bucketName;
 
     @Override
-    public String uploadImage(MultipartFile image)  {
+    public FileUploadInfoDTO uploadImage(MultipartFile image)  {
         String actualFIleName= image.getOriginalFilename();
         // UUID -> genrating  Universal unique identifier for filename
         String fileName = UUID.randomUUID().toString()+actualFIleName.substring(actualFIleName.lastIndexOf("."));
@@ -41,7 +42,7 @@ public class S3ImageUploaderImpl implements S3ImageUploader {
             //uploading file into amazons3 bucket
             PutObjectResult putObjectResult = amazonS3.putObject(new PutObjectRequest(bucketName,fileName,image.getInputStream(),metadata));
             //returning filename
-             return fileName;
+             return new FileUploadInfoDTO(amazonS3.getUrl(bucketName,fileName).toString(),fileName,fileName.substring(fileName.lastIndexOf(".") + 1));
         }
         catch (IOException e){
             throw new ImageUploadException("error in uploading image: "+e.getMessage());

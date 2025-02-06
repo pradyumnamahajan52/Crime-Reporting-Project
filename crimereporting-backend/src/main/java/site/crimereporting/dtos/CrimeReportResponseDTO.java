@@ -1,25 +1,30 @@
 package site.crimereporting.dtos;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
+import site.crimereporting.entity.Address;
+import site.crimereporting.entity.CrimeCategory;
+import site.crimereporting.entity.PoliceStation;
+import site.crimereporting.entity.Status;
 
 import java.time.LocalDate;
 
-
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class CrimeReportDTO {
-
-    private Long crimeCategoryId;
-
+public class CrimeReportResponseDTO {
     private String description;
 
+
+    private CrimeCategory crimeCategory;
+
     private LocalDate crimeDate;
+
+
+    private Status reportStatus;
+
     //from address
     private String addressLine1;
 
@@ -33,9 +38,6 @@ public class CrimeReportDTO {
 
     private String pinCode;
 
-    private Double latitude;
+    private String stationName;
 
-    private Double longitude;
-
-    private MultipartFile[] evidences;
 }

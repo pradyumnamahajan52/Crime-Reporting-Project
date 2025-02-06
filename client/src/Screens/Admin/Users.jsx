@@ -1,5 +1,5 @@
 import React from "react";
-import TopBar from "../../Components/Admin/Dashboard/TopBar";
+import TopBar from "../../Components/Dashboard/Topbar/TopBar";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import UserForm from "../../Components/Admin/user/UserForm";
 
