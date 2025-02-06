@@ -1,17 +1,21 @@
 import { API } from "../../API";
+import { getAuthToken } from "../user/Auth";
 
 export async function newCrimeReportAction({ request }) {
   try {
 
 
     const formdata = await request.formData()
+    const token = getAuthToken();
 
-    console.log("in action - "+ request)
+    console.log("in action - "+ formdata)
     // Send request to backend
     const response = await fetch(`${API}/crimereport/newreport`, {
       method: "POST",
-    //   headers: { "Content-Type": "multipart/form-data" },
-      body: formdata,
+      headers: {
+        Authorization: `Bearer ${token}`, // for token
+      },
+      body: formdata
     });
 
     if (response.ok) {
