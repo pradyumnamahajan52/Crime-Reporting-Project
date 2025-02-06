@@ -11,6 +11,7 @@ import site.crimereporting.dtos.CrimeCategoryDTO;
 public interface CrimeCategoryService {
 
 	ApiResponse<List<CrimeCategoryDTO>>  getAllCategories();
-	
-	
+
+
+    ApiResponse<CrimeCategoryDTO> addCategory(CrimeCategoryDTO crimeCategoryDTO);
 }
