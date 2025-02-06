@@ -9,6 +9,7 @@ import site.crimereporting.dao.CitizenDao;
 import site.crimereporting.dao.PoliceStationUserDao;
 import site.crimereporting.dao.UserDao;
 import site.crimereporting.dtos.ApiResponse;
+import site.crimereporting.dtos.CrimeReportResponseDTO;
 import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.entity.AuditTrails;
 import site.crimereporting.entity.Citizen;
@@ -27,8 +28,8 @@ public class AuditServiceImpl implements AuditService {
 
 	@Autowired
 	private AuditDao auditDao;
-	
-	@Autowired 
+
+	@Autowired
 	private UserDao userDao;
 
 	@Override
@@ -70,8 +71,6 @@ public class AuditServiceImpl implements AuditService {
 //		auditDao.save(auditTrails);
 //	}
 
-
-
 	@Override
 	public void userLogin(ApiResponse<User> user) {
 		if (user == null || user.getData() == null) {
@@ -94,7 +93,6 @@ public class AuditServiceImpl implements AuditService {
 //			username = policeUser.getName();
 //		}
 
-
 		AuditTrails auditTrails = new AuditTrails();
 		auditTrails.setUser(userData);
 
@@ -105,6 +103,31 @@ public class AuditServiceImpl implements AuditService {
 		System.out.println(message.toUpperCase());
 		auditDao.save(auditTrails);
 		System.out.println("Audit log saved: " + auditTrails.getMessage());
+	}
+
+	@Override
+	public void newCrimeReport(ApiResponse<CrimeReportResponseDTO> returnedCrimeReport) {
+		CrimeReportResponseDTO crimeReportResponseDTO = returnedCrimeReport.getData();
+
+		AuditTrails auditTrails = new AuditTrails();
+
+		Citizen citizen = citizenDao.findById(crimeReportResponseDTO.getCitizenId()).orElse(null);
+
+		User user = null;
+		if (citizen != null) {
+			user = userDao.findById(citizen.getUser().getId()).orElse(null);
+		}
+
+		if (user != null)
+			auditTrails.setUser(user);
+
+		// setting message
+		String message = user.getRole() + " " + user.getFullName() + " reported a crime";
+		auditTrails.setMessage(message.toUpperCase());
+
+		System.out.println(message.toUpperCase());
+		auditDao.save(auditTrails);
+
 	}
 
 }
