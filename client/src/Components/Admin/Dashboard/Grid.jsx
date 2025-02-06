@@ -1,20 +1,24 @@
 
 import Card from "./Card";
 
-const Grid = () => {
+const Grid = ({dashboardInfo}) => {
+  console.log('====================================');
+  console.log(dashboardInfo);
+  console.log('====================================');
   return (
     <div className="px-4 grid gap-3 grid-cols-12">
+      
       <Card
         title="Total Police Station"
-        value="250"
+        value={dashboardInfo?.data?.policeStationCount}
       />
       <Card
         title="Total Users"
-        value="1000"
+        value={dashboardInfo?.data?.userCount}
       />
       <Card
         title="Total Crime Registered"
-        value="2500"
+        value={dashboardInfo?.data?.cimeRegisteredCount}
       />
     </div>
   );

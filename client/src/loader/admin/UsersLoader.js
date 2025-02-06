@@ -1,10 +1,10 @@
 import { getAuthToken } from "../../action/user/Auth";
 import { API } from "../../API";
 
-async function loadAdmnAuditLog() {
+async function loadUsers() {
   try {
     const token = getAuthToken();
-    const response = await fetch(`${API}/admin/auditlog`, {
+    const response = await fetch(`${API}/admin/users`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",  
@@ -15,18 +15,18 @@ async function loadAdmnAuditLog() {
     if (!response.ok) {
       const responseData = await response.json();
 
-      throw new Error(responseData?.error || "Failed to fetch audit logs");
+      throw new Error(responseData?.error || "Failed to fetch users");
     }
 
     return await response.json();
   } catch (error) {
-    throw new Error(error.message || "Something went wrong while fetching logs.");
+    throw new Error(error.message || "Something went wrong while fetching users.");
   }
 }
 
 // Loader now returns a normal async function instead of `defer()`
 export async function loader() {
-  const auditData = await loadAdmnAuditLog();
+  const usersData = await loadUsers();
 
-  return { auditData }; 
+  return { usersData }; 
 }
