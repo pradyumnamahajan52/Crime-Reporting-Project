@@ -55,6 +55,7 @@ const Report = () => {
         address: { ...prev.address, [field]: value },
       }));
     } else {
+      console.log(name,value)
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
@@ -107,8 +108,21 @@ const Report = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("crimeDate", formData.crimeDate);
+    console.log("description", formData.description);
+   // console.log("stationName", formData.stationName);
+    console.log("crimeCategoryId", formData.crimeCategoryId);
+    console.log("addressLine1", formData.address.addressLine1);
+    console.log("addressLine2", formData.address.addressLine2)
+    console.log("city", formData.address.city);
+    console.log("state", formData.address.state);
+    console.log("country", formData.address.country);
+    console.log("pinCode", formData.address.pinCode);
+    console.log("latitude", formData.address.latitude);
+    console.log("longitude", formData.address.longitude);
+
     // Prepare FormData for file uploads
-    const formDataToSubmit = new FormData();
+    let formDataToSubmit = new FormData();
     formDataToSubmit.append("crimeDate", formData.crimeDate);
     formDataToSubmit.append("description", formData.description);
     // formDataToSubmit.append("stationName", formData.stationName);
@@ -118,7 +132,7 @@ const Report = () => {
     formDataToSubmit.append("city", formData.address.city);
     formDataToSubmit.append("state", formData.address.state);
     formDataToSubmit.append("country", formData.address.country);
-    formDataToSubmit.append("pinCode", formData.address.pincode);
+    formDataToSubmit.append("pinCode", formData.address.pinCode);
     formDataToSubmit.append("latitude", formData.address.latitude);
     formDataToSubmit.append("longitude", formData.address.longitude);
     
@@ -131,12 +145,14 @@ const Report = () => {
       formDataToSubmit.append(`evidence[${index}]`, file);
     });
 
-  console.log("working submission");
+    console.log("Submitting the following FormData:");
+    for (let pair of formDataToSubmit.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+    
 
     submit(formDataToSubmit, {
-      action:"/",
-      method: "post", 
-      encType: "multipart/form-data",
+      method: "post", encType: "multipart/form-data",
     });
   };
 
@@ -159,7 +175,7 @@ const Report = () => {
           To report a crime, please provide the following details:
         </p>
 
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           {/* Crime Date */}
           <div className="mb-4">
             <label className="block text-lg font-medium mb-2">
@@ -191,10 +207,11 @@ const Report = () => {
                       <button
                         type="button"
                         onClick={() => {
+                          console.log(cat.categoryId)
                           setSelectedCategory(cat.category + cat.subCategory);
                           setFormData((prev) => ({
                             ...prev,
-                            crimeCategoryId: cat.catergoryId,
+                            crimeCategoryId: cat.categoryId,
                           }));
                         }}
                         className={`block w-full text-left px-4 py-2 text-sm ${
@@ -258,6 +275,7 @@ const Report = () => {
               placeholder="Country"
               className="border border-[#17A2B8] p-2 rounded w-full"
               value={formData.address.country}
+              
               readOnly
             />
             </div>

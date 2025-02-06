@@ -4,7 +4,7 @@ export async function newCrimeReportAction({ request }) {
   try {
 
 
-    const formdata = await request.formdata()
+    const formdata = await request.formData()
 
     console.log("in action - "+ request)
     // Send request to backend
