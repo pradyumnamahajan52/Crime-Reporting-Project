@@ -19,14 +19,8 @@ import site.crimereporting.dao.CrimeReportsDao;
 import site.crimereporting.dao.FeedbackDao;
 import site.crimereporting.dao.PoliceStationDao;
 import site.crimereporting.dao.UserDao;
-import site.crimereporting.dtos.ApiResponse;
-import site.crimereporting.dtos.AuditTrailsResponse;
-import site.crimereporting.dtos.FeedbackResponse;
-import site.crimereporting.dtos.AdminUserDTO;
-import site.crimereporting.entity.CrimeCategory;
-import site.crimereporting.entity.CrimeReports;
-import site.crimereporting.entity.PoliceStation;
-import site.crimereporting.entity.User;
+import site.crimereporting.dtos.*;
+import site.crimereporting.entity.*;
 
 @Service
 @Transactional
@@ -71,6 +65,16 @@ public class AdminServiceImpl implements AdminService {
 		return  new ApiResponse("Dashboard Data fetched successfully",counts);
 
 
+	}
+
+	@Override
+	public ApiResponse newPoliceStationRegister(PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO) {
+		PoliceStation policeStation = mapper.map(policeStationRegisterRequestDTO,PoliceStation.class);
+		Address address = mapper.map(policeStationRegisterRequestDTO,Address.class);
+		policeStation.setAddress(address);
+		policeStationDao.save(policeStation);
+//		policeStationDao.
+		return new ApiResponse("New Police Station Registered Successfully",policeStation);
 	}
 
 	@Override

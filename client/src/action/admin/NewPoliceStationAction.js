@@ -21,7 +21,7 @@ export async function NewPoliceStationAction({ request }) {
     };
 
     // Send request to backend
-    const response = await fetch(`${API}/police-stations`, {
+    const response = await fetch(`${API}/admin/policeStations`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(stationData),
