@@ -1,12 +1,17 @@
+import { getAuthToken } from "../../action/user/Auth";
+import { API } from "../../API";
+
 async function loadCrimeCategory() {
   try {
    
+        const token = getAuthToken();
+
     const response = await fetch(`${API}/crimecategory/getCategories`, {
       method: "GET",
-      // headers: {
-      //   "Content-Type": "application/json",  
-      //   Authorization: `Bearer ${token}`, // for token
-      // },
+      headers: {
+        "Content-Type": "application/json",  
+        Authorization: `Bearer ${token}`, // for token
+      },
     });
 
     if (!response.ok) {

@@ -63,8 +63,6 @@ public class AdminServiceImpl implements AdminService {
 		counts.put("policeStationCount", policeStationCount);
 		counts.put("cimeRegisteredCount", cimeRegisteredCount);
 		return  new ApiResponse("Dashboard Data fetched successfully",counts);
-
-
 	}
 
 	@Override
