@@ -2,6 +2,7 @@ import React from "react";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import { useNavigate } from "react-router-dom";
 
 import img5 from "../assets/images/crime-categories/img7.jpg";
 import img1 from "../assets/images/crime-categories/img6.jpg";
@@ -51,71 +52,73 @@ function Home() {
     {
       image: rimg1,
       title: "Property Crimes",
-      description: "Includes burglary, theft, vandalism, etc.",
+      description: "Includes burglary, theft, vandalism, etc."
     },
     {
       image: rimg2,
       title: "Violent Crimes",
-      description: "Includes assault, robbery, and homicide.",
+      description: "Includes assault, robbery, and homicide."
     },
     {
       image: rimg3,
       title: "Cyber Crimes",
-      description: "Includes hacking, identity theft, and online fraud.",
+      description: "Includes hacking, identity theft, and online fraud."
     },
     {
       image: rimg4,
       title: "Finencial Crimes",
-      description: "Includes Fraud , money landering.",
+      description: "Includes Fraud , money landering."
     },
 
     {
       image: rimg5,
       title: "Drug Offenses",
       description:
-        "Includes possession, distribution, and manufacturing of illegal drugs.",
+        "Includes possession, distribution."
     },
     {
       image: rimg6,
       title: "Traffic Offenses",
-      description: "Includes Hit and Run , drunk driving , speeding.",
+      description: "Includes Hit and Run , drunk driving , speeding."
     },
     {
       image: rimg7,
       title: "Public Order Crimes",
-      description: "Includes Disorderly Conduct, and Trespassing.",
+      description: "Includes Disorderly Conduct, and Trespassing."
     },
     {
       image: rimg8,
       title: "Environmental Crimes",
-      description: "Includes Illegal Dumping, Poaching.",
+      description: "Includes Illegal Dumping, Poaching."
     },
     {
       image: rimg9,
       title: "White Collar Crimes",
-      description: "Includes Tax Evasion , Insider Trading .",
+      description: "Includes Tax Evasion , Insider Trading ."
     },
     {
       image: rimg10,
       title: "Crimes Against Women",
-      description: "Includes Sexual Harassment , .",
+      description: "Includes Sexual Harassment."
     },
     {
       image: rimg13,
-      title: "Crimes Against Women",
-      description: "Includes Child Abuse , labor.",
+      title: "Crimes Against Children",
+      description: "Includes Child Abuse , labor."
     },
     {
       image: rimg11,
       title: "Terrorism",
-      description: "Includes Bomb threats , act of terrorism.",
+      description: "Includes Bomb threats , act of terrorism."
     },
     {
       image: rimg12,
       title: "Miscellaneous",
-      description: "Includes Harasment , Stalking.",
+      description: "Includes Harasment , Stalking."
     },
   ];
+
+  const navigate = useNavigate();
 
   return (
     //  <>
@@ -253,6 +256,7 @@ function Home() {
               data-aos-delay="500"
               data-aos-offset="0"
               className="bg-primary text-white py-3 px-6 rounded-lg shadow-lg transition-all duration-300 hover:bg-opacity-90"
+              onClick={() => navigate("/reports")}
             >
               Report a Crime
             </button>

@@ -9,9 +9,11 @@ import {
     IconButton,
   } from "@material-tailwind/react";
   import img1 from '../../assets/images/card/1.png';
+  import { useNavigate } from "react-router-dom";
   
   export function BookingCard({ image, title, description }) {
     
+    const navigate = useNavigate();
     return (
    <Card className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 h-full min-h-[350px] max-w-[26rem] shadow-lg flex flex-col transition-transform transform hover:scale-105">
   <CardHeader floated={false} color="blue-gray" className="relative">
@@ -33,7 +35,8 @@ import {
     </Typography>
   </CardBody>
   <CardFooter className="pt-3">
-    <Button size="lg" fullWidth={true} className="py-4">
+    <Button size="lg" fullWidth={true} className="py-4 bg-black" 
+     onClick={() => navigate("/reports")} >
       Report Crime
     </Button>
   </CardFooter>
