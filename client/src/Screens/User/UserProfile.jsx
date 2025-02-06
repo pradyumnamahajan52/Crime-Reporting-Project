@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TopBar from '../../Components/Admin/Dashboard/TopBar';
+import TopBar from '../../Components/Dashboard/Topbar/TopBar';
 import profileimg from '../../assets/images/profile.png'
 
 const UserProfile = () => {

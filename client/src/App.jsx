@@ -25,16 +25,26 @@ import NotFound from "./Screens/NotFound";
 import FeedbackForm from "./Screens/FeedBackForm";
 import UpdatePoliceStation from "./Screens/Admin/UpdatePoliceStation";
 import Reports from "./Screens/Citizen/Reports"
-import PoliceFeedback from "./Components/Police/Sidebar/Feedback"
+
 import PoliceDashboard from "./Screens/Police/Dashboard"
 import UserLogin from "./Screens/User/UserLogin";
 import { LoginAction } from "./action/user/LoginAction";
 import { LogoutAction } from "./action/user/LogoutAction";
 import { loader as loadAuditLog } from "./loader/admin/AuditLogLoader";
 import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
+import { loader as loadAdminDashboard } from "./loader/admin/DashboardLoader";
+import { loader as loadAdminUsers } from "./loader/admin/UsersLoader";
+import { loader as loadAdminUserDetails} from "./loader/admin/UserDetailsLoader";
+
+// citizen
+import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
+
 
 import './App.css'
 import { checkAdminAuthLoader, checkPoliceAuthLoader } from "./action/user/Auth";
+import PoliceFeedback from "./Screens/Police/PoliceFeedback";
+import { UserProfileAction } from "./action/admin/UserProfileAction";
+import { NewPoliceStationAction } from "./action/admin/NewPoliceStationAction";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +72,8 @@ const router = createBrowserRouter([
       },
       {
         path:"reports",
-        element: <Reports />
+        element: <Reports />,
+        loader:loadCrimeCategory
       }
       
     ],
@@ -110,14 +121,18 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <AdminDashboard />,
+        loader:loadAdminDashboard
       },
       {
         path:"users",
         element: <AdminUsers />,
+        loader:loadAdminUsers
       },
       {
         path:"profile",
         element: <AdminProfile />,
+        loader:loadAdminUserDetails,
+        action:UserProfileAction
       },
       {
         path:"crime-report",
@@ -130,6 +145,7 @@ const router = createBrowserRouter([
       {
         path:"new-police-station",
         element: <NewPoliceStation />,
+        action: NewPoliceStationAction,
       },
       {
         path:"update-police-station/:id",

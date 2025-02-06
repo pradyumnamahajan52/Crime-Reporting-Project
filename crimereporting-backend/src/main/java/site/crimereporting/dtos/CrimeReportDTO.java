@@ -14,6 +14,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CrimeReportDTO {
+
+    private Long crimeCategoryId;
+
     private String description;
 
     private LocalDate crimeDate;

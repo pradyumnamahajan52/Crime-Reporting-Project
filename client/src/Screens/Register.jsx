@@ -183,7 +183,7 @@ export default function Register() {
 
 
   const [policeformData , setpoliceformData] =useState({
-    name: '',
+    fullName: '',
     designation: '',
     email: '',
     phoneNumber: '',
@@ -201,9 +201,9 @@ export default function Register() {
       type: "text",
       placeholder: "Enter your name",
       name: "name",
-      value:policeformData.name,
+      value:policeformData.fullName,
       onchange : (e) =>{
-        setpoliceformData({...policeformData,name:e.target.value})
+        setpoliceformData({...policeformData,fullName:e.target.value})
       }
     },
     {

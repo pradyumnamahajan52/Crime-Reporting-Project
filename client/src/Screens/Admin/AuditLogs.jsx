@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TopBar from '../../Components/Admin/Dashboard/TopBar';
+import TopBar from '../../Components/Dashboard/Topbar/TopBar';
 import { useLoaderData } from 'react-router-dom';
 import DashboardSpinner from '../../Components/DashboardSpinner';
 

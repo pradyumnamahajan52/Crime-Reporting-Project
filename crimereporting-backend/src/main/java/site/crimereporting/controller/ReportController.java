@@ -19,8 +19,8 @@ public class ReportController {
 
     @PostMapping("/newreport")
     public ResponseEntity<?> crimeReport(@ModelAttribute CrimeReportDTO crimereport){
-        System.out.println(crimereport);
-        System.out.println(crimereport.getEvidences());
+//        System.out.println(crimereport);
+//        System.out.println(crimereport.getEvidences());
         return ResponseEntity.status(HttpStatus.CREATED).body(reportService.newReport(crimereport));
 
     }

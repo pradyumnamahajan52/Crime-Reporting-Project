@@ -3,13 +3,13 @@ import { API } from "../../API";
 
 async function loadAdmnFeedback() {
   try {
-    // const token = getAuthToken();
+    const token = getAuthToken();
     const response = await fetch(`${API}/admin/feedback`, {
       method: "GET",
-      // headers: {
-      //   "Content-Type": "application/json",  
-      //   Authorization: `Bearer ${token}`, // for token
-      // },
+      headers: {
+        "Content-Type": "application/json",  
+        Authorization: `Bearer ${token}`, // for token
+      },
     });
 
     if (!response.ok) {

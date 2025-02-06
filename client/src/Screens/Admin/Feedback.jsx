@@ -1,7 +1,7 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import TopBar from "../../Components/Admin/Dashboard/TopBar";
+import TopBar from "../../Components/Dashboard/Topbar/TopBar";
 
 const Feedback = () => {
   const { feedbackData } = useLoaderData(); // Fetch data from the loader

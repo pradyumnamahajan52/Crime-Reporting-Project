@@ -1,48 +1,190 @@
-import React from "react";
-import { useState } from "react";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import React, { useState, useEffect } from "react";
+import { useActionData, useLoaderData, useSubmit } from "react-router-dom";
+import { HiChevronDown } from "react-icons/hi";
+import { toast } from "react-toastify";
 
 const Report = () => {
+  const [formData, setFormData] = useState({
+    crimeDate: new Date().toISOString().split("T")[0], // Set default to today's date
+    description: "",
+    stationName: "",
+    address: {
+      addressLine2: "",
+      addressLine1: "",
+      city: "",
+      state: "",
+      country: "",
+      pinCode: "",
+      latitude: "",
+      longitude: "",
+    },
+    crimeCategoryId: null,
+    evidence: [],
+  });
 
-    const [evidence, setEvidence] = useState([]);
-    const handleFileChange = (event) => {
-        const files = Array.from(event.target.files);
-        setEvidence(files);
-      };
-    
+  const {crimeCategories} = useLoaderData();
+
+  const actionData = useActionData();
+  const submit = useSubmit();
+  const [selectedCategory, setSelectedCategory] = useState("Select a category");
+  const [evidenceFiles, setEvidenceFiles] = useState([]);
+
+
+
+  // Handle File Upload
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    setEvidenceFiles((prevFiles) => [...prevFiles, ...files]);
+  };
+
+  // Remove a file from preview
+  const handleRemoveFile = (index) => {
+    setEvidenceFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  };
+
+  // Handle Input Changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name.startsWith("address.")) {
+      const field = name.split(".")[1];
+      setFormData((prev) => ({
+        ...prev,
+        address: { ...prev.address, [field]: value },
+      }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  // Get Google Map Source
+  const mapSrc = () => {
+    const { latitude, longitude } = formData.address;
+    if (latitude && longitude) {
+      return `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
+    }
+    return null;
+  };
+
+  // Set User's Latitude & Longitude Automatically
+  const getUserLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setFormData((prev) => ({
+            ...prev,
+            address: {
+              ...prev.address,
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            },
+          }));
+        },
+        () => {
+          alert("Location permission denied. Please enable location services.");
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by your browser.");
+    }
+  };
+
+  // Auto-fetch location on component mount
+  useEffect(() => {
+    getUserLocation();
+  }, []);
+
+    // useEffect(() => {
+    //   setSelectedCategory(crimeCategories.data || []);
+    //   // console.log('====================================');
+    //   // console.log(crimeCategories.data);
+    //   // console.log('====================================');
+    // }, [crimeCategories.data]);
+
+  // Handle Form Submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Prepare FormData for file uploads
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append("crimeDate", formData.crimeDate);
+    formDataToSubmit.append("description", formData.description);
+    formDataToSubmit.append("stationName", formData.stationName);
+    formDataToSubmit.append("crimeCategoryId", formData.crimeCategoryId);
+
+    Object.keys(formData.address).forEach((key) => {
+      formDataToSubmit.append(`address.${key}`, formData.address[key]);
+    });
+
+    // Append all files
+    evidenceFiles.forEach((file, index) => {
+      formDataToSubmit.append(`evidence[${index}]`, file);
+    });
+
+    submit(formDataToSubmit, { method: "post", encType: "multipart/form-data" });
+  };
+
+  // Show success/error messages after submission
+  useEffect(() => {
+    if (actionData?.success) {
+      toast.success(actionData.success);
+    } else if (actionData?.error) {
+      toast.error(actionData.error);
+    }
+  }, [actionData]);
+
   return (
-    <div style={{width:"100vw"}} className="w-full min-h-screen p-6 bg-gray-100">
+    <div className="w-full min-h-screen p-6 bg-gray-100">
       <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-black mb-4 text-center">
-          Register Your Complaint
-        </h1>
-        <p className="mb-6 text-center text-gray-600">
-          To report a crime, please provide the following details:
-        </p>
+        <h1 className="text-3xl font-bold text-black mb-4 text-center">Register Your Complaint</h1>
+        <p className="mb-6 text-center text-gray-600">To report a crime, please provide the following details:</p>
 
-        {/* Crime Date */}
-        <div className="mb-4">
-          <label className="block text-lg font-medium mb-2">Crime Date:</label>
-          <input
-            type="text"
-            placeholder="MM-DD-YYYY"
-            className="border border-[#17A2B8] p-2 rounded w-full"
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          {/* Crime Date */}
+          <div className="mb-4">
+            <label className="block text-lg font-medium mb-2">Crime Date:</label>
+            <input
+              type="date"
+              name="crimeDate"
+              className="border border-[#17A2B8] p-2 rounded w-full"
+              value={formData.crimeDate}
+              onChange={handleChange}
+            />
+          </div>
 
-        {/* Crime Description */}
-        <div className="mb-4">
-          <label className="block text-lg font-medium mb-2">
-            Crime Description:
-          </label>
-          <textarea
-            className="border border-[#17A2B8] p-2 rounded w-full"
-            rows="4"
-            placeholder="Describe the crime in detail..."
-          ></textarea>
-        </div>
+          {/* Crime Category Dropdown */}
+          <div className="mb-4">
+            <label className="block text-lg font-medium mb-2">Crime Category:</label>
+            <Menu as="div" className="relative inline-block w-full">
+              <MenuButton className="w-full flex justify-between items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-sm ring-gray-300 hover:bg-gray-50">
+                {selectedCategory}
+                <HiChevronDown className="size-5 text-gray-400" />
+              </MenuButton>
+              <MenuItems className="absolute w-full z-10 mt-2 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5">
+                {crimeCategories.data?.map((cat, index) => (
+                  <MenuItem key={index}>
+                    {({ active }) => (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedCategory(cat.category+cat.subCategory);
+                          setFormData((prev) => ({ ...prev, crimeCategoryId: cat.catergoryId }));
+                        }}
+                        className={`block w-full text-left px-4 py-2 text-sm ${
+                          active ? "bg-gray-100 text-gray-900" : "text-gray-700"
+                        }`}
+                      >
+                        {cat.category} {cat.subCategory}
+                      </button>
+                    )}
+                  </MenuItem>
+                ))}
+              </MenuItems>
+            </Menu>
+          </div>
 
-        {/* Address Section */}
-        <div className="mb-4">
+                          {/* Address Section */}
+                          <div className="mb-4">
           <label className="block text-lg font-medium mb-2">Address:</label>
           <input
             type="text"
@@ -98,45 +240,8 @@ const Report = () => {
           </div>
         </div>
 
-        
-            <div className="mb-6">
-          <label className="block text-lg font-medium mb-2">
-            Upload Adhhar Image:
-          </label>
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleFileChange}
-            className="border border-[#17A2B8] p-2 rounded w-full cursor-pointer"
-          />
-
-          {/* Preview Uploaded Images */}
-          {evidence.length > 0 && (
-            <div className="mt-4">
-              <h3 className="font-semibold text-gray-700 mb-2">Preview:</h3>
-              <div className="flex flex-wrap gap-4">
-                {evidence.map((file, index) => (
-                  file.type.startsWith("image/") ? (
-                    <img
-                      key={index}
-                      src={URL.createObjectURL(file)}
-                      alt={`Uploaded ${index + 1}`}
-                      className="w-24 h-24 object-cover rounded border border-[#17A2B8]"
-                    />
-                  ) : (
-                    <p key={index} className="text-sm text-gray-700">
-                      {file.name}
-                    </p>
-                  )
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Further Comments */}
-        <div className="mb-4">
+                {/* Further Comments */}
+                <div className="mb-4">
           <label className="block text-lg font-medium mb-2">
             Further Comments:
           </label>
@@ -158,12 +263,66 @@ const Report = () => {
           </label>
         </div>
 
-        {/* Submit Button */}
-        <div className="text-center">
-          <button className="bg-[#17A2B8] text-white px-6 py-3 rounded-lg text-lg hover:bg-[#138496] transition">
-            Report Now!
-          </button>
+        {/* Crime Description */}
+        <div className="mb-4">
+          <label className="block text-lg font-medium mb-2">Crime Description:</label>
+          <textarea className="border border-[#17A2B8] p-2 rounded w-full" rows="4" placeholder="Describe the crime in detail..."></textarea>
         </div>
+
+
+          {/* Upload Evidence */}
+          <div className="mb-6">
+            <label className="block text-lg font-medium mb-2">Upload Evidence (Optional):</label>
+            <input type="file" multiple accept="image/*,video/*" onChange={handleFileChange} className="border border-[#17A2B8] p-2 rounded w-full cursor-pointer" />
+
+            {/* Preview Uploaded Files */}
+            {evidenceFiles.length > 0 && (
+              <div className="mt-4">
+                <h3 className="font-semibold text-gray-700 mb-2">Preview:</h3>
+                <div className="flex flex-wrap gap-4">
+                  {evidenceFiles.map((file, index) => (
+                    <div key={index} className="relative">
+                      {file.type.startsWith("image/") ? (
+                        <img src={URL.createObjectURL(file)} alt={`Uploaded ${index + 1}`} className="w-24 h-24 object-cover rounded border border-[#17A2B8]" />
+                      ) : (
+                        <p className="text-sm text-gray-700">{file.name}</p>
+                      )}
+                      <button type="button" onClick={() => handleRemoveFile(index)} className="absolute top-0 right-0 bg-red-500 text-white px-1 rounded">
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Submit Button */}
+          <div className="text-center">
+            <button type="submit" className="bg-[#17A2B8] text-white px-6 py-3 rounded-lg text-lg hover:bg-[#138496] transition">
+              Report Now!
+            </button>
+          </div>
+        </form>
+        <div className="mt-6">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Map Preview
+            </label>
+            <div className="w-full h-80 border rounded-lg overflow-hidden">
+              {mapSrc() ? (
+                <iframe
+                  src={mapSrc()}
+                  title="Map Preview"
+                  className="w-full h-full"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <p className="text-center text-gray-500 pt-32">
+                  Please give permission Latitude and Longitude to preview the location.
+                </p>
+              )}
+            </div>
+          </div>
       </div>
     </div>
   );
