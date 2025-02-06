@@ -27,6 +27,6 @@ public class CrimeCategoryController {
 		ApiResponse<List<CrimeCategoryDTO>>  crimeCategoryDTO =  crimeCategoryService.getAllCategories();
 		
 		
-		return ResponseEntity.status(HttpStatus.SC_ACCEPTED).body(crimeCategoryDTO);
+		return ResponseEntity.status(HttpStatus.SC_OK).body(crimeCategoryDTO);
 	}
 }

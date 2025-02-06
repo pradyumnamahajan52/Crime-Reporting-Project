@@ -1,7 +1,7 @@
 async function loadCrimeCategory() {
   try {
    
-    const response = await fetch(`${API}/crimereport/newreport`, {
+    const response = await fetch(`${API}/crimecategory/getCategories`, {
       method: "GET",
       // headers: {
       //   "Content-Type": "application/json",  
