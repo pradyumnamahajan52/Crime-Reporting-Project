@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import site.crimereporting.dtos.AdminUserDTO;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.OtpRequest;
+import site.crimereporting.dtos.PoliceStationRegisterRequestDTO;
 import site.crimereporting.service.AdminService;
 
 @RestController
-@RequestMapping("/admin")
 @CrossOrigin("*")
+@RequestMapping("/admin")
 public class AdminController {
 
 	@Autowired
@@ -58,6 +59,11 @@ public class AdminController {
 	@GetMapping("/policeStations")
 	public ResponseEntity<?> viewPoliceStations() {
 		return ResponseEntity.ok(adminService.getAllPoliceStations());
+	}
+
+	@PostMapping("/policeStations")
+	public ResponseEntity<?> newPoliceStations(@RequestBody @Valid PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO) {
+		return ResponseEntity.ok(adminService.newPoliceStationRegister(policeStationRegisterRequestDTO));
 	}
 	
 	@GetMapping("/crimeList")

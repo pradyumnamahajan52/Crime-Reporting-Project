@@ -4,6 +4,7 @@ import java.util.List;
 
 import site.crimereporting.dtos.AdminUserDTO;
 import site.crimereporting.dtos.ApiResponse;
+import site.crimereporting.dtos.PoliceStationRegisterRequestDTO;
 import site.crimereporting.entity.CrimeCategory;
 import site.crimereporting.entity.CrimeReports;
 import site.crimereporting.entity.PoliceStation;
@@ -14,6 +15,8 @@ public interface AdminService {
 	List<User> getAllUsers();
 
 	ApiResponse getDashboardDetails();
+
+	ApiResponse newPoliceStationRegister(PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO);
 
 	ApiResponse getLoggedInUserDetails();
 

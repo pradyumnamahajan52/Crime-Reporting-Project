@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const NewPoliceStation = () => {
   const [formData, setFormData] = useState({
-    stationCode: "",
+    crimeDate: "",
     stationName: "",
     address: {
       addressLine1: "",
@@ -29,7 +29,7 @@ const NewPoliceStation = () => {
   const mapSrc = () => {
     const { latitude, longitude } = formData.address;
     if (latitude && longitude) {
-      return `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
+        return `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
     }
     return null;
   };
