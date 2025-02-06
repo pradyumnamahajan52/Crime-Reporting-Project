@@ -97,29 +97,12 @@ const Report = () => {
     getUserLocation();
   }, []);
 
-  // useEffect(() => {
-  //   setSelectedCategory(crimeCategories.data || []);
-  //   // console.log('====================================');
-  //   // console.log(crimeCategories.data);
-  //   // console.log('====================================');
-  // }, [crimeCategories.data]);
 
   // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("crimeDate", formData.crimeDate);
-    console.log("description", formData.description);
-   // console.log("stationName", formData.stationName);
-    console.log("crimeCategoryId", formData.crimeCategoryId);
-    console.log("addressLine1", formData.address.addressLine1);
-    console.log("addressLine2", formData.address.addressLine2)
-    console.log("city", formData.address.city);
-    console.log("state", formData.address.state);
-    console.log("country", formData.address.country);
-    console.log("pinCode", formData.address.pinCode);
-    console.log("latitude", formData.address.latitude);
-    console.log("longitude", formData.address.longitude);
+
 
     // Prepare FormData for file uploads
     let formDataToSubmit = new FormData();
@@ -136,19 +119,14 @@ const Report = () => {
     formDataToSubmit.append("latitude", formData.address.latitude);
     formDataToSubmit.append("longitude", formData.address.longitude);
     
-    // Object.keys(formData.address).forEach((key) => {
-    //   formDataToSubmit.append(`address.${key}`, formData.address[key]);
-    // });
+  
 
     // Append all files
     evidenceFiles.forEach((file, index) => {
-      formDataToSubmit.append(`evidence[${index}]`, file);
+      formDataToSubmit.append(`evidences[${index}]`, file);
     });
 
-    console.log("Submitting the following FormData:");
-    for (let pair of formDataToSubmit.entries()) {
-      console.log(pair[0], pair[1]);
-    }
+    
     
 
     submit(formDataToSubmit, {
