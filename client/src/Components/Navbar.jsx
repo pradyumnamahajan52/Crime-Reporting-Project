@@ -8,9 +8,9 @@ export default function Navbar() {
   const token = getAuthToken();
   const navigate = useNavigate();
  
-  console.log('====================================');
-  console.log(token);
-  console.log('====================================');
+  // console.log('====================================');
+  // console.log(token);
+  // console.log('====================================');
   
   // State to toggle the mobile menu, initialized to false (closed state)
   const [isOpen, setIsOpen] = useState(false);
