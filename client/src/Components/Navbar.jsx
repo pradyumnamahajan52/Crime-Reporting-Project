@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const token = getAuthToken();
   const navigate = useNavigate();
+ 
+  console.log('====================================');
+  console.log(token);
+  console.log('====================================');
   
   // State to toggle the mobile menu, initialized to false (closed state)
   const [isOpen, setIsOpen] = useState(false);
@@ -65,6 +69,14 @@ export default function Navbar() {
         >
           Feedback
         </span>
+        <span
+          className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+          onClick={() => handleNavigation("/user/profile")}
+        >
+          My Account
+        </span>
+
+            
       </div>
 
       {/* Mobile Menu Toggle */}
@@ -110,6 +122,12 @@ export default function Navbar() {
           >
             Feedback
           </span>
+          <span
+            className="text-white hover:bg-white hover:text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
+            onClick={() => handleNavigation("/user/profile")}
+          >
+            My Account
+          </span>
           {!token && (
             <span
               onClick={() => handleNavigation("/user/register")}
@@ -132,7 +150,7 @@ export default function Navbar() {
 
       {/* Right - Profile Image or Register/Login Button */}
       <div className="flex items-center space-x-4">
-        {token ? (
+        {token === null ? (
           <span
             onClick={() => handleNavigation("/user/login")}
             className="bg-white text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
@@ -143,15 +161,15 @@ export default function Navbar() {
         ) : (
           <>
 
-          <img
+          {/* <img
             src="https://api.dicebear.com/9.x/avataaars-neutral/svg?backgroundColor=b6e3f4,c0aede,d1d4f9"
             alt="Profile"
             className="w-8 h-8 rounded-full border border-white cursor-pointer"
             onClick={() => handleNavigation("/user/profile")}
-          />
+          /> */}
 
           <Form method="POST" action="/user/logout">
-          <button type="submit"  className="px-2 py-1.5 font-medium bg-stone-200 hover:bg-stone-300 transition-colors rounded" >
+          <button type="submit"  className="bg-white text-primary font-semibold px-4 py-2 rounded-lg transition cursor-pointer" >
             Logout
           </button>
           </Form>
