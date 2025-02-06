@@ -4,7 +4,7 @@ import RootLayout from "./Layout/RootLayout";
 import Home from "./Screens/Home";
 import AdminLayout from "./Layout/AdminLayout";
 import AdminDashboard from "./Screens/Admin/Dashboard";
-import About from "./Screens/About";
+import Aboutus from "./Screens/Aboutus";
 import Contact from "./Screens/Contact";
 import PoliceLayout from "./Layout/PoliceLayout";
 
@@ -17,6 +17,7 @@ import AdminPoliceStation from "./Screens/Admin/PoliceStation";
 import AdminFeedback from "./Screens/Admin/Feedback";
 import AdminAuditLogs from "./Screens/Admin/AuditLogs";
 import NewPoliceStation from "./Screens/Admin/NewPoliceStation";
+import UserProfile from "./Screens/User/UserProfile";
 
 
 import Register from "./Screens/Register";
@@ -31,6 +32,7 @@ import { LoginAction } from "./action/user/LoginAction";
 import { LogoutAction } from "./action/user/LogoutAction";
 import { loader as loadAuditLog } from "./loader/admin/AuditLogLoader";
 import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
+
 import './App.css'
 import { checkAdminAuthLoader, checkPoliceAuthLoader } from "./action/user/Auth";
 import PoliceFeedback from "./Screens/Police/PoliceFeedback";
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
       }, 
       {
         path: "about",
-        element: <About />,
+        element: <Aboutus />,
       },
       {
         path:"contact",
@@ -59,7 +61,10 @@ const router = createBrowserRouter([
         path:"feedback",
         element: <FeedbackForm />
       },
-        
+      {
+        path:"reports",
+        element: <Reports />
+      }
       
     ],
   },
@@ -88,9 +93,10 @@ const router = createBrowserRouter([
       element: <Register />
     },
     {
-      path:"reports",
-      element: <Reports />
+      path:"profile",
+      element: <UserProfile />,
     },
+    
    
     { path: "logout", action: LogoutAction },
   ]
