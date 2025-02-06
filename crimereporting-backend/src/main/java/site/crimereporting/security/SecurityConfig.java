@@ -66,7 +66,7 @@ public class SecurityConfig {
                                "/users/register/police", 
                                "/",
 //                               "/crimereport/newreport",
-//                               "/admin/*",
+                               "/admin/**",
                                "/v*/api-doc*/**",
                                "/swagger-ui/**")
                 .permitAll()

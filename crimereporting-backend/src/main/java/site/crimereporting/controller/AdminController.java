@@ -4,15 +4,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import site.crimereporting.dtos.AdminUserDTO;
 import site.crimereporting.dtos.ApiResponse;
+import site.crimereporting.dtos.OtpRequest;
 import site.crimereporting.service.AdminService;
 
 @RestController
@@ -35,8 +35,6 @@ public class AdminController {
 
 	@GetMapping("/dashboard")
 	public ResponseEntity<?> renderAdminHome() {
-
-
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(adminService.getDashboardDetails());
 	}
@@ -45,7 +43,18 @@ public class AdminController {
 	public ResponseEntity<?> viewUsers() {
 		return ResponseEntity.ok(adminService.getAllUsers());
 	}
-	
+
+	@GetMapping("/user/details")
+	public ResponseEntity<?> renderUserDetails() {
+		return ResponseEntity.ok(adminService.getLoggedInUserDetails());
+	}
+
+	@PutMapping("/user/details")
+	public ResponseEntity<?> updateUserDetails(@RequestBody @Valid AdminUserDTO adminUserDTO) {
+		return ResponseEntity.ok(adminService.updateLoggedInUserDetails(adminUserDTO));
+	}
+
+
 	@GetMapping("/policeStations")
 	public ResponseEntity<?> viewPoliceStations() {
 		return ResponseEntity.ok(adminService.getAllPoliceStations());

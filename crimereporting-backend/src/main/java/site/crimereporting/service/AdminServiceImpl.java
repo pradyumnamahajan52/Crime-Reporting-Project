@@ -7,9 +7,12 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import site.crimereporting.custom_exception.ResourceNotFoundException;
 import site.crimereporting.dao.AuditDao;
 import site.crimereporting.dao.CrimeCategoryDao;
 import site.crimereporting.dao.CrimeReportsDao;
@@ -19,6 +22,7 @@ import site.crimereporting.dao.UserDao;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.AuditTrailsResponse;
 import site.crimereporting.dtos.FeedbackResponse;
+import site.crimereporting.dtos.AdminUserDTO;
 import site.crimereporting.entity.CrimeCategory;
 import site.crimereporting.entity.CrimeReports;
 import site.crimereporting.entity.PoliceStation;
@@ -51,7 +55,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<User> getAllUsers() {
-		return userDao.findAll();
+		return userDao.findByIsDeletedFalse();
 	}
 
 	@Override
@@ -66,6 +70,37 @@ public class AdminServiceImpl implements AdminService {
 		counts.put("cimeRegisteredCount", cimeRegisteredCount);
 		return  new ApiResponse("Dashboard Data fetched successfully",counts);
 
+
+	}
+
+	@Override
+	public ApiResponse getLoggedInUserDetails() {
+		// Get Current logged In Email from security Context Holder
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String loggedInEmail = authentication.getName();
+		//find User by logged in email
+		User user = userDao.findByEmail(loggedInEmail).orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+		return new ApiResponse("Logged Users Information",mapper.map(user, AdminUserDTO.class));
+	}
+
+	@Override
+	public ApiResponse updateLoggedInUserDetails(AdminUserDTO adminUserDTO) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String loggedInEmail = authentication.getName();
+
+		// Find User by logged-in email
+		User user = userDao.findByEmail(loggedInEmail)
+				.orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+
+		// Update user details
+		user.setFullName(adminUserDTO.getFullName());
+		user.setPhoneNumber(adminUserDTO.getPhoneNumber());
+
+		// Save updated user back to DB
+		user = userDao.save(user);
+
+		// Return updated user details as DTO
+		return new ApiResponse("Logged User's Information updated", mapper.map(user, AdminUserDTO.class));
 
 	}
 
