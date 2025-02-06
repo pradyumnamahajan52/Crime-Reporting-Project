@@ -45,6 +45,8 @@ import { checkAdminAuthLoader, checkPoliceAuthLoader } from "./action/user/Auth"
 import PoliceFeedback from "./Screens/Police/PoliceFeedback";
 import { UserProfileAction } from "./action/admin/UserProfileAction";
 import { NewPoliceStationAction } from "./action/admin/NewPoliceStationAction";
+import { newCrimeReportAction } from "./action/crime/newCrimeReportAction";
+
 
 const router = createBrowserRouter([
   {
@@ -73,7 +75,8 @@ const router = createBrowserRouter([
       {
         path:"reports",
         element: <Reports />,
-        loader:loadCrimeCategory
+        loader: loadCrimeCategory,
+        action: newCrimeReportAction
       }
       
     ],
