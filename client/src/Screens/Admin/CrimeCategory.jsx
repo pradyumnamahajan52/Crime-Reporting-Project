@@ -150,7 +150,7 @@ const TableRow = ({ category, handleOpenModal, handleDelete }) => {
 // Category Form Component
 const CategoryForm = ({ category, onClose, onSave }) => {
   const [formData, setFormData] = useState(
-    category || {
+    category || {  
       category: "",
       subCategory: "",
     }
