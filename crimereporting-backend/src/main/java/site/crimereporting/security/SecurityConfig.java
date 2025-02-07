@@ -49,7 +49,7 @@ public class SecurityConfig {
 //    private PasswordEncoder passwordEncoder;
     
     @Autowired
-    private CustomJWTAuthenticationFilter customJWTAuthenticationFilter;
+    private JWTAuthenticationFilter jWTAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -78,11 +78,11 @@ public class SecurityConfig {
                 
                 // Role-based access
                 .requestMatchers("/citizen/**")
-                .hasRole("CITIZEN")
+                .hasAuthority("CITIZEN")
                 .requestMatchers("/police/**")
-                .hasRole("POLICE")
+                .hasAuthority("POLICE")
                 .requestMatchers("/admin/**")
-                .hasRole("ADMIN")
+                .hasAuthority("ADMIN")
                 
                 // All other requests need authentication
                 .anyRequest()
@@ -95,7 +95,7 @@ public class SecurityConfig {
             );
         
         // Add JWT filter before authentication filter
-        http.addFilterBefore(customJWTAuthenticationFilter, 
+        http.addFilterBefore(jWTAuthenticationFilter, 
                            UsernamePasswordAuthenticationFilter.class);
         
         return http.build();

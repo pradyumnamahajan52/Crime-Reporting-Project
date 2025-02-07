@@ -303,6 +303,10 @@ import site.crimereporting.security.JwtUtil;
 import site.crimereporting.service.EmailService;
 import site.crimereporting.service.AuditService;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -442,9 +446,42 @@ public class UserServiceImpl implements UserService {
         throw new ApiException("User not found!");
     }
 
+//    @Override
+//    public AuthResponse verifyOtp(String email, String otp) {
+//        // Find user by email and OTP
+//        Optional<User> userOptional = userDao.findByEmailAndOtp(email, otp);
+//
+//        if (userOptional.isEmpty()) {
+//            throw new AuthenticationException("Invalid OTP!");
+//        }
+//
+//        User existingUser = userOptional.get();
+//
+//        // Check if OTP has expired
+//        if (existingUser.getOtpExpiry() == null || existingUser.getOtpExpiry().isBefore(LocalDateTime.now())) {
+//            throw new AuthenticationException("OTP expired!");
+//        }
+//
+//        // Generate JWT token for valid OTP
+//        String token = jwtUtil.generateToken(email);
+//
+//        // Clear OTP and expiry after successful verification
+//        existingUser.setOtp(null);
+//        existingUser.setOtpExpiry(null);
+//
+//        // Save updated user details
+//        User loginUser = userDao.save(existingUser);
+//
+//        // Log user login for audit purposes
+//        ApiResponse<User> apiResponse = new ApiResponse<>("User logged in via OTP", loginUser);
+//        auditService.userLogin(apiResponse);
+//
+//        // Return AuthResponse with JWT token
+//        return new AuthResponse("User login successful!", token, loginUser);
+//    }
+    
     @Override
     public AuthResponse verifyOtp(String email, String otp) {
-        // Find user by email and OTP
         Optional<User> userOptional = userDao.findByEmailAndOtp(email, otp);
 
         if (userOptional.isEmpty()) {
@@ -452,14 +489,18 @@ public class UserServiceImpl implements UserService {
         }
 
         User existingUser = userOptional.get();
+        
 
-        // Check if OTP has expired
+        // Check OTP expiry
         if (existingUser.getOtpExpiry() == null || existingUser.getOtpExpiry().isBefore(LocalDateTime.now())) {
             throw new AuthenticationException("OTP expired!");
         }
 
-        // Generate JWT token for valid OTP
-        String token = jwtUtil.generateToken(email);
+        // Create Authentication object
+        Authentication authentication = new UsernamePasswordAuthenticationToken(existingUser.getEmail(), null, existingUser.getAuthorities());
+
+        // Generate JWT token with authorities using the updated method
+        String token = jwtUtil.generateToken(authentication);
 
         // Clear OTP and expiry after successful verification
         existingUser.setOtp(null);
@@ -475,5 +516,6 @@ public class UserServiceImpl implements UserService {
         // Return AuthResponse with JWT token
         return new AuthResponse("User login successful!", token, loginUser);
     }
+
 }
 

@@ -17,11 +17,10 @@ import jakarta.servlet.http.HttpServletResponse;
  * Custom filter for JWT-based authentication that executes once per request
  */
 @Component
-public class CustomJWTAuthenticationFilter extends OncePerRequestFilter {
+public class JWTAuthenticationFilter extends OncePerRequestFilter {
     
     @Autowired
     private JwtUtil jwtUtil;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
             HttpServletResponse response, FilterChain filterChain)
@@ -38,7 +37,7 @@ public class CustomJWTAuthenticationFilter extends OncePerRequestFilter {
             
             // 4. Use JwtUtil to validate token and get Authentication object
             Authentication authentication = jwtUtil.getAuthenticationFromToken(jwt);
-            System.out.println("authentication "+authentication);
+            System.out.println("authentication "+ authentication);
             // 5. If authentication is valid, store it in SecurityContextHolder
             if (authentication != null) {
                 SecurityContextHolder.getContext().setAuthentication(authentication);

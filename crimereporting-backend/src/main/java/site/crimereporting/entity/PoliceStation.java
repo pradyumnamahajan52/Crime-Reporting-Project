@@ -43,7 +43,6 @@ public class PoliceStation extends BaseEntity {
 	@JsonIgnore
 	private List<PoliceStationUser> policeStationUserList = new ArrayList<>();
 
-	
 	 public void addPoliceStationUser(PoliceStationUser user) {
 	        policeStationUserList.add(user);
 	        user.setPoliceStation(this);
