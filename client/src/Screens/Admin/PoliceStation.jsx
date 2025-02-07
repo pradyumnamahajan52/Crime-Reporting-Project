@@ -1,37 +1,45 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import for navigation
+import React, { useEffect, useState } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom"; // Import for navigation
 import { FiEdit, FiTrash } from "react-icons/fi";
 import TopBar from "../../Components/Dashboard/Topbar/TopBar";
 
 const PoliceStation = () => {
-  const [stations, setStations] = useState([
-    {
-      id: 1,
-      stationCode: "123456",
-      stationName: "Hinjawadi Police Station",
-      city: "Pune",
-      state: "Maharashtra",
-      country: "India",
-      pinCode: "411057",
-      latitude: "18.5973",
-      longitude: "73.7187",
-      createdAt: "2025-01-30T12:43:06.073Z",
-    },
-    {
-      id: 2,
-      stationCode: "654321",
-      stationName: "Wakad Police Station",
-      city: "Pune",
-      state: "Maharashtra",
-      country: "India",
-      pinCode: "411057",
-      latitude: "18.6025",
-      longitude: "73.7615",
-      createdAt: "2025-01-29T12:43:06.073Z",
-    },
-  ]);
+  const { policeStationData  } = useLoaderData(); // Fetch data from loader
+  const [stations, setStations] = useState(policeStationData || []);
+    // {
+    //   id: 1,
+    //   stationCode: "123456",
+    //   stationName: "Hinjawadi Police Station",
+    //   city: "Pune",
+    //   state: "Maharashtra",
+    //   country: "India",
+    //   pinCode: "411057",
+    //   latitude: "18.5973",
+    //   longitude: "73.7187",
+    //   createdAt: "2025-01-30T12:43:06.073Z",
+    // },
+    // {
+    //   id: 2,
+    //   stationCode: "654321",
+    //   stationName: "Wakad Police Station",
+    //   city: "Pune",
+    //   state: "Maharashtra",
+    //   country: "India",
+    //   pinCode: "411057",
+    //   latitude: "18.6025",
+    //   longitude: "73.7615",
+    //   createdAt: "2025-01-29T12:43:06.073Z",
+    // },
+  
 
   const navigate = useNavigate(); // Initialize navigation
+
+
+  // Sync state when stations changes
+    useEffect(() => {
+      setStations(policeStationData || []);
+      console.log(policeStationData)
+    }, [policeStationData]);
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this police station?")) {
@@ -87,10 +95,10 @@ const TableRow = ({ station, handleEdit, handleDelete }) => {
       <td className="p-1.5 border border-gray-200">{station.id}</td>
       <td className="p-1.5 border border-gray-200">{station.stationCode}</td>
       <td className="p-1.5 border border-gray-200">{station.stationName}</td>
-      <td className="p-1.5 border border-gray-200">{station.city}</td>
-      <td className="p-1.5 border border-gray-200">{station.state}</td>
-      <td className="p-1.5 border border-gray-200">{station.country}</td>
-      <td className="p-1.5 border border-gray-200">{station.pinCode}</td>
+      <td className="p-1.5 border border-gray-200">{station.address.city}</td>
+      <td className="p-1.5 border border-gray-200">{station.address.state}</td>
+      <td className="p-1.5 border border-gray-200">{station.address.country}</td>
+      <td className="p-1.5 border border-gray-200">{station.address.pinCode}</td>
       <td className="p-1.5 border border-gray-200">
         {new Date(station.createdAt).toLocaleString()}
       </td>

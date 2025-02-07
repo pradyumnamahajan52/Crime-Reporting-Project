@@ -69,6 +69,7 @@ public class AdminServiceImpl implements AdminService {
 	public ApiResponse newPoliceStationRegister(PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO) {
 		PoliceStation policeStation = mapper.map(policeStationRegisterRequestDTO,PoliceStation.class);
 		Address address = mapper.map(policeStationRegisterRequestDTO,Address.class);
+		System.out.println(address);
 		policeStation.setAddress(address);
 		policeStationDao.save(policeStation);
 //		policeStationDao.

@@ -62,7 +62,8 @@ public class AdminController {
 	}
 
 	@PostMapping("/policeStations")
-	public ResponseEntity<?> newPoliceStations(@RequestBody @Valid PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO) {
+	public ResponseEntity<?> newPoliceStations(@ModelAttribute @Valid PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO) {
+		System.out.println(policeStationRegisterRequestDTO.toString());
 		return ResponseEntity.ok(adminService.newPoliceStationRegister(policeStationRegisterRequestDTO));
 	}
 	
@@ -74,5 +75,13 @@ public class AdminController {
 	@GetMapping("/reports")
 	public ResponseEntity<?> viewReports() {
 		return ResponseEntity.ok(adminService.getAllReports());
+	}
+	
+	public ResponseEntity<?> updatePoliceStation(){
+		
+		
+		
+		return null;
+		
 	}
 }

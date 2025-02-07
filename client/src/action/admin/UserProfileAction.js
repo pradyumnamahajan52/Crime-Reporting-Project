@@ -6,9 +6,11 @@ export async function UserProfileAction({ request }) {
     const formData = await request.formData();
 
     // Extract form data
-    const userProfileData = {
-      fullName: formData.get("fullName"),
-      phoneNumber: formData.get("phoneNumber"),
+    const policeStationData = {
+      id: formData.get("id"),
+      stationCode: formData.get("stationCode"),
+      stationName: formData.get("stationName"),
+      addressLine1: formData.get()
     };
 
     // Send update request to backend
