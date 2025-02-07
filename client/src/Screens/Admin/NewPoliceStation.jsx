@@ -6,7 +6,7 @@ const NewPoliceStation = () => {
   const [formData, setFormData] = useState({
     crimeDate: "",
     stationName: "",
-    address: {
+
       addressLine1: "",
       addressLine2: "",
       city: "",
@@ -15,7 +15,7 @@ const NewPoliceStation = () => {
       pinCode: "",
       latitude: "",
       longitude: "",
-    },
+
   });
 
   const actionData = useActionData();
@@ -27,7 +27,7 @@ const NewPoliceStation = () => {
   };
 
   const mapSrc = () => {
-    const { latitude, longitude } = formData.address;
+    const { latitude, longitude } = formData;
     if (latitude && longitude) {
         return `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
     }
@@ -36,15 +36,7 @@ const NewPoliceStation = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name.startsWith("address.")) {
-      const field = name.split(".")[1];
-      setFormData((prev) => ({
-        ...prev,
-        address: { ...prev.address, [field]: value },
-      }));
-    } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
-    }
   };
 
   const handleSubmit = (e) => {
@@ -128,8 +120,8 @@ const NewPoliceStation = () => {
                 </label>
                 <input
                   type="text"
-                  name={`address.${field}`}
-                  value={formData.address[field]}
+                  name={`${field}`}
+                  value={formData[field]}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2"
                   required
@@ -145,8 +137,8 @@ const NewPoliceStation = () => {
                 </label>
                 <input
                   type="text"
-                  name={`address.${field}`}
-                  value={formData.address[field]}
+                  name={`${field}`}
+                  value={formData[field]}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2"
                 />

@@ -35,6 +35,7 @@ import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
 import { loader as loadAdminDashboard } from "./loader/admin/DashboardLoader";
 import { loader as loadAdminUsers } from "./loader/admin/UsersLoader";
 import { loader as loadAdminUserDetails} from "./loader/admin/UserDetailsLoader";
+import {loader as loadPoliceStations} from "./loader/admin/PoliceStationLoader"
 
 // citizen
 import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
@@ -46,6 +47,7 @@ import PoliceFeedback from "./Screens/Police/PoliceFeedback";
 import { UserProfileAction } from "./action/admin/UserProfileAction";
 import { NewPoliceStationAction } from "./action/admin/NewPoliceStationAction";
 import { newCrimeReportAction } from "./action/crime/newCrimeReportAction";
+import { updatePoliceStationAction } from "./action/admin/UpdatePoliceStationAction";
 
 
 const router = createBrowserRouter([
@@ -153,10 +155,13 @@ const router = createBrowserRouter([
       {
         path:"update-police-station/:id",
         element: <UpdatePoliceStation />,
+        loader: loadPoliceStations,
+        action: updatePoliceStationAction
       },
       {
         path:"police-station",
         element: <AdminPoliceStation />,
+        loader: loadPoliceStations
       },
       {
         path:"feedback",

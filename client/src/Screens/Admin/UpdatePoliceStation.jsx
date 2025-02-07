@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLoaderData } from "react-router-dom";
 
 const UpdatePoliceStation = () => {
+  const { policeStationData } = useLoaderData();
   const { id } = useParams(); // Get the station ID from the URL
   const navigate = useNavigate(); // Navigation instance
 
@@ -23,28 +24,15 @@ const UpdatePoliceStation = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    // Simulating fetching data for the given ID
-    // Replace this with an API call to fetch the data by ID
-    const fetchData = async () => {
-      const mockStationData = {
-        id,
-        stationCode: "123456",
-        stationName: "Hinjawadi Police Station",
-        address: {
-          addressLine1: "IT Park Road",
-          addressLine2: "Near Phase 1",
-          city: "Pune",
-          state: "Maharashtra",
-          country: "India",
-          pinCode: "411057",
-          latitude: "18.5973",
-          longitude: "73.7187",
-        },
-      };
-      setFormData(mockStationData);
-    };
 
-    fetchData();
+    let requiredPoliceStationData;
+      policeStationData.forEach((policeStation, index) => {
+        if(policeStation.id == id){
+          requiredPoliceStationData = policeStation
+        }
+      })
+
+      setFormData(requiredPoliceStationData || []);
   }, [id]);
 
   const validateField = (name, value) => {
