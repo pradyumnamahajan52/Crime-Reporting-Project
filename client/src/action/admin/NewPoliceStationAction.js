@@ -1,15 +1,21 @@
 import { API } from "../../API";
+import { getAuthToken } from "../user/Auth";
 
 export async function NewPoliceStationAction({ request }) {
   try {
     const formData = await request.formData();
 //    console.log("formData NewPoliceStationAction",formData)
 
+    const token = getAuthToken();
     // Send request to backend
     const response = await fetch(`${API}/admin/policeStations`, {
       method: "POST",
       // headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: formData,
+
     });
 
     if (response.ok) {

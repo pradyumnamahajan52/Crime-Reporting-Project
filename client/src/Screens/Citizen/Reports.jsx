@@ -1,15 +1,15 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import React, { useState, useEffect } from "react";
-import { useActionData, useLoaderData, useSubmit } from "react-router-dom";
+import { useActionData, useLoaderData, useNavigation, useSubmit } from "react-router-dom";
 import { HiChevronDown } from "react-icons/hi";
 import { toast } from "react-toastify";
 import SelectPoliceStationReport from "../../Components/Report/SelectPoliceStationReport";
 
 const Report = () => {
-  const [showModal, setShowModal] = useState(false);
   const [showPoliceStationModal, setShowPoliceStationModal] = useState(false);
   const [selectedPoliceStation, setSelectedPoliceStation] = useState(null);
   const [nearByPoliceStations, setNearByPoliceStations] = useState([]);
+  
   const [formData, setFormData] = useState({
     crimeDate: new Date().toISOString().split("T")[0], // Set default to today's date
     description: "",
@@ -34,6 +34,9 @@ const Report = () => {
 
   const actionData = useActionData();
   const submit = useSubmit();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === "submitting";
 
   const [selectedCategory, setSelectedCategory] = useState();
   const [evidenceFiles, setEvidenceFiles] = useState([]);
@@ -130,16 +133,22 @@ const Report = () => {
     submit(formDataToSubmit, {
       method: "post",
       encType: "multipart/form-data",
-      action: "/crime/report?step=report",
+      action: "/reports?step=report",
     });
   };
 
   // Show success/error messages after submission
   useEffect(() => {
     if (actionData?.success) {
+      console.log(actionData);
+      
       toast.success(actionData.success);
-      setNearByPoliceStations(actionData.data.nearByPoliceStationList);
-      setShowPoliceStationModal(true);
+      if(actionData.reportSubmitted && !actionData.policeAssigned)
+      {
+        setNearByPoliceStations(actionData.data.nearByPoliceStationList);
+        setShowPoliceStationModal(true);
+      }
+
     } else if (actionData?.error) {
       toast.error(actionData.error);
     }
@@ -162,7 +171,7 @@ const Report = () => {
     submit(formDataToSubmit, {
       method: "post",
       encType: "multipart/form-data",
-      action: "/crime/report?step=select-police-station",
+      action: "/reports?step=select-police-station",
     });
   };
 
@@ -426,7 +435,8 @@ const Report = () => {
               className="bg-[#17A2B8] text-white px-6 py-3 rounded-lg text-lg hover:bg-[#138496] transition"
               disabled={!formData.tandcisChecked}
             >
-              Report Now!
+                        {isSubmitting ? "Please Wait" : "Report Now!" }
+              
             </button>
           </div>
         </form>
@@ -437,7 +447,7 @@ const Report = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
             <h2 className="text-xl font-bold mb-4">Select Police Station</h2>
             <ul className="mb-4">
-              {nearByPoliceStations.map((station) => (
+              {nearByPoliceStations?.map((station) => (
                 <li key={station.policeStationId} className="mb-2">
                   <button
                     onClick={() => handleSelectPoliceStation(station)}
