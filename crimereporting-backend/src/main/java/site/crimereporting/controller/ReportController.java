@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import site.crimereporting.dtos.CrimeReportDTO;
 
+import site.crimereporting.dtos.ApiResponse;
+import site.crimereporting.dtos.CrimeReportDTO;
+import site.crimereporting.dtos.CrimeReportResponseDTO;
 import site.crimereporting.service.ReportService;
 
 @RestController
@@ -31,12 +33,4 @@ public class ReportController {
 
     }
     
-//    @PostMapping("/findNearByPoliceStation")
-//    public ResponseEntity<?> findNearByPoliceStation(@RequestBody NearByPoliceStationDTO nearByPoliceStationDTO){
-//
-//
-//
-//		return null;
-//
-//    }
 }
