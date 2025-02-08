@@ -12,7 +12,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NearByPoliceStationDTO {
-	private Double latitude;
-	private Double longitude;
+
+	//police station Info
+	private String policeStationName;
+
+	private Long policeStationId;
+
+	private String policeStationAddressLine1;
+
+	private String policeStationAddressLine2;
+
+	private String policeStationCity;
+
+	private String policeStationState;
 
 }

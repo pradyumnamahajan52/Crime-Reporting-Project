@@ -42,6 +42,9 @@ public class ReportServiceImpl implements ReportService {
     private CrimeCategoryDao crimeCategoryDao;
 
     @Autowired
+    private PoliceStationDao policeStationDao;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
@@ -94,17 +97,14 @@ public class ReportServiceImpl implements ReportService {
 
         }
 
+        // finding near by police stations list
+
+
+
+
         return new ApiResponse<>("Crime Report Uploaded Successfully", new CrimeReportResponseDTO(persistentCrimeReports.getCitizen().getId(),
                 persistentCrimeReports.getDescription(),
-                persistentCrimeReports.getCrimeCategory(),
-                persistentCrimeReports.getCrimeDate(),
-                persistentCrimeReports.getReportStatus(),
-                persistentCrimeReports.getAddress().getAddressLine1(),
-                persistentCrimeReports.getAddress().getAddressLine2(),
-                persistentCrimeReports.getAddress().getCity(),
-                persistentCrimeReports.getAddress().getState(),
-                persistentCrimeReports.getAddress().getCountry(),
-                persistentCrimeReports.getAddress().getPinCode(),
-                null));
+                persistentCrimeReports.getReportStatus()
+               ));
     }
 }
