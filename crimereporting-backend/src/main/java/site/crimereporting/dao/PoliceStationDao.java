@@ -20,7 +20,7 @@ public interface PoliceStationDao extends JpaRepository<PoliceStation, Long> {
 	long countByIsDeletedFalse();
 
 	@Procedure(procedureName = "GetNearestPoliceStations")
-	List<TestDto> getNearestPoliceStations(
+	List<?> getNearestPoliceStations(
 			@Param("crimeLatitude") double crimeLatitude,
 			@Param("crimeLongitude") double crimeLongitude,
 			@Param("limitCount") int limitCount

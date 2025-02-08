@@ -3,9 +3,13 @@ import React, { useState, useEffect } from "react";
 import { useActionData, useLoaderData, useSubmit } from "react-router-dom";
 import { HiChevronDown } from "react-icons/hi";
 import { toast } from "react-toastify";
-
+import SelectPoliceStationReport from "../../Components/Report/SelectPoliceStationReport";
 
 const Report = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [showPoliceStationModal, setShowPoliceStationModal] = useState(false);
+  const [selectedPoliceStation, setSelectedPoliceStation] = useState(null);
+  const [nearByPoliceStations, setNearByPoliceStations] = useState([]);
   const [formData, setFormData] = useState({
     crimeDate: new Date().toISOString().split("T")[0], // Set default to today's date
     description: "",
@@ -23,7 +27,7 @@ const Report = () => {
     crimeLocation: "yes", // Default selected option
     crimeCategoryId: null,
     evidence: [],
-    tandcisChecked:false
+    tandcisChecked: false,
   });
 
   const { crimeCategories } = useLoaderData();
@@ -55,7 +59,7 @@ const Report = () => {
         address: { ...prev.address, [field]: value },
       }));
     } else {
-      console.log(name,value)
+      console.log(name, value);
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
@@ -92,17 +96,16 @@ const Report = () => {
     }
   };
 
+
+
   // Auto-fetch location on component mount
   useEffect(() => {
     getUserLocation();
   }, []);
 
-
   // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
 
     // Prepare FormData for file uploads
     let formDataToSubmit = new FormData();
@@ -111,26 +114,23 @@ const Report = () => {
     // formDataToSubmit.append("stationName", formData.stationName);
     formDataToSubmit.append("crimeCategoryId", formData.crimeCategoryId);
     formDataToSubmit.append("addressLine1", formData.address.addressLine1);
-    formDataToSubmit.append("addressLine2", formData.address.addressLine2)
+    formDataToSubmit.append("addressLine2", formData.address.addressLine2);
     formDataToSubmit.append("city", formData.address.city);
     formDataToSubmit.append("state", formData.address.state);
     formDataToSubmit.append("country", formData.address.country);
     formDataToSubmit.append("pinCode", formData.address.pinCode);
     formDataToSubmit.append("latitude", formData.address.latitude);
     formDataToSubmit.append("longitude", formData.address.longitude);
-    
-  
 
     // Append all files
     evidenceFiles.forEach((file, index) => {
       formDataToSubmit.append(`evidences[${index}]`, file);
     });
 
-    
-    
-
     submit(formDataToSubmit, {
-      method: "post", encType: "multipart/form-data",
+      method: "post",
+      encType: "multipart/form-data",
+      action: "/crime/report?step=report",
     });
   };
 
@@ -138,10 +138,33 @@ const Report = () => {
   useEffect(() => {
     if (actionData?.success) {
       toast.success(actionData.success);
+      setNearByPoliceStations(actionData.data.nearByPoliceStationList);
+      setShowPoliceStationModal(true);
     } else if (actionData?.error) {
       toast.error(actionData.error);
     }
   }, [actionData]);
+
+  // Handle police station selection
+  const handleSelectPoliceStation = (station) => {
+    setSelectedPoliceStation(station);
+    setFormData((prev) => ({
+      ...prev,
+      policeStationId: station.policeStationId,
+    }));
+    setShowPoliceStationModal(false);
+
+    // Resubmit the form with the selected police station
+    let formDataToSubmit = new FormData();
+    formDataToSubmit.append("crimeReportId", actionData.data.crimeReportId);
+    formDataToSubmit.append("policeStationId", station.policeStationId);
+
+    submit(formDataToSubmit, {
+      method: "post",
+      encType: "multipart/form-data",
+      action: "/crime/report?step=select-police-station",
+    });
+  };
 
   return (
     <div className="w-full min-h-screen p-6 bg-gray-100">
@@ -185,7 +208,7 @@ const Report = () => {
                       <button
                         type="button"
                         onClick={() => {
-                          console.log(cat.categoryId)
+                          console.log(cat.categoryId);
                           setSelectedCategory(cat.category + cat.subCategory);
                           setFormData((prev) => ({
                             ...prev,
@@ -239,23 +262,21 @@ const Report = () => {
               />
             </div>
             <div className="flex space-x-2">
-            <input
-              type="text"
-              placeholder="Postal/Zip Code"
-              className="border border-[#17A2B8] p-2 rounded w-full"
-              name="address.pinCode"
-              onChange={handleChange}
-            />
+              <input
+                type="text"
+                placeholder="Postal/Zip Code"
+                className="border border-[#17A2B8] p-2 rounded w-full"
+                name="address.pinCode"
+                onChange={handleChange}
+              />
 
-
-            <input
-              type="text"
-              placeholder="Country"
-              className="border border-[#17A2B8] p-2 rounded w-full"
-              value={formData.address.country}
-              
-              readOnly
-            />
+              <input
+                type="text"
+                placeholder="Country"
+                className="border border-[#17A2B8] p-2 rounded w-full"
+                value={formData.address.country}
+                readOnly
+              />
             </div>
           </div>
 
@@ -300,7 +321,7 @@ const Report = () => {
               rows="4"
               placeholder="Describe the crime in detail..."
               onChange={handleChange}
-              name ="description"
+              name="description"
             ></textarea>
           </div>
 
@@ -383,9 +404,18 @@ const Report = () => {
           {/* Certification Checkbox */}
           <div className="mb-6">
             <label className="flex items-center text-lg">
-              <input type="checkbox" className="mr-2 accent-[#17A2B8]"    checked={formData.tandcisChecked }  onChange={(e) => setFormData((prev) => ({ ...prev, tandcisChecked: e.target.checked }))}
-              />        
-                  I certify that the above information is true and correct.
+              <input
+                type="checkbox"
+                className="mr-2 accent-[#17A2B8]"
+                checked={formData.tandcisChecked}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    tandcisChecked: e.target.checked,
+                  }))
+                }
+              />
+              I certify that the above information is true and correct.
             </label>
           </div>
 
@@ -401,6 +431,32 @@ const Report = () => {
           </div>
         </form>
       </div>
+      {/* Police Station Selection Modal */}
+      {showPoliceStationModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+            <h2 className="text-xl font-bold mb-4">Select Police Station</h2>
+            <ul className="mb-4">
+              {nearByPoliceStations.map((station) => (
+                <li key={station.policeStationId} className="mb-2">
+                  <button
+                    onClick={() => handleSelectPoliceStation(station)}
+                    className="w-full text-left p-2 border rounded hover:bg-gray-100"
+                  >
+                    {station.station_name} - {station.policeStationCity}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => setShowPoliceStationModal(false)}
+              className="bg-red-500 text-white px-4 py-2 rounded"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

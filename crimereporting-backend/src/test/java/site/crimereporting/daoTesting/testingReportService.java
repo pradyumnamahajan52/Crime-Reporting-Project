@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -21,6 +22,9 @@ public class testingReportService {
 	
 	@Autowired
 	PoliceStationDao policeStationDao;
+
+    @Autowired
+    private ModelMapper modelMapper;
 	
 	@Test
 	public void testingNewReport() {
@@ -31,7 +35,11 @@ public class testingReportService {
         int limitCount = 3;
 
         // Act - Call the stored procedure
-        List<TestDto> nearestStations = policeStationDao.getNearestPoliceStations(crimeLat, crimeLon, limitCount);
+        List<?> nearestStations = policeStationDao.getNearestPoliceStations(crimeLat, crimeLon, limitCount);
+
+
+        nearestStations.forEach((policestation) -> {TestDto testDto = modelMapper.map(policestation,TestDto.class); System.out.println(testDto);});
+
         
         System.out.println("working");
 
@@ -41,6 +49,6 @@ public class testingReportService {
 
 		
         // Print results for debugging (optional)
-        nearestStations.forEach(System.out::println);
+//        testDto.forEach(System.out::println);
 	}
 }
