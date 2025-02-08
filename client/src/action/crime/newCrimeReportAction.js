@@ -12,7 +12,7 @@ export async function newCrimeReportAction({ request }) {
 
     if (step === "select-police-station") {
       // Step 2: Assign the report to the selected police station
-      const response = await fetch(`${API}/crimereport/assignPoliceStation`, {
+      const response = await fetch(`${API}/crimereport/update-police-station`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -23,12 +23,12 @@ export async function newCrimeReportAction({ request }) {
       if (response.ok) {
         return new Response(
           JSON.stringify({ success: "Police station assigned successfully!" }),
-          { status: 200, headers: { "Content-Type": "application/json" } }
+          { status: 200, reportSubmitted: true, policeAssigned: true, headers: { "Content-Type": "application/json" } }
         );
       } else {
         return new Response(
           JSON.stringify({ error: "Failed to assign police station" }),
-          { status: 400, headers: { "Content-Type": "application/json" } }
+          { status: 400, reportSubmitted: true, policeAssigned: false, headers: { "Content-Type": "application/json" } }
         );
       }
     }
@@ -47,7 +47,8 @@ export async function newCrimeReportAction({ request }) {
       return new Response(
         JSON.stringify({
           success: "Crime Report Submitted Successfully",
-          data: responseData,
+          reportSubmitted: true,
+          ...responseData,
         }),
         { status: 200, headers: { "Content-Type": "application/json" } }
       );

@@ -134,4 +134,19 @@ public class ReportServiceImpl implements ReportService {
                 nearByPoliceStationList
                ));
     }
+
+    @Override
+    public ApiResponse<?> crimeReportUpdatePoliceStation(Long crimeReportId, Long policeStationId) {
+        CrimeReports crimeReports = crimeReportsDao.findById(crimeReportId).orElseThrow(() -> new ResourceNotFoundException("Invalid Crime Reports Id"));
+        PoliceStation policeStation = policeStationDao.findById(policeStationId).orElseThrow(() -> new ResourceNotFoundException("Invalid Police station Id"));
+        crimeReports.setPoliceStation(policeStation);
+        crimeReportsDao.save(crimeReports);
+        return new ApiResponse("Police Station updated sucessfully", new CrimeReportResponseDTO(crimeReports.getCitizen().getId(),
+                crimeReports.getId(),
+                crimeReports.getDescription(),
+                crimeReports.getReportStatus(),
+                null
+        ));
+    }
+
 }
