@@ -10,6 +10,8 @@ import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.Status;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,12 +20,12 @@ public class CrimeReportResponseDTO {
 	
 	private Long citizenId;
 	
+	private Long crimeReportId;
+	
     private String description;
-
-
 
     private Status reportStatus;
 
-
+    List<NearByPoliceStationDTO> nearByPoliceStationList = new ArrayList<>();
 
 }

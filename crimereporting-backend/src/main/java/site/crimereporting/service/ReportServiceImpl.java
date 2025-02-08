@@ -15,6 +15,7 @@ import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.CrimeReportDTO;
 import site.crimereporting.dtos.CrimeReportResponseDTO;
 import site.crimereporting.dtos.FileUploadInfoDTO;
+import site.crimereporting.dtos.NearByPoliceStationDTO;
 import site.crimereporting.entity.*;
 
 import java.util.ArrayList;
@@ -43,6 +44,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     private PoliceStationDao policeStationDao;
+    
+    @Autowired
+    private AddressDao addressDao;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -98,13 +102,36 @@ public class ReportServiceImpl implements ReportService {
         }
 
         // finding near by police stations list
+        List<Object[]> nearestStations = policeStationDao.getNearestPoliceStations(address.getLatitude(), address.getLongitude(), 3);
+        
+        List<NearByPoliceStationDTO> nearByPoliceStationList = new ArrayList<>();
+        for (Object obj : nearestStations) {
+            Object[] row = (Object[]) obj; // Cast each object to Object[]
+            
+            NearByPoliceStationDTO nearByPoliceStation = new NearByPoliceStationDTO();
+            nearByPoliceStation.setPoliceStationId((Long) row[0]);
+            nearByPoliceStation.setStation_name((String) row[1]);
+            
+            Address add = addressDao.findById((Long) row[2]).orElseGet(null);
+            nearByPoliceStation.setPoliceStationAddressLine1(add.getAddressLine1());
+            nearByPoliceStation.setPoliceStationAddressLine2(add.getAddressLine2());
+            nearByPoliceStation.setPoliceStationCity(add.getCity());
+            nearByPoliceStation.setPoliceStationState(add.getState());
+            
+            nearByPoliceStation.setLatitude((Double) row[3]);
+            nearByPoliceStation.setLongitude((Double) row[4]);
+            nearByPoliceStation.setDistance((Double) row[5]);
+           
+            nearByPoliceStationList.add(nearByPoliceStation);
+        }
 
 
 
-
-        return new ApiResponse<>("Crime Report Uploaded Successfully", new CrimeReportResponseDTO(persistentCrimeReports.getCitizen().getId(),
+        return new ApiResponse<CrimeReportResponseDTO>("Crime Report Uploaded Successfully", new CrimeReportResponseDTO(persistentCrimeReports.getCitizen().getId(),
+        		persistentCrimeReports.getId(),
                 persistentCrimeReports.getDescription(),
-                persistentCrimeReports.getReportStatus()
+                persistentCrimeReports.getReportStatus(),
+                nearByPoliceStationList
                ));
     }
 }
