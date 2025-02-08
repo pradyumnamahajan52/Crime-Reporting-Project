@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import site.crimereporting.dtos.CrimeReportDTO;
-import site.crimereporting.dtos.NearByPoliceStationDTO;
+
 import site.crimereporting.service.ReportService;
 
 @RestController
@@ -21,23 +21,22 @@ public class ReportController {
     @Autowired
     private ReportService reportService;
     
-    @Autowired
-    
+
 
     @PostMapping("/newreport")
-    public ResponseEntity<?> crimeReport(@ModelAttribute CrimeReportDTO crimereport){
-        System.out.println(crimereport);
+    public ResponseEntity<?> crimeReport(@ModelAttribute CrimeReportDTO crimeReportDTO){
+        System.out.println(crimeReportDTO);
 //        System.out.println(crimereport.getEvidences());
-        return ResponseEntity.status(HttpStatus.CREATED).body(reportService.newReport(crimereport));
+        return ResponseEntity.status(HttpStatus.CREATED).body(reportService.newReport(crimeReportDTO));
 
     }
     
-    @PostMapping("/findNearByPoliceStation")
-    public ResponseEntity<?> findNearByPoliceStation(@RequestBody NearByPoliceStationDTO nearByPoliceStationDTO){
-    	
-    	
-    	
-		return null;
-    	
-    }
+//    @PostMapping("/findNearByPoliceStation")
+//    public ResponseEntity<?> findNearByPoliceStation(@RequestBody NearByPoliceStationDTO nearByPoliceStationDTO){
+//
+//
+//
+//		return null;
+//
+//    }
 }
