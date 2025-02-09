@@ -396,8 +396,8 @@ const Report = () => {
             <div className="w-full h-80 border rounded-lg overflow-hidden">
               {mapSrc() ? (
                 <iframe
+                title="Map Preview"
                   src={mapSrc()}
-                  title="Map Preview"
                   className="w-full h-full"
                   allowFullScreen
                 ></iframe>
@@ -443,10 +443,10 @@ const Report = () => {
       </div>
       {/* Police Station Selection Modal */}
       {showPoliceStationModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3 overflow-hidden">
             <h2 className="text-xl font-bold mb-4">Select Police Station</h2>
-            <ul className="mb-4">
+            <ul className="mb-4 ">
               {nearByPoliceStations?.map((station) => (
                 <li key={station.policeStationId} className="mb-2">
                   <button

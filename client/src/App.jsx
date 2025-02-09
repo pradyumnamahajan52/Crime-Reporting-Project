@@ -49,6 +49,7 @@ import { NewPoliceStationAction } from "./action/admin/NewPoliceStationAction";
 import { newCrimeReportAction } from "./action/crime/newCrimeReportAction";
 import { updatePoliceStationAction } from "./action/admin/UpdatePoliceStationAction";
 import { ToastContainer } from "react-toastify";
+import About from "./Screens/About";
 
 
 const router = createBrowserRouter([
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
       }, 
       {
         path: "about",
-        element: <Aboutus />,
+        element: <About />,
       },
       {
         path:"contact",
