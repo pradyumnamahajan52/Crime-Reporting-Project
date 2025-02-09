@@ -15,25 +15,25 @@ import { useState } from "react";
 const Sidebar = ({panelType}) => {
   const [adminSideMenuItems] = useState([
     { title: "Dashboard", url: "/admin/", path: "", icon: FiHome },
-    { title: "User", url: "/admin/users", path: "users", icon: FiUsers },
-    { title: "Profile", url: "/admin/profile", path: "profile", icon: CgProfile },
-    { title: "Crime Reports", url: "/admin/crime-report", path: "crime-report", icon: TbReportAnalytics },
-    { title: "Crime Category", url: "/admin/crime-category", path: "crime-category", icon: MdCategory },
-    { title: "New Police Station", url: "/admin/new-police-station", path: "new-police-station", icon: MdOutlineLocalPolice },
-    { title: "Police Station", url: "/admin/police-station", path: "police-station", icon: FaClipboardList },
-    { title: "Feedback", url: "/admin/feedback", path: "feedback", icon: MdFeedback },
-    { title: "Audit Logs", url: "/admin/audit-logs", path: "audit-logs", icon: TbLogs },
+    { title: "User", url: "/admin/users", path: "/admin/users", icon: FiUsers },
+    { title: "Profile", url: "/admin/profile", path: "/admin/profile", icon: CgProfile },
+    { title: "Crime Reports", url: "/admin/crime-report", path: "/admin/crime-report", icon: TbReportAnalytics },
+    { title: "Crime Category", url: "/admin/crime-category", path: "/admin/crime-category", icon: MdCategory },
+    { title: "New Police Station", url: "/admin/new-police-station", path: "/admin/new-police-station", icon: MdOutlineLocalPolice },
+    { title: "Police Station", url: "/admin/police-station", path: "/admin/police-station", icon: FaClipboardList },
+    { title: "Feedback", url: "/admin/feedback", path: "/admin/feedback", icon: MdFeedback },
+    { title: "Audit Logs", url: "/admin/audit-logs", path: "/admin/audit-logs", icon: TbLogs },
   ]);
   
   const [policeSideMenuItems] = useState([
     { title: "Dashboard", url: "/police/", path: "", icon: FiHome },
-    { title: "User", url: "/police/users", path: "users", icon: FiUsers },
-    { title: "Profile", url: "/police/profile", path: "profile", icon: CgProfile },
-    { title: "Crime Reports", url: "/police/crime-report", path: "crime-report", icon: TbReportAnalytics },
-    { title: "Crime Category", url: "/police/crime-category", path: "crime-category", icon: MdCategory },
-    { title: "Police Station", url: "/police/police-station", path: "police-station", icon: FaClipboardList },
-    { title: "Feedback", url: "/police/feedback", path: "feedback", icon: MdFeedback },
-    { title: "Crime Rate", url: "/police/crime-rate", path: "crime-rate", icon: MdGraphicEq },
+    { title: "User", url: "/police/users", path: "/police/users", icon: FiUsers },
+    { title: "Profile", url: "/police/profile", path: "/police/profile", icon: CgProfile },
+    { title: "Crime Reports", url: "/police/crime-report", path: "/police/crime-report", icon: TbReportAnalytics },
+    { title: "Crime Category", url: "/police/crime-category", path: "/police/crime-category", icon: MdCategory },
+    { title: "Police Station", url: "/police/police-station", path: "/police/police-station", icon: FaClipboardList },
+    { title: "Feedback", url: "/police/feedback", path: "/police/feedback", icon: MdFeedback },
+    { title: "Crime Rate", url: "/police/crime-rate", path: "/police/crime-rate", icon: MdGraphicEq },
   ]);
   
   return (
