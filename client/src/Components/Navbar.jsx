@@ -80,7 +80,7 @@ export default function Navbar() {
                     src="https://api.dicebear.com/9.x/avataaars-neutral/svg?backgroundColor=b6e3f4,c0aede,d1d4f9"
                     alt="Profile"
                     className="w-8 h-8 rounded-full border border-white cursor-pointer"
-                    onClick={() => handleNavigation("/user/profile")}
+                    onClick={() => handleNavigation("/citizen//profile")}
                   />
                 ) : (
                   <>
