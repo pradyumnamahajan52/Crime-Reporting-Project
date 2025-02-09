@@ -7,7 +7,10 @@ import AdminDashboard from "./Screens/Admin/Dashboard";
 import Aboutus from "./Screens/Aboutus";
 import Contact from "./Screens/Contact";
 import PoliceLayout from "./Layout/PoliceLayout";
-import About from "./Screens/About";
+
+
+
+
 
 import AdminUsers from "./Screens/Admin/Users";
 import AdminProfile from "./Screens/Admin/Profile";
@@ -39,11 +42,24 @@ import { loader as loadAdminUsers } from "./loader/admin/UsersLoader";
 import { loader as loadAdminUserDetails } from "./loader/admin/UserDetailsLoader";
 import { loader as loadPoliceStations } from "./loader/admin/PoliceStationLoader";
 import { loader as loadAdminCrimeReports } from "./loader/admin/CrimeReportsLoader";
+<<<<<<< HEAD
+=======
+import { loader as loadAdminCrimeCategory } from "./loader/admin/CrimeCategoryLoader";
+
+
+
+
+>>>>>>> af90e9b3da8d05f711cf2cb36d726ef8a6144de5
 import {loader as loadPoliceDetails} from './loader/Police/LoadPoliceDetails';
 
  // citizen
 import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
+<<<<<<< HEAD
 import { loader as loadCrimeStatus } from "./loader/citizen/CrimeStatusLoader";
+=======
+import {loader as loadReportDetails} from "./loader/Crime/ReportDetailsLoader"
+
+>>>>>>> af90e9b3da8d05f711cf2cb36d726ef8a6144de5
 
 import "./App.css";
 import {
@@ -59,6 +75,10 @@ import { updatePoliceStationAction } from "./action/admin/UpdatePoliceStationAct
 import { ToastContainer } from "react-toastify";
 import CrimeStatus from "./Screens/Citizen/CrimeStatus";
 // import About from "./Screens/About";
+
+import About from "./Screens/About";
+import CrimeReportsDetail from "./Screens/Citizen/ReportsDetail";
+
 
 const router = createBrowserRouter([
   {
@@ -103,7 +123,11 @@ const router = createBrowserRouter([
         path: "reports",
         element: <Reports />,
         loader: loadCrimeCategory,
-        action: newCrimeReportAction,
+        action: newCrimeReportAction
+      },{
+        path: "report-details/:id",
+        element: <CrimeReportsDetail/>,
+        loader: loadReportDetails
       },
       {
         index: true,
@@ -170,6 +194,7 @@ const router = createBrowserRouter([
       {
         path: "crime-category",
         element: <AdminCrimeCategory />,
+        loader:loadAdminCrimeCategory
       },
       {
         path: "new-police-station",

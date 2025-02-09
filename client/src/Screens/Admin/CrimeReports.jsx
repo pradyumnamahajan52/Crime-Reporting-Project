@@ -1,3 +1,4 @@
+
 import React, { Suspense } from "react";
 import { useLoaderData, Await } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
@@ -22,6 +23,7 @@ export default function CrimeReports() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
+
       <h1 className="text-3xl font-semibold text-gray-800 mb-6">Crime Reports</h1>
 
       {/* 🔹 Suspense: Show fallback while data loads */}

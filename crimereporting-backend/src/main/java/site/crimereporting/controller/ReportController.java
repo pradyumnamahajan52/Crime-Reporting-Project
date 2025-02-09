@@ -2,6 +2,7 @@ package site.crimereporting.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,21 +50,30 @@ public class ReportController {
 //
 //    }
 
-	@PostMapping("/update-police-station")
-	public ResponseEntity<?> crimeReportUpdatePoliceStation(@RequestParam("crimeReportId") Long crimeReportId,
-			@RequestParam("policeStationId") Long policeStationId) {
-		System.out.println(crimeReportId);
-		System.out.println(policeStationId);
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(reportService.crimeReportUpdatePoliceStation(crimeReportId, policeStationId));
+    @PostMapping("/update-police-station")
+    public ResponseEntity<?> crimeReportUpdatePoliceStation(@RequestParam("crimeReportId") Long crimeReportId,
+                                                             @RequestParam("policeStationId") Long policeStationId){
+        System.out.println(crimeReportId);
+        System.out.println(policeStationId);
+        return ResponseEntity.status(HttpStatus.OK).body(reportService.crimeReportUpdatePoliceStation(crimeReportId,policeStationId));
+
 
 	}
 
-	@PostMapping("/get-evidence")
-	public ResponseEntity<?> getReportsEvidence(@RequestParam("crimeReportId") Long crimeReportId) {
-		System.out.println(crimeReportId);
-		return ResponseEntity.status(HttpStatus.CREATED).body(reportService.getReportsEvidence(crimeReportId));
+    @PostMapping("/get-evidence")
+    public ResponseEntity<?> getReportsEvidence(@RequestParam("crimeReportId") Long crimeReportId){
+        System.out.println(crimeReportId);
+        return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportsEvidence(crimeReportId));
 
-	}
+    }
+
+    @PostMapping("/get-reportDetails")
+    public ResponseEntity<?> getReportDetails(@RequestParam Long crimeReportId){
+    	
+    	
+		return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportDetails(crimeReportId));
+    	
+    }
+
 
 }

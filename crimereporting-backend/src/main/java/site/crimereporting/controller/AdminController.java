@@ -76,6 +76,12 @@ public class AdminController {
 		return ResponseEntity.ok(adminService.getAllPoliceStations());
 	}
 
+	@GetMapping("/policeStations/details")
+	public ResponseEntity<?> getPoliceStationsDetails(@RequestParam Long id) {
+		return ResponseEntity.ok(adminService.getPoliceStationDetails(id));
+	}
+
+
 	@PostMapping("/policeStations")
 	public ResponseEntity<?> newPoliceStations(@ModelAttribute @Valid PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO) {
 		System.out.println(policeStationRegisterRequestDTO.toString());
@@ -94,9 +100,6 @@ public class AdminController {
 	
 	@PutMapping("/updatePoliceStation")
 	public ResponseEntity<?> updatePoliceStation(@ModelAttribute PoliceStationRegisterRequestDTO policeStationDataForUpdate){
-		
-		
-		
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.updatePoliceStation(policeStationDataForUpdate));
 		
 	}
