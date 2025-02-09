@@ -42,24 +42,12 @@ import { loader as loadAdminUsers } from "./loader/admin/UsersLoader";
 import { loader as loadAdminUserDetails } from "./loader/admin/UserDetailsLoader";
 import { loader as loadPoliceStations } from "./loader/admin/PoliceStationLoader";
 import { loader as loadAdminCrimeReports } from "./loader/admin/CrimeReportsLoader";
-<<<<<<< HEAD
-=======
-import { loader as loadAdminCrimeCategory } from "./loader/admin/CrimeCategoryLoader";
-
-
-
-
->>>>>>> af90e9b3da8d05f711cf2cb36d726ef8a6144de5
 import {loader as loadPoliceDetails} from './loader/Police/LoadPoliceDetails';
-
+import { loader as loadAdminCrimeCategory } from "./loader/admin/CrimeCategoryLoader";
  // citizen
 import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
-<<<<<<< HEAD
+import {loader as loadReportDetails} from "./loader/Crime/ReportDetailsLoader";
 import { loader as loadCrimeStatus } from "./loader/citizen/CrimeStatusLoader";
-=======
-import {loader as loadReportDetails} from "./loader/Crime/ReportDetailsLoader"
-
->>>>>>> af90e9b3da8d05f711cf2cb36d726ef8a6144de5
 
 import "./App.css";
 import {

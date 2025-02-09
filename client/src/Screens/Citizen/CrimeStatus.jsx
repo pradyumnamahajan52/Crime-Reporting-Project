@@ -1,34 +1,13 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 
 const CrimeStatus = () => {
-  const [crimes, setCrimes] = useState([]);
+  const { crimeReportsData, error } = useLoaderData(); // Accessing data from loader
   const navigate = useNavigate();
 
-  useEffect(() => {
-
-    const token = localStorage.getItem("token");
-    console.log(token); 
-    // Fetch data from API using axios with token for authentication
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/crimereport/reportstatus", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Token-based authentication
-          },
-          withCredentials: true, // If sessions/cookies are used
-        });
-        console.log(response.data);
-        setCrimes(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error.response?.data || error.message);
-      }
-    };
-
-    fetchData();
-  }, []); // Empty dependency array to fetch only once when component mounts
+  if (!crimeReportsData) {
+    return <p className="text-center text-red-500">{error || "No data available."}</p>;
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -46,23 +25,31 @@ const CrimeStatus = () => {
             </tr>
           </thead>
           <tbody>
-            {crimes.map(crime => (
-              <tr key={crime.crimeId} className="hover:bg-gray-100">
-                <td className="border p-2">{crime.crimeId}</td>
-                <td className="border p-2">{crime.crimeCategory}</td>
-                <td className="border p-2">{crime.crimeDate}</td>
-                <td className="border p-2">{crime.crimeStatus}</td>
-                <td className="border p-2">{crime.crimeDescription}</td>
-                <td className="border p-2">
-                  <button 
-                    className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-700"
-                    onClick={() => navigate(`/crime-details/${crime.crimeId}`)}
-                  >
-                    See More
-                  </button>
+            {crimeReportsData.length > 0 ? (
+              crimeReportsData.map((crime) => (
+                <tr key={crime.crimeId} className="hover:bg-gray-100">
+                  <td className="border p-2">{crime.crimeId}</td>
+                  <td className="border p-2">{crime.crimeCategory}</td>
+                  <td className="border p-2">{new Date(crime.crimeDate).toLocaleDateString()}</td>
+                  <td className="border p-2">{crime.crimeStatus}</td>
+                  <td className="border p-2">{crime.crimeDescription}</td>
+                  <td className="border p-2">
+                    <button
+                      className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-700"
+                      onClick={() => navigate(`/crime-details/${crime.crimeId}`)}
+                    >
+                      See More
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="text-center p-4">
+                  No crime reports found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
