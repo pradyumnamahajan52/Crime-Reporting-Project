@@ -109,7 +109,6 @@ const router = createBrowserRouter([
         path: "reports",
         element: <Reports />,
         loader: loadCrimeCategory,
-
         action: newCrimeReportAction
       },{
         path: "report-details/:id",

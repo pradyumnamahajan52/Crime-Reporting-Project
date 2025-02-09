@@ -1,176 +1,136 @@
-import React from "react";
-import { useState } from "react";
-import { motion } from "framer-motion"; 
+import { useEffect, useState } from "react";
+import { Link, useLoaderData, useParams } from "react-router-dom"
+ 
 
-const ReportsCopy = () => {
 
-    const [evidence, setEvidence] = useState([]);
-    const handleFileChange = (event) => {
-        const files = Array.from(event.target.files);
-        setEvidence(files);
-      };
-    
-  return (
-    <motion.div style={{width:"100vw"}} className="w-full min-h-screen p-6 bg-gray-100" 
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}>
-      <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-black mb-4 text-center">
-          Register Your Complaint
-        </h1>
-        <p className="mb-6 text-center text-gray-600">
-          To report a crime, please provide the following details:
-        </p>
+const ReportDetailsCard = ({ data }) => {
 
-        {/* Crime Date */}
-        <div className="mb-4">
-          <label className="block text-lg font-medium mb-2">Crime Date:</label>
-          <input
-            type="text"
-            placeholder="MM-DD-YYYY"
-            className="border border-[#17A2B8] p-2 rounded w-full"
-          />
-        </div>
+  const [evidences, setEvidences] = useState([]);
 
-        {/* Crime Description */}
-        <div className="mb-4">
-          <label className="block text-lg font-medium mb-2">
-            Crime Description:
-          </label>
-          <textarea
-            className="border border-[#17A2B8] p-2 rounded w-full"
-            rows="4"
-            placeholder="Describe the crime in detail..."
-          ></textarea>
-        </div>
-
-        {/* Address Section */}
-        <div className="mb-4">
-          <label className="block text-lg font-medium mb-2">Address:</label>
-          <input
-            type="text"
-            placeholder="Street Address"
-            className="border border-[#17A2B8] p-2 rounded w-full mb-2"
-          />
-          <input
-            type="text"
-            placeholder="Street Address Line 2"
-            className="border border-[#17A2B8] p-2 rounded w-full mb-2"
-          />
-          <div className="flex space-x-2">
-            <input
-              type="text"
-              placeholder="City"
-              className="border border-[#17A2B8] p-2 rounded w-full"
-            />
-            <input
-              type="text"
-              placeholder="State/Province"
-              className="border border-[#17A2B8] p-2 rounded w-full"
-            />
-          </div>
-          <input
-            type="text"
-            placeholder="Postal/Zip Code"
-            className="border border-[#17A2B8] p-2 rounded w-full mt-2"
-          />
-        </div>
-
-        {/* Police Contact Question */}
-        <div className="mb-4">
-          <label className="block text-lg font-medium mb-2">
-            Do you want the police to contact you?
-          </label>
-          <div className="flex space-x-4">
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="contact"
-                className="mr-2 accent-[#17A2B8]"
-              />
-              Yes
-            </label>
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="contact"
-                className="mr-2 accent-[#17A2B8]"
-              />
-              No
-            </label>
-          </div>
-        </div>
-
-        
-            <div className="mb-6">
-          <label className="block text-lg font-medium mb-2">
-            Upload Adhhar Image:
-          </label>
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleFileChange}
-            className="border border-[#17A2B8] p-2 rounded w-full cursor-pointer"
-          />
-
-          {/* Preview Uploaded Images */}
-          {evidence.length > 0 && (
-            <div className="mt-4">
-              <h3 className="font-semibold text-gray-700 mb-2">Preview:</h3>
-              <div className="flex flex-wrap gap-4">
-                {evidence.map((file, index) => (
-                  file.type.startsWith("image/") ? (
-                    <img
-                      key={index}
-                      src={URL.createObjectURL(file)}
-                      alt={`Uploaded ${index + 1}`}
-                      className="w-24 h-24 object-cover rounded border border-[#17A2B8]"
-                    />
-                  ) : (
-                    <p key={index} className="text-sm text-gray-700">
-                      {file.name}
-                    </p>
-                  )
-                ))}
+    return (
+      <div className="w-full max-w-7xl mx-auto p-6">
+        <div className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105">
+          <div className="px-6 py-4">
+            {/* Title */}
+            <h1 className="font-bold text-2xl mb-6 text-gray-800 border-b pb-3">
+              Crime Report Details
+            </h1>
+  
+            {/* Crime Date and Category */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              {/* Date Box */}
+              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <p className="text-gray-700 font-semibold text-lg mb-1">📅Date:</p>
+                <p className="text-gray-600 text-base">{data.crimeDate}</p>
+              </div>
+  
+              {/* Category Box */}
+              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <p className="text-gray-700 font-semibold text-lg mb-1">Category:</p>
+                <p className="text-gray-600 text-base">{data.category +" "+ data.subCategory}</p>
               </div>
             </div>
-          )}
-        </div>
+  
+            {/* Description Box */}
+            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
+              <p className="text-gray-700 font-semibold text-lg mb-2">Description:</p>
+              <p className="text-gray-600 text-base leading-relaxed">{data.description}</p>
+            </div>
+  
+            {/* Crime Location Box */}
+            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
+              <p className="text-gray-700 font-semibold text-lg mb-2">📍Crime Location:</p>
+              <p className="text-gray-600 text-base">
+                {[data.addressLine1, data.addressLine2, data.city, data.state, data.country, data.pinCode]
+                  .filter(Boolean)
+                  .join(", ")}
+              </p>
+            </div>
+  
+            {/* Police Station Box */}
+            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <p className="text-gray-700 font-semibold text-lg mb-2">Police Station:</p>
+              <p className="text-gray-600 text-base mb-1">{data.stationName}</p>
+              <p className="text-gray-600 text-base">
+                {[
+                  data.stationAddressLine1,
+                  data.stationAddressLine2,
+                  data.stationCity,
+                  data.stationState,
+                  data.stationCountry,
+                  data.stationPinCode,
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
+              </p>
+            </div>
 
-        {/* Further Comments */}
-        <div className="mb-4">
-          <label className="block text-lg font-medium mb-2">
-            Further Comments:
-          </label>
-          <textarea
-            className="border border-[#17A2B8] p-2 rounded w-full"
-            rows="4"
-            placeholder="Add any extra details..."
-          ></textarea>
-        </div>
-
-        {/* Certification Checkbox */}
-        <div className="mb-6">
-          <label className="flex items-center text-lg">
-            <input
-              type="checkbox"
-              className="mr-2 accent-[#17A2B8]"
-            />
-            I certify that the above information is true and correct.
-          </label>
-        </div>
-
-        {/* Submit Button */}
-        <div className="text-center">
-          <button className="bg-[#17A2B8] text-white px-6 py-3 rounded-lg text-lg hover:bg-[#138496] transition">
-            Report Now!
-          </button>
+                {/* See Evidences */}
+            <div className="flex justify-end mt-3 items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 rtl:space-x-reverse">
+                <button className = "w-full  sm:w-auto focus:ring-4 focus:outline-none  text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5  hover:bg-primary bg-primary">
+           
+                <div className="text-left rtl:text-right">
+                <div className="-mt-1 font-sans text font-semibold">See Evidences</div>
+                </div>
+                </button>
+            </div>
+          </div>
         </div>
       </div>
-    </motion.div>
-  );
-};
+    );
+  };
+const CrimeReportsDetail = () =>{
+    const [reportsDetail, setReportsDetails] = useState({
+        crimeDate: "",
+        description: "",
+        addressLine1: "",
+        addressLine2: "",
+        city: "",
+        state: "",
+        country: "",
+        pinCode: "",
+        category: "",
+        subCategory: "",
+        stationName: "",
+        stationAddressLine1: "",
+        stationAddressLine2: "",
+        stationCity: "",
+        stationState: "",
+        stationCountry: "",
+        stationPinCode: ""
+    })
+    const {reportDetails } = useLoaderData();
 
-export default ReportsCopy;
+    useEffect(() => {
+        
+        const reportData = reportDetails.data;
+
+        setReportsDetails({
+            crimeDate: reportData.crimeDate || "",
+            description: reportData.description || "",
+            addressLine1: reportData.addressLine1 || "",
+            addressLine2: reportData.addressLine2 || "",
+            city: reportData.city || "",
+            state: reportData.state || "",
+            country: reportData.country || "",
+            pinCode: reportData.pinCode || "",
+            category: reportData.category || "",
+            subCategory: reportData.subCategory || "",
+            stationName: reportData.stationName || "Not Assigned",
+            stationAddressLine1: reportData.stationAddressLine1 || "",
+            stationAddressLine2: reportData.stationAddressLine2 || "",
+            stationCity: reportData.stationCity || "",
+            stationState: reportData.stationState || "",
+            stationCountry: reportData.stationCountry || "",
+            stationPinCode: reportData.stationPinCode || "",
+        })
+    }, [reportsDetail]);
+
+    return (
+        <div className="bg-gray-100 min-h-screen py-8 space-y-8">
+          <ReportDetailsCard data={reportsDetail} />
+        </div>
+      )
+}
+
+export default CrimeReportsDetail;

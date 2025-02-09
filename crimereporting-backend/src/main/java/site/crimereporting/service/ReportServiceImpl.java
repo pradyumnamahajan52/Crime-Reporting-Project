@@ -21,12 +21,7 @@ import site.crimereporting.dao.CrimeReportsDao;
 import site.crimereporting.dao.EvidenceDao;
 import site.crimereporting.dao.PoliceStationDao;
 import site.crimereporting.dao.UserDao;
-import site.crimereporting.dtos.ApiResponse;
-import site.crimereporting.dtos.CrimeReportDTO;
-import site.crimereporting.dtos.CrimeReportResponseDTO;
-import site.crimereporting.dtos.CrimeReportStatusDTO;
-import site.crimereporting.dtos.FileUploadInfoDTO;
-import site.crimereporting.dtos.NearByPoliceStationDTO;
+import site.crimereporting.dtos.*;
 import site.crimereporting.entity.Address;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.CrimeCategory;
@@ -231,12 +226,10 @@ public class ReportServiceImpl implements ReportService {
 			 stationCountry =  stationAddress.getCountry();
 			 stationPinCode = stationAddress.getPinCode();
 		 }
-		 
-		
-		
-		
+
 		
 		return new ApiResponse<CrimeReportDetailsDTO>("crime report details fetched successfully", new CrimeReportDetailsDTO(
+				crimeReports.getId(),
 				crimeReports.getCrimeDate(),
 				crimeReports.getDescription(),
 				crimeAddress.getAddressLine1(),
