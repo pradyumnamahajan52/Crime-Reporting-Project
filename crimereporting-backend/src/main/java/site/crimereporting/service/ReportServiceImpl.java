@@ -14,6 +14,7 @@ import site.crimereporting.dao.*;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.CrimeReportDTO;
 import site.crimereporting.dtos.CrimeReportResponseDTO;
+import site.crimereporting.dtos.CrimeReportStatusDTO;
 import site.crimereporting.dtos.FileUploadInfoDTO;
 import site.crimereporting.entity.*;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -40,6 +42,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     private CrimeCategoryDao crimeCategoryDao;
+    
+    @Autowired
+    private CrimeReportsDao crimeReportDao;
 
     @Autowired
     private PoliceStationDao policeStationDao;
@@ -106,5 +111,33 @@ public class ReportServiceImpl implements ReportService {
                 persistentCrimeReports.getDescription(),
                 persistentCrimeReports.getReportStatus()
                ));
+    }
+
+    @Override
+    public List<CrimeReportStatusDTO> getAllReportStatusById() {
+        // Get Current logged-in Email
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInEmail = authentication.getName();
+
+        // Find User by Email
+        User user = userDao.findByEmail(loggedInEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+
+        // Find Citizen
+        Citizen citizen = citizenDao.findByUser(user);
+        if (citizen == null) {
+            throw new ApiException("Cannot find Citizen associated with the user");
+        }
+
+        // Fetch Crime Reports and Convert to DTOs
+        return crimeReportsDao.findByCitizen(citizen).stream()
+                .map(crime -> new CrimeReportStatusDTO(
+                        crime.getId(),               // ✅ Include crimeId
+                        crime.getCrimeCategory(),
+                        crime.getCrimeDate(),
+                        crime.getReportStatus(),
+                        crime.getDescription()
+                ))
+                .collect(Collectors.toList());
     }
 }

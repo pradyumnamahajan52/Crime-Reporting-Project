@@ -1,15 +1,9 @@
 package site.crimereporting.dtos;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import site.crimereporting.entity.Address;
-import site.crimereporting.entity.CrimeCategory;
-import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.Status;
-
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -19,8 +13,6 @@ public class CrimeReportResponseDTO {
 	private Long citizenId;
 	
     private String description;
-
-
 
     private Status reportStatus;
 
