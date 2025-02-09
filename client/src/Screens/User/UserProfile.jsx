@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TopBar from '../../Components/Dashboard/Topbar/TopBar';
 import profileimg from '../../assets/images/profile.png'
+import { Form } from 'react-router-dom';
 
 const UserProfile = () => {
   
@@ -83,6 +84,12 @@ const UserProfile = () => {
           />
           <h3 className="text-xl font-semibold text-gray-700"></h3>
           <p className="text-sm text-gray-500">Citizen</p>
+
+          <Form method="POST" action="/user/logout">
+        <button type="submit"  className="text-md gap-2 bg-primary hover:bg-primary-400 hover:text-black text-white transition-colors  px-3 py-1.5 rounded" >
+          Logout
+        </button>
+        </Form>
         </div>
       </div>
     </>
