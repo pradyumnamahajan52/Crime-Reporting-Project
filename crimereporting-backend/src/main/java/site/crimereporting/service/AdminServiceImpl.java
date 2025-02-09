@@ -98,12 +98,55 @@ public class AdminServiceImpl implements AdminService {
 		// Update user details
 		user.setFullName(adminUserDTO.getFullName());
 		user.setPhoneNumber(adminUserDTO.getPhoneNumber());
+//		user.setRole(adminUserDTO.getRole());
+
 
 		// Save updated user back to DB
 		user = userDao.save(user);
+//		System.out.println(user.toString());
 
 		// Return updated user details as DTO
 		return new ApiResponse("Logged User's Information updated", mapper.map(user, AdminUserDTO.class));
+
+	}
+
+	@Override
+	public ApiResponse updateUserDetails(AdminUserDTO adminUserDTO) {
+
+		// Find User by logged-in email
+		User user = userDao.findByEmail(adminUserDTO.getEmail())
+				.orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+
+		// Update user details
+		user.setFullName(adminUserDTO.getFullName());
+		user.setPhoneNumber(adminUserDTO.getPhoneNumber());
+		user.setRole(adminUserDTO.getRole());
+
+
+		// Save updated user back to DB
+		user = userDao.save(user);
+//		System.out.println(user.toString());
+
+		// Return updated user details as DTO
+		return new ApiResponse("User's Information updated", mapper.map(user, AdminUserDTO.class));
+	}
+
+	@Override
+	public ApiResponse newUserDetails(AdminUserDTO adminUserDTO) {
+		User user = mapper.map(adminUserDTO,User.class);
+		user = userDao.save(user);
+		return new ApiResponse("User's Created Sucessfully", mapper.map(user, AdminUserDTO.class));
+	}
+
+	@Override
+	public ApiResponse logicalDeleteUser(Long id) {
+		User user = userDao.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("User with id does not exist"));
+		user.setIsDeleted(true);
+
+		// Save updated user back to DB
+		user = userDao.save(user);
+		return new ApiResponse("User's Deleted Sucessfully", mapper.map(user, AdminUserDTO.class));
 
 	}
 
@@ -131,17 +174,25 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<PoliceStation> getAllPoliceStations() {
-		return policeStationDao.findAll();
+		return policeStationDao.findByIsDeletedFalse();
 	}
 
 	@Override
 	public List<CrimeCategory> getAllCrime() {
-		return crimeCategoryDao.findAll();
+		return crimeCategoryDao.findByIsDeletedFalse();
 	}
 
 	@Override
-	public List<CrimeReports> getAllReports() {
-		return crimeReportsDao.findAll() ;
+	public ApiResponse getAllReports() {
+		List<CrimeReports> crimeReportsList = crimeReportsDao.findByIsDeletedFalse();
+
+		// Proper conversion using ModelMapper for lists
+		List<AdminCrimeReportDTO> adminCrimeReportDTOList = crimeReportsList.stream()
+				.map(report -> mapper.map(report, AdminCrimeReportDTO.class))
+				.collect(Collectors.toList());
+
+
+		return new ApiResponse("All Crime Reports fetched successfully",adminCrimeReportDTOList);
 	}
 
 	@Override

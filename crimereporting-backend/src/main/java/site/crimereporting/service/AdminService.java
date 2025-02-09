@@ -6,7 +6,6 @@ import site.crimereporting.dtos.AdminUserDTO;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.PoliceStationRegisterRequestDTO;
 import site.crimereporting.entity.CrimeCategory;
-import site.crimereporting.entity.CrimeReports;
 import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.User;
 
@@ -22,7 +21,13 @@ public interface AdminService {
 
 	ApiResponse updateLoggedInUserDetails(AdminUserDTO adminUserDTO);
 
-	List<CrimeReports> getAllReports();
+	ApiResponse updateUserDetails(AdminUserDTO adminUserDTO);
+
+	ApiResponse newUserDetails(AdminUserDTO adminUserDTO);
+
+	ApiResponse logicalDeleteUser(Long id);
+
+	ApiResponse getAllReports();
 	
 	List<CrimeCategory> getAllCrime();
 	
