@@ -7,6 +7,7 @@ import AdminDashboard from "./Screens/Admin/Dashboard";
 import Aboutus from "./Screens/Aboutus";
 import Contact from "./Screens/Contact";
 import PoliceLayout from "./Layout/PoliceLayout";
+import About from "./Screens/About"
 
 
 import AdminUsers from "./Screens/Admin/Users";
@@ -67,6 +68,7 @@ const router = createBrowserRouter([
       {
         path: "about",
         element: <About />,
+
       },
       {
         path:"contact",
