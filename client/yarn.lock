@@ -468,15 +468,15 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oven/bun-windows-x64-baseline@1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@oven/bun-windows-x64-baseline/-/bun-windows-x64-baseline-1.2.1.tgz"
-  integrity sha512-CAnEprAMazrXCY1pwBV+POV4VUZqGYvIkszwzQp22zzjllMXUWDsflOu34BTIahIF8zmgIsrk6w7VEC9t9tOwA==
+"@oven/bun-windows-x64-baseline@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/@oven/bun-windows-x64-baseline/-/bun-windows-x64-baseline-1.2.2.tgz"
+  integrity sha512-bYopMWSCjjjCKjANv7xxAXQoabVUxLZxTw0iC1bGYD9VZGo48nGaJXPn7DsPfeCXGyl+CY3Cy4QIEn+3gNRS2A==
 
-"@oven/bun-windows-x64@1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@oven/bun-windows-x64/-/bun-windows-x64-1.2.1.tgz"
-  integrity sha512-AKuKOMHalSG0hII7UP7MKmVZhz7LgB/o2QjIBHqnKj3NY9CXxwymuoSLnpHNnV2ndHG85TggDhJ1DZLUAhYBGQ==
+"@oven/bun-windows-x64@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/@oven/bun-windows-x64/-/bun-windows-x64-1.2.2.tgz"
+  integrity sha512-ZjxyIcS7kQFoGxyNBMZ9mqCxCkg7ZVG9P+/GTzMpUceFF/q88lUwsFsC7YwAe0ZubqcQLRSfdyjbKbC/HuqnFw==
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
@@ -1145,22 +1145,22 @@ browserslist@^4.23.3, browserslist@^4.24.0, "browserslist@>= 4.21.0":
     node-releases "^2.0.18"
     update-browserslist-db "^1.1.1"
 
-bun@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/bun/-/bun-1.2.1.tgz"
-  integrity sha512-ryoRbHhTWzCjDOwnsq3LPCsd/rL9A2xTdaoWFKbVBsYtDTsEFdQLowUuY47AhwtgCG5SIcKZh0XXxpylFqYeeg==
+bun@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/bun/-/bun-1.2.2.tgz"
+  integrity sha512-RUc8uVVTw8WoASUzXaEQJR1s7mnwoHm3P871qBUIqSaoOpuwcU+bSVX151/xoqDwnyv38SjOX7yQ3oO0IeT73g==
   optionalDependencies:
-    "@oven/bun-darwin-aarch64" "1.2.1"
-    "@oven/bun-darwin-x64" "1.2.1"
-    "@oven/bun-darwin-x64-baseline" "1.2.1"
-    "@oven/bun-linux-aarch64" "1.2.1"
-    "@oven/bun-linux-aarch64-musl" "1.2.1"
-    "@oven/bun-linux-x64" "1.2.1"
-    "@oven/bun-linux-x64-baseline" "1.2.1"
-    "@oven/bun-linux-x64-musl" "1.2.1"
-    "@oven/bun-linux-x64-musl-baseline" "1.2.1"
-    "@oven/bun-windows-x64" "1.2.1"
-    "@oven/bun-windows-x64-baseline" "1.2.1"
+    "@oven/bun-darwin-aarch64" "1.2.2"
+    "@oven/bun-darwin-x64" "1.2.2"
+    "@oven/bun-darwin-x64-baseline" "1.2.2"
+    "@oven/bun-linux-aarch64" "1.2.2"
+    "@oven/bun-linux-aarch64-musl" "1.2.2"
+    "@oven/bun-linux-x64" "1.2.2"
+    "@oven/bun-linux-x64-baseline" "1.2.2"
+    "@oven/bun-linux-x64-musl" "1.2.2"
+    "@oven/bun-linux-x64-musl-baseline" "1.2.2"
+    "@oven/bun-windows-x64" "1.2.2"
+    "@oven/bun-windows-x64-baseline" "1.2.2"
 
 call-bind-apply-helpers@^1.0.0:
   version "1.0.1"

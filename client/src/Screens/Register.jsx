@@ -22,8 +22,8 @@ export default function Register() {
     fullName: '',
     email: '',
     phoneNumber: '',
-    password: '',
-    cpassword: '',
+    password: 'Test',
+    cpassword: 'Test',
     dateOfBirth:'',
     cardNumber:'',
     addressLine1:'',
@@ -64,24 +64,24 @@ export default function Register() {
         setCitizenformData({...citizenformData,phoneNumber:e.target.value})
       }
     },
-    {
-      type: "password",
-      placeholder: "Enter your Password",
-      name: "password",
-      value:citizenformData.password,
-      onchange : (e) =>{
-        setCitizenformData({...citizenformData,password:e.target.value})
-      }
-    },
-    {
-      type: "password",
-      placeholder: "Enter Confirm Password",
-      name: "cpassword",
-      value:citizenformData.cpassword,
-      onchange : (e) =>{
-        setCitizenformData({...citizenformData,cpassword:e.target.value})
-      }
-    },
+    // {
+    //   type: "password",
+    //   placeholder: "Enter your Password",
+    //   name: "password",
+    //   value:citizenformData.password,
+    //   onchange : (e) =>{
+    //     setCitizenformData({...citizenformData,password:e.target.value})
+    //   }
+    // },
+    // {
+    //   type: "password",
+    //   placeholder: "Enter Confirm Password",
+    //   name: "cpassword",
+    //   value:citizenformData.cpassword,
+    //   onchange : (e) =>{
+    //     setCitizenformData({...citizenformData,cpassword:e.target.value})
+    //   }
+    // },
     {
       type: "date",
       placeholder: "Enter your Date of Birth",
@@ -188,8 +188,8 @@ export default function Register() {
     designation: '',
     email: '',
     phoneNumber: '',
-    password:'',
-    cpassword:'',
+    password:'Test',
+    cpassword:'Test',
     stationCode:''
 
 
@@ -234,24 +234,24 @@ export default function Register() {
         setpoliceformData({...policeformData,phoneNumber:e.target.value})
       }
     },
-    {
-      type: "password",
-      placeholder: "Enter your Password",
-      name: "password",
-      value:policeformData.password,
-      onchange : (e) =>{
-        setpoliceformData({...policeformData,password:e.target.value})
-      }
-    },
-    {
-      type: "password",
-      placeholder: "Enter your Confirm Password",
-      name: "cpassword",
-      value:policeformData.cpassword,
-      onchange : (e) =>{
-        setpoliceformData({...policeformData,cpassword:e.target.value})
-      }
-    },
+    // {
+    //   type: "password",
+    //   placeholder: "Enter your Password",
+    //   name: "password",
+    //   value:policeformData.password,
+    //   onchange : (e) =>{
+    //     setpoliceformData({...policeformData,password:e.target.value})
+    //   }
+    // },
+    // {
+    //   type: "password",
+    //   placeholder: "Enter your Confirm Password",
+    //   name: "cpassword",
+    //   value:policeformData.cpassword,
+    //   onchange : (e) =>{
+    //     setpoliceformData({...policeformData,cpassword:e.target.value})
+    //   }
+    // },
     {
       type: "number",
       placeholder: "Enter your Station Code",

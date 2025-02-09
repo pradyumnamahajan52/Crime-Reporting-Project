@@ -9,7 +9,7 @@ public interface S3ImageUploader {
 
     FileUploadInfoDTO uploadImage(MultipartFile image);
 
-    List<String> allFiles();
+//    List<String> allFiles();
 
-    String preSignedUrl();
+    List<String> preSignedUrl(List<String> fileNames);
 }
