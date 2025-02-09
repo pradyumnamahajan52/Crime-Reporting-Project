@@ -8,6 +8,7 @@ import site.crimereporting.dtos.CrimeReportStatusDTO;
 
 public interface ReportService {
 
+
 	ApiResponse<?> newReport(CrimeReportDTO crimereport);
 
 	List<CrimeReportStatusDTO> getAllReportStatusById();
@@ -15,4 +16,8 @@ public interface ReportService {
 	ApiResponse<?> crimeReportUpdatePoliceStation(Long crimeReportId, Long policeStationId);
 
 	ApiResponse<?> getReportsEvidence(Long crimeReportId);
+  
+  ApiResponse<?> getReportDetails(Long crimeReportId);
+
+
 }
