@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CrimeReportDetailsDTO {
+	private Long crimeReportId;
 	private LocalDate crimeDate;
 	private String description;
 	
