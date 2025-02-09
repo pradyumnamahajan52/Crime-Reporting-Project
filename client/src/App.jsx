@@ -39,15 +39,11 @@ import { loader as loadAdminUsers } from "./loader/admin/UsersLoader";
 import { loader as loadAdminUserDetails } from "./loader/admin/UserDetailsLoader";
 import { loader as loadPoliceStations } from "./loader/admin/PoliceStationLoader";
 import { loader as loadAdminCrimeReports } from "./loader/admin/CrimeReportsLoader";
-
-
-import { loader as loadAdminUserDetails} from "./loader/admin/UserDetailsLoader";
-import {loader as loadPoliceStations} from "./loader/admin/PoliceStationLoader"
 import {loader as loadPoliceDetails} from './loader/Police/LoadPoliceDetails';
 
  // citizen
 import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
-
+import { loader as loadCrimeStatus } from "./loader/citizen/CrimeStatusLoader";
 
 import "./App.css";
 import {
@@ -61,6 +57,7 @@ import { NewPoliceStationAction } from "./action/admin/NewPoliceStationAction";
 import { newCrimeReportAction } from "./action/crime/newCrimeReportAction";
 import { updatePoliceStationAction } from "./action/admin/UpdatePoliceStationAction";
 import { ToastContainer } from "react-toastify";
+import CrimeStatus from "./Screens/Citizen/CrimeStatus";
 // import About from "./Screens/About";
 
 const router = createBrowserRouter([
@@ -95,6 +92,13 @@ const router = createBrowserRouter([
         path: "feedback",
         element: <FeedbackForm />,
       },
+
+      {
+        path: "crimestatus",
+        element: <CrimeStatus />,
+        loader:loadCrimeStatus,
+      },
+
       {
         path: "reports",
         element: <Reports />,
