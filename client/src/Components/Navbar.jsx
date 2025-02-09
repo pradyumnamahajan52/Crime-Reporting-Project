@@ -37,8 +37,8 @@ export default function Navbar() {
               { label: "Home", path: "/" },
               { label: "About Us", path: "/about" },
               { label: "Contact Us", path: "/contact" },
-              { label: "Report Crime", path: "/reports" },
-              { label: "Feedback", path: "/feedback" }
+              { label: "Report Crime", path: "/citizen/reports" },
+              { label: "Feedback", path: "/citizen/feedback" }
             ].map((item) => (
               <span
                 key={item.path}
@@ -62,8 +62,8 @@ export default function Navbar() {
                 { label: "Home", path: "/" },
                 { label: "About Us", path: "/about" },
                 { label: "Contact Us", path: "/contact" },
-                { label: "Report Crime", path: "/reports" },
-                { label: "Feedback", path: "/feedback" }
+                { label: "Report Crime", path: "/citizen/reports" },
+                { label: "Feedback", path: "/citizen/feedback" }
               ].map((item) => (
                 <span
                   key={item.path}
@@ -80,7 +80,7 @@ export default function Navbar() {
                     src="https://api.dicebear.com/9.x/avataaars-neutral/svg?backgroundColor=b6e3f4,c0aede,d1d4f9"
                     alt="Profile"
                     className="w-8 h-8 rounded-full border border-white cursor-pointer"
-                    onClick={() => handleNavigation("/user/profile")}
+                    onClick={() => handleNavigation("/citizen//profile")}
                   />
                 ) : (
                   <>

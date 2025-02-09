@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const teamMembers = [
   {
@@ -30,7 +31,10 @@ const teamMembers = [
 
 function About() {
   return (
-    <section className="bg-white text-black w-full px-12 sm:px-6 py-20">
+    <motion.section className="bg-white text-black w-full px-12 sm:px-6 py-20" 
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}>
       <div className="w-full px-14 mx-auto">
         {/* Title Section */}
         <div className="text-center mb-16">
@@ -81,7 +85,7 @@ function About() {
           <h2 className="text-3xl font-bold mb-10 text-center">Meet Our Team</h2>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
             {teamMembers.map((member, index) => (
-              <div key={index} className="flex items-center border border-primary border-2 p-6 rounded-lg bg-gray-100 shadow-lg w-full">
+              <div key={index} className="flex items-center border border-primary border-2 p-6 rounded-lg bg-gray-100 shadow-lg w-full hover:scale-105 transition-transform">
                 <img
                   alt={member.name}
                   className="w-16 h-16 object-cover object-center rounded-full mr-4 border border-gray-300"
@@ -104,7 +108,7 @@ function About() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
