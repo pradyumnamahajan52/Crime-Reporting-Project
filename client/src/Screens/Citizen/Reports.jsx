@@ -134,7 +134,7 @@ const Report = () => {
     submit(formDataToSubmit, {
       method: "post",
       encType: "multipart/form-data",
-      action: "/reports?step=report",
+      action: "/citizen/reports?step=report",
     });
   };
 
@@ -172,7 +172,7 @@ const Report = () => {
     submit(formDataToSubmit, {
       method: "post",
       encType: "multipart/form-data",
-      action: "/reports?step=select-police-station",
+      action: "/citizen/reports?step=select-police-station",
     });
   };
 
