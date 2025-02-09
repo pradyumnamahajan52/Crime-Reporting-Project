@@ -60,7 +60,7 @@ export default function Form({
               className="flex items-center rounded-lg border border-2 border-primary w-full p-3 sm:p-4 mt-4 h-10 sm:h-12"
             >
               <input
-                className="flex-grow outline-none px-2 text-sm sm:text-base w-full h-full"
+                className="flex-grow outline-none p-2 text-sm sm:text-base w-full h-full"
                 type={item.type}
                 placeholder={item.placeholder}
                 name={item.name}
