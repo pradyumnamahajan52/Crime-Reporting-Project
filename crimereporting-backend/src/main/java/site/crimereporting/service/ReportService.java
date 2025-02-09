@@ -8,5 +8,5 @@ public interface ReportService {
 
     ApiResponse<?> newReport(CrimeReportDTO crimereport);
     ApiResponse<?> crimeReportUpdatePoliceStation(Long crimeReportId, Long policeStationId);
-
+    ApiResponse<?> getReportsEvidence(Long crimeReportId);
 }

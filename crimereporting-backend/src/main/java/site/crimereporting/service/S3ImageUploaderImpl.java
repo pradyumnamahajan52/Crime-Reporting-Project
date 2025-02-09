@@ -1,6 +1,8 @@
 package site.crimereporting.service;
 
+import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
@@ -12,6 +14,8 @@ import site.crimereporting.custom_exception.ImageUploadException;
 import site.crimereporting.dtos.FileUploadInfoDTO;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,13 +54,23 @@ public class S3ImageUploaderImpl implements S3ImageUploader {
 
     }
 
-    @Override
-    public List<String> allFiles() {
-        return List.of();
-    }
+//    @Override
+//    public List<String> allFiles() {
+//        return List.of();
+//    }
 
     @Override
-    public String preSignedUrl() {
-        return "";
+    public List<String> preSignedUrl(List<String> fileNames) {
+        List<String> signedUrls = new ArrayList<>();
+        fileNames.forEach(file -> {
+            Date expirationDate =new  Date();
+            long time = expirationDate.getTime();
+            time = time + 10 * 60 * 1000;
+            expirationDate.setTime(time);
+            GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName,file).withMethod(HttpMethod.GET).withExpiration(expirationDate);
+            signedUrls.add(amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString());
+        });
+
+        return signedUrls;
     }
 }
