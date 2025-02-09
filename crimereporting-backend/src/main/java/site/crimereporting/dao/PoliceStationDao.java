@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import site.crimereporting.dtos.NearByPoliceStationDTO;
 import site.crimereporting.entity.PoliceStation;
+import site.crimereporting.entity.User;
+
 import java.util.List;
 
 
@@ -19,8 +21,9 @@ public interface PoliceStationDao extends JpaRepository<PoliceStation, Long> {
 	Optional<PoliceStation> findByStationCode(Integer stationCode);
 	long countByIsDeletedFalse();
 
-	@Procedure(procedureName = "GetNearestPoliceStations")
+	List<PoliceStation> findByIsDeletedFalse();
 
+	@Procedure(procedureName = "GetNearestPoliceStations")
 	List<Object[]> getNearestPoliceStations(
 
 			@Param("crimeLatitude") double crimeLatitude,

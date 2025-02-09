@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -67,6 +68,6 @@ public class CrimeReports extends BaseEntity {
 	// crime reports 1 --> *
 	// eager
 	@OneToMany(mappedBy = "crimeReports", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-//	@JsonIgnore
+	@JsonIgnore
 	private List<Evidence> evidenceList = new ArrayList<>();
 }

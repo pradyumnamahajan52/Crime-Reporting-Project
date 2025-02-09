@@ -81,6 +81,23 @@ export function checkPoliceAuthLoader() {
 
 
 
+export function checkCitizenAuthLoader() {
+  const token = getAuthToken();
+  const userInfo = getUserInfo();
+
+  if (!token) {
+    return redirect("/user/login");
+  }
+
+  if (userInfo.role !== "CITIZEN") {
+    return redirect("/user/login");
+  }
+
+  return token;
+}
+
+
+
 
 
 

@@ -396,6 +396,7 @@ public class UserServiceImpl implements UserService {
         policeStationUser.setPoliceStation(policeStation);
         policeStationUser.setUser(user);
         policeStationUser.setDesignation(police.getDesignation());
+        policeStationUser.setIsVerified(true);
         //policeStationUser.setName(police.getName());
 
         // Save PoliceStationUser in the database

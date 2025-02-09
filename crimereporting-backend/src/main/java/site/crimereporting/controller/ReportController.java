@@ -4,11 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.CrimeReportDTO;
-import site.crimereporting.dtos.CrimeReportResponseDTO;
 import site.crimereporting.service.ReportService;
 
 @RestController
@@ -16,18 +20,35 @@ import site.crimereporting.service.ReportService;
 @CrossOrigin("*")
 public class ReportController {
 
-    @Autowired
-    private ReportService reportService;
-    
+	@Autowired
+	private ReportService reportService;
 
+	@PostMapping("/newreport")
+	public ResponseEntity<?> crimeReport(@ModelAttribute CrimeReportDTO crimeReportDTO) {
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(reportService.newReport(crimeReportDTO));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+		}
+	}
 
-    @PostMapping("/newreport")
-    public ResponseEntity<?> crimeReport(@ModelAttribute CrimeReportDTO crimeReportDTO){
-        System.out.println(crimeReportDTO);
-//        System.out.println(crimereport.getEvidences());
-        return ResponseEntity.status(HttpStatus.CREATED).body(reportService.newReport(crimeReportDTO));
+	@GetMapping("/reportstatus")
+	public ResponseEntity<?> viewStatus() {
+		try {
+			return ResponseEntity.ok(reportService.getAllReportStatusById());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+		}
+	}
 
-    }
+//    @PostMapping("/findNearByPoliceStation")
+//    public ResponseEntity<?> findNearByPoliceStation(@RequestBody NearByPoliceStationDTO nearByPoliceStationDTO){
+//
+//
+//
+//		return null;
+//
+//    }
 
     @PostMapping("/update-police-station")
     public ResponseEntity<?> crimeReportUpdatePoliceStation(@RequestParam("crimeReportId") Long crimeReportId,
@@ -36,7 +57,8 @@ public class ReportController {
         System.out.println(policeStationId);
         return ResponseEntity.status(HttpStatus.OK).body(reportService.crimeReportUpdatePoliceStation(crimeReportId,policeStationId));
 
-    }
+
+	}
 
     @PostMapping("/get-evidence")
     public ResponseEntity<?> getReportsEvidence(@RequestParam("crimeReportId") Long crimeReportId){
@@ -52,5 +74,6 @@ public class ReportController {
 		return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportDetails(crimeReportId));
     	
     }
+
 
 }

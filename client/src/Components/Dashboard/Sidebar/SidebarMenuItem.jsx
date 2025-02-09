@@ -10,7 +10,7 @@ const SidebarMenuItem = ({ selected, Icon, title,url }) => {
           ? "bg-primary text-stone-950 shadow"
           : "hover:bg-stone-200 bg-transparent text-stone-500 shadow-none"
       }`}
-      to={`/admin/${url}`}
+      to={`${url}`}
     >
       <Icon className={selected ? "text-white" : ""} />
       <span className={selected ? "text-white" : ""}>{title}</span>

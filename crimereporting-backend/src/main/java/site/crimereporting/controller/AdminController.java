@@ -45,13 +45,28 @@ public class AdminController {
 		return ResponseEntity.ok(adminService.getAllUsers());
 	}
 
+	@PutMapping("/users")
+	public ResponseEntity<?> updateUserDetails(@RequestBody @Valid AdminUserDTO adminUserDTO) {
+		return ResponseEntity.ok(adminService.updateUserDetails(adminUserDTO));
+	}
+
+	@PostMapping("/users")
+	public ResponseEntity<?> saveNewUser(@RequestBody @Valid AdminUserDTO adminUserDTO) {
+		return ResponseEntity.ok(adminService.newUserDetails(adminUserDTO));
+	}
+
+	@DeleteMapping("/users")
+	public ResponseEntity<?> deleteUser(@RequestParam Long id) {
+		return ResponseEntity.ok(adminService.logicalDeleteUser(id));
+	}
+
 	@GetMapping("/user/details")
 	public ResponseEntity<?> renderUserDetails() {
 		return ResponseEntity.ok(adminService.getLoggedInUserDetails());
 	}
 
 	@PutMapping("/user/details")
-	public ResponseEntity<?> updateUserDetails(@RequestBody @Valid AdminUserDTO adminUserDTO) {
+	public ResponseEntity<?> updateLoggedInUserDetails(@RequestBody @Valid AdminUserDTO adminUserDTO) {
 		return ResponseEntity.ok(adminService.updateLoggedInUserDetails(adminUserDTO));
 	}
 
@@ -60,6 +75,12 @@ public class AdminController {
 	public ResponseEntity<?> viewPoliceStations() {
 		return ResponseEntity.ok(adminService.getAllPoliceStations());
 	}
+
+	@GetMapping("/policeStations/details")
+	public ResponseEntity<?> getPoliceStationsDetails(@RequestParam Long id) {
+		return ResponseEntity.ok(adminService.getPoliceStationDetails(id));
+	}
+
 
 	@PostMapping("/policeStations")
 	public ResponseEntity<?> newPoliceStations(@ModelAttribute @Valid PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO) {
@@ -79,9 +100,6 @@ public class AdminController {
 	
 	@PutMapping("/updatePoliceStation")
 	public ResponseEntity<?> updatePoliceStation(@ModelAttribute PoliceStationRegisterRequestDTO policeStationDataForUpdate){
-		
-		
-		
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.updatePoliceStation(policeStationDataForUpdate));
 		
 	}
