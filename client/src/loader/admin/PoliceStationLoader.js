@@ -8,7 +8,7 @@ export async function loader() {
   return { policeStationData };
 }
 
-// ✅ Function to fetch police stations (returns promise)
+// Function to fetch police stations (returns promise)
 async function loadPoliceStations() {
   try {
     const token = getAuthToken();
