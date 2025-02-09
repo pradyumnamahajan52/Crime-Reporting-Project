@@ -65,7 +65,7 @@ public class S3ImageUploaderImpl implements S3ImageUploader {
         fileNames.forEach(file -> {
             Date expirationDate =new  Date();
             long time = expirationDate.getTime();
-            time = time + 10 * 60 * 60* 1000;
+            time = time + 10 * 60 * 1000;
             expirationDate.setTime(time);
             GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName,file).withMethod(HttpMethod.GET).withExpiration(expirationDate);
             signedUrls.add(amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString());
