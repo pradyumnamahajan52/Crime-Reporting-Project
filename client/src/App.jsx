@@ -45,8 +45,8 @@ import { loader as loadAdminCrimeReports } from "./loader/admin/CrimeReportsLoad
 import { loader as loadAdminCrimeCategory } from "./loader/admin/CrimeCategoryLoader";
 
 
-import { loader as loadAdminUserDetails} from "./loader/admin/UserDetailsLoader";
-import {loader as loadPoliceStations} from "./loader/admin/PoliceStationLoader"
+
+
 import {loader as loadPoliceDetails} from './loader/Police/LoadPoliceDetails';
 
  // citizen
