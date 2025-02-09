@@ -387,8 +387,8 @@ public class UserServiceImpl implements UserService {
         User user = mapper.map(userDto, User.class);
         user.setRole(UserRole.POLICE);
 
-        // Find police station by station code
         PoliceStation policeStation = policeStationDao.findByStationCode(police.getStationCode())
+        // Find police station by station code
                 .orElseThrow(() -> new ResourceNotFoundException("Station code is not valid!"));
 
         // Create PoliceStationUser object
@@ -396,6 +396,7 @@ public class UserServiceImpl implements UserService {
         policeStationUser.setPoliceStation(policeStation);
         policeStationUser.setUser(user);
         policeStationUser.setDesignation(police.getDesignation());
+        policeStationUser.setIsVerified(true);
         //policeStationUser.setName(police.getName());
 
         // Save PoliceStationUser in the database

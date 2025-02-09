@@ -1,5 +1,4 @@
 import React from 'react';
-import CrimeGraph from '../../Components/Police/Dashboard/CrimeGraph';
 import Grid from './../../Components/Police/Dashboard/Grid';
 import TopBar from '../../Components/Dashboard/Topbar/TopBar';
 
@@ -8,7 +7,7 @@ const Dashboard = () => {
     <>
       <TopBar rightButton="" />
       <Grid />
-      <CrimeGraph/>
+      {/* <CrimeGraph/> */}
     </>
   );
 }

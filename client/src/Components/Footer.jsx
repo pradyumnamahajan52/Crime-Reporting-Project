@@ -20,7 +20,7 @@ const currentYear = new Date().getFullYear();
 export default function Footer() {
   return (
     <footer className="relative w-full bg-primary text-white py-8">
-  <div className="mx-auto w-full max-w-7xl px-8">
+  <div className="mx-auto w-full max-w-7xl px-5">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 justify-between">
       <div>
         <h2 className="text-3xl font-bold mb-4">Crime Reporting Portal</h2>

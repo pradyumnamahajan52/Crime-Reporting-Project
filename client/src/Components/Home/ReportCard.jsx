@@ -15,7 +15,8 @@ import {
     
     const navigate = useNavigate();
     return (
-   <Card className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 h-full min-h-[350px] max-w-[26rem] shadow-lg flex flex-col transition-transform transform hover:scale-105">
+   <Card className="
+    shadow-lg flex flex-col transition-transform transform hover:scale-105">
   <CardHeader floated={false} color="blue-gray" className="relative">
     <img
       src={image}

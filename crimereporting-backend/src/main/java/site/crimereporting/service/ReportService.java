@@ -11,4 +11,8 @@ public interface ReportService {
 	ApiResponse<?> newReport(CrimeReportDTO crimereport);
 
 	List<CrimeReportStatusDTO> getAllReportStatusById();
+
+	ApiResponse<?> crimeReportUpdatePoliceStation(Long crimeReportId, Long policeStationId);
+
+	ApiResponse<?> getReportsEvidence(Long crimeReportId);
 }

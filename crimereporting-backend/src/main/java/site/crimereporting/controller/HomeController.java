@@ -41,7 +41,7 @@ public class HomeController {
         hashmap.put("Project Name","Crime Reporting System");
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse<>("Project is Working! This message is from project creator", hashmap));
     }
-
-
+    
+   
 
 }

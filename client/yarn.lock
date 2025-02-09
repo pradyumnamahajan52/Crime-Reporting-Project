@@ -168,7 +168,7 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
-"@emotion/is-prop-valid@^0.8.2":
+"@emotion/is-prop-valid@*", "@emotion/is-prop-valid@^0.8.2":
   version "0.8.8"
   resolved "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz"
   integrity sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
@@ -379,6 +379,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@kurkle/color@^0.3.0":
+  version "0.3.4"
+  resolved "https://registry.npmjs.org/@kurkle/color/-/color-0.3.4.tgz"
+  integrity sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==
+
 "@material-tailwind/react@^2.1.10":
   version "2.1.10"
   resolved "https://registry.npmjs.org/@material-tailwind/react/-/react-2.1.10.tgz"
@@ -468,15 +473,15 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oven/bun-windows-x64-baseline@1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@oven/bun-windows-x64-baseline/-/bun-windows-x64-baseline-1.2.1.tgz"
-  integrity sha512-CAnEprAMazrXCY1pwBV+POV4VUZqGYvIkszwzQp22zzjllMXUWDsflOu34BTIahIF8zmgIsrk6w7VEC9t9tOwA==
+"@oven/bun-windows-x64-baseline@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/@oven/bun-windows-x64-baseline/-/bun-windows-x64-baseline-1.2.2.tgz"
+  integrity sha512-bYopMWSCjjjCKjANv7xxAXQoabVUxLZxTw0iC1bGYD9VZGo48nGaJXPn7DsPfeCXGyl+CY3Cy4QIEn+3gNRS2A==
 
-"@oven/bun-windows-x64@1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/@oven/bun-windows-x64/-/bun-windows-x64-1.2.1.tgz"
-  integrity sha512-AKuKOMHalSG0hII7UP7MKmVZhz7LgB/o2QjIBHqnKj3NY9CXxwymuoSLnpHNnV2ndHG85TggDhJ1DZLUAhYBGQ==
+"@oven/bun-windows-x64@1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/@oven/bun-windows-x64/-/bun-windows-x64-1.2.2.tgz"
+  integrity sha512-ZjxyIcS7kQFoGxyNBMZ9mqCxCkg7ZVG9P+/GTzMpUceFF/q88lUwsFsC7YwAe0ZubqcQLRSfdyjbKbC/HuqnFw==
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
@@ -667,154 +672,6 @@
   dependencies:
     tslib "^2.8.0"
 
-"@syncfusion/ej2-base@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-base/-/ej2-base-28.2.3.tgz"
-  integrity sha512-THvYa6k6c9vEXlNoQ0vKf/1r1gHA9+3iNWPIqUJ6K1fMFu0cYOLGOT7LCVtxEtKuqkUIu90x2DJaoWnF1nt4tw==
-  dependencies:
-    "@syncfusion/ej2-icons" "~28.2.3"
-
-"@syncfusion/ej2-buttons@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-buttons/-/ej2-buttons-28.2.3.tgz"
-  integrity sha512-EeGq0dNWxWQj4pslG8x/XvPVbeoV0R56x/ymo3DA+6KtFj2JVYHL/3vB2I2pvUlogPS9fBVC6OQmYLWLQ6KL3A==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-
-"@syncfusion/ej2-calendars@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-calendars/-/ej2-calendars-28.2.3.tgz"
-  integrity sha512-Km/mU3ZIyLeJQnB1wXDRMDlweune6cp11zg6qm5Ib8hN+gtO6v2tiRcz4AZITqUZX2TIvIxyrxw3pEgtEFCFgQ==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-    "@syncfusion/ej2-buttons" "~28.2.3"
-    "@syncfusion/ej2-inputs" "~28.2.3"
-    "@syncfusion/ej2-lists" "~28.2.3"
-    "@syncfusion/ej2-popups" "~28.2.3"
-
-"@syncfusion/ej2-charts@28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-charts/-/ej2-charts-28.2.3.tgz"
-  integrity sha512-oXnanLyNQT2LbnlAxOa2CAZwcaZ6bP/sBbr4OZo02L4SIgceSMOei9r0ZX+aFg5BrWtg05l6yHeRzuVzU+icxw==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-    "@syncfusion/ej2-calendars" "~28.2.3"
-    "@syncfusion/ej2-data" "~28.2.3"
-    "@syncfusion/ej2-excel-export" "~28.2.3"
-    "@syncfusion/ej2-navigations" "~28.2.3"
-    "@syncfusion/ej2-pdf-export" "~28.2.3"
-    "@syncfusion/ej2-svg-base" "~28.2.3"
-
-"@syncfusion/ej2-compression@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-compression/-/ej2-compression-28.2.3.tgz"
-  integrity sha512-OG+qWn2fNT4CtLpBWAif5gvZsrnpPrgEcxNQlT6uQX6ntDHT5IUDHSdvpUypGmJM3cDdcaqK8qygcgWBbj9ceQ==
-  dependencies:
-    "@syncfusion/ej2-file-utils" "~28.2.3"
-
-"@syncfusion/ej2-data@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-data/-/ej2-data-28.2.3.tgz"
-  integrity sha512-qAZQRqtOp/LhKLznMflaXUefrrinNpqBQkIE49XiUK0WzTZB8bXXtPMI5qPjTfqNkbqM4DelNMEqvqSkAi1BKA==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-
-"@syncfusion/ej2-excel-export@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-excel-export/-/ej2-excel-export-28.2.3.tgz"
-  integrity sha512-DgL6Jg7uKFJKB83EDU0WLMTYpJDCGXsgbJ59ODSHOW+go+3gCBK/A+NJ7eZdacVQ0kAUNhuXRaIyjTemDqK6WA==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-    "@syncfusion/ej2-compression" "~28.2.3"
-
-"@syncfusion/ej2-file-utils@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-file-utils/-/ej2-file-utils-28.2.3.tgz"
-  integrity sha512-5PDcBtUfKy+P9BPVIYisT8DdZ7hNXkF5UWeOgw8rzE9BshBdpIcxRdEyMkRgQfqIHf3E7AWqLxyT87XxUOti2A==
-
-"@syncfusion/ej2-icons@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-icons/-/ej2-icons-28.2.3.tgz"
-  integrity sha512-lwDMbygU3y15jLkTCtvFb7dwfEtOVknjajYWnp+wmCJF14ZUwDEBuY1jCcpDcEd6mHkDdS5GFlpifdjZhh9jJA==
-
-"@syncfusion/ej2-inputs@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-inputs/-/ej2-inputs-28.2.3.tgz"
-  integrity sha512-BoWxC7Ezi4vPjQRPE6r3zwbdEiT9bmcWYKI5jdc9EXvONId5gD4qgRb3X7kUOBhmsBxb4C8qY055OSeRCz6vYA==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-    "@syncfusion/ej2-buttons" "~28.2.3"
-    "@syncfusion/ej2-popups" "~28.2.3"
-    "@syncfusion/ej2-splitbuttons" "~28.2.3"
-
-"@syncfusion/ej2-lists@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-lists/-/ej2-lists-28.2.3.tgz"
-  integrity sha512-MB9ecuC0A3T6jwY6xIuHu5ZOtFcoNJGGCDWHiLRXH2OQWkeTsiGe0vjG2skTcrl0LXkinRAXo79RU1DaPFDB1Q==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-    "@syncfusion/ej2-buttons" "~28.2.3"
-    "@syncfusion/ej2-data" "~28.2.3"
-    "@syncfusion/ej2-popups" "~28.2.3"
-
-"@syncfusion/ej2-navigations@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-navigations/-/ej2-navigations-28.2.3.tgz"
-  integrity sha512-zknEJzq8DLAE0/mvyZGD4M8KEs5MAz4p5VPKVbGEe668B1oLo6pPFHqEddWVhTjicvX90Ig0cEQf+i+esruo3g==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-    "@syncfusion/ej2-buttons" "~28.2.3"
-    "@syncfusion/ej2-data" "~28.2.3"
-    "@syncfusion/ej2-inputs" "~28.2.3"
-    "@syncfusion/ej2-lists" "~28.2.3"
-    "@syncfusion/ej2-popups" "~28.2.3"
-
-"@syncfusion/ej2-pdf-export@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-pdf-export/-/ej2-pdf-export-28.2.3.tgz"
-  integrity sha512-bYvzVG4NZNhZv0juHJwJ56DfJ+Yc/mS3xJen2YJu6AcumTET1MMTG1IrlFvzLffwGvdDddXVZNgbNkVXJS3Fug==
-  dependencies:
-    "@syncfusion/ej2-compression" "~28.2.3"
-
-"@syncfusion/ej2-popups@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-popups/-/ej2-popups-28.2.3.tgz"
-  integrity sha512-9gjfbW7s90hrjmv8sYkDLYuttOJsS70U4P1wt2O/EaRt/T6UPdSAz3616BojPYica4RUTlbW5lTzYTRHbDBddg==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-    "@syncfusion/ej2-buttons" "~28.2.3"
-
-"@syncfusion/ej2-react-base@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-react-base/-/ej2-react-base-28.2.3.tgz"
-  integrity sha512-mrKI8OiSujBxOVpuWUGTiaCzS+cC8yGpujr4uG79ce/Rle4knE9BZEbEDQamZkAxT/u8kG4yetox6vs7kLI9EA==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-
-"@syncfusion/ej2-react-charts@^28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-react-charts/-/ej2-react-charts-28.2.3.tgz"
-  integrity sha512-kOxyKYFJQY0Ccf2fyQpXSWFG4fsZW6RwTNA45Y784upso9IGHpigJi4uFLOp6HpWK42oMY7pGn20jxvqjFD2rw==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-    "@syncfusion/ej2-charts" "28.2.3"
-    "@syncfusion/ej2-react-base" "~28.2.3"
-
-"@syncfusion/ej2-splitbuttons@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-splitbuttons/-/ej2-splitbuttons-28.2.3.tgz"
-  integrity sha512-8PWYWo+kZgV2JfPkqe6riToKO7blxNBFMo083HdbaE2z76gKkB1Eg3JNCJU2NIqlsb8eZX1eBHd6JoUbTEkgow==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-    "@syncfusion/ej2-popups" "~28.2.3"
-
-"@syncfusion/ej2-svg-base@~28.2.3":
-  version "28.2.3"
-  resolved "https://registry.npmjs.org/@syncfusion/ej2-svg-base/-/ej2-svg-base-28.2.3.tgz"
-  integrity sha512-G5ZLzumZOuKHiZTtpnadRHMUuqTbq8dwpl8QCMo8zzW+VtmEMNG5+0OAwR1V0tjPTsFFHDGEVFjmAFhVOxZKJA==
-  dependencies:
-    "@syncfusion/ej2-base" "~28.2.3"
-
 "@tanstack/react-virtual@^3.8.1":
   version "3.12.0"
   resolved "https://registry.npmjs.org/@tanstack/react-virtual/-/react-virtual-3.12.0.tgz"
@@ -958,6 +815,15 @@ anymatch@~3.1.2:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+aos@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.npmjs.org/aos/-/aos-2.3.4.tgz"
+  integrity sha512-zh/ahtR2yME4I51z8IttIt4lC1Nw0ktsFtmeDzID1m9naJnWXhCoARaCgNOGXb5CLy3zm+wqmRAEgMYB5E2HUw==
+  dependencies:
+    classlist-polyfill "^1.0.3"
+    lodash.debounce "^4.0.6"
+    lodash.throttle "^4.0.1"
 
 arg@^5.0.2:
   version "5.0.2"
@@ -1136,22 +1002,22 @@ browserslist@^4.23.3, browserslist@^4.24.0, "browserslist@>= 4.21.0":
     node-releases "^2.0.18"
     update-browserslist-db "^1.1.1"
 
-bun@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/bun/-/bun-1.2.1.tgz"
-  integrity sha512-ryoRbHhTWzCjDOwnsq3LPCsd/rL9A2xTdaoWFKbVBsYtDTsEFdQLowUuY47AhwtgCG5SIcKZh0XXxpylFqYeeg==
+bun@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/bun/-/bun-1.2.2.tgz"
+  integrity sha512-RUc8uVVTw8WoASUzXaEQJR1s7mnwoHm3P871qBUIqSaoOpuwcU+bSVX151/xoqDwnyv38SjOX7yQ3oO0IeT73g==
   optionalDependencies:
-    "@oven/bun-darwin-aarch64" "1.2.1"
-    "@oven/bun-darwin-x64" "1.2.1"
-    "@oven/bun-darwin-x64-baseline" "1.2.1"
-    "@oven/bun-linux-aarch64" "1.2.1"
-    "@oven/bun-linux-aarch64-musl" "1.2.1"
-    "@oven/bun-linux-x64" "1.2.1"
-    "@oven/bun-linux-x64-baseline" "1.2.1"
-    "@oven/bun-linux-x64-musl" "1.2.1"
-    "@oven/bun-linux-x64-musl-baseline" "1.2.1"
-    "@oven/bun-windows-x64" "1.2.1"
-    "@oven/bun-windows-x64-baseline" "1.2.1"
+    "@oven/bun-darwin-aarch64" "1.2.2"
+    "@oven/bun-darwin-x64" "1.2.2"
+    "@oven/bun-darwin-x64-baseline" "1.2.2"
+    "@oven/bun-linux-aarch64" "1.2.2"
+    "@oven/bun-linux-aarch64-musl" "1.2.2"
+    "@oven/bun-linux-x64" "1.2.2"
+    "@oven/bun-linux-x64-baseline" "1.2.2"
+    "@oven/bun-linux-x64-musl" "1.2.2"
+    "@oven/bun-linux-x64-musl-baseline" "1.2.2"
+    "@oven/bun-windows-x64" "1.2.2"
+    "@oven/bun-windows-x64-baseline" "1.2.2"
 
 call-bind-apply-helpers@^1.0.0:
   version "1.0.1"
@@ -1194,6 +1060,13 @@ chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chart.js@^4.1.1, chart.js@^4.4.7:
+  version "4.4.7"
+  resolved "https://registry.npmjs.org/chart.js/-/chart.js-4.4.7.tgz"
+  integrity sha512-pwkcKfdzTMAU/+jNosKhNL2bHtJc/sSmYgVbuGTEDhzkrhmyihmP7vUc/5ZK9WopidMDHNe3Wm7jOd/WhuHWuw==
+  dependencies:
+    "@kurkle/color" "^0.3.0"
+
 chokidar@^3.6.0:
   version "3.6.0"
   resolved "https://registry.npmjs.org/chokidar/-/chokidar-3.6.0.tgz"
@@ -1208,6 +1081,11 @@ chokidar@^3.6.0:
     readdirp "~3.6.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+classlist-polyfill@^1.0.3:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/classlist-polyfill/-/classlist-polyfill-1.2.0.tgz"
+  integrity sha512-GzIjNdcEtH4ieA2S8NmrSxv7DfEV5fmixQeyTmqmRmRJPGpRBaSnA2a0VrCjyT8iW8JjEdMbKzDotAJf+ajgaQ==
 
 classnames@^2.2.5:
   version "2.5.1"
@@ -1797,6 +1675,15 @@ fraction.js@^4.3.7:
   resolved "https://registry.npmjs.org/fraction.js/-/fraction.js-4.3.7.tgz"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
 
+framer-motion@^12.4.1:
+  version "12.4.1"
+  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-12.4.1.tgz"
+  integrity sha512-5Ijbea3topSZjadQ0hgc/TcWj2ldMZmNREM7RvAhvsThYOA1HHOA8TT1yKvMu1YXP3jWaFwoZ6Vo9Nw+DUZrzA==
+  dependencies:
+    motion-dom "^12.0.0"
+    motion-utils "^12.0.0"
+    tslib "^2.4.0"
+
 framer-motion@6.5.1:
   version "6.5.1"
   resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-6.5.1.tgz"
@@ -2304,10 +2191,20 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
+lodash.debounce@^4.0.6:
+  version "4.0.8"
+  resolved "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
+  integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
+
 lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
+lodash.throttle@^4.0.1:
+  version "4.1.1"
+  resolved "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz"
+  integrity sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==
 
 loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
@@ -2381,6 +2278,18 @@ minimatch@^9.0.4:
   version "7.1.2"
   resolved "https://registry.npmjs.org/minipass/-/minipass-7.1.2.tgz"
   integrity sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==
+
+motion-dom@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.npmjs.org/motion-dom/-/motion-dom-12.0.0.tgz"
+  integrity sha512-CvYd15OeIR6kHgMdonCc1ihsaUG4MYh/wrkz8gZ3hBX/uamyZCXN9S9qJoYF03GqfTt7thTV/dxnHYX4+55vDg==
+  dependencies:
+    motion-utils "^12.0.0"
+
+motion-utils@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.npmjs.org/motion-utils/-/motion-utils-12.0.0.tgz"
+  integrity sha512-MNFiBKbbqnmvOjkPyOKgHUp3Q6oiokLkI1bEwm5QA28cxMZrv0CbbBGDNmhF6DIXsi1pCQBSs0dX8xjeER1tmA==
 
 ms@^2.1.3:
   version "2.1.3"
@@ -2656,8 +2565,14 @@ queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
+  
+react-chartjs-2@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-5.3.0.tgz"
+  integrity sha512-UfZZFnDsERI3c3CZGxzvNJd02SHjaSJ8kgW1djn65H1KK8rehwTjyrRKOG3VTMG8wtHZ5rgAO5oTHtHi9GCCmw==
 
 "react-dom@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1", "react-dom@^18 || ^19 || ^19.0.0-rc", react-dom@^18.3.1, "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", react-dom@>=16.8.0, react-dom@>=18:
+
   version "18.3.1"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
   integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
@@ -2665,7 +2580,7 @@ queue-microtask@^1.2.2:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
-react-dom@18.2.0:
+"react-dom@>=16.8 || ^17.0.0 || ^18.0.0", react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -2764,14 +2679,14 @@ react-toastify@^10.0.6:
   dependencies:
     clsx "^2.1.0"
 
-react@*, "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1", "react@^18 || ^19 || ^19.0.0-rc", react@^18.3.1, react@>=15.0.0, "react@>=16.8 || ^17.0.0 || ^18.0.0", react@>=16.8.0, react@>=18:
+react@*, "react@^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1", "react@^18 || ^19 || ^19.0.0-rc", "react@^18.0.0 || ^19.0.0", react@^18.3.1, react@>=15.0.0, react@>=16.8.0, react@>=18:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
   dependencies:
     loose-envify "^1.1.0"
 
-react@^18.2.0, react@18.2.0:
+react@^18.2.0, "react@>=16.8 || ^17.0.0 || ^18.0.0", react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -3187,7 +3102,7 @@ ts-interface-checker@^0.1.9:
   resolved "https://registry.npmjs.org/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
 
-tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.8.0:
+tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.4.0, tslib@^2.8.0:
   version "2.8.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==

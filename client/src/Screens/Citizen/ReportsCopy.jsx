@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { motion } from "framer-motion"; 
 
 const ReportsCopy = () => {
 
@@ -10,7 +11,10 @@ const ReportsCopy = () => {
       };
     
   return (
-    <div style={{width:"100vw"}} className="w-full min-h-screen p-6 bg-gray-100">
+    <motion.div style={{width:"100vw"}} className="w-full min-h-screen p-6 bg-gray-100" 
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}>
       <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold text-black mb-4 text-center">
           Register Your Complaint
@@ -165,7 +169,7 @@ const ReportsCopy = () => {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -4,6 +4,7 @@ import Right from "../Components/Register_Login.jsx/Right";
 import {toast} from 'react-toastify'
 import { ToastContainer } from "react-toastify";
 import { registerCitizen, registerPolice } from "../Services/action/Login";
+import { motion } from "framer-motion"; 
 
 export default function Register() {
  
@@ -21,8 +22,8 @@ export default function Register() {
     fullName: '',
     email: '',
     phoneNumber: '',
-    password: '',
-    cpassword: '',
+    password: 'Test',
+    cpassword: 'Test',
     dateOfBirth:'',
     cardNumber:'',
     addressLine1:'',
@@ -63,24 +64,24 @@ export default function Register() {
         setCitizenformData({...citizenformData,phoneNumber:e.target.value})
       }
     },
-    {
-      type: "password",
-      placeholder: "Enter your Password",
-      name: "password",
-      value:citizenformData.password,
-      onchange : (e) =>{
-        setCitizenformData({...citizenformData,password:e.target.value})
-      }
-    },
-    {
-      type: "password",
-      placeholder: "Enter Confirm Password",
-      name: "cpassword",
-      value:citizenformData.cpassword,
-      onchange : (e) =>{
-        setCitizenformData({...citizenformData,cpassword:e.target.value})
-      }
-    },
+    // {
+    //   type: "password",
+    //   placeholder: "Enter your Password",
+    //   name: "password",
+    //   value:citizenformData.password,
+    //   onchange : (e) =>{
+    //     setCitizenformData({...citizenformData,password:e.target.value})
+    //   }
+    // },
+    // {
+    //   type: "password",
+    //   placeholder: "Enter Confirm Password",
+    //   name: "cpassword",
+    //   value:citizenformData.cpassword,
+    //   onchange : (e) =>{
+    //     setCitizenformData({...citizenformData,cpassword:e.target.value})
+    //   }
+    // },
     {
       type: "date",
       placeholder: "Enter your Date of Birth",
@@ -187,8 +188,8 @@ export default function Register() {
     designation: '',
     email: '',
     phoneNumber: '',
-    password:'',
-    cpassword:'',
+    password:'Test',
+    cpassword:'Test',
     stationCode:''
 
 
@@ -233,24 +234,24 @@ export default function Register() {
         setpoliceformData({...policeformData,phoneNumber:e.target.value})
       }
     },
-    {
-      type: "password",
-      placeholder: "Enter your Password",
-      name: "password",
-      value:policeformData.password,
-      onchange : (e) =>{
-        setpoliceformData({...policeformData,password:e.target.value})
-      }
-    },
-    {
-      type: "password",
-      placeholder: "Enter your Confirm Password",
-      name: "cpassword",
-      value:policeformData.cpassword,
-      onchange : (e) =>{
-        setpoliceformData({...policeformData,cpassword:e.target.value})
-      }
-    },
+    // {
+    //   type: "password",
+    //   placeholder: "Enter your Password",
+    //   name: "password",
+    //   value:policeformData.password,
+    //   onchange : (e) =>{
+    //     setpoliceformData({...policeformData,password:e.target.value})
+    //   }
+    // },
+    // {
+    //   type: "password",
+    //   placeholder: "Enter your Confirm Password",
+    //   name: "cpassword",
+    //   value:policeformData.cpassword,
+    //   onchange : (e) =>{
+    //     setpoliceformData({...policeformData,cpassword:e.target.value})
+    //   }
+    // },
     {
       type: "number",
       placeholder: "Enter your Station Code",
@@ -288,31 +289,44 @@ export default function Register() {
 
   return (
 
-    <div className="flex flex-col md:flex-row h-screen overflow-hidden">
-      <div
-        style={{overflow:'auto'}}
-        className={`container w-full md:w-1/2 flex justify-center`}
-      >
-        <LeftFormRegister
-          formFields={isCitizen ? citizenformFields : policeformFields}
-          setCitizen={setCitizen}
-          isCitizen={isCitizen}
-          isUser={false}
-          handleFileChange={handleFileChange}
-          evidence={evidence}
-          handleSignUpforPolice={handleSignUpforPolice}
-          handleSignUpforcitizen={handleSignUpforcitizen}
-          isLoading={isLoading}
-        />
-      </div>
+    <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="flex flex-col md:flex-row h-screen overflow-hidden"
+  >
+    {/* Left Section */}
+    <motion.div
+      style={{ overflow: "auto" }}
+      className="container w-full md:w-1/2 flex justify-center"
+      initial={{ x: -50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <LeftFormRegister
+        formFields={isCitizen ? citizenformFields : policeformFields}
+        setCitizen={setCitizen}
+        isCitizen={isCitizen}
+        isUser={false}
+        handleFileChange={handleFileChange}
+        evidence={evidence}
+        handleSignUpforPolice={handleSignUpforPolice}
+        handleSignUpforcitizen={handleSignUpforcitizen}
+        isLoading={isLoading}
+      />
+    </motion.div>
 
-      <div
-      
-        className="hidden md:block w-1/2 overflow-hidden bg-primary rounded-tl-[7%] rounded-bl-[7%]"
-      >
-       <Right />
-      </div>
-      <ToastContainer/>
-    </div>
+    {/* Right Section */}
+    <motion.div
+      className="hidden md:block w-1/2 overflow-hidden bg-primary rounded-tl-[7%] rounded-bl-[7%]"
+      initial={{ x: 50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Right />
+    </motion.div>
+
+    <ToastContainer />
+  </motion.div>
   );
 }
