@@ -37,8 +37,8 @@ export default function Navbar() {
               { label: "Home", path: "/" },
               { label: "About Us", path: "/about" },
               { label: "Contact Us", path: "/contact" },
-              { label: "Report Crime", path: "/reports" },
-              { label: "Feedback", path: "/feedback" }
+              { label: "Report Crime", path: "/citizen/reports" },
+              { label: "Feedback", path: "/citizen/feedback" }
             ].map((item) => (
               <span
                 key={item.path}
@@ -62,8 +62,8 @@ export default function Navbar() {
                 { label: "Home", path: "/" },
                 { label: "About Us", path: "/about" },
                 { label: "Contact Us", path: "/contact" },
-                { label: "Report Crime", path: "/reports" },
-                { label: "Feedback", path: "/feedback" }
+                { label: "Report Crime", path: "/citizen/reports" },
+                { label: "Feedback", path: "/citizen/feedback" }
               ].map((item) => (
                 <span
                   key={item.path}
