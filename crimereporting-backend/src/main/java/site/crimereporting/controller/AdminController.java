@@ -77,11 +77,12 @@ public class AdminController {
 		return ResponseEntity.ok(adminService.getAllReports());
 	}
 	
-	public ResponseEntity<?> updatePoliceStation(){
+	@PutMapping("/updatePoliceStation")
+	public ResponseEntity<?> updatePoliceStation(@ModelAttribute PoliceStationRegisterRequestDTO policeStationDataForUpdate){
 		
 		
 		
-		return null;
+		return ResponseEntity.status(HttpStatus.OK).body(adminService.updatePoliceStation(policeStationDataForUpdate));
 		
 	}
 }

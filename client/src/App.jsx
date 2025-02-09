@@ -48,6 +48,7 @@ import { UserProfileAction } from "./action/admin/UserProfileAction";
 import { NewPoliceStationAction } from "./action/admin/NewPoliceStationAction";
 import { newCrimeReportAction } from "./action/crime/newCrimeReportAction";
 import { updatePoliceStationAction } from "./action/admin/UpdatePoliceStationAction";
+import { ToastContainer } from "react-toastify";
 
 
 const router = createBrowserRouter([
@@ -198,7 +199,13 @@ const router = createBrowserRouter([
 
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <div>
+      <RouterProvider router={router} />
+      <ToastContainer/>
+    </div>
+  
+  )
 }
 
 export default App;

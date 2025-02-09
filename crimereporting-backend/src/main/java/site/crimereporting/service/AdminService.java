@@ -31,4 +31,6 @@ public interface AdminService {
 	ApiResponse getFeedbacks();
 
 	ApiResponse getAuditLogs();
+	
+	ApiResponse<?> updatePoliceStation(PoliceStationRegisterRequestDTO policeStationForUpdate);
 }

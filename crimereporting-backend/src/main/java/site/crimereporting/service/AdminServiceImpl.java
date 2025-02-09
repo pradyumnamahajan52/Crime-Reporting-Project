@@ -144,4 +144,19 @@ public class AdminServiceImpl implements AdminService {
 		return crimeReportsDao.findAll() ;
 	}
 
+	@Override
+	public ApiResponse<?> updatePoliceStation(PoliceStationRegisterRequestDTO policeStationForUpdate) {
+		
+		PoliceStation policeStation =  policeStationDao.findByStationCode(policeStationForUpdate.getStationCode()).orElseThrow(() -> new ResourceNotFoundException("police station with "+policeStationForUpdate.getStationCode() +"does not exist"));
+		
+		policeStation.setStationName(policeStationForUpdate.getStationName());
+		Address address = new Address(policeStationForUpdate.getAddressLine1(), policeStationForUpdate.getAddressLine2(), policeStationForUpdate.getCity(), policeStationForUpdate.getState(), policeStationForUpdate.getCountry(), policeStationForUpdate.getPinCode() ,policeStationForUpdate.getLatitude(), policeStationForUpdate.getLongitude());
+		policeStation.setAddress(address);
+		
+		
+		return new ApiResponse<>("police station updated successfully", policeStation);
+	}
+
+	
+	
 }

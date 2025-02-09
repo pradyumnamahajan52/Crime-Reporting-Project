@@ -4,6 +4,7 @@ import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.CrimeReportResponseDTO;
 import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.entity.Citizen;
+import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.PoliceStationUser;
 import site.crimereporting.entity.User;
 
@@ -15,5 +16,7 @@ public interface AuditService {
 	void userLogin(ApiResponse<User> user);
 
 	void newCrimeReport(ApiResponse<CrimeReportResponseDTO> returnedCrimeReport);
+
+	void policeStationUpdate(ApiResponse<PoliceStation> returnedPoliceStation);
 	
 }
