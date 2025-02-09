@@ -77,7 +77,7 @@ public class SecurityConfig {
                 .permitAll()
                 
                 // Role-based access
-                .requestMatchers("/citizen/**")
+                .requestMatchers("/citizen/**", "/crimereport/**")
                 .hasAuthority("CITIZEN")
                 .requestMatchers("/police/**")
                 .hasAuthority("POLICE")

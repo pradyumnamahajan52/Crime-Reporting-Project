@@ -7,7 +7,6 @@ import AdminDashboard from "./Screens/Admin/Dashboard";
 import Aboutus from "./Screens/Aboutus";
 import Contact from "./Screens/Contact";
 import PoliceLayout from "./Layout/PoliceLayout";
-import About from "./Screens/About"
 
 
 import AdminUsers from "./Screens/Admin/Users";
@@ -40,6 +39,7 @@ import {loader as loadPoliceStations} from "./loader/admin/PoliceStationLoader"
 
 // citizen
 import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
+import {loader as loadReportDetails} from "./loader/Crime/ReportDetailsLoader"
 
 
 import './App.css'
@@ -51,6 +51,7 @@ import { newCrimeReportAction } from "./action/crime/newCrimeReportAction";
 import { updatePoliceStationAction } from "./action/admin/UpdatePoliceStationAction";
 import { ToastContainer } from "react-toastify";
 import About from "./Screens/About";
+import CrimeReportsDetail from "./Screens/Citizen/ReportsDetail";
 
 
 const router = createBrowserRouter([
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
         element: <Reports />,
         loader: loadCrimeCategory,
         action: newCrimeReportAction
+      },{
+        path: "report-details/:id",
+        element: <CrimeReportsDetail/>,
+        loader: loadReportDetails
       }
       
     ],
