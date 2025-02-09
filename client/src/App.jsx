@@ -36,6 +36,7 @@ import { loader as loadAdminUsers } from "./loader/admin/UsersLoader";
 import { loader as loadAdminUserDetails } from "./loader/admin/UserDetailsLoader";
 import { loader as loadPoliceStations } from "./loader/admin/PoliceStationLoader";
 import { loader as loadAdminCrimeReports } from "./loader/admin/CrimeReportsLoader";
+import { loader as loadAdminCrimeCategory } from "./loader/admin/CrimeCategoryLoader";
 
 // citizen
 import { loader as loadCrimeCategory } from "./loader/Crime/CrimeCategory";
@@ -157,6 +158,7 @@ const router = createBrowserRouter([
       {
         path: "crime-category",
         element: <AdminCrimeCategory />,
+        loader:loadAdminCrimeCategory
       },
       {
         path: "new-police-station",

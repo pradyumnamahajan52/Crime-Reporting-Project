@@ -39,7 +39,7 @@ const Profile = () => {
       }
 
       // ✅ Redirect to Profile Page with Success Message
-      navigate("/admin/profile?success=Profile updated successfully! ✅");
+      navigate("/admin/profile?success=Profile updated successfully!");
     } catch (error) {
       console.error("Error updating profile:", error);
     } finally {
