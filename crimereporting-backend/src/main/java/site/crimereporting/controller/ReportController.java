@@ -37,5 +37,12 @@ public class ReportController {
 
     }
 
+    @PostMapping("/get-evidence")
+    public ResponseEntity<?> getReportsEvidence(@RequestParam("crimeReportId") Long crimeReportId){
+        System.out.println(crimeReportId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(reportService.getReportsEvidence(crimeReportId));
+
+    }
+
 
 }

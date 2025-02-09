@@ -11,12 +11,9 @@ import site.crimereporting.custom_exception.ApiException;
 import site.crimereporting.custom_exception.ImageUploadException;
 import site.crimereporting.custom_exception.ResourceNotFoundException;
 import site.crimereporting.dao.*;
-import site.crimereporting.dtos.ApiResponse;
-import site.crimereporting.dtos.CrimeReportDTO;
-import site.crimereporting.dtos.CrimeReportResponseDTO;
-import site.crimereporting.dtos.FileUploadInfoDTO;
-import site.crimereporting.dtos.NearByPoliceStationDTO;
+import site.crimereporting.dtos.*;
 import site.crimereporting.entity.*;
+import site.crimereporting.utils.ExtractFileNameFromUrl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +41,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     private PoliceStationDao policeStationDao;
-    
+
     @Autowired
     private AddressDao addressDao;
 
@@ -67,7 +64,7 @@ public class ReportServiceImpl implements ReportService {
 
         //finding citizen by using user
         Citizen citizen = citizenDao.findByUser(user);
-        
+
         if(citizen == null)
         	throw new ApiException("cannot find Citizen");
         crimeReports.setCitizen(citizen);
@@ -77,7 +74,7 @@ public class ReportServiceImpl implements ReportService {
         // finding crime category and setting it crime category
         CrimeCategory crimeCategory = crimeCategoryDao.findById(crimereport.getCrimeCategoryId()).orElseThrow(() -> new ResourceNotFoundException("Invalid Crime Category"));
         crimeReports.setCrimeCategory(crimeCategory);
-        
+
         //setting default status of crime reported
         crimeReports.setReportStatus(Status.SUBMITTED);
         CrimeReports persistentCrimeReports = crimeReportsDao.save(crimeReports);
@@ -103,25 +100,25 @@ public class ReportServiceImpl implements ReportService {
 
         // finding near by police stations list
         List<Object[]> nearestStations = policeStationDao.getNearestPoliceStations(address.getLatitude(), address.getLongitude(), 3);
-        
+
         List<NearByPoliceStationDTO> nearByPoliceStationList = new ArrayList<>();
         for (Object obj : nearestStations) {
             Object[] row = (Object[]) obj; // Cast each object to Object[]
-            
+
             NearByPoliceStationDTO nearByPoliceStation = new NearByPoliceStationDTO();
             nearByPoliceStation.setPoliceStationId((Long) row[0]);
             nearByPoliceStation.setStation_name((String) row[1]);
-            
+
             Address add = addressDao.findById((Long) row[2]).orElseGet(null);
             nearByPoliceStation.setPoliceStationAddressLine1(add.getAddressLine1());
             nearByPoliceStation.setPoliceStationAddressLine2(add.getAddressLine2());
             nearByPoliceStation.setPoliceStationCity(add.getCity());
             nearByPoliceStation.setPoliceStationState(add.getState());
-            
+
             nearByPoliceStation.setLatitude((Double) row[3]);
             nearByPoliceStation.setLongitude((Double) row[4]);
             nearByPoliceStation.setDistance((Double) row[5]);
-           
+
             nearByPoliceStationList.add(nearByPoliceStation);
         }
 
@@ -147,6 +144,23 @@ public class ReportServiceImpl implements ReportService {
                 crimeReports.getReportStatus(),
                 null
         ));
+    }
+
+    @Override
+    public ApiResponse<?> getReportsEvidence(Long crimeReportId) {
+        List<Evidence> evidences = evidenceDao.findByCrimeReports_Id(crimeReportId);
+
+        if(evidences == null)
+            throw new ApiException("evidences of this report not found");
+        List<String> fileNames = new ArrayList<>();
+//                List<EvidenceResponseDTO> evidenceResponseDTOList = new ArrayList<>();
+        evidences.forEach((evidence) -> {
+            ExtractFileNameFromUrl extractFileNameFromUrl = new ExtractFileNameFromUrl();
+        fileNames.add(extractFileNameFromUrl.extractFileName(evidence.getFileUrl()));
+        });
+        List<String>  preSignedUrls =s3ImageUploader.preSignedUrl(fileNames);
+
+        return new ApiResponse("Evidences fetched sucessfully",preSignedUrls);
     }
 
 }
