@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, useLoaderData } from "react-router-dom";
+import { useParams, useNavigate, useLoaderData, Form, useActionData, useSubmit } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UpdatePoliceStation = () => {
   const { policeStationData } = useLoaderData();
   const { id } = useParams(); // Get the station ID from the URL
   const navigate = useNavigate(); // Navigation instance
+  const actionData = useActionData();
+  const submit = useSubmit();
 
   const [formData, setFormData] = useState({
     stationCode: "",
     stationName: "",
-    address: {
       addressLine1: "",
       addressLine2: "",
       city: "",
@@ -17,8 +19,7 @@ const UpdatePoliceStation = () => {
       country: "",
       pinCode: "",
       latitude: "",
-      longitude: "",
-    },
+      longitude: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -28,12 +29,44 @@ const UpdatePoliceStation = () => {
     let requiredPoliceStationData;
       policeStationData.forEach((policeStation, index) => {
         if(policeStation.id == id){
-          requiredPoliceStationData = policeStation
+          requiredPoliceStationData = policeStation;
+          
         }
       })
 
-      setFormData(requiredPoliceStationData || []);
+
+      setFormData({
+        stationCode: requiredPoliceStationData.stationCode ,
+        stationName: requiredPoliceStationData.stationName ,
+        addressLine1: requiredPoliceStationData.address?.addressLine1 ,
+        addressLine2: requiredPoliceStationData.address?.addressLine2 ,
+        city: requiredPoliceStationData.address?.city ,
+        state: requiredPoliceStationData.address?.state ,
+        country: requiredPoliceStationData.address?.country,
+        pinCode: requiredPoliceStationData.address?.pinCode ,
+        latitude: requiredPoliceStationData.address?.latitude,
+        longitude: requiredPoliceStationData.address?.longitude,
+      } || {});
   }, [id]);
+
+
+  // ✅ Show toast message when actionData updates
+  useEffect(() => {
+    console.log(actionData);
+    if (actionData?.success) {
+      console.log("in success")
+      toast.success(actionData.success);
+
+
+      // Delay navigation to show toast message
+      setTimeout(() => {
+        navigate("/admin/police-station"); // Redirect after success
+      }, 2000); // Wait 2 seconds to allow the toast to show
+
+    } else if (actionData?.error) {
+      toast.error(actionData.error);
+    }
+  }, [actionData]);
 
   const validateField = (name, value) => {
     const newErrors = { ...errors };
@@ -44,24 +77,23 @@ const UpdatePoliceStation = () => {
       newErrors.stationName = "Station Name is required.";
     }
 
-    if (name.startsWith("address.")) {
-      const fieldName = name.split(".")[1];
-      if (fieldName === "addressLine1" && !value) {
+  
+      if (name === "addressLine1" && !value) {
         newErrors.addressLine1 = "Address Line 1 is required.";
       }
-      if (fieldName === "city" && !value) {
+      if (name === "city" && !value) {
         newErrors.city = "City is required.";
       }
-      if (fieldName === "state" && !value) {
+      if (name === "state" && !value) {
         newErrors.state = "State is required.";
       }
-      if (fieldName === "country" && !value) {
+      if (name === "country" && !value) {
         newErrors.country = "Country is required.";
       }
-      if (fieldName === "pinCode" && !value) {
+      if (name === "pinCode" && !value) {
         newErrors.pinCode = "Pin Code is required.";
       }
-    }
+    
 
     setErrors(newErrors);
   };
@@ -69,18 +101,10 @@ const UpdatePoliceStation = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name.startsWith("address.")) {
-      const addressField = name.split(".")[1];
       setFormData((prevData) => ({
         ...prevData,
-        address: {
-          ...prevData.address,
-          [addressField]: value,
-        },
+          [name]: value,
       }));
-    } else {
-      setFormData((prevData) => ({ ...prevData, [name]: value }));
-    }
 
     validateField(name, value);
   };
@@ -88,26 +112,21 @@ const UpdatePoliceStation = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const validationErrors = {};
     Object.keys(formData).forEach((key) => {
-      if (typeof formData[key] === "object") {
-        Object.keys(formData[key]).forEach((subKey) => {
-          validateField(`address.${subKey}`, formData.address[subKey]);
+          validateField(key, formData[key]);
         });
-      } else {
-        validateField(key, formData[key]);
-      }
-    });
 
     if (Object.keys(errors).length === 0) {
       console.log("Updated Station Data:", formData);
       // Perform API call to save the updated data
-      navigate("/police-stations"); // Navigate back to the police stations list
+      submit(formData, { method: "post" });
+
+      // navigate("/police-stations"); // Navigate back to the police stations list
     }
   };
 
   const mapSrc = () => {
-    const { latitude, longitude } = formData.address;
+    const { latitude, longitude } = formData;
     if (latitude && longitude) {
       return `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
     }
@@ -120,7 +139,7 @@ const UpdatePoliceStation = () => {
         <h2 className="text-2xl font-semibold mb-6 text-gray-800">
           Update Police Station
         </h2>
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} method="PUT">
           <div className="grid grid-cols-2 gap-4">
             {/* Station Code */}
             <div>
@@ -169,8 +188,8 @@ const UpdatePoliceStation = () => {
               </label>
               <input
                 type="text"
-                name="address.addressLine1"
-                value={formData.address.addressLine1}
+                name="addressLine1"
+                value={formData.addressLine1}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
               />
@@ -186,8 +205,8 @@ const UpdatePoliceStation = () => {
               </label>
               <input
                 type="text"
-                name="address.addressLine2"
-                value={formData.address.addressLine2}
+                name="addressLine2"
+                value={formData.addressLine2}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
               />
@@ -200,8 +219,8 @@ const UpdatePoliceStation = () => {
               </label>
               <input
                 type="text"
-                name="address.city"
-                value={formData.address.city}
+                name="city"
+                value={formData.city}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
               />
@@ -215,8 +234,8 @@ const UpdatePoliceStation = () => {
               </label>
               <input
                 type="text"
-                name="address.state"
-                value={formData.address.state}
+                name="state"
+                value={formData.state}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
               />
@@ -232,8 +251,8 @@ const UpdatePoliceStation = () => {
               </label>
               <input
                 type="text"
-                name="address.country"
-                value={formData.address.country}
+                name="country"
+                value={formData.country}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
               />
@@ -249,8 +268,8 @@ const UpdatePoliceStation = () => {
               </label>
               <input
                 type="text"
-                name="address.pinCode"
-                value={formData.address.pinCode}
+                name="pinCode"
+                value={formData.pinCode}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
               />
@@ -266,8 +285,8 @@ const UpdatePoliceStation = () => {
               </label>
               <input
                 type="text"
-                name="address.latitude"
-                value={formData.address.latitude}
+                name="latitude"
+                value={formData.latitude}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
               />
@@ -280,8 +299,8 @@ const UpdatePoliceStation = () => {
               </label>
               <input
                 type="text"
-                name="address.longitude"
-                value={formData.address.longitude}
+                name="longitude"
+                value={formData.longitude}
                 onChange={handleChange}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2"
               />
@@ -324,10 +343,10 @@ const UpdatePoliceStation = () => {
               Update Police Station
             </button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   );
-};
+}
 
 export default UpdatePoliceStation;

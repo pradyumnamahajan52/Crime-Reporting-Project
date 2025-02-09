@@ -13,6 +13,7 @@ import site.crimereporting.dtos.CrimeReportResponseDTO;
 import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.entity.AuditTrails;
 import site.crimereporting.entity.Citizen;
+import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.PoliceStationUser;
 import site.crimereporting.entity.User;
 
@@ -123,6 +124,22 @@ public class AuditServiceImpl implements AuditService {
 
 		// setting message
 		String message = user.getRole() + " " + user.getFullName() + " reported a crime";
+		auditTrails.setMessage(message.toUpperCase());
+
+		System.out.println(message.toUpperCase());
+		auditDao.save(auditTrails);
+
+	}
+
+	@Override
+	public void policeStationUpdate(ApiResponse<PoliceStation> returnedPoliceStation) {
+		PoliceStation policeStation = returnedPoliceStation.getData();
+
+		AuditTrails auditTrails = new AuditTrails();
+
+
+		// setting message
+		String message = policeStation.getStationName() + " profile is updated";
 		auditTrails.setMessage(message.toUpperCase());
 
 		System.out.println(message.toUpperCase());
