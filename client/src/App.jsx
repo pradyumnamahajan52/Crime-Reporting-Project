@@ -23,7 +23,9 @@ import Register from "./Screens/Register";
 import NotFound from "./Screens/NotFound";
 import FeedbackForm from "./Screens/FeedBackForm";
 import UpdatePoliceStation from "./Screens/Admin/UpdatePoliceStation";
-import Reports from "./Screens/Citizen/Reports";
+
+import Reports from "./Screens/Citizen/Reports"
+import PoliceProfile from "./Screens/Police/Profile";
 
 import PoliceDashboard from "./Screens/Police/Dashboard";
 import UserLogin from "./Screens/User/UserLogin";
@@ -33,11 +35,14 @@ import { loader as loadAuditLog } from "./loader/admin/AuditLogLoader";
 import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
 import { loader as loadAdminDashboard } from "./loader/admin/DashboardLoader";
 import { loader as loadAdminUsers } from "./loader/admin/UsersLoader";
-import { loader as loadAdminUserDetails } from "./loader/admin/UserDetailsLoader";
-import { loader as loadPoliceStations } from "./loader/admin/PoliceStationLoader";
 
-// citizen
-import { loader as loadCrimeCategory } from "./loader/Crime/CrimeCategory";
+import { loader as loadAdminUserDetails} from "./loader/admin/UserDetailsLoader";
+import {loader as loadPoliceStations} from "./loader/admin/PoliceStationLoader"
+import {loader as loadPoliceDetails} from './loader/Police/LoadPoliceDetails';
+
+ // citizen
+import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
+
 
 import "./App.css";
 import {
@@ -199,6 +204,11 @@ const router = createBrowserRouter([
       {
         path: "feedback",
         element: <PoliceFeedback />,
+      },
+      {
+        path:"profile",
+        element: <PoliceProfile/>,
+        loader: loadPoliceDetails,
       },
     ],
   },
