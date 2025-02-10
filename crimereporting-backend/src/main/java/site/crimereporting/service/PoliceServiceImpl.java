@@ -267,6 +267,8 @@ package site.crimereporting.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import site.crimereporting.custom_exception.ApiException;
@@ -290,6 +292,9 @@ public class PoliceServiceImpl implements PoliceService {
 
     @Autowired
     private FeedbackDao feedbackDao;
+    
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private ModelMapper mapper;
@@ -304,5 +309,16 @@ public class PoliceServiceImpl implements PoliceService {
 
         return new ApiResponse("feedback retrieved successfully", feedbackResponseList);
     }
+
+	@Override
+	public ApiResponse getLoggedInPoliceDetails() {
+		// Get Current logged In Email from security Context Holder
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String loggedInEmail = authentication.getName();
+		//find User by logged in email
+		User user = userDao.findByEmail(loggedInEmail).orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+			
+		return new ApiResponse("Logged Users Information",mapper.map(user, AdminUserDTO.class));
+	}
 }
 
