@@ -3,11 +3,14 @@ import { useLoaderData, Await } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
 import { getAuthToken } from "../../action/user/Auth";
 import { API } from "../../API";
+import { motion } from "framer-motion";
+import CrimeStatus from "../Citizen/CrimeStatus";
 
-const ReportDetailsCard = ({ data, fetchEvidences }) => {
+const ReportDetailsCard = ({ data, fetchEvidences,setCrimeStatus,CrimeStatus }) => {
   console.log("====================================");
   console.log(data);
   console.log("====================================");
+  
 
   return (
     <div className="w-full max-w-7xl mx-auto p-6">
@@ -99,6 +102,18 @@ const ReportDetailsCard = ({ data, fetchEvidences }) => {
                 </div>
               </div>
             </button>
+
+            <button
+              type="button"
+              onClick={() => setShowCrimeStatusModal(true)}
+              className="w-full  sm:w-auto focus:ring-4 focus:outline-none  text-white rounded-lg inline-flex items-center justify-center px-4 py-2.5  hover:bg-primary bg-primary"
+            >
+              <div className="text-left rtl:text-right">
+                <div className="-mt-1 font-sans text font-semibold">
+                  Update Status
+                </div>
+              </div>
+            </button>
           </div>
         </div>
       </div>
@@ -109,7 +124,18 @@ const ReportDetailsCard = ({ data, fetchEvidences }) => {
 const CrimeReportsDetail = () => {
   const { reportDetails } = useLoaderData();
   const [evidences, setEvidences] = useState([]);
-
+  const [showCrimeStatusModal, setShowCrimeStatusModal] = useState(false);
+  const [CrimeStatus, setCrimeStatus] = useState([
+    "SUBMITTED",
+    "ACKNOWLEDGED",
+    "REJECTED",
+    "PENDING_ADDITIONAL_INFO",
+    "RECEIVED",
+    "UNDER_INVESTIGATION",
+    "ON_HOLD",
+    "RESOLVED",
+    "CLOSED",
+  ]);
 
   const fetchEvidences = async (reportId) => {
     try {
@@ -117,7 +143,7 @@ const CrimeReportsDetail = () => {
       formData.append("crimeReportId", reportId);
 
       const token = getAuthToken();
-      const response = await fetch(`${API}/crimereport/get-evidence`, {
+      const response = await fetch(`${API}/police/get-evidence`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -130,55 +156,85 @@ const CrimeReportsDetail = () => {
       }
 
       const data = await response.json();
-      setEvidences(data.data); 
+      setEvidences(data.data);
     } catch (error) {
       console.error("Error fetching evidences:", error.message);
     }
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-8 space-y-8">
-      <Suspense fallback={<Spinner />}>
-        <Await resolve={reportDetails}>
-          {(data) => (
-            <ReportDetailsCard
-              data={data.data}
-              fetchEvidences={fetchEvidences}
-            />
-          )}
-        </Await>
-      </Suspense>
-
-
-      {evidences.length > 0  && (
-        <div className="flex justify-center items-center">
-          <div className="bg-white rounded-lg w-2/3 p-6 shadow-lg relative">
-
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">
-              Evidences
-            </h2>
-
+    <motion.div
+      className="w-full min-h-screen p-6 bg-gray-100"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="bg-gray-100 min-h-screen py-8 space-y-8">
+        <Suspense fallback={<Spinner />}>
+          <Await resolve={reportDetails}>
+            {(data) => (
+              <ReportDetailsCard
+                data={data.data}
+                fetchEvidences={fetchEvidences}
+                setCrimeStatus={setCrimeStatus}
+                CrimeStatus={CrimeStatus}
+              />
+            )}
+          </Await>
+        </Suspense>
+        {evidences.length > 0 && (
+          <div className="flex justify-center items-center">
+            <div className="bg-white rounded-lg w-2/3 p-6 shadow-lg relative">
+              <h2 className="text-lg font-semibold text-gray-800 mb-4">
+                Evidences
+              </h2>
 
               <div className="grid grid-cols-2 gap-4">
                 {evidences.map((evidence, index) => {
-                  console.log('====================================');
+                  console.log("====================================");
                   console.log(evidence);
-                  console.log('====================================');
+                  console.log("====================================");
                   return (
-                  <img
-                    key={index}
-                    src={evidence}
-                    alt={`Evidence ${index + 1}`}
-                    className="w-full h-60 border rounded-lg"
-                  ></img>)
-})}
+                    <img
+                      key={index}
+                      src={evidence}
+                      alt={`Evidence ${index + 1}`}
+                      className="w-full h-60 border rounded-lg"
+                    ></img>
+                  );
+                })}
               </div>
-
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-    </div>
+        {showCrimeStatusModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-1/3 overflow-hidden">
+              <h2 className="text-xl font-bold mb-4">Select Police Station</h2>
+              <ul className="mb-4 ">
+                {CrimeStatus?.map((station) => (
+                  <li key={CrimeStatus} className="mb-2">
+                    <button
+                      // onClick={() => handleSelectPoliceStation(station)}
+                      className="w-full text-left p-2 border rounded hover:bg-gray-100"
+                    >
+                      {CrimeStatus}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={() => setShowCrimeStatusModal(false)}
+                className="bg-red-500 text-white px-4 py-2 rounded"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </motion.div>
   );
 };
 

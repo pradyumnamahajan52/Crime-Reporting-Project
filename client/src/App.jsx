@@ -54,7 +54,6 @@ import { loader as loadPoliceCrimeReports } from "./loader/Police/CrimeReportsLo
 import {loader as loadPoliceFeedback } from "./loader/Police/FeedbackLoader";
 import {loader as loadPoliceCrimeCategory} from "./loader/Police/CrimeCategoryLoader";
 import { loader as loadPoliceCrimeReportsDetails } from "./loader/Police/ReportDetailsLoader";
-import PoliceCrimeReports from "./Screens/Police/CrimeReports";
 import PoliceCrimeReportsDetail from "./Screens/Police/ReportsDetail";
 
 import "./App.css";
@@ -74,7 +73,11 @@ import CrimeStatus from "./Screens/Citizen/CrimeStatus";
 
 import About from "./Screens/About";
 import CrimeReportsDetail from "./Screens/Citizen/ReportsDetail";
+
+import 'react-toastify/dist/ReactToastify.css';
+
 import PoliceCrimeCategory from "./Screens/Police/PoliceCrimeCategory";
+
 
 
 const router = createBrowserRouter([

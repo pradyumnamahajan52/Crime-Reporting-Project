@@ -65,6 +65,9 @@ public class ReportServiceImpl implements ReportService {
 
 	@Autowired
 	private S3ImageUploader s3ImageUploader;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@Override
 	public ApiResponse<CrimeReportResponseDTO> newReport(CrimeReportDTO crimereport) {
@@ -248,6 +251,22 @@ public class ReportServiceImpl implements ReportService {
 				stationCountry,
 				stationPinCode
 				));
+	}
+
+	@Override
+	public ApiResponse<?> updateCrimeStatus(Long crimeReportId, String status) {
+		
+		CrimeReports crimeReports =  crimeReportDao.findById(crimeReportId).orElseThrow(() -> new ResourceNotFoundException("crime report with given id not found"));
+		
+		crimeReportsDao.updateCrimeReportStatus(Status.valueOf(status), crimeReportId);
+		
+		
+		//for sending crimereport email 
+		User user = crimeReports.getCitizen().getUser();
+
+		emailService.generateFIR(user.getEmail(), crimeReports);
+		
+		return new ApiResponse("Crime Report Status updated successfully", null);
 	}
 
 }
