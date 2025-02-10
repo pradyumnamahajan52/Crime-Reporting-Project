@@ -72,4 +72,6 @@ public class PoliceController {
 	public ResponseEntity<?> viewCrimeList() {
 		return ResponseEntity.ok(policeService.getAllCrime());
 	}
+	
+	
 }
