@@ -7,4 +7,6 @@ import java.io.IOException;
 public interface PoliceService {
 
 	ApiResponse getFeedbacks();
+	
+	ApiResponse getLoggedInPoliceDetails();
 }

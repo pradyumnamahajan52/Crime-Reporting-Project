@@ -12,6 +12,9 @@ import site.crimereporting.service.UserService;
 
 import java.io.IOException;
 import java.util.Collections;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/police")
@@ -25,5 +28,9 @@ public class PoliceController {
 		return ResponseEntity.status(HttpStatus.OK).body(policeService.getFeedbacks());
 	}
 
-
+	@GetMapping("/profile")
+	public ResponseEntity<?> renderLoggedInPoliceDetail() {
+		return ResponseEntity.ok(policeService.getLoggedInPoliceDetails());
+	}
+	
 }
