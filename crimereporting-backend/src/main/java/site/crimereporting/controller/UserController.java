@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import site.crimereporting.custom_exception.ApiException;
+import site.crimereporting.dao.PoliceStationUserDao;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.AuthRequest;
 import site.crimereporting.dtos.CitizenRegisterRequestDTO;
@@ -26,6 +27,7 @@ import site.crimereporting.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
 
 	@PostMapping("/signin/email")
 	public ResponseEntity<?> requestOtp(@RequestBody @Valid OtpRequest otpRequest) {
@@ -74,6 +76,15 @@ public class UserController {
 
 	}
 
+	
+	@GetMapping("/getPoliceStationUserDetails")
+	public ResponseEntity<?> getPoliceStationUserDetails(){
+		
+		
+		
+		return ResponseEntity.status(HttpStatus.OK).body(userService.getPoliceStationUserDetails());
+		
+	}
 
 
 }

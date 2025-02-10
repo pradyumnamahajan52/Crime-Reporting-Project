@@ -266,6 +266,7 @@
 package site.crimereporting.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -290,6 +291,7 @@ import site.crimereporting.dtos.AuthRequest;
 import site.crimereporting.dtos.AuthResponse;
 import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.dtos.PoliceRegisterRequestDTO;
+import site.crimereporting.dtos.PoliceStationUserDTO;
 import site.crimereporting.dtos.RegisterRequestDTO;
 import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.entity.AadhaarCard;
@@ -517,6 +519,26 @@ public class UserServiceImpl implements UserService {
         // Return AuthResponse with JWT token
         return new AuthResponse("User login successful!", token, loginUser);
     }
+
+	@Override
+	public ApiResponse<?> getPoliceStationUserDetails() {
+		
+		List<PoliceStationUser> policeStationUsers =  policeStationUserDao.findAll();
+		
+		List<PoliceStationUserDTO> policeStationUserDTOs = new ArrayList<>();
+		
+		policeStationUsers.forEach((police) -> {
+			PoliceStationUserDTO policeDto =  mapper.map(police, PoliceStationUserDTO.class);
+			policeDto.setFullName(police.getUser().getFullName());
+			policeDto.setState(police.getPoliceStation().getStationName()+" " +police.getPoliceStation().getAddress().getAddressLine1() +" "+ police.getPoliceStation().getAddress().getAddressLine2()+" "+ police.getPoliceStation().getAddress().getCity() +" "+ police.getPoliceStation().getAddress().getState());
+			policeDto.setEmail(police.getUser().getEmail());
+			policeDto.setPhoneNumber(police.getUser().getPhoneNumber());
+			
+			policeStationUserDTOs.add(policeDto);
+		});
+		
+		return new ApiResponse<>("successfully fetched all police station users", policeStationUserDTOs );
+	}
 
 }
 

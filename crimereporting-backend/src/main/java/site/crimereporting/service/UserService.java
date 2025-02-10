@@ -23,4 +23,6 @@ public interface UserService {
 
 	Long getTotalUsers();
 
+	ApiResponse<?> getPoliceStationUserDetails();
+
 }
