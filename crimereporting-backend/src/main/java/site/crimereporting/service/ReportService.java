@@ -19,5 +19,7 @@ public interface ReportService {
   
   ApiResponse<?> getReportDetails(Long crimeReportId);
 
+  ApiResponse<?> updateCrimeStatus(Long crimeReportId, String status);
+
 
 }
