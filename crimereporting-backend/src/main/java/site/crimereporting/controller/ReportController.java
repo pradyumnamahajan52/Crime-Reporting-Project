@@ -60,12 +60,12 @@ public class ReportController {
 
 	}
 
-    @PostMapping("/get-evidence")
-    public ResponseEntity<?> getReportsEvidence(@RequestParam("crimeReportId") Long crimeReportId){
-        System.out.println(crimeReportId);
-        return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportsEvidence(crimeReportId));
+		@PostMapping("/get-evidence")
+		public ResponseEntity<?> getReportsEvidence(@RequestParam("crimeReportId") Long crimeReportId){
+			System.out.println(crimeReportId);
+			return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportsEvidence(crimeReportId));
 
-    }
+		}
 
     @PostMapping("/get-reportDetails")
     public ResponseEntity<?> getReportDetails(@RequestParam Long crimeReportId){

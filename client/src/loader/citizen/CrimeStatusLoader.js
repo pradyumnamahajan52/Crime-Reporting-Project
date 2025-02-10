@@ -10,7 +10,7 @@ export async function loader() {
 
 async function fetchCrimeStatus() {
     const token = getAuthToken();
-    const response = await fetch(`${API}/citizen/crimestatus`, {
+    const response = await fetch(`${API}/crimereport/reportstatus`, {
         method: "GET",
         headers : {
             "Content-Type": "application/json",
