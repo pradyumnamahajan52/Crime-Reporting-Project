@@ -66,6 +66,7 @@ import CrimeStatus from "./Screens/Citizen/CrimeStatus";
 
 import About from "./Screens/About";
 import CrimeReportsDetail from "./Screens/Citizen/ReportsDetail";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const router = createBrowserRouter([
