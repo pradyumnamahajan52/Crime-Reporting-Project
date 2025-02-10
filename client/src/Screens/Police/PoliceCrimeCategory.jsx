@@ -16,20 +16,19 @@ const PoliceCrimeCategory = () => {
             {(categories) => 
               {
                 console.log('====================================');
-                console.log(categories);
+                console.log("====> ",categories);
                 console.log('====================================');
                 return (
-              <table className="w-full table-auto border-collapse border border-gray-200">
+              <table className="w-3/4 sm:w-full table-auto border-collapse border border-gray-200" >
                 <thead>
                   <tr className="bg-stone-100 text-sm font-normal text-stone-500">
                     <th className="text-start p-1.5 border border-gray-300">ID</th>
                     <th className="text-start p-1.5 border border-gray-300">Category</th>
                     <th className="text-start p-1.5 border border-gray-300">Sub-Category</th>
-                    <th className="text-start p-1.5 border border-gray-300">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {categories.data?.map((category) => (
+                  {categories?.map((category) => (
                     <TableRow key={category.id} category={category} />
                   ))}
                 </tbody>
@@ -48,18 +47,9 @@ export default PoliceCrimeCategory;
 const TableRow = ({ category }) => {
   return (
     <tr className="text-sm border-b-2">
-      <td className="p-1.5 border border-gray-300">{category.categoryId}</td>
+      <td className="p-1.5 border border-gray-300">{category.id }</td>
       <td className="p-1.5 border border-gray-300">{category.category}</td>
       <td className="p-1.5 border border-gray-300">{category.subCategory}</td>
-
-      <td className="w-8 flex flex-row content-center m-2">
-        <button
-          className="text-red-600 hover:underline ml-2"
-          onClick={() => alert("Delete feature is under development!")}
-        >
-          <FiTrash size={20} />
-        </button>
-      </td>
     </tr>
   );
 };
