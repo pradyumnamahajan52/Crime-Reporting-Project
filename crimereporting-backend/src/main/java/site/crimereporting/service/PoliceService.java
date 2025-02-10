@@ -9,4 +9,6 @@ public interface PoliceService {
 	ApiResponse getFeedbacks();
 	
 	ApiResponse getLoggedInPoliceDetails();
+
+	ApiResponse<?> getAllReports(String email);
 }

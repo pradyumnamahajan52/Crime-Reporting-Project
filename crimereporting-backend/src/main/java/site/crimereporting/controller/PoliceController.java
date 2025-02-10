@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import site.crimereporting.custom_exception.ApiException;
 import site.crimereporting.dtos.*;
@@ -33,4 +34,10 @@ public class PoliceController {
 		return ResponseEntity.ok(policeService.getLoggedInPoliceDetails());
 	}
 	
+	@GetMapping("/reports")
+	public ResponseEntity<?> viewReports() {
+		
+		return ResponseEntity.ok(policeService.getAllReports(SecurityContextHolder.getContext().getAuthentication().getName()));
+
+	}
 }
