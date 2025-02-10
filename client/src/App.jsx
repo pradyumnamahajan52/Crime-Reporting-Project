@@ -49,6 +49,9 @@ import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
 import {loader as loadReportDetails} from "./loader/Crime/ReportDetailsLoader";
 import { loader as loadCrimeStatus } from "./loader/citizen/CrimeStatusLoader";
 
+//Police
+import {loader as loadPoliceFeedback } from "./loader/Police/FeedbackLoader"
+
 import "./App.css";
 import {
   checkAdminAuthLoader,
@@ -227,6 +230,7 @@ const router = createBrowserRouter([
       {
         path: "feedback",
         element: <PoliceFeedback />,
+        loader: loadPoliceFeedback,
       },
       {
         path:"profile",
