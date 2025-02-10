@@ -23,4 +23,5 @@ public interface UserService {
 
 	Long getTotalUsers();
 
+	ApiResponse<?> getLoggedInUserDetails();
 }
