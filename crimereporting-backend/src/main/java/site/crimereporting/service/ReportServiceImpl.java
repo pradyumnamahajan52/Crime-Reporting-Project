@@ -235,6 +235,7 @@ public class ReportServiceImpl implements ReportService {
 				crimeReports.getId(),
 				crimeReports.getCrimeDate(),
 				crimeReports.getDescription(),
+				crimeReports.getReportStatus(),
 				crimeAddress.getAddressLine1(),
 				crimeAddress.getAddressLine2(),
 				crimeAddress.getCity(),
