@@ -28,7 +28,7 @@ public class ReportController {
 
     }
 
-    @PostMapping("/update-police-station")
+    @PostMapping("/update-police-station ")
     public ResponseEntity<?> crimeReportUpdatePoliceStation(@RequestParam("crimeReportId") Long crimeReportId,
                                                              @RequestParam("policeStationId") Long policeStationId){
         System.out.println(crimeReportId);
