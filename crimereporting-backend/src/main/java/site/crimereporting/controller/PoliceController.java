@@ -63,9 +63,13 @@ public class PoliceController {
 
 
 	@PatchMapping("/update-crime-status")
-	public ResponseEntity<?> updateStatus(@RequestParam("crimeReportId") Long crimeReportId, @RequestParam("status") String status){
 
+	public ResponseEntity<?> updateStatus(@RequestParam("crimeReportId") Long crimeReportId, @RequestParam("status") String status){
 		return ResponseEntity.status(HttpStatus.OK).body(reportService.updateCrimeStatus(crimeReportId, status));
-		
+	}
+	
+	@GetMapping("/crime-category")
+	public ResponseEntity<?> viewCrimeList() {
+		return ResponseEntity.ok(policeService.getAllCrime());
 	}
 }

@@ -302,6 +302,9 @@ public class PoliceServiceImpl implements PoliceService {
     
     @Autowired
     private CrimeReportsDao crimeReportsDao;
+    
+    @Autowired
+    private CrimeCategoryDao crimeCategoryDao;
    
 
     @Autowired
@@ -350,6 +353,12 @@ public class PoliceServiceImpl implements PoliceService {
 		
 		return new ApiResponse<>("All Crime Reports fetched successfully",  crimereportsDTOList);
 	}
+
+	@Override
+	public List<CrimeCategory> getAllCrime() {
+		return crimeCategoryDao.findByIsDeletedFalse();
+	}
+
 
 }
 

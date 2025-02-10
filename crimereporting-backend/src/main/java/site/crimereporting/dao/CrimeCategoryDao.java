@@ -8,5 +8,6 @@ import site.crimereporting.entity.PoliceStation;
 import java.util.List;
 
 public interface CrimeCategoryDao extends JpaRepository<CrimeCategory, Long> {
+	
     List<CrimeCategory> findByIsDeletedFalse();
 }
