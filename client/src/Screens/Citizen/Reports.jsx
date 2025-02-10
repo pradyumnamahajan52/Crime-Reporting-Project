@@ -1,16 +1,22 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import React, { useState, useEffect } from "react";
-import { useActionData, useLoaderData, useNavigation, useSubmit } from "react-router-dom";
+import {
+  redirect,
+  useActionData,
+  useLoaderData,
+  useNavigation,
+  useSubmit,
+} from "react-router-dom";
 import { HiChevronDown } from "react-icons/hi";
 import { toast } from "react-toastify";
 import SelectPoliceStationReport from "../../Components/Report/SelectPoliceStationReport";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 
 const Report = () => {
   const [showPoliceStationModal, setShowPoliceStationModal] = useState(false);
   const [selectedPoliceStation, setSelectedPoliceStation] = useState(null);
   const [nearByPoliceStations, setNearByPoliceStations] = useState([]);
-  
+
   const [formData, setFormData] = useState({
     crimeDate: new Date().toISOString().split("T")[0], // Set default to today's date
     description: "",
@@ -100,8 +106,6 @@ const Report = () => {
     }
   };
 
-
-
   // Auto-fetch location on component mount
   useEffect(() => {
     getUserLocation();
@@ -142,14 +146,16 @@ const Report = () => {
   useEffect(() => {
     if (actionData?.success) {
       console.log(actionData);
-      
+
       toast.success(actionData.success);
-      if(actionData.reportSubmitted && !actionData.policeAssigned)
-      {
+      if (actionData.reportSubmitted && !actionData.policeAssigned) {
         setNearByPoliceStations(actionData.data.nearByPoliceStationList);
         setShowPoliceStationModal(true);
       }
+      if (actionData.reportSubmitted && actionData.policeAssigned) {
+ redirect("/citizen/crimestatus");
 
+      }
     } else if (actionData?.error) {
       toast.error(actionData.error);
     }
@@ -177,10 +183,12 @@ const Report = () => {
   };
 
   return (
-    <motion.div className="w-full min-h-screen p-6 bg-gray-100" 
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}>
+    <motion.div
+      className="w-full min-h-screen p-6 bg-gray-100"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold text-black mb-4 text-center">
           Register Your Complaint
@@ -400,7 +408,7 @@ const Report = () => {
             <div className="w-full h-80 border rounded-lg overflow-hidden">
               {mapSrc() ? (
                 <iframe
-                title="Map Preview"
+                  title="Map Preview"
                   src={mapSrc()}
                   className="w-full h-full"
                   allowFullScreen
@@ -439,8 +447,7 @@ const Report = () => {
               className="bg-[#17A2B8] text-white px-6 py-3 rounded-lg text-lg hover:bg-[#138496] transition"
               disabled={!formData.tandcisChecked}
             >
-                        {isSubmitting ? "Please Wait" : "Report Now!" }
-              
+              {isSubmitting ? "Please Wait" : "Report Now!"}
             </button>
           </div>
         </form>

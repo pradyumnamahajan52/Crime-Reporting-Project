@@ -53,7 +53,8 @@ export default function Form({ formFields, isUser }) {
       </button>
       
       <span className="text-xl text-center mt-4 ml-6 w-[200px] mx-auto">
-        {isUser ? <p>Create New Account? <span className=' text-primary cursor-pointer ' onClick={()=> navigate("/user/register") } >Sign Up</span> </p> : <p>Have An Account? <span>Sign In</span> </p>}
+       <p  onClick={()=> navigate("/user/login") }>Have An Account? <span>Sign In</span> </p>
+        
       </span> 
 
        
