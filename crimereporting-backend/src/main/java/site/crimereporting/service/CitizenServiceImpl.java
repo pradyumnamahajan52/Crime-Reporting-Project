@@ -265,264 +265,91 @@
 
 package site.crimereporting.service;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.io.IOException;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import site.crimereporting.custom_exception.ApiException;
 import site.crimereporting.custom_exception.AuthenticationException;
 import site.crimereporting.custom_exception.ResourceNotFoundException;
-import site.crimereporting.dao.AadhaarCardDao;
-import site.crimereporting.dao.AddressDao;
-import site.crimereporting.dao.CitizenDao;
-import site.crimereporting.dao.PoliceStationDao;
-import site.crimereporting.dao.PoliceStationUserDao;
-import site.crimereporting.dao.UserDao;
+import site.crimereporting.dao.*;
 import site.crimereporting.dtos.*;
-import site.crimereporting.entity.AadhaarCard;
-import site.crimereporting.entity.Address;
-import site.crimereporting.entity.Citizen;
-import site.crimereporting.entity.PoliceStation;
-import site.crimereporting.entity.PoliceStationUser;
-import site.crimereporting.entity.User;
-import site.crimereporting.entity.UserRole;
+import site.crimereporting.entity.*;
 import site.crimereporting.security.JwtUtil;
-import site.crimereporting.service.EmailService;
-import site.crimereporting.service.AuditService;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.Random;
 
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
-
-    @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private AadhaarCardDao aadhaarCardDao;
-
-    @Autowired
-    private AddressDao addressDao;
+public class CitizenServiceImpl implements CitizenService {
 
     @Autowired
     private CitizenDao citizenDao;
 
     @Autowired
-    private PoliceStationDao policeStationDao;
-
-    @Autowired
-    private PoliceStationUserDao policeStationUserDao;
-
-    @Autowired
-    private ModelMapper mapper;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
-    private EmailService emailService;
-
-    @Autowired
-    private AuditService auditService;
-
-    private final Random random = new Random();
-    private static final int OTP_EXPIRY_MINUTES = 5;
+    private AddressDao addressDao;
 
     @Override
-    public ApiResponse<RegisterResponseDTO> registerCitizen(CitizenRegisterRequestDTO citizen) throws IOException {
-        // Create and map user DTO
-        RegisterRequestDTO userDto = mapper.map(citizen, RegisterRequestDTO.class);
-
-        // Create user object and set role as CITIZEN
-        User user = mapper.map(userDto, User.class);
-        user.setRole(UserRole.CITIZEN);
- 
-
-        // Create Aadhaar card and Address objects
-        AadhaarCard aadhaarCard = mapper.map(citizen, AadhaarCard.class);
-        aadhaarCard.setImage(citizen.getImage().getBytes());
-
-        Address address = mapper.map(citizen, Address.class);
-
-        // Create Citizen object and set references to user, aadhaarCard, and address
-        Citizen citizenToRegister = mapper.map(citizen, Citizen.class);
-        citizenToRegister.setUser(user);
-        citizenToRegister.setAadhaarCard(aadhaarCard);
-        citizenToRegister.setAddress(address);
-
-        // Save Citizen in the database
-        Citizen registeredCitizen = citizenDao.save(citizenToRegister);
-
-        if (registeredCitizen == null) {
-            throw new ApiException("Citizen registration failed!");
-        }
-        
-        
-
-        return new ApiResponse<>("Citizen registered successfully!", new RegisterResponseDTO(user.getFullName(), user.getEmail(), user.getRole()));
-    }
-
-    @Override
-    public ApiResponse<RegisterResponseDTO> registerPolice(PoliceRegisterRequestDTO police) {
-        // Create and map user DTO
-        RegisterRequestDTO userDto = mapper.map(police, RegisterRequestDTO.class);
-
-        // Create user object and set role as POLICE
-        User user = mapper.map(userDto, User.class);
-        user.setRole(UserRole.POLICE);
-
-        PoliceStation policeStation = policeStationDao.findByStationCode(police.getStationCode())
-        // Find police station by station code
-                .orElseThrow(() -> new ResourceNotFoundException("Station code is not valid!"));
-
-        // Create PoliceStationUser object
-        PoliceStationUser policeStationUser = new PoliceStationUser();
-        policeStationUser.setPoliceStation(policeStation);
-        policeStationUser.setUser(user);
-        policeStationUser.setDesignation(police.getDesignation());
-        policeStationUser.setIsVerified(true);
-        //policeStationUser.setName(police.getName());
-
-        // Save PoliceStationUser in the database
-        PoliceStationUser registeredPolice = policeStationUserDao.save(policeStationUser);
-
-        if (registeredPolice == null) {
-            throw new ApiException("Police registration failed!");
-        }
-
-        return new ApiResponse<>("Police registered successfully!",  new RegisterResponseDTO(user.getFullName(), user.getEmail(), user.getRole()));
-    }
-
-    @Override
-    public Long getTotalUsers() {
-        return userDao.countByIsDeletedFalse();
-    }
-
-
-
-    @Override
-    public AuthResponse signIn(AuthRequest dto) {
-        // Find user by email and OTP
-        User userEntity = userDao.findByEmailAndOtp(dto.getEmail(), dto.getOtp())
-                .orElseThrow(() -> new AuthenticationException("Invalid Email or OTP"));
-
-        // Map and return AuthResponse with user details
-        return mapper.map(userEntity, AuthResponse.class);
-    }
-
-    @Override
-    public String generateOtp(String email) {
-        // Generate 6-digit OTP
-        String otp = String.valueOf(random.nextInt(900000) + 100000);
-
-        // Check if user exists by email
-        Optional<User> existingUser = userDao.findByEmail(email);
-
-        if (existingUser.isPresent()) {
-            User user = existingUser.get();
-            user.setOtp(otp);
-            user.setOtpExpiry(LocalDateTime.now().plusMinutes(OTP_EXPIRY_MINUTES));  // Set OTP expiry time
-            userDao.save(user);
-
-            // Send OTP to user's email
-            emailService.sendOtpEmail(email, otp);
-
-            return "OTP sent successfully!";
-        }
-
-        throw new ApiException("User not found!");
-    }
-
-//    @Override
-//    public AuthResponse verifyOtp(String email, String otp) {
-//        // Find user by email and OTP
-//        Optional<User> userOptional = userDao.findByEmailAndOtp(email, otp);
-//
-//        if (userOptional.isEmpty()) {
-//            throw new AuthenticationException("Invalid OTP!");
-//        }
-//
-//        User existingUser = userOptional.get();
-//
-//        // Check if OTP has expired
-//        if (existingUser.getOtpExpiry() == null || existingUser.getOtpExpiry().isBefore(LocalDateTime.now())) {
-//            throw new AuthenticationException("OTP expired!");
-//        }
-//
-//        // Generate JWT token for valid OTP
-//        String token = jwtUtil.generateToken(email);
-//
-//        // Clear OTP and expiry after successful verification
-//        existingUser.setOtp(null);
-//        existingUser.setOtpExpiry(null);
-//
-//        // Save updated user details
-//        User loginUser = userDao.save(existingUser);
-//
-//        // Log user login for audit purposes
-//        ApiResponse<User> apiResponse = new ApiResponse<>("User logged in via OTP", loginUser);
-//        auditService.userLogin(apiResponse);
-//
-//        // Return AuthResponse with JWT token
-//        return new AuthResponse("User login successful!", token, loginUser);
-//    }
-    
-    @Override
-    public AuthResponse verifyOtp(String email, String otp) {
-        Optional<User> userOptional = userDao.findByEmailAndOtp(email, otp);
-
-        if (userOptional.isEmpty()) {
-            throw new AuthenticationException("Invalid OTP!");
-        }
-
-        User existingUser = userOptional.get();
-        
-
-        // Check OTP expiry
-        if (existingUser.getOtpExpiry() == null || existingUser.getOtpExpiry().isBefore(LocalDateTime.now())) {
-            throw new AuthenticationException("OTP expired!");
-        }
-
-        // Create Authentication object
-        Authentication authentication = new UsernamePasswordAuthenticationToken(existingUser.getEmail(), null, existingUser.getAuthorities());
-
-        // Generate JWT token with authorities using the updated method
-        String token = jwtUtil.generateToken(authentication);
-
-        // Clear OTP and expiry after successful verification
-        existingUser.setOtp(null);
-        existingUser.setOtpExpiry(null);
-
-        // Save updated user details
-        User loginUser = userDao.save(existingUser);
-
-        // Log user login for audit purposes
-        ApiResponse<User> apiResponse = new ApiResponse<>("User logged in via OTP", loginUser);
-        auditService.userLogin(apiResponse);
-
-        // Return AuthResponse with JWT token
-        return new AuthResponse("User login successful!", token, loginUser);
-    }
-
-    @Override
-    public ApiResponse<?>  getLoggedInUserDetails() {
+    public ApiResponse<?>  getLoggedInCitizenDetails() {
         // Get Current logged In Email from security Context Holder
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loggedInEmail = authentication.getName();
-        //find User by logged in email
-        User user = userDao.findByEmail(loggedInEmail).orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
-        return new ApiResponse<>("Logged Users Information", user);
+        //find citizen by logged in email
+//        Citizen citizen = citizenDao.findByEmail(loggedInEmail).orElseThrow(() -> new ResourceNotFoundException("Citizen with Email does not exist"));
+//        return new ApiResponse<>("Logged Citizen Information", citizen);
+
+        Citizen citizen = citizenDao.findByUser_Email(loggedInEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("Citizen with Email does not exist"));
+        return new ApiResponse<>("Logged Citizen Information", citizen);
     }
+
+    @Override
+    public ApiResponse<?> updateLoggedInCitizenDetails(CitizenDTO citizenDTO) {
+        // Get logged-in user's email
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInEmail = authentication.getName();
+
+        // Find Citizen by User's email
+        Citizen citizen = citizenDao.findByUser_Email(loggedInEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("Citizen with Email does not exist"));
+
+        // Update Citizen details
+        if (citizenDTO.getDateOfBirth() != null) {
+            citizen.setDateOfBirth(citizenDTO.getDateOfBirth());
+        }
+
+        // Update Address details
+        Address address = citizen.getAddress();
+        if (citizenDTO.getAddressLine1() != null) {
+            address.setAddressLine1(citizenDTO.getAddressLine1());
+        }
+        if (citizenDTO.getAddressLine2() != null) {
+            address.setAddressLine2(citizenDTO.getAddressLine2());
+        }
+        if (citizenDTO.getCity() != null) {
+            address.setCity(citizenDTO.getCity());
+        }
+        if (citizenDTO.getCountry() != null) {
+            address.setCountry(citizenDTO.getCountry());
+        }
+        if (citizenDTO.getPinCode() != null) {
+            address.setPinCode(citizenDTO.getPinCode());
+        }
+
+        // Save updated entities
+        addressDao.save(address);
+        citizenDao.save(citizen);
+
+        // Return updated citizen details
+        return new ApiResponse<>("Citizen profile updated successfully", citizenDTO);
+    }
+
 }
 

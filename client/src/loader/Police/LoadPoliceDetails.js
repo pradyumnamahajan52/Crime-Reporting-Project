@@ -1,7 +1,7 @@
 import { getAuthToken } from "../../action/user/Auth";
 import { API } from "../../API";
 
-async function loadPoliceDetails() {
+async function  loadPoliceDetails() {
   try {
     const token = getAuthToken();
     const response = await fetch(`${API}/police/profile`, {
