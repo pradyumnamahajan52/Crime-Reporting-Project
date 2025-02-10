@@ -21,8 +21,11 @@ const CrimeStatus = () => {
       <div className="overflow-x-auto">
         <Suspense fallback={<Spinner />}>
           <Await resolve={crimeReportsData}>
-            {(reports) => (
-              <table className="w-full border-collapse border border-gray-300">
+            {(reports) => {
+              console.log('====================================');
+              console.log(reports);
+              console.log('====================================');
+              return (<table className="w-full border-collapse border border-gray-300">
                 <thead className="bg-gray-200">
                   <tr>
                     <th className="border p-2">Crime ID</th>
@@ -65,7 +68,7 @@ const CrimeStatus = () => {
                   )}
                 </tbody>
               </table>
-            )}
+            )}}
           </Await>
         </Suspense>
       </div>
