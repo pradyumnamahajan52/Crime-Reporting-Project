@@ -3,7 +3,7 @@ import { API } from "../../API";
 
 export async function loader() {
     const crimeStatusData = fetchCrimeStatus();
-
+    console.log(crimeStatusData);
     return { crimeStatusData  }
 
 }
