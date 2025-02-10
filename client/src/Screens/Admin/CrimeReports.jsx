@@ -2,21 +2,9 @@
 import React, { Suspense } from "react";
 import { useLoaderData, Await } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
+import { getStatusColor } from "../../utils/getCrimeReportStatusColor";
 
-const getStatusColor = (status) => {
-  switch (status) {
-    case "SUBMITTED": return "bg-blue-100 text-blue-600";
-    case "ACKNOWLEDGED": return "bg-green-100 text-green-600";
-    case "REJECTED": return "bg-red-100 text-red-600";
-    case "PENDING_ADDITIONAL_INFO": return "bg-yellow-100 text-yellow-600";
-    case "RECEIVED": return "bg-purple-100 text-purple-600";
-    case "UNDER_INVESTIGATION": return "bg-indigo-100 text-indigo-600";
-    case "ON_HOLD": return "bg-orange-100 text-orange-600";
-    case "RESOLVED": return "bg-teal-100 text-teal-600";
-    case "CLOSED": return "bg-gray-100 text-gray-600";
-    default: return "bg-red-100 text-red-600";
-  }
-};
+
 
 export default function CrimeReports() {
   const { crimeReportsData } = useLoaderData(); // Data is still a Promise
@@ -32,7 +20,7 @@ export default function CrimeReports() {
           {(crimeReports) => (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {crimeReports.data?.map((report) => (
-                <div key={report.id} className="bg-white shadow-lg rounded-lg p-6 flex flex-col space-y-4">
+                <div key={report.id} className="bg-white shadow-lg rounded-lg p-6 flex flex-col space-y-4 h-full">
                   <div>
                     <h2 className="text-xl font-semibold text-gray-800">
                       {report?.citizen?.user?.fullName}

@@ -49,6 +49,14 @@ import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
 import {loader as loadReportDetails} from "./loader/Crime/ReportDetailsLoader";
 import { loader as loadCrimeStatus } from "./loader/citizen/CrimeStatusLoader";
 
+//Police
+import { loader as loadPoliceCrimeReports } from "./loader/Police/CrimeReportsLoader";
+import PoliceCrimeReports from "./Screens/Police/CrimeReports";
+import {loader as loadPoliceFeedback } from "./loader/Police/FeedbackLoader";
+import {loader as loadPoliceCrimeCategory} from "./loader/Police/CrimeCategoryLoader";
+import { loader as loadPoliceCrimeReportsDetails } from "./loader/Police/ReportDetailsLoader";
+import PoliceCrimeReportsDetail from "./Screens/Police/ReportsDetail";
+
 import "./App.css";
 import {
   checkAdminAuthLoader,
@@ -66,7 +74,11 @@ import CrimeStatus from "./Screens/Citizen/CrimeStatus";
 
 import About from "./Screens/About";
 import CrimeReportsDetail from "./Screens/Citizen/ReportsDetail";
+
 import 'react-toastify/dist/ReactToastify.css';
+
+import PoliceCrimeCategory from "./Screens/Police/PoliceCrimeCategory";
+
 
 
 const router = createBrowserRouter([
@@ -113,7 +125,8 @@ const router = createBrowserRouter([
         element: <Reports />,
         loader: loadCrimeCategory,
         action: newCrimeReportAction
-      },{
+      },
+      {
         path: "report-details/:id",
         element: <CrimeReportsDetail/>,
         loader: loadReportDetails
@@ -226,13 +239,29 @@ const router = createBrowserRouter([
         element: <PoliceDashboard />,
       },
       {
+        path: "crime-report",
+        element: <PoliceCrimeReports />,
+        loader:loadPoliceCrimeReports
+      },
+      {
+        path: "report-details/:id",
+        element: <PoliceCrimeReportsDetail/>,
+        loader: loadPoliceCrimeReportsDetails
+      },
+      {
         path: "feedback",
         element: <PoliceFeedback />,
+        loader: loadPoliceFeedback,
       },
       {
         path:"profile",
         element: <PoliceProfile/>,
         loader: loadPoliceDetails,
+      },
+      {
+        path: "crime-category",
+        element: <PoliceCrimeCategory />,
+        loader: loadPoliceCrimeCategory,
       },
     ],
   },

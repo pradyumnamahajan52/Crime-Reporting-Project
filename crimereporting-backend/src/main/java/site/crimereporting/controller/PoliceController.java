@@ -4,16 +4,17 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import site.crimereporting.custom_exception.ApiException;
+import site.crimereporting.dao.CrimeReportsDao;
 import site.crimereporting.dtos.*;
 import site.crimereporting.service.PoliceService;
+import site.crimereporting.service.ReportService;
 import site.crimereporting.service.UserService;
 
 import java.io.IOException;
 import java.util.Collections;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -22,6 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PoliceController {
 	@Autowired
 	private PoliceService policeService;
+	
+	@Autowired
+	private ReportService reportService;
+	
+	
 
 	@GetMapping("/feedback")
 	public ResponseEntity<?> renderFeedback() {
@@ -33,4 +39,35 @@ public class PoliceController {
 		return ResponseEntity.ok(policeService.getLoggedInPoliceDetails());
 	}
 	
+	@GetMapping("/reports")
+	public ResponseEntity<?> viewReports() {
+		
+		return ResponseEntity.ok(policeService.getAllReports(SecurityContextHolder.getContext().getAuthentication().getName()));
+
+	}
+	
+	@PostMapping("/get-reportDetails")
+    public ResponseEntity<?> getReportDetails(@RequestParam Long crimeReportId){
+    	
+    	
+		return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportDetails(crimeReportId));
+    	
+    }
+	
+	@PostMapping("/get-evidence")
+	public ResponseEntity<?> getReportsEvidence(@RequestParam("crimeReportId") Long crimeReportId){
+		System.out.println(crimeReportId);
+		return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportsEvidence(crimeReportId));
+		
+	}
+
+	
+	@PatchMapping("/update-crime-status")
+	public ResponseEntity<?> updateStatus(@RequestParam Long crimeReportId, @RequestParam String status){
+		
+		 
+		
+		return ResponseEntity.status(HttpStatus.OK).body(reportService.updateCrimeStatus(crimeReportId, status));
+		
+	}
 }

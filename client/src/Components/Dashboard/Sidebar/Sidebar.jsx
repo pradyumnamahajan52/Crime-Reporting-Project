@@ -33,7 +33,7 @@ const Sidebar = ({panelType}) => {
     { title: "Crime Category", url: "/police/crime-category", path: "/police/crime-category", icon: MdCategory },
     { title: "Police Station", url: "/police/police-station", path: "/police/police-station", icon: FaClipboardList },
     { title: "Feedback", url: "/police/feedback", path: "/police/feedback", icon: MdFeedback },
-    { title: "Crime Rate", url: "/police/crime-rate", path: "/police/crime-rate", icon: MdGraphicEq },
+    // { title: "Crime Rate", url: "/police/crime-rate", path: "/police/crime-rate", icon: MdGraphicEq },
   ]);
   
   return (

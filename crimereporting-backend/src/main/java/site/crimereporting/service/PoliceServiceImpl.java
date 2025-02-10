@@ -281,6 +281,7 @@ import site.crimereporting.security.JwtUtil;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -295,6 +296,13 @@ public class PoliceServiceImpl implements PoliceService {
     
     @Autowired
     private UserDao userDao;
+    
+    @Autowired
+    private PoliceStationUserDao policeStationUserDao;
+    
+    @Autowired
+    private CrimeReportsDao crimeReportsDao;
+   
 
     @Autowired
     private ModelMapper mapper;
@@ -320,5 +328,28 @@ public class PoliceServiceImpl implements PoliceService {
 			
 		return new ApiResponse("Logged Users Information",mapper.map(user, AdminUserDTO.class));
 	}
+
+	@Override
+	public ApiResponse<?>  getAllReports(String email) {
+		
+//		User user = userDao.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("user with the email not found!"));
+//		
+//		PoliceStationUser policeStationUser =  policeStationUserDao.findByUser(user);
+//		
+//		PoliceStation policeStation =  policeStationUser.getPoliceStation();
+//		
+//		List<CrimeReports> crimeReportsList =  crimeReportsDao.getCrimeReports(policeStation.getId());
+		
+		List<CrimeReports> crimeReportsList =  crimeReportsDao.getCrimeReports(email);
+		
+		List<AdminCrimeReportDTO> crimereportsDTOList = new ArrayList<>();
+		crimeReportsList.forEach((s)-> {
+			AdminCrimeReportDTO crime =  mapper.map(s, AdminCrimeReportDTO.class);
+			crimereportsDTOList.add(crime);
+		});
+		
+		return new ApiResponse<>("All Crime Reports fetched successfully",  crimereportsDTOList);
+	}
+
 }
 
