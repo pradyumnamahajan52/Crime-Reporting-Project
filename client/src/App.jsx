@@ -55,7 +55,6 @@ import PoliceCrimeReports from "./Screens/Police/CrimeReports";
 import {loader as loadPoliceFeedback } from "./loader/Police/FeedbackLoader";
 import {loader as loadPoliceCrimeCategory} from "./loader/Police/CrimeCategoryLoader";
 import { loader as loadPoliceCrimeReportsDetails } from "./loader/Police/ReportDetailsLoader";
-import PoliceCrimeReports from "./Screens/Police/CrimeReports";
 import PoliceCrimeReportsDetail from "./Screens/Police/ReportsDetail";
 
 import "./App.css";
