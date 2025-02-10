@@ -59,7 +59,7 @@ public class PoliceController {
 	}
 
 	
-	@PatchMapping
+	@PatchMapping("/updateCrimeStatus")
 	public ResponseEntity<?> updateStatus(@RequestParam Long crimeReportId, @RequestParam String status){
 		
 		
