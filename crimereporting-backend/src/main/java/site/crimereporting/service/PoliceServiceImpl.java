@@ -303,6 +303,7 @@ public class PoliceServiceImpl implements PoliceService {
     @Autowired
     private CrimeReportsDao crimeReportsDao;
    
+
     @Autowired
     private ModelMapper mapper;
 
@@ -327,7 +328,7 @@ public class PoliceServiceImpl implements PoliceService {
 			
 		return new ApiResponse("Logged Users Information",mapper.map(user, AdminUserDTO.class));
 	}
-	
+
 	@Override
 	public ApiResponse<?>  getAllReports(String email) {
 		
@@ -349,5 +350,6 @@ public class PoliceServiceImpl implements PoliceService {
 		
 		return new ApiResponse<>("All Crime Reports fetched successfully",  crimereportsDTOList);
 	}
+
 }
 
