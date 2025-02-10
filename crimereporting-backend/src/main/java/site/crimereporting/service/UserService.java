@@ -25,4 +25,5 @@ public interface UserService {
 
 	ApiResponse<?> getPoliceStationUserDetails();
 
+	ApiResponse<?> getLoggedInUserDetails();
 }

@@ -17,8 +17,10 @@ import site.crimereporting.dtos.CitizenRegisterRequestDTO;
 import site.crimereporting.dtos.OtpRequest;
 import site.crimereporting.dtos.PoliceRegisterRequestDTO;
 import site.crimereporting.dtos.RegisterResponseDTO;
+import site.crimereporting.dtos.*;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.PoliceStationUser;
+import site.crimereporting.service.CitizenService;
 import site.crimereporting.service.UserService;
 
 @RestController
@@ -28,6 +30,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+
+	@Autowired
+	private CitizenService citizenService;
+
 
 	@PostMapping("/signin/email")
 	public ResponseEntity<?> requestOtp(@RequestBody @Valid OtpRequest otpRequest) {
@@ -86,5 +92,16 @@ public class UserController {
 		
 	}
 
+	@GetMapping("/citizendetails")
+	public ResponseEntity<?> renderAllCitizenDetails() {
+		return ResponseEntity.ok(citizenService.getLoggedInCitizenDetails());
+	}
+
+
+
+	@PutMapping("/updatedetails")
+	public ResponseEntity<?> updateLoggedInCitizenDetails(@RequestBody @Valid CitizenDTO citizenDTO) {
+		return ResponseEntity.ok(citizenService.updateLoggedInCitizenDetails(citizenDTO));
+	}
 
 }

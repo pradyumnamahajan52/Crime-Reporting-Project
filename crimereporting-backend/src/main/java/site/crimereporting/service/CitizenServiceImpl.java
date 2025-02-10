@@ -267,6 +267,7 @@ package site.crimereporting.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -281,84 +282,74 @@ import site.crimereporting.security.JwtUtil;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Collectors;
+
 
 @Service
 @Transactional
-public class PoliceServiceImpl implements PoliceService {
+public class CitizenServiceImpl implements CitizenService {
 
     @Autowired
-    private FeedbackDao feedbackDao;
-    
-    @Autowired
-    private UserDao userDao;
-    
-    @Autowired
-    private PoliceStationUserDao policeStationUserDao;
-    
-    @Autowired
-    private CrimeReportsDao crimeReportsDao;
-    
-    @Autowired
-    private CrimeCategoryDao crimeCategoryDao;
-   
+    private CitizenDao citizenDao;
 
     @Autowired
-    private ModelMapper mapper;
+    private AddressDao addressDao;
 
     @Override
-    public ApiResponse getFeedbacks() {
-        List<FeedbackResponse> feedbackResponseList = feedbackDao.findAll().stream().map(feedback -> {
-            FeedbackResponse response = mapper.map(feedback, FeedbackResponse.class);
-            response.setEmail(feedback.getUser().getEmail()); // we need only user email
-            return response;
-        }).collect(Collectors.toList());
+    public ApiResponse<?>  getLoggedInCitizenDetails() {
+        // Get Current logged In Email from security Context Holder
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInEmail = authentication.getName();
+        //find citizen by logged in email
+//        Citizen citizen = citizenDao.findByEmail(loggedInEmail).orElseThrow(() -> new ResourceNotFoundException("Citizen with Email does not exist"));
+//        return new ApiResponse<>("Logged Citizen Information", citizen);
 
-        return new ApiResponse("feedback retrieved successfully", feedbackResponseList);
+        Citizen citizen = citizenDao.findByUser_Email(loggedInEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("Citizen with Email does not exist"));
+        return new ApiResponse<>("Logged Citizen Information", citizen);
     }
 
-	@Override
-	public ApiResponse getLoggedInPoliceDetails() {
-		// Get Current logged In Email from security Context Holder
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String loggedInEmail = authentication.getName();
-		//find User by logged in email
-		User user = userDao.findByEmail(loggedInEmail).orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
-			
-		return new ApiResponse("Logged Users Information",mapper.map(user, AdminUserDTO.class));
-	}
+    @Override
+    public ApiResponse<?> updateLoggedInCitizenDetails(CitizenDTO citizenDTO) {
+        // Get logged-in user's email
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInEmail = authentication.getName();
 
-	@Override
-	public ApiResponse<?>  getAllReports(String email) {
-		
-//		User user = userDao.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("user with the email not found!"));
-//		
-//		PoliceStationUser policeStationUser =  policeStationUserDao.findByUser(user);
-//		
-//		PoliceStation policeStation =  policeStationUser.getPoliceStation();
-//		
-//		List<CrimeReports> crimeReportsList =  crimeReportsDao.getCrimeReports(policeStation.getId());
-		
-		List<CrimeReports> crimeReportsList =  crimeReportsDao.getCrimeReports(email);
-		
-		List<AdminCrimeReportDTO> crimereportsDTOList = new ArrayList<>();
-		crimeReportsList.forEach((s)-> {
-			AdminCrimeReportDTO crime =  mapper.map(s, AdminCrimeReportDTO.class);
-			crimereportsDTOList.add(crime);
-		});
-		
-		return new ApiResponse<>("All Crime Reports fetched successfully",  crimereportsDTOList);
-	}
+        // Find Citizen by User's email
+        Citizen citizen = citizenDao.findByUser_Email(loggedInEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("Citizen with Email does not exist"));
 
-	@Override
-	public List<CrimeCategory> getAllCrime() {
-		return crimeCategoryDao.findByIsDeletedFalse();
-	}
+        // Update Citizen details
+        if (citizenDTO.getDateOfBirth() != null) {
+            citizen.setDateOfBirth(citizenDTO.getDateOfBirth());
+        }
 
+        // Update Address details
+        Address address = citizen.getAddress();
+        if (citizenDTO.getAddressLine1() != null) {
+            address.setAddressLine1(citizenDTO.getAddressLine1());
+        }
+        if (citizenDTO.getAddressLine2() != null) {
+            address.setAddressLine2(citizenDTO.getAddressLine2());
+        }
+        if (citizenDTO.getCity() != null) {
+            address.setCity(citizenDTO.getCity());
+        }
+        if (citizenDTO.getCountry() != null) {
+            address.setCountry(citizenDTO.getCountry());
+        }
+        if (citizenDTO.getPinCode() != null) {
+            address.setPinCode(citizenDTO.getPinCode());
+        }
+
+        // Save updated entities
+        addressDao.save(address);
+        citizenDao.save(citizen);
+
+        // Return updated citizen details
+        return new ApiResponse<>("Citizen profile updated successfully", citizenDTO);
+    }
 
 }
 
