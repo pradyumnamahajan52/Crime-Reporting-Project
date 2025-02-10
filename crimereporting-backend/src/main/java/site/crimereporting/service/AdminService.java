@@ -6,7 +6,6 @@ import site.crimereporting.dtos.AdminUserDTO;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.PoliceStationRegisterRequestDTO;
 import site.crimereporting.entity.CrimeCategory;
-import site.crimereporting.entity.CrimeReports;
 import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.User;
 
@@ -14,23 +13,31 @@ public interface AdminService {
 
 	List<User> getAllUsers();
 
-	ApiResponse getDashboardDetails();
+	ApiResponse<?> getDashboardDetails();
 
-	ApiResponse newPoliceStationRegister(PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO);
+	ApiResponse<?> newPoliceStationRegister(PoliceStationRegisterRequestDTO policeStationRegisterRequestDTO);
 
-	ApiResponse getLoggedInUserDetails();
+	ApiResponse<?>  getLoggedInUserDetails();
 
-	ApiResponse updateLoggedInUserDetails(AdminUserDTO adminUserDTO);
+	ApiResponse<?>  updateLoggedInUserDetails(AdminUserDTO adminUserDTO);
 
-	List<CrimeReports> getAllReports();
+	ApiResponse<?>  updateUserDetails(AdminUserDTO adminUserDTO);
+
+	ApiResponse<?>  newUserDetails(AdminUserDTO adminUserDTO);
+
+	ApiResponse<?>  logicalDeleteUser(Long id);
+
+	ApiResponse<?>  getAllReports();
 	
 	List<CrimeCategory> getAllCrime();
 	
 	List<PoliceStation> getAllPoliceStations();
 
-	ApiResponse getFeedbacks();
+	ApiResponse<?> getPoliceStationDetails(Long id);
 
-	ApiResponse getAuditLogs();
+	ApiResponse<?> getFeedbacks();
+
+	ApiResponse<?> getAuditLogs();
 	
 	ApiResponse<?> updatePoliceStation(PoliceStationRegisterRequestDTO policeStationForUpdate);
 }

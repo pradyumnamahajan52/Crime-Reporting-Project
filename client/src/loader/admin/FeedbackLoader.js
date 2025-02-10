@@ -1,32 +1,32 @@
 import { getAuthToken } from "../../action/user/Auth";
 import { API } from "../../API";
 
-async function loadAdmnFeedback() {
+export async function loader() {
+  // Return the promise directly (do not await)
+  const feedbackData = loadAdminFeedback();
+
+  return { feedbackData };
+}
+
+// ✅ Function to fetch users' feedbacks (returns promise)
+async function loadAdminFeedback() {
   try {
     const token = getAuthToken();
     const response = await fetch(`${API}/admin/feedback`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",  
-        Authorization: `Bearer ${token}`, // for token
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // for token authentication
       },
     });
 
     if (!response.ok) {
       const responseData = await response.json();
-
-      throw new Error(responseData?.error || "Failed to fetch users feedbacks");
+      throw new Error(responseData?.error || "Failed to fetch users' feedbacks");
     }
 
-    return await response.json();
+    return response.json(); // Return the JSON response
   } catch (error) {
-    throw new Error(error.message || "Something went wrong while fetching users feedbacks.");
+    throw new Error(error.message || "Something went wrong while fetching users' feedbacks.");
   }
-}
-
-// Loader now returns a normal async function instead of `defer()`
-export async function loader() {
-  const feedbackData = await loadAdmnFeedback();
-
-  return { feedbackData }; 
 }

@@ -21,12 +21,7 @@ import site.crimereporting.dao.CrimeReportsDao;
 import site.crimereporting.dao.EvidenceDao;
 import site.crimereporting.dao.PoliceStationDao;
 import site.crimereporting.dao.UserDao;
-import site.crimereporting.dtos.ApiResponse;
-import site.crimereporting.dtos.CrimeReportDTO;
-import site.crimereporting.dtos.CrimeReportResponseDTO;
-import site.crimereporting.dtos.CrimeReportStatusDTO;
-import site.crimereporting.dtos.FileUploadInfoDTO;
-import site.crimereporting.dtos.NearByPoliceStationDTO;
+import site.crimereporting.dtos.*;
 import site.crimereporting.entity.Address;
 import site.crimereporting.entity.Citizen;
 import site.crimereporting.entity.CrimeCategory;
@@ -199,6 +194,60 @@ public class ReportServiceImpl implements ReportService {
 		List<String> preSignedUrls = s3ImageUploader.preSignedUrl(fileNames);
 
 		return new ApiResponse("Evidences fetched sucessfully", preSignedUrls);
+	}
+
+	@Override
+	public ApiResponse<?> getReportDetails(Long crimeReportId) {
+		
+		CrimeReports crimeReports =  crimeReportsDao.findById(crimeReportId).orElseThrow(() -> new ResourceNotFoundException("Crime Report with id " + crimeReportId + " doesn't exist"));
+		
+		Address crimeAddress = addressDao.findById(crimeReports.getAddress().getId()).orElseThrow(()-> new ResourceNotFoundException("crime address not found"));
+		
+		CrimeCategory category = crimeCategoryDao.findById(crimeReports.getCrimeCategory().getId()).orElseThrow(()-> new ResourceNotFoundException("crime category not found"));
+		
+		String stationName = null;
+		
+		 PoliceStation policeStation = crimeReports.getPoliceStation();
+		 Address stationAddress = null;
+		 String stationAddressLine1 = null;
+		 String stationAddressLine2 = null;
+		 String	stationCity = null;
+		 String stationState = null;
+		 String stationCountry = null;
+		 String	stationPinCode = null;
+		 
+		 if(policeStation != null) {
+			 stationName  = policeStation.getStationName();
+			 stationAddress = addressDao.findById(policeStation.getAddress().getId()).orElseThrow(() -> new ResourceNotFoundException("station adress not found"));
+			 stationAddressLine1 = stationAddress.getAddressLine1();
+			 stationAddressLine2 = stationAddress.getAddressLine2();
+			 stationCity = stationAddress.getCity();
+			 stationState = stationAddress.getState();
+			 stationCountry =  stationAddress.getCountry();
+			 stationPinCode = stationAddress.getPinCode();
+		 }
+
+		
+		return new ApiResponse<CrimeReportDetailsDTO>("crime report details fetched successfully", new CrimeReportDetailsDTO(
+				crimeReports.getId(),
+				crimeReports.getCrimeDate(),
+				crimeReports.getDescription(),
+				crimeAddress.getAddressLine1(),
+				crimeAddress.getAddressLine2(),
+				crimeAddress.getCity(),
+				crimeAddress.getState(),
+				crimeAddress.getCountry(),
+				crimeAddress.getPinCode(),
+				category.getCategory(),
+				category.getSubCategory(),
+				stationName,
+				stationAddressLine1,
+				stationAddressLine2,
+				stationCity,
+				stationState,
+				stationCountry,
+				stationPinCode
+				));
 	}
 
 }
