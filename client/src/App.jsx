@@ -55,7 +55,7 @@ import {loader as loadPoliceFeedback } from "./loader/Police/FeedbackLoader";
 import {loader as loadPoliceCrimeCategory} from "./loader/Police/CrimeCategoryLoader";
 import { loader as loadPoliceCrimeReportsDetails } from "./loader/Police/ReportDetailsLoader";
 import PoliceCrimeReportsDetail from "./Screens/Police/ReportsDetail";
-
+import PoliceCrimeReports from "./Screens/Police/CrimeReports";
 import "./App.css";
 import {
   checkAdminAuthLoader,
