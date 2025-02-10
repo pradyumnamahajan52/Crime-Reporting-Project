@@ -15,6 +15,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class AdminCrimeReportDTO {
 
+	private Long id;
+	
     private AdminCrimeReportCitizenDTO citizen;
 
     private String description;

@@ -20,7 +20,7 @@ export default function CrimeReports() {
           {(crimeReports) => (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {crimeReports.data?.map((report) => (
-                <div key={report.id} className="bg-white shadow-lg rounded-lg p-6 flex flex-col space-y-4">
+                <div key={report.id} className="bg-white shadow-lg rounded-lg p-6 flex flex-col space-y-4 h-full">
                   <div>
                     <h2 className="text-xl font-semibold text-gray-800">
                       {report?.citizen?.user?.fullName}

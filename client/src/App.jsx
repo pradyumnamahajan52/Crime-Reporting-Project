@@ -54,6 +54,9 @@ import { loader as loadPoliceCrimeReports } from "./loader/Police/CrimeReportsLo
 import PoliceCrimeReports from "./Screens/Police/CrimeReports";
 import {loader as loadPoliceFeedback } from "./loader/Police/FeedbackLoader";
 import {loader as loadPoliceCrimeCategory} from "./loader/Police/CrimeCategoryLoader";
+import { loader as loadPoliceCrimeReportsDetails } from "./loader/Police/ReportDetailsLoader";
+import PoliceCrimeReports from "./Screens/Police/CrimeReports";
+import PoliceCrimeReportsDetail from "./Screens/Police/ReportsDetail";
 
 import "./App.css";
 import {
@@ -119,7 +122,8 @@ const router = createBrowserRouter([
         element: <Reports />,
         loader: loadCrimeCategory,
         action: newCrimeReportAction
-      },{
+      },
+      {
         path: "report-details/:id",
         element: <CrimeReportsDetail/>,
         loader: loadReportDetails
@@ -235,6 +239,11 @@ const router = createBrowserRouter([
         path: "crime-report",
         element: <PoliceCrimeReports />,
         loader:loadPoliceCrimeReports
+      },
+      {
+        path: "report-details/:id",
+        element: <PoliceCrimeReportsDetail/>,
+        loader: loadPoliceCrimeReportsDetails
       },
       {
         path: "feedback",
