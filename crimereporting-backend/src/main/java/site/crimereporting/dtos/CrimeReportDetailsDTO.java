@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import site.crimereporting.entity.Status;
 
 @Getter
 @Setter
@@ -16,7 +17,8 @@ public class CrimeReportDetailsDTO {
 	private Long crimeReportId;
 	private LocalDate crimeDate;
 	private String description;
-	
+	private Status reportStatus;
+
 	//crime address 
 	private String addressLine1;
 	private String addressLine2;
