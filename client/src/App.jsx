@@ -143,10 +143,10 @@ const router = createBrowserRouter([
         path: "register",
         element: <Register />,
       },
-      {
-        path: "profile",
-        element: <UserProfile />,
-      },
+      // {
+      //   path: "profile",
+      //   element: <UserProfile />,
+      // },
 
       { path: "logout", action: LogoutAction },
     ],
