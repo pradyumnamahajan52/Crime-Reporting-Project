@@ -51,6 +51,14 @@ public class PoliceController {
     	
     }
 	
+	@PostMapping("/get-evidence")
+	public ResponseEntity<?> getReportsEvidence(@RequestParam("crimeReportId") Long crimeReportId){
+		System.out.println(crimeReportId);
+		return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportsEvidence(crimeReportId));
+		
+	}
+
+	
 	@PatchMapping
 	public ResponseEntity<?> updateStatus(@RequestParam Long crimeReportId, @RequestParam String status){
 		
