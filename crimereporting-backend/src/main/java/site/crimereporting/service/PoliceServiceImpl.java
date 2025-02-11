@@ -271,6 +271,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import jakarta.validation.Valid;
 import site.crimereporting.custom_exception.ApiException;
 import site.crimereporting.custom_exception.AuthenticationException;
 import site.crimereporting.custom_exception.ResourceNotFoundException;
@@ -357,6 +359,28 @@ public class PoliceServiceImpl implements PoliceService {
 	@Override
 	public List<CrimeCategory> getAllCrime() {
 		return crimeCategoryDao.findByIsDeletedFalse();
+	}
+
+	@Override
+	public ApiResponse<?> updateUserDetails(@Valid PoliceUserDTO policeUserDTO) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String loggedInEmail = authentication.getName();
+
+		// Find User by logged-in email
+		User user = userDao.findByEmail(loggedInEmail)
+				.orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+
+		// Update user details
+		user.setFullName(policeUserDTO.getFullName());
+		user.setPhoneNumber(policeUserDTO.getPhoneNumer());
+
+
+		// Save updated user back to DB
+		user = userDao.save(user);
+//		System.out.println(user.toString());
+
+		// Return updated user details as DTO
+		return new ApiResponse<>("Logged User's Information updated",  mapper.map(user, PoliceUserDTO.class));
 	}
 
 
