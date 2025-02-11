@@ -104,7 +104,7 @@ public class PoliceServiceImpl implements PoliceService {
 
 		// Update user details
 		user.setFullName(policeUserDTO.getFullName());
-		user.setPhoneNumber(policeUserDTO.getPhoneNumer());
+		user.setPhoneNumber(policeUserDTO.getPhoneNumber());
 
 
 		// Save updated user back to DB
@@ -126,7 +126,7 @@ public class PoliceServiceImpl implements PoliceService {
 
 		// Update user details
 		user.setFullName(policeUserDTO.getFullName());
-		user.setPhoneNumber(policeUserDTO.getPhoneNumer());
+		user.setPhoneNumber(policeUserDTO.getPhoneNumber());
 //		user.setRole(adminUserDTO.getRole());
 
 

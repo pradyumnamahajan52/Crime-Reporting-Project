@@ -101,6 +101,12 @@ const UserProfile = () => {
                   value={profileData.fullName}
                   className="w-full px-3 py-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200"
                   placeholder="Full Name"
+                  onChange={(e) =>
+                    setProfileData({
+                      ...profileData,
+                      fullName: e.target.value,
+                    })
+                  }
 
                 />
               </div>
@@ -233,7 +239,7 @@ const UserProfile = () => {
                   }
                 />
               </div>
-              <div>
+              {/* <div>
                 <label className="block text-sm font-medium text-gray-600 mb-2">
                   Latitude
                 </label>
@@ -246,9 +252,9 @@ const UserProfile = () => {
                     setProfileData({ ...profileData, latitude: e.target.value })
                   }
                 />
-              </div>
+              </div> */}
             </div>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <label className="block text-sm font-medium text-gray-600 mb-2">
                 Longitude
               </label>
@@ -261,7 +267,7 @@ const UserProfile = () => {
                   setProfileData({ ...profileData, longitude: e.target.value })
                 }
               />
-            </div>
+            </div> */}
             <button
               onClick={handleSaveChanges}
               className="mt-6 px-6 py-2 bg-primary hover:bg-primary-400 hover:text-black text-white rounded"

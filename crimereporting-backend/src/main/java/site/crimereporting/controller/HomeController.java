@@ -21,12 +21,7 @@ import site.crimereporting.dtos.OtpRequest;
 @RestController
 public class HomeController {
 
-    //
-//    @GetMapping
-//    public Result<Object> renderHome(){
-//        HashMap hasmpa = new HashMap<String,String>() {"Author":"Pradyumna Mahajan"};
-//  return new Result<Object>("success","Project is Working",hasmap);
-//    }
+
 
     @Autowired
     private PoliceStationDao policeStationDao;

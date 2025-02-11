@@ -20,6 +20,7 @@ import java.util.Collections;
 @RequestMapping("/police")
 @CrossOrigin("*")
 public class PoliceController {
+	
 	@Autowired
 	private PoliceService policeService;
 	
@@ -47,17 +48,14 @@ public class PoliceController {
 	
 	@PostMapping("/get-reportDetails")
     public ResponseEntity<?> getReportDetails(@RequestParam Long crimeReportId){
-    	
-    	
 		return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportDetails(crimeReportId));
-    	
     }
-	
+
+
 	@PostMapping("/get-evidence")
 	public ResponseEntity<?> getReportsEvidence(@RequestParam("crimeReportId") Long crimeReportId){
 		System.out.println(crimeReportId);
 		return ResponseEntity.status(HttpStatus.OK).body(reportService.getReportsEvidence(crimeReportId));
-		
 	}
 
 	
@@ -77,6 +75,7 @@ public class PoliceController {
 		return ResponseEntity.ok(policeService.newCrimeCategoryDetails(crimeCategoryRequestDTO));
 	}
 
+
 	
 	
 	@GetMapping("/user/details")
@@ -89,5 +88,4 @@ public class PoliceController {
 		return ResponseEntity.ok(policeService.updateLoggedInUserDetails(policeUserDTO));
 	}
 
-	
 }

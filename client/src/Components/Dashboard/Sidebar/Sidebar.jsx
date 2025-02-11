@@ -27,7 +27,7 @@ const Sidebar = ({panelType}) => {
   
   const [policeSideMenuItems] = useState([
     { title: "Dashboard", url: "/police/", path: "", icon: FiHome },
-    { title: "User", url: "/police/users", path: "/police/users", icon: FiUsers },
+    // { title: "User", url: "/police/users", path: "/police/users", icon: FiUsers },
     { title: "Profile", url: "/police/profile", path: "/police/profile", icon: CgProfile },
     { title: "Crime Reports", url: "/police/crime-report", path: "/police/crime-report", icon: TbReportAnalytics },
     { title: "Crime Category", url: "/police/crime-category", path: "/police/crime-category", icon: MdCategory },
