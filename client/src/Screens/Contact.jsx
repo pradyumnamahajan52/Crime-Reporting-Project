@@ -1,10 +1,11 @@
 
 import React, { useEffect, useState } from "react";
-import getContacts from "../Services/loader/ContactUs";
 import { motion } from "framer-motion"; 
+import { useLoaderData } from "react-router-dom";
 
 function Contact() {
 
+  const {contactData} = useLoaderData();
   const [arrOfContacts, setArrOfContacts] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -15,113 +16,10 @@ function Contact() {
 
   useEffect(()=>{
 
-    //const fetchData = async ()=>{
-      // const result = await getContacts();
+     setArrOfContacts(contactData.data);
 
-     // setArrOfContacts(result);
-
-    //}
-
-    //fetchData()
-
-    const fetchdata = async() =>{
-      const data = [
-        {
-            "id":1,
-            "name":"Atharva Jamdar",
-            "state": "Maharashtra",
-            "rank": "Superintendent of Chhichore",
-            "email" : "lucifer.and@nic.in",
-            "contact" : "8900910411"
-        },
-        {
-          "id":2,
-          "name":"John Michael",
-          "state": "ANDHRA PRADESH",
-          "rank": "Superintendent of Police",
-          "email" : "spcid.and@nic.in",
-          "contact" : "8900910411"
-      },
-      {
-        "id":3,
-        "name":"John Michael",
-        "state": "ANDHRA PRADESH",
-        "rank": "Superintendent of Police",
-        "email" : "spcid.and@nic.in",
-        "contact" : "8900910411"
-      },
-      {
-        "id":4,
-        "name":"John Michael",
-        "state": "ANDHRA PRADESH",
-        "rank": "Superintendent of Police",
-        "email" : "spcid.and@nic.in",
-        "contact" : "8900910411"
-      },
-      {
-        "id":4,
-        "name":"John Michael",
-        "state": "ANDHRA PRADESH",
-        "rank": "Superintendent of Police",
-        "email" : "spcid.and@nic.in",
-        "contact" : "8900910411"
-      },
-      {
-        "id":4,
-        "name":"John Michael",
-        "state": "ANDHRA PRADESH",
-        "rank": "Superintendent of Police",
-        "email" : "spcid.and@nic.in",
-        "contact" : "8900910411"
-      },
-      {
-        "id":4,
-        "name":"John Michael",
-        "state": "ANDHRA PRADESH",
-        "rank": "Superintendent of Police",
-        "email" : "spcid.and@nic.in",
-        "contact" : "8900910411"
-      },
-      {
-        "id":4,
-        "name":"John Michael",
-        "state": "ANDHRA PRADESH",
-        "rank": "Superintendent of Police",
-        "email" : "spcid.and@nic.in",
-        "contact" : "8900910411"
-      },
-      {
-        "id":4,
-        "name":"John Michael",
-        "state": "ANDHRA PRADESH",
-        "rank": "Superintendent of Police",
-        "email" : "spcid.and@nic.in",
-        "contact" : "8900910411"
-      },
-      {
-        "id":4,
-        "name":"John Michael",
-        "state": "ANDHRA PRADESH",
-        "rank": "Superintendent of Police",
-        "email" : "spcid.and@nic.in",
-        "contact" : "8900910411"
-      },
-      {
-        "id":4,
-        "name":"John Michael",
-        "state": "ANDHRA PRADESH",
-        "rank": "Superintendent of Police",
-        "email" : "spcid.and@nic.in",
-        "contact" : "8900910411"
-      }
-      ] 
-
-      setArrOfContacts(data)
-    }
-
-    fetchdata()
     
-  }, [])
+  }, [arrOfContacts])
 
   const totalPages = Math.ceil(arrOfContacts.length / itemsPerPage);
 
@@ -146,7 +44,7 @@ function Contact() {
     <section className="text-gray-400 bg-gray-100 body-font relative">
   {/* Section Container Animation */}
   <motion.div
-    className="container px-5 pt-20 m-0 flex sm:flex-nowrap flex-wrap"
+    className="container px-5 pt-5 m-0 flex sm:flex-nowrap flex-wrap"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 0.5 }}
@@ -200,7 +98,7 @@ function Contact() {
               </th>
               <th className="p-4 border-y border-blue-gray-100 bg-slate-500">
                 <p className="block font-sans text-sm antialiased font-normal leading-none text-white opacity-70">
-                  State
+                  Police Station
                 </p>
               </th>
               <th className="p-4 border-y border-blue-gray-100 bg-slate-500">
@@ -236,7 +134,7 @@ function Contact() {
                   <div className="flex items-center gap-3">
                     <div className="flex flex-col">
                       <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        {row.name}
+                        {row.fullName}
                       </p>
                     </div>
                   </div>
@@ -251,7 +149,7 @@ function Contact() {
                 <td className="p-4 border-b border-blue-gray-50">
                   <div className="w-max">
                     <div className="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase">
-                      <span className="">{row.rank}</span>
+                      <span className="">{row.designation}</span>
                     </div>
                   </div>
                 </td>
@@ -262,7 +160,7 @@ function Contact() {
                 </td>
                 <td className="p-4 border-b border-blue-gray-50">
                   <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                    {row.contact}
+                    {row.phoneNumber}
                   </p>
                 </td>
               </tr>

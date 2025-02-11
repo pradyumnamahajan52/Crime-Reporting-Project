@@ -70,11 +70,11 @@ public class PoliceController {
 	public ResponseEntity<?> viewCrimeList() {
 		return ResponseEntity.ok(policeService.getAllCrime());
 	}
-	
+
 	@PutMapping("/users")
 	public ResponseEntity<?> updatePoliceUserDetails(@RequestBody @Valid PoliceUserDTO policeUserDTO) {
 		return ResponseEntity.ok(policeService.updateUserDetails(policeUserDTO));
 	}
-	
+
 	
 }
