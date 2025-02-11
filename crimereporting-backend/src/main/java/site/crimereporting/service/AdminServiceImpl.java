@@ -215,6 +215,13 @@ public class AdminServiceImpl implements AdminService {
 		return new ApiResponse<>("police station updated successfully", policeStation);
 	}
 
-	
-	
+	@Override
+	public ApiResponse<?> deletePoliceStation(Long policeStationId) {
+
+		policeStationDao.deleteById(policeStationId);
+
+		return new ApiResponse<>("police station deleted successfully", null);
+	}
+
+
 }
