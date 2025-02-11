@@ -87,4 +87,5 @@ public class PoliceController {
 	public ResponseEntity<?> updateLoggedInUserDetails(@RequestBody @Valid PoliceUserDTO policeUserDTO) {
 		return ResponseEntity.ok(policeService.updateLoggedInUserDetails(policeUserDTO));
 	}
+
 }
