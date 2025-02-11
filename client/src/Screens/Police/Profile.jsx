@@ -30,7 +30,10 @@ const Profile = () => {
           "Content-Type": "application/json",
         },
         body:  JSON.stringify(userInfo),
+        
       });
+
+      console.log(response.data);
 
       if (!response.ok) {
         throw new Error("Failed to update profile.");
@@ -96,6 +99,7 @@ const ProfileForm = ({ userData, handleSubmit, isSaving }) => {
 
   return (
     <form onSubmit={(e) => handleSubmit(e, userInfo)}>
+       
       <div className="grid mt-4">
         <label className="block text-sm font-medium text-gray-600 mb-2">Full Name</label>
         <input

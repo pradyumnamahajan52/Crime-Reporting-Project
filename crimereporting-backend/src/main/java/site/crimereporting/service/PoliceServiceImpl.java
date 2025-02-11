@@ -1,7 +1,3 @@
-
-
-
-
 package site.crimereporting.service;
 
 import java.util.ArrayList;
@@ -25,6 +21,8 @@ import site.crimereporting.dao.UserDao;
 import site.crimereporting.dtos.AdminCrimeReportDTO;
 import site.crimereporting.dtos.AdminUserDTO;
 import site.crimereporting.dtos.ApiResponse;
+import site.crimereporting.dtos.CrimeCategoryDTO;
+import site.crimereporting.dtos.CrimeCategoryRequestDTO;
 import site.crimereporting.dtos.FeedbackResponse;
 import site.crimereporting.dtos.PoliceUserDTO;
 import site.crimereporting.entity.CrimeCategory;
@@ -106,7 +104,7 @@ public class PoliceServiceImpl implements PoliceService {
 
 		// Update user details
 		user.setFullName(policeUserDTO.getFullName());
-		user.setPhoneNumber(policeUserDTO.getPhoneNumer());
+		user.setPhoneNumber(policeUserDTO.getPhoneNumber());
 
 
 		// Save updated user back to DB
@@ -125,14 +123,10 @@ public class PoliceServiceImpl implements PoliceService {
 		// Find User by logged-in email
 		User user = userDao.findByEmail(loggedInEmail)
 				.orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
-		
-		CrimeCategory category = mapper.map(crimeCategoryRequestDTO, CrimeCategory.class);
-		category = crimeCategoryDao.save(category);
-		return new ApiResponse<>("User's Created Sucessfully", mapper.map(category, CrimeCategoryDTO.class));
 
 		// Update user details
 		user.setFullName(policeUserDTO.getFullName());
-		user.setPhoneNumber(policeUserDTO.getPhoneNumer());
+		user.setPhoneNumber(policeUserDTO.getPhoneNumber());
 //		user.setRole(adminUserDTO.getRole());
 
 
@@ -144,6 +138,21 @@ public class PoliceServiceImpl implements PoliceService {
 		return new ApiResponse<>("Logged User's Information updated", mapper.map(user, PoliceUserDTO.class));
 
 	}
+
+	@Override
+	public ApiResponse<?> newCrimeCategoryDetails(CrimeCategoryRequestDTO crimeCategoryRequestDTO) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String loggedInEmail = authentication.getName();
+
+		// Find User by logged-in email
+		User user = userDao.findByEmail(loggedInEmail)
+				.orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+		
+		CrimeCategory category = mapper.map(crimeCategoryRequestDTO, CrimeCategory.class);
+		category = crimeCategoryDao.save(category);
+		return new ApiResponse<>("User's Created Sucessfully", mapper.map(category, CrimeCategoryDTO.class));
+	}
+
 
 
 }

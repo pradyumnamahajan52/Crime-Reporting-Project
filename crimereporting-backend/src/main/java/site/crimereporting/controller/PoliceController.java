@@ -20,6 +20,7 @@ import java.util.Collections;
 @RequestMapping("/police")
 @CrossOrigin("*")
 public class PoliceController {
+	
 	@Autowired
 	private PoliceService policeService;
 	
@@ -85,7 +86,6 @@ public class PoliceController {
 	@PutMapping("/user/details")
 	public ResponseEntity<?> updateLoggedInUserDetails(@RequestBody @Valid PoliceUserDTO policeUserDTO) {
 		return ResponseEntity.ok(policeService.updateLoggedInUserDetails(policeUserDTO));
-
-
 	}
+
 }
