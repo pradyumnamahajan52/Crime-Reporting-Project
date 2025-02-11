@@ -20,5 +20,5 @@ public class PoliceUserDTO
 	@NotBlank(message = "Full Name must be filled!! ")
 	private String fullName;
 	
-	private String phoneNumer;
+	private String phoneNumber;
 }

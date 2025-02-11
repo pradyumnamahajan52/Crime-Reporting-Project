@@ -25,6 +25,7 @@ const PoliceCrimeCategory = () => {
                     <th className="text-start p-1.5 border border-gray-300">ID</th>
                     <th className="text-start p-1.5 border border-gray-300">Category</th>
                     <th className="text-start p-1.5 border border-gray-300">Sub-Category</th>
+                    <th className="text-start p-1.5 border border-gray-300">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
