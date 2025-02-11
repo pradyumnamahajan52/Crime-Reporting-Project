@@ -7,9 +7,10 @@ import java.io.IOException;
 
 public interface CitizenService {
 
-
-
 	ApiResponse<?> getLoggedInCitizenDetails();
 
 	ApiResponse<?> updateLoggedInCitizenDetails(@Valid CitizenDTO citizenDTO);
+
+	ApiResponse<?> newFeedback(FeedbackRequestDTO feedbackRequestDTO);
+
 }

@@ -82,7 +82,11 @@ import CrimeReportsDetail from "./Screens/Citizen/ReportsDetail";
 import 'react-toastify/dist/ReactToastify.css';
 
 import PoliceCrimeCategory from "./Screens/Police/PoliceCrimeCategory";
+
+import { NewFeedbackAction } from "./action/user/NewFeedbackAction";
+
 import Profile from "./Screens/Police/Profile";
+
 
 
 
@@ -118,8 +122,8 @@ const router = createBrowserRouter([
       {
         path: "feedback",
         element: <FeedbackForm />,
+        action: NewFeedbackAction
       },
-
       {
         path: "crimestatus",
         element: <CrimeStatus />,

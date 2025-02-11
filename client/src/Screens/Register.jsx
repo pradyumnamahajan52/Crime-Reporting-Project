@@ -164,22 +164,25 @@ export default function Register() {
 
   //handle submit for citizen register
   const handleSignUpforcitizen = async () => {
+    if (isLoading) return;
+
+    setisLoading(true);
     try {
-      toast.success("citizen registration succesfully");
-      console.log(citizenformData);
-      console.log(evidence);
       const imgData = { image: evidence[0] };
       const mergedObj = { ...citizenformData, ...imgData };
-      console.log(mergedObj);
       const res = await registerCitizen(mergedObj);
-      console.log("handleSignUpforcitizen",res);
-      navigation("/user/login");
+
+      toast.success("Citizen registration successful!");
+      console.log("handleSignUpforcitizen Response:", res);
+      setTimeout(() => {
+        navigation("/user/login");
+      }, 1500);
+
     } catch (error) {
-      console.log('====================================');
-      console.log("error in handleSignUpforcitizen",error);
-      console.log("message in handleSignUpforcitizen",error.message);
-      console.log('====================================');
-      return error;
+      console.error("Error in handleSignUpforcitizen:", error);
+      toast.error(error.message || "Failed to register. Please try again.");
+    } finally {
+      setisLoading(false);
     }
   };
 
@@ -262,20 +265,19 @@ export default function Register() {
   //handlesubmit for police register
   const handleSignUpforPolice = async () => {
     if (isLoading) return;
-    console.log("signup clicked");
-    console.log(policeformData);
+
+    setisLoading(true);
     try {
-      setisLoading(true);
       const res = await registerPolice(policeformData);
-      console.log("handleSignUpforPolice",res);
-      setisLoading(false);
-      toast.success("police registration sucessfully");
-      navigation("/user/login");
+      toast.success("Police registration successful!");
+      console.log("handleSignUpforPolice Response:", res);
+      setTimeout(() => {
+        navigation("/user/login");        
+      }, 1500);
+
     } catch (error) {
-      console.log('====================================');
-      console.log(error);
-      console.log('====================================');
-      return error;
+      console.error("Error in handleSignUpforPolice:", error);
+      toast.error(error.message || "Failed to register. Please try again.");
     } finally {
       setisLoading(false);
     }
