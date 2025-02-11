@@ -26,6 +26,8 @@ public class PoliceController {
 	@Autowired
 	private ReportService reportService;
 	
+	private CrimeCategoryDTO crimeCategoryDTO;
+
 	@GetMapping("/feedback")
 	public ResponseEntity<?> renderFeedback() {
 		return ResponseEntity.status(HttpStatus.OK).body(policeService.getFeedbacks());
@@ -68,6 +70,11 @@ public class PoliceController {
 	@GetMapping("/crime-category")
 	public ResponseEntity<?> viewCrimeList() {
 		return ResponseEntity.ok(policeService.getAllCrime());
+	}
+	
+	@PostMapping("/crime-category")
+	public ResponseEntity<?> saveNewCategory(@RequestBody @Valid CrimeCategoryRequestDTO crimeCategoryRequestDTO) {
+		return ResponseEntity.ok(policeService.newCrimeCategoryDetails(crimeCategoryRequestDTO));
 	}
 
 	

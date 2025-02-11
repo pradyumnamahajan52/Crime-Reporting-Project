@@ -125,6 +125,10 @@ public class PoliceServiceImpl implements PoliceService {
 		// Find User by logged-in email
 		User user = userDao.findByEmail(loggedInEmail)
 				.orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+		
+		CrimeCategory category = mapper.map(crimeCategoryRequestDTO, CrimeCategory.class);
+		category = crimeCategoryDao.save(category);
+		return new ApiResponse<>("User's Created Sucessfully", mapper.map(category, CrimeCategoryDTO.class));
 
 		// Update user details
 		user.setFullName(policeUserDTO.getFullName());
