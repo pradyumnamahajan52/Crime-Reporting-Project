@@ -170,6 +170,8 @@ const router = createBrowserRouter([
     ],
   },
   {
+
+    
     path: "admin",
     errorElement: <Error />,
     element: <AdminLayout />,
