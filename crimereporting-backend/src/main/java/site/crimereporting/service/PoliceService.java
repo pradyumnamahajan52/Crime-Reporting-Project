@@ -22,4 +22,5 @@ public interface PoliceService {
 	
 	ApiResponse<?>  newCrimeCategoryDetails(CrimeCategoryRequestDTO crimeCategoryRequestDTO);
 	
+	ApiResponse<?>  updateLoggedInUserDetails(PoliceUserDTO policeUserDTO);
 }

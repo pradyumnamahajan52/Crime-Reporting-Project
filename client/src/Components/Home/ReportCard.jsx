@@ -37,7 +37,7 @@ import {
   </CardBody>
   <CardFooter className="pt-3">
     <Button size="lg" fullWidth={true} className="py-4 bg-black" 
-     onClick={() => navigate("/reports")} >
+     onClick={() => navigate("/citizen/reports")} >
       Report Crime
     </Button>
   </CardFooter>
