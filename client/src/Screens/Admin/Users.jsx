@@ -86,7 +86,7 @@ const Users = () => {
                     <th className="text-start p-1.5 border border-gray-300">Role</th>
                     <th className="text-start p-1.5 border border-gray-300">Phone Number</th>
                     <th className="text-start p-1.5 border border-gray-300">Created At</th>
-                    <th className="p-2 border border-gray-300"></th>
+                    <th className="p-2 border border-gray-300">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
