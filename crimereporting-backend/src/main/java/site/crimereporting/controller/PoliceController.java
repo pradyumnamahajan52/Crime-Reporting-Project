@@ -25,6 +25,8 @@ public class PoliceController {
 	
 	@Autowired
 	private ReportService reportService;
+	
+	private CrimeCategoryDTO crimeCategoryDTO;
 
 	@GetMapping("/feedback")
 	public ResponseEntity<?> renderFeedback() {
@@ -66,12 +68,24 @@ public class PoliceController {
 	public ResponseEntity<?> viewCrimeList() {
 		return ResponseEntity.ok(policeService.getAllCrime());
 	}
-
-
-	@PutMapping("/users")
-	public ResponseEntity<?> updatePoliceUserDetails(@RequestBody @Valid PoliceUserDTO policeUserDTO) {
-		return ResponseEntity.ok(policeService.updateUserDetails(policeUserDTO));
+	
+	@PostMapping("/crime-category")
+	public ResponseEntity<?> saveNewCategory(@RequestBody @Valid CrimeCategoryRequestDTO crimeCategoryRequestDTO) {
+		return ResponseEntity.ok(policeService.newCrimeCategoryDetails(crimeCategoryRequestDTO));
 	}
+
+
+	
+	
+	@GetMapping("/user/details")
+	public ResponseEntity<?> renderUserDetails() {
+		return ResponseEntity.ok(policeService.getLoggedInPoliceDetails());
+	}
+
+	@PutMapping("/user/details")
+	public ResponseEntity<?> updateLoggedInUserDetails(@RequestBody @Valid PoliceUserDTO policeUserDTO) {
+		return ResponseEntity.ok(policeService.updateLoggedInUserDetails(policeUserDTO));
+
 
 	
 }
