@@ -31,7 +31,7 @@ const Sidebar = ({panelType}) => {
     { title: "Profile", url: "/police/profile", path: "/police/profile", icon: CgProfile },
     { title: "Crime Reports", url: "/police/crime-report", path: "/police/crime-report", icon: TbReportAnalytics },
     { title: "Crime Category", url: "/police/crime-category", path: "/police/crime-category", icon: MdCategory },
-    { title: "Police Station", url: "/police/police-station", path: "/police/police-station", icon: FaClipboardList },
+    // { title: "Police Station", url: "/police/police-station", path: "/police/police-station", icon: FaClipboardList },
     { title: "Feedback", url: "/police/feedback", path: "/police/feedback", icon: MdFeedback },
     // { title: "Crime Rate", url: "/police/crime-rate", path: "/police/crime-rate", icon: MdGraphicEq },
   ]);

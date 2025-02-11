@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import site.crimereporting.custom_exception.ApiException;
-import site.crimereporting.dao.CrimeReportsDao;
 import site.crimereporting.dtos.*;
 import site.crimereporting.service.PoliceService;
 import site.crimereporting.service.ReportService;
@@ -26,8 +25,6 @@ public class PoliceController {
 	
 	@Autowired
 	private ReportService reportService;
-	
-	
 
 	@GetMapping("/feedback")
 	public ResponseEntity<?> renderFeedback() {
@@ -61,15 +58,23 @@ public class PoliceController {
 		
 	}
 
-
-	@PatchMapping("/update-crime-status")
-
-	public ResponseEntity<?> updateStatus(@RequestParam("crimeReportId") Long crimeReportId, @RequestParam("status") String status){
-		return ResponseEntity.status(HttpStatus.OK).body(reportService.updateCrimeStatus(crimeReportId, status));
+	
+	@PatchMapping
+	public ResponseEntity<?> updateStatus(@RequestParam Long crimeReportId, @RequestParam String status){
+			
+		return null;
+		
 	}
 	
 	@GetMapping("/crime-category")
 	public ResponseEntity<?> viewCrimeList() {
 		return ResponseEntity.ok(policeService.getAllCrime());
 	}
+	
+	@PutMapping("/users")
+	public ResponseEntity<?> updatePoliceUserDetails(@RequestBody @Valid PoliceUserDTO policeUserDTO) {
+		return ResponseEntity.ok(policeService.updateUserDetails(policeUserDTO));
+	}
+	
+	
 }

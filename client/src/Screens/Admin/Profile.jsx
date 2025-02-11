@@ -7,14 +7,14 @@ import Spinner from "../../Components/Spinner";
 
 const Profile = () => {
   const { userData } = useLoaderData(); // Fetch user data using Suspense
-  const navigate = useNavigate(); // ✅ Use navigate for redirection
-  const location = useLocation(); // ✅ Get current URL (for reading success message)
+  const navigate = useNavigate(); //  Use navigate for redirection
+  const location = useLocation(); //  Get current URL (for reading success message)
   const [isSaving, setIsSaving] = useState(false);
 
-  // ✅ Read success message from URL
+  //  Read success message from URL
   const successMessage = new URLSearchParams(location.search).get("success");
 
-  // ✅ Handle form submission (Save user profile)
+  //  Handle form submission (Save user profile)
   const handleSubmit = async (e, userInfo) => {
     e.preventDefault();
     setIsSaving(true);
@@ -38,7 +38,7 @@ const Profile = () => {
         throw new Error("Failed to update profile.");
       }
 
-      // ✅ Redirect to Profile Page with Success Message
+      //  Redirect to Profile Page with Success Message
       navigate("/admin/profile?success=Profile updated successfully!");
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -55,12 +55,12 @@ const Profile = () => {
         <div className="col-span-8 bg-white shadow rounded-lg p-6">
           <h2 className="text-lg font-semibold text-gray-700 mb-4">My Account</h2>
 
-          {/* ✅ Show Success Message if available */}
+          {/*  Show Success Message if available */}
           {successMessage && (
             <div className="mb-4 text-green-600 font-semibold">{successMessage}</div>
           )}
 
-          {/* ✅ Suspense + Await for handling loader data */}
+          {/*  Suspense + Await for handling loader data */}
           <Suspense fallback={<Spinner />}>
             <Await resolve={userData}>
               {(data) => <ProfileForm userData={data.data} handleSubmit={handleSubmit} isSaving={isSaving} />}
@@ -84,7 +84,7 @@ const Profile = () => {
 
 export default Profile;
 
-// ✅ Profile Form Component
+//  Profile Form Component
 const ProfileForm = ({ userData, handleSubmit, isSaving }) => {
   const [userInfo, setUserInfo] = useState(userData || {});
 
@@ -145,7 +145,7 @@ const ProfileForm = ({ userData, handleSubmit, isSaving }) => {
   );
 };
 
-// ✅ Profile Sidebar Component
+//  Profile Sidebar Component
 const ProfileSidebar = ({ fullName, role }) => (
   <>
     <img

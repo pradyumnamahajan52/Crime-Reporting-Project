@@ -19,7 +19,7 @@ const PoliceCrimeCategory = () => {
                 console.log("====> ",categories);
                 console.log('====================================');
                 return (
-              <table className="w-3/4 sm:w-full table-auto border-collapse border border-gray-200" >
+              <table className="w-3/4 table-auto border-collapse border border-gray-200" >
                 <thead>
                   <tr className="bg-stone-100 text-sm font-normal text-stone-500">
                     <th className="text-start p-1.5 border border-gray-300">ID</th>
@@ -43,7 +43,7 @@ const PoliceCrimeCategory = () => {
 
 export default PoliceCrimeCategory;
 
-// ✅ Table Row Component
+// Table Row Component
 const TableRow = ({ category }) => {
   return (
     <tr className="text-sm border-b-2">

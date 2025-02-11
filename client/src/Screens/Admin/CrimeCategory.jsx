@@ -44,7 +44,7 @@ const CrimeCategory = () => {
 
 export default CrimeCategory;
 
-// ✅ Table Row Component
+//  Table Row Component
 const TableRow = ({ category }) => {
   return (
     <tr className="text-sm border-b-2">
