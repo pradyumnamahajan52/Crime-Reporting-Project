@@ -44,6 +44,7 @@ import { loader as loadPoliceStations } from "./loader/admin/PoliceStationLoader
 import { loader as loadAdminCrimeReports } from "./loader/admin/CrimeReportsLoader";
 import {loader as loadPoliceDetails} from './loader/Police/LoadPoliceDetails';
 import { loader as loadAdminCrimeCategory } from "./loader/admin/CrimeCategoryLoader";
+import { loader as loadPoliceStationDetailsLoader } from "./loader/admin/PoliceStationDetailsLoader ";
  // citizen
 import { loader as loadCrimeCategory} from "./loader/Crime/CrimeCategory";
 import {loader as loadReportDetails} from "./loader/Crime/ReportDetailsLoader";
@@ -55,6 +56,7 @@ import {loader as loadPoliceFeedback } from "./loader/Police/FeedbackLoader";
 import {loader as loadPoliceCrimeCategory} from "./loader/Police/CrimeCategoryLoader";
 import { loader as loadPoliceCrimeReportsDetails } from "./loader/Police/ReportDetailsLoader";
 import {loader as loadContacts} from "./Services/loader/ContactUs"
+
 import PoliceCrimeReportsDetail from "./Screens/Police/ReportsDetail";
 import PoliceCrimeReports from "./Screens/Police/CrimeReports";
 import "./App.css";
@@ -207,7 +209,7 @@ const router = createBrowserRouter([
       {
         path: "update-police-station/:id",
         element: <UpdatePoliceStation />,
-        loader: loadPoliceStations,
+        loader: loadPoliceStationDetailsLoader,
         action: updatePoliceStationAction,
       },
       {
