@@ -106,8 +106,6 @@ public class AdminController {
 
 	@DeleteMapping("/deletePoliceStation")
 	public ResponseEntity<?> deletePoliceStation(@RequestBody Long policeStationId){
-		
-
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.deletePoliceStation(policeStationId));
 	}
 }

@@ -87,5 +87,5 @@ public class PoliceController {
 		return ResponseEntity.ok(policeService.updateLoggedInUserDetails(policeUserDTO));
 
 
-	
+	}
 }
