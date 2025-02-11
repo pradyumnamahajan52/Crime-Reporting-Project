@@ -93,10 +93,10 @@ const TableRow = ({ station, handleEdit, handleDelete }) => {
         {station.createdAt ? new Date(station.createdAt).toLocaleString() : "N/A"}
       </td>
       <td className="p-1.5 flex items-center gap-2 border border-gray-200">
-        <button className="text-primary-600 hover:underline" onClick={() => handleEdit(station.id)}>
+        <button className="text-primary-600 hover:underline" onClick={() => alert("working on! Future Scope!")}>
           <FiEdit size={20} />
         </button>
-        <button className="text-red-600 hover:underline" onClick={() => handleDelete(station.id)}>
+        <button className="text-red-600 hover:underline" onClick={() => alert("working on! Future Scope!")}>
           <FiTrash size={20} />
         </button>
       </td>
