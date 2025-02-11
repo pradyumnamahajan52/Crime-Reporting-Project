@@ -48,16 +48,17 @@ const Users = () => {
 
   // Handle save (add or update user)
   const handleSaveUser = (newUser) => {
-    if (editUser) {
-      // Update existing user
-      setUsers((prevUsers) =>
-        prevUsers.map((user) => (user.id === newUser.id ? newUser : user))
-      );
-    } else {
-      // Add new user
-      setUsers((prevUsers) => [...prevUsers, newUser]);
-    }
+    // if (editUser) {
+    //   // Update existing user
+    //   setUsers((prevUsers) =>
+    //     prevUsers.map((user) => (user.id === newUser.id ? newUser : user))
+    //   );
+    // } else {
+    //   // Add new user
+    //   setUsers((prevUsers) => [...prevUsers, newUser]);
+    // }
     handleCloseModal();
+    window.location.reload();
   };
 
   return (
@@ -85,7 +86,7 @@ const Users = () => {
                     <th className="text-start p-1.5 border border-gray-300">Role</th>
                     <th className="text-start p-1.5 border border-gray-300">Phone Number</th>
                     <th className="text-start p-1.5 border border-gray-300">Created At</th>
-                    <th className="p-2 border border-gray-300"></th>
+                    <th className="p-2 border border-gray-300">Actions</th>
                   </tr>
                 </thead>
                 <tbody>

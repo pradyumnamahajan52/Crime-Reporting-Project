@@ -85,9 +85,6 @@ public class UserController {
 	
 	@GetMapping("/getPoliceStationUserDetails")
 	public ResponseEntity<?> getPoliceStationUserDetails(){
-		
-		
-		
 		return ResponseEntity.status(HttpStatus.OK).body(userService.getPoliceStationUserDetails());
 		
 	}
@@ -98,10 +95,17 @@ public class UserController {
 	}
 
 
-
 	@PutMapping("/updatedetails")
 	public ResponseEntity<?> updateLoggedInCitizenDetails(@RequestBody @Valid CitizenDTO citizenDTO) {
 		return ResponseEntity.ok(citizenService.updateLoggedInCitizenDetails(citizenDTO));
 	}
+
+	@PostMapping("/feedback")
+	public ResponseEntity<?> newUserFeedbacks(@ModelAttribute FeedbackRequestDTO feedbackRequestDTO) {
+//		System.out.println(feedbackRequestDTO.toString());
+		return ResponseEntity.status(HttpStatus.CREATED).body(citizenService.newFeedback(feedbackRequestDTO));
+	}
+
+
 
 }

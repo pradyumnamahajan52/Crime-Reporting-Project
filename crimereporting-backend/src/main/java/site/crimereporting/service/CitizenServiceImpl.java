@@ -294,7 +294,15 @@ public class CitizenServiceImpl implements CitizenService {
     private CitizenDao citizenDao;
 
     @Autowired
+    private  UserDao userDao;
+
+    @Autowired
     private AddressDao addressDao;
+
+    @Autowired
+    private FeedbackDao feedbackDao;
+
+    @Autowired ModelMapper modelMapper;
 
     @Override
     public ApiResponse<?>  getLoggedInCitizenDetails() {
@@ -315,16 +323,23 @@ public class CitizenServiceImpl implements CitizenService {
         // Get logged-in user's email
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String loggedInEmail = authentication.getName();
-
+        User user = userDao.findByEmail(loggedInEmail).orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
         // Find Citizen by User's email
-        Citizen citizen = citizenDao.findByUser_Email(loggedInEmail)
-                .orElseThrow(() -> new ResourceNotFoundException("Citizen with Email does not exist"));
+        Citizen citizen = citizenDao.findByUser(user);
 
         // Update Citizen details
         if (citizenDTO.getDateOfBirth() != null) {
             citizen.setDateOfBirth(citizenDTO.getDateOfBirth());
         }
 
+        if (citizenDTO.getFullName() != null) {
+            user.setFullName(citizenDTO.getFullName());
+
+        }
+        if (citizenDTO.getPhoneNumber() != null) {
+            user.setPhoneNumber(citizenDTO.getPhoneNumber());
+
+        }
         // Update Address details
         Address address = citizen.getAddress();
         if (citizenDTO.getAddressLine1() != null) {
@@ -343,12 +358,25 @@ public class CitizenServiceImpl implements CitizenService {
             address.setPinCode(citizenDTO.getPinCode());
         }
 
+        userDao.save(user);
         // Save updated entities
         addressDao.save(address);
         citizenDao.save(citizen);
 
         // Return updated citizen details
         return new ApiResponse<>("Citizen profile updated successfully", citizenDTO);
+    }
+
+    @Override
+    public ApiResponse<?> newFeedback(FeedbackRequestDTO feedbackRequestDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInEmail = authentication.getName();
+        User user = userDao.findByEmail(loggedInEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+        Feedback  feedback = modelMapper.map(feedbackRequestDTO,Feedback.class);
+        feedback.setUser(user);
+        Feedback transientFeedback = feedbackDao.save(feedback);
+        return new ApiResponse<>("New Feedback Created successfully",transientFeedback);
     }
 
 }

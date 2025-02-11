@@ -4,6 +4,7 @@ import {
   redirect,
   useActionData,
   useLoaderData,
+  useNavigate,
   useNavigation,
   useSubmit,
 } from "react-router-dom";
@@ -42,6 +43,7 @@ const Report = () => {
   const actionData = useActionData();
   const submit = useSubmit();
   const navigation = useNavigation();
+  const navigate = useNavigate();
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -153,7 +155,7 @@ const Report = () => {
         setShowPoliceStationModal(true);
       }
       if (actionData.reportSubmitted && actionData.policeAssigned) {
- redirect("/citizen/crimestatus");
+ navigate("/citizen/crimestatus");
 
       }
     } else if (actionData?.error) {
