@@ -1,28 +1,27 @@
-import axios from 'axios'
+import axios from "axios";
+import { API } from "../../API";
 
-export const registerPolice = async (data) =>{
-    try {
-       const res = await axios.post(`http://localhost:8000/users/register/police`,data,{
-       headers:{
-        'Content-Type':'multipart/form-data'
-       }
-       }) 
-       return res
-    } catch (error) {
-        return error
-    }
-}
+const API_BASE_URL = `${API}/users/register`;
 
 
-export const registerCitizen = async (data)=>{
-    try {
-        const res = await axios.post(`http://localhost:8000/users/register/citizen`,data,{
-        headers:{
-         'Content-Type':'multipart/form-data'
-        }
-        }) 
-        return res
-     } catch (error) {
-         return error
-     }
-}
+const sendRequest = async (url, data) => {
+  try {
+    const res = await axios.post(url, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return res.data; 
+  } catch (error) {
+    console.error("Error in API request:", error);
+    throw error.response ? error.response.data : new Error("Network Error");
+  }
+};
+
+export const registerPolice = async (data) => {
+  return sendRequest(`${API_BASE_URL}/police`, data);
+};
+
+export const registerCitizen = async (data) => {
+  return sendRequest(`${API_BASE_URL}/citizen`, data);
+};

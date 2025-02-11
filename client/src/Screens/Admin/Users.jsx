@@ -48,16 +48,17 @@ const Users = () => {
 
   // Handle save (add or update user)
   const handleSaveUser = (newUser) => {
-    if (editUser) {
-      // Update existing user
-      setUsers((prevUsers) =>
-        prevUsers.map((user) => (user.id === newUser.id ? newUser : user))
-      );
-    } else {
-      // Add new user
-      setUsers((prevUsers) => [...prevUsers, newUser]);
-    }
+    // if (editUser) {
+    //   // Update existing user
+    //   setUsers((prevUsers) =>
+    //     prevUsers.map((user) => (user.id === newUser.id ? newUser : user))
+    //   );
+    // } else {
+    //   // Add new user
+    //   setUsers((prevUsers) => [...prevUsers, newUser]);
+    // }
     handleCloseModal();
+    window.location.reload();
   };
 
   return (

@@ -25,7 +25,7 @@ const CrimeCategory = () => {
                     <th className="text-start p-1.5 border border-gray-300">ID</th>
                     <th className="text-start p-1.5 border border-gray-300">Category</th>
                     <th className="text-start p-1.5 border border-gray-300">Sub-Category</th>
-                    <th className="text-start p-1.5 border border-gray-300">Actions</th>
+                    {/* <th className="text-start p-1.5 border border-gray-300">Actions</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -52,14 +52,14 @@ const TableRow = ({ category }) => {
       <td className="p-1.5 border border-gray-300">{category.category}</td>
       <td className="p-1.5 border border-gray-300">{category.subCategory}</td>
 
-      <td className="w-8 flex flex-row content-center m-2">
+      {/* <td className="w-8 flex flex-row content-center m-2">
         <button
           className="text-red-600 hover:underline ml-2"
           onClick={() => alert("Delete feature is under development!")}
         >
           <FiTrash size={20} />
         </button>
-      </td>
+      </td> */}
     </tr>
   );
 };
