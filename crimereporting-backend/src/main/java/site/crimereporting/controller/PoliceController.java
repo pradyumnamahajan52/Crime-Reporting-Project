@@ -59,10 +59,9 @@ public class PoliceController {
 	}
 
 	
-	@PatchMapping
+	@PatchMapping("/update-crime-status")
 	public ResponseEntity<?> updateStatus(@RequestParam Long crimeReportId, @RequestParam String status){
-			
-		return null;
+		return ResponseEntity.status(HttpStatus.OK).body(reportService.updateCrimeStatus(crimeReportId,status));
 		
 	}
 	
