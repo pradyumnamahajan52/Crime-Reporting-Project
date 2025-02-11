@@ -337,14 +337,6 @@ public class PoliceServiceImpl implements PoliceService {
 	@Override
 	public ApiResponse<?>  getAllReports(String email) {
 		
-//		User user = userDao.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("user with the email not found!"));
-//		
-//		PoliceStationUser policeStationUser =  policeStationUserDao.findByUser(user);
-//		
-//		PoliceStation policeStation =  policeStationUser.getPoliceStation();
-//		
-//		List<CrimeReports> crimeReportsList =  crimeReportsDao.getCrimeReports(policeStation.getId());
-		
 		List<CrimeReports> crimeReportsList =  crimeReportsDao.getCrimeReports(email);
 		
 		List<AdminCrimeReportDTO> crimereportsDTOList = new ArrayList<>();
@@ -381,6 +373,30 @@ public class PoliceServiceImpl implements PoliceService {
 
 		// Return updated user details as DTO
 		return new ApiResponse<>("Logged User's Information updated",  mapper.map(user, PoliceUserDTO.class));
+	}
+
+	@Override
+	public ApiResponse<?> updateLoggedInUserDetails(PoliceUserDTO policeUserDTO) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String loggedInEmail = authentication.getName();
+
+		// Find User by logged-in email
+		User user = userDao.findByEmail(loggedInEmail)
+				.orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+
+		// Update user details
+		user.setFullName(policeUserDTO.getFullName());
+		user.setPhoneNumber(policeUserDTO.getPhoneNumer());
+//		user.setRole(adminUserDTO.getRole());
+
+
+		// Save updated user back to DB
+		user = userDao.save(user);
+//		System.out.println(user.toString());
+
+		// Return updated user details as DTO
+		return new ApiResponse<>("Logged User's Information updated", mapper.map(user, PoliceUserDTO.class));
+
 	}
 
 

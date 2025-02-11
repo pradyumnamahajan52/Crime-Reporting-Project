@@ -18,6 +18,7 @@ public interface PoliceService {
 
 	List<CrimeCategory> getAllCrime();
 
-	ApiResponse<?>  updateUserDetails(@Valid PoliceUserDTO policeUserDTO);
+	ApiResponse<?>  updateLoggedInUserDetails(PoliceUserDTO policeUserDTO);
 
+	ApiResponse<?>  updateUserDetails(PoliceUserDTO policeUserDTO);
 }

@@ -34,7 +34,7 @@ import PoliceDashboard from "./Screens/Police/Dashboard";
 import UserLogin from "./Screens/User/UserLogin";
 import { LoginAction } from "./action/user/LoginAction";
 import { LogoutAction } from "./action/user/LogoutAction";
-import { loader as loadAuditLog } from "./loader/admin/AuditLogLoader";
+import { loader as loadAuditLog, loader } from "./loader/admin/AuditLogLoader";
 import { loader as loadAdminFeedback } from "./loader/admin/FeedbackLoader";
 import { loader as loadAdminDashboard } from "./loader/admin/DashboardLoader";
 import { loader as loadAdminUsers } from "./loader/admin/UsersLoader";
@@ -53,6 +53,7 @@ import { loader as loadCrimeStatus } from "./loader/citizen/CrimeStatusLoader";
 import { loader as loadPoliceCrimeReports } from "./loader/Police/CrimeReportsLoader";
 import {loader as loadPoliceFeedback } from "./loader/Police/FeedbackLoader";
 import {loader as loadPoliceCrimeCategory} from "./loader/Police/CrimeCategoryLoader";
+import {loader as loadPolicePofileDetails} from "./loader/Police/UserDetailsLoader";
 import { loader as loadPoliceCrimeReportsDetails } from "./loader/Police/ReportDetailsLoader";
 import PoliceCrimeReportsDetail from "./Screens/Police/ReportsDetail";
 import PoliceCrimeReports from "./Screens/Police/CrimeReports";
@@ -67,6 +68,7 @@ import { UserProfileAction } from "./action/admin/UserProfileAction";
 import { NewPoliceStationAction } from "./action/admin/NewPoliceStationAction";
 import { newCrimeReportAction } from "./action/crime/newCrimeReportAction";
 import { updatePoliceStationAction } from "./action/admin/UpdatePoliceStationAction";
+import {PoliceProfileAction} from "./action/police/UserProfileAction"
 import { ToastContainer } from "react-toastify";
 import CrimeStatus from "./Screens/Citizen/CrimeStatus";
 // import About from "./Screens/About";
@@ -77,6 +79,7 @@ import CrimeReportsDetail from "./Screens/Citizen/ReportsDetail";
 import 'react-toastify/dist/ReactToastify.css';
 
 import PoliceCrimeCategory from "./Screens/Police/PoliceCrimeCategory";
+import Profile from "./Screens/Police/Profile";
 
 
 
@@ -261,6 +264,12 @@ const router = createBrowserRouter([
         path: "crime-category",
         element: <PoliceCrimeCategory />,
         loader: loadPoliceCrimeCategory,
+      },
+      {
+        path: "profile",
+        element: <PoliceProfile />,
+        loader: loadPolicePofileDetails,
+        action: PoliceProfileAction,
       },
     ],
   },

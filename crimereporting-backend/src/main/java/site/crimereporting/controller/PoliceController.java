@@ -25,7 +25,7 @@ public class PoliceController {
 	
 	@Autowired
 	private ReportService reportService;
-
+	
 	@GetMapping("/feedback")
 	public ResponseEntity<?> renderFeedback() {
 		return ResponseEntity.status(HttpStatus.OK).body(policeService.getFeedbacks());
@@ -71,10 +71,16 @@ public class PoliceController {
 		return ResponseEntity.ok(policeService.getAllCrime());
 	}
 	
-	@PutMapping("/users")
-	public ResponseEntity<?> updatePoliceUserDetails(@RequestBody @Valid PoliceUserDTO policeUserDTO) {
-		return ResponseEntity.ok(policeService.updateUserDetails(policeUserDTO));
-	}
 	
+	@GetMapping("/user/details")
+	public ResponseEntity<?> renderUserDetails() {
+		return ResponseEntity.ok(policeService.getLoggedInPoliceDetails());
+	}
+
+	@PutMapping("/user/details")
+	public ResponseEntity<?> updateLoggedInUserDetails(@RequestBody @Valid PoliceUserDTO policeUserDTO) {
+		return ResponseEntity.ok(policeService.updateLoggedInUserDetails(policeUserDTO));
+	}
+
 	
 }
