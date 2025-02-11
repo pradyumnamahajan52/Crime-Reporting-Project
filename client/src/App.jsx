@@ -55,6 +55,7 @@ import {loader as loadPoliceFeedback } from "./loader/Police/FeedbackLoader";
 import {loader as loadPoliceCrimeCategory} from "./loader/Police/CrimeCategoryLoader";
 import {loader as loadPolicePofileDetails} from "./loader/Police/UserDetailsLoader";
 import { loader as loadPoliceCrimeReportsDetails } from "./loader/Police/ReportDetailsLoader";
+import {loader as loadContacts} from "./Services/loader/ContactUs"
 import PoliceCrimeReportsDetail from "./Screens/Police/ReportsDetail";
 import PoliceCrimeReports from "./Screens/Police/CrimeReports";
 import "./App.css";
@@ -101,6 +102,7 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
+        loader: loadContacts,
       },
     ],
   },

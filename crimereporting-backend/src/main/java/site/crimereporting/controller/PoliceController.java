@@ -59,10 +59,9 @@ public class PoliceController {
 	}
 
 	
-	@PatchMapping
+	@PatchMapping("/update-crime-status")
 	public ResponseEntity<?> updateStatus(@RequestParam Long crimeReportId, @RequestParam String status){
-			
-		return null;
+		return ResponseEntity.status(HttpStatus.OK).body(reportService.updateCrimeStatus(crimeReportId,status));
 		
 	}
 	
@@ -70,6 +69,7 @@ public class PoliceController {
 	public ResponseEntity<?> viewCrimeList() {
 		return ResponseEntity.ok(policeService.getAllCrime());
 	}
+
 	
 	
 	@GetMapping("/user/details")
@@ -80,7 +80,7 @@ public class PoliceController {
 	@PutMapping("/user/details")
 	public ResponseEntity<?> updateLoggedInUserDetails(@RequestBody @Valid PoliceUserDTO policeUserDTO) {
 		return ResponseEntity.ok(policeService.updateLoggedInUserDetails(policeUserDTO));
-	}
+
 
 	
 }

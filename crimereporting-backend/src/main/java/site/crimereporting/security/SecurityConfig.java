@@ -65,10 +65,11 @@ public class SecurityConfig {
                                "/users/register/citizen",
                                "/users/register/police",
                                "/police/feedback",
-                               "/police/user/details",
                                "/",
                                "/users/updatedetails",
 //                               "/crimereport/newreport",
+                               "/users/getPoliceStationUserDetails",
+//                               "/crimereport/",
 //                               "/admin/**",
                                "/v*/api-doc*/**",
                                "/swagger-ui/**")
@@ -79,7 +80,7 @@ public class SecurityConfig {
                 .permitAll()
                 
                 // Role-based access
-                .requestMatchers("/citizen/**", "/crimereport/**")
+                .requestMatchers("/citizen/**")
                 .hasAuthority("CITIZEN")
                 .requestMatchers("/police/**")
                 .hasAuthority("POLICE")

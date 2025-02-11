@@ -101,7 +101,7 @@ const UserProfile = () => {
                   value={profileData.fullName}
                   className="w-full px-3 py-2 border border-gray-300 rounded focus:ring focus:ring-indigo-200"
                   placeholder="Full Name"
-                  readOnly
+
                 />
               </div>
               <div>

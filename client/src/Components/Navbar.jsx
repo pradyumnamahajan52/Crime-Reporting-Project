@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { getAuthToken } from "../action/user/Auth";
 import { Form, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import profileimg from "../assets/images/profile.png";
 
 export default function Navbar() {
   const token = getAuthToken();
@@ -79,9 +79,9 @@ export default function Navbar() {
               <div className="flex flex-col space-y-2 mt-2">
                 {token ? (
                   <img
-                    src="https://api.dicebear.com/9.x/avataaars-neutral/svg?backgroundColor=b6e3f4,c0aede,d1d4f9"
+                    src={profileimg}
                     alt="Profile"
-                    className="w-8 h-8 rounded-full border border-white cursor-pointer"
+                    className="w-10 h-10 rounded-full border border-white cursor-pointer"
                     onClick={() => handleNavigation("/citizen/")}
                   />
                 ) : (
@@ -108,9 +108,9 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             {token ? (
               <img
-                src="https://api.dicebear.com/9.x/avataaars-neutral/svg?backgroundColor=b6e3f4,c0aede,d1d4f9"
+                src={profileimg}
                 alt="Profile"
-                className="w-8 h-8 rounded-full border border-white cursor-pointer"
+                className="w-10 h-10 rounded-full border border-white cursor-pointer"
                 onClick={() => handleNavigation("/citizen/")}
               />
             ) : (

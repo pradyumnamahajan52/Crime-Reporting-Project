@@ -187,7 +187,7 @@ function Home() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               className="bg-primary text-white py-3 px-6 rounded-lg shadow-lg transition-all duration-300"
-              onClick={() => navigate("/reports")}
+              onClick={() => navigate("/citizen/reports")}
             >
               Report a Crime
             </motion.button>
