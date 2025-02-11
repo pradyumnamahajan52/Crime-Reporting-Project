@@ -103,4 +103,11 @@ public class AdminController {
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.updatePoliceStation(policeStationDataForUpdate));
 		
 	}
+
+	@DeleteMapping("/deletePoliceStation")
+	public ResponseEntity<?> deletePoliceStation(@RequestBody Long policeStationId){
+		
+
+		return ResponseEntity.status(HttpStatus.OK).body(adminService.deletePoliceStation(policeStationId));
+	}
 }

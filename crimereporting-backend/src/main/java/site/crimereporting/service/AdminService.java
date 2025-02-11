@@ -2,6 +2,7 @@ package site.crimereporting.service;
 
 import java.util.List;
 
+import com.amazonaws.services.apigatewayv2.model.Api;
 import site.crimereporting.dtos.AdminUserDTO;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.PoliceStationRegisterRequestDTO;
@@ -40,4 +41,6 @@ public interface AdminService {
 	ApiResponse<?> getAuditLogs();
 	
 	ApiResponse<?> updatePoliceStation(PoliceStationRegisterRequestDTO policeStationForUpdate);
+
+	ApiResponse<?> deletePoliceStation(Long policeStationId);
 }
