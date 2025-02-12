@@ -16,7 +16,7 @@ import {
     const navigate = useNavigate();
     return (
    <Card className="
-    shadow-lg flex flex-col transition-transform transform hover:scale-105">
+    shadow-lg flex flex-col transition-transform transform hover:scale-105 ">
   <CardHeader floated={false} color="blue-gray" className="relative">
     <img
       src={image}
@@ -31,12 +31,13 @@ import {
         {title}
       </Typography>
     </div>
-    <Typography color="gray">
+    <Typography color="gray" className="line-clamp-3 h-[4.5rem] overflow-hidden">
       {description}
     </Typography>
+    
   </CardBody>
   <CardFooter className="pt-3">
-    <Button size="lg" fullWidth={true} className="py-4 bg-black" 
+    <Button size="lg" fullWidth={true} className="py-4 bg-primary" 
      onClick={() => navigate("/citizen/reports")} >
       Report Crime
     </Button>
