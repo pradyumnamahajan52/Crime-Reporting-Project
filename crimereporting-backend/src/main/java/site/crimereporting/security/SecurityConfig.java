@@ -64,7 +64,6 @@ public class SecurityConfig {
                                "/users/signin", 
                                "/users/register/citizen",
                                "/users/register/police",
-                               "/police/feedback",
                                "/",
                                "/users/updatedetails",
 //                               "/crimereport/newreport",
