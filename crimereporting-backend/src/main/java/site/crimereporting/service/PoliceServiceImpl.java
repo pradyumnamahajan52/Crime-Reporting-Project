@@ -141,17 +141,24 @@ public class PoliceServiceImpl implements PoliceService {
 
 	@Override
 	public ApiResponse<?> newCrimeCategoryDetails(CrimeCategoryRequestDTO crimeCategoryRequestDTO) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String loggedInEmail = authentication.getName();
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String loggedInEmail = authentication.getName();
 
-		// Find User by logged-in email
-		User user = userDao.findByEmail(loggedInEmail)
-				.orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
-		
-		CrimeCategory category = mapper.map(crimeCategoryRequestDTO, CrimeCategory.class);
-		category = crimeCategoryDao.save(category);
-		return new ApiResponse<>("User's Created Sucessfully", mapper.map(category, CrimeCategoryDTO.class));
+	    // Log user details
+	    System.out.println("Logged-in User Email: " + loggedInEmail);
+	    System.out.println("User Authorities: " + authentication.getAuthorities());
+
+	    // Find User by logged-in email
+	    User user = userDao.findByEmail(loggedInEmail)
+	            .orElseThrow(() -> new ResourceNotFoundException("User with Email does not exist"));
+
+	    // Map DTO to Entity and save category
+	    CrimeCategory category = mapper.map(crimeCategoryRequestDTO, CrimeCategory.class);
+	    category = crimeCategoryDao.save(category);
+
+	    return new ApiResponse<>("Crime Category Created Successfully", mapper.map(category, CrimeCategoryDTO.class));
 	}
+
 
 
 
