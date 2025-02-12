@@ -1,0 +1,1179 @@
+{
+	"info": {
+		"_postman_id": "87717396-4f68-41ad-adaf-5f41b0b24c99",
+		"name": "crime reporting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33767130",
+		"_collection_link": "https://crime-report-dev-team.postman.co/workspace/crime-reporting-~d1750d8f-ba2a-4844-9698-9f3a9a29fc45/collection/25217798-87717396-4f68-41ad-adaf-5f41b0b24c99?action=share&source=collection_link&creator=33767130"
+	},
+	"item": [
+		{
+			"name": "registration",
+			"item": [
+				{
+					"name": "register citizen",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "jsmnkispotta@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "1234567891",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Jasminepass",
+									"type": "text"
+								},
+								{
+									"key": "fullName",
+									"value": "Jsmn",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "2002-09-11",
+									"type": "text"
+								},
+								{
+									"key": "cardNumber",
+									"value": "453563",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ps/Desktop/aadhaar_card-image.jpg"
+								},
+								{
+									"key": "addressLine1",
+									"value": "pune",
+									"type": "text"
+								},
+								{
+									"key": "addressLine2",
+									"value": "Pune, Maharashtra",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Pune",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "Maharashtra",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "India",
+									"type": "text"
+								},
+								{
+									"key": "pinCode",
+									"value": "456346",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "5347577",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "38457834",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/register/citizen",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"register",
+								"citizen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register police station user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "police9@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "47458457",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "police9",
+									"type": "text"
+								},
+								{
+									"key": "stationCode",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "designation",
+									"value": "Public Servant Inspector",
+									"type": "text"
+								},
+								{
+									"key": "fullName",
+									"value": "Police9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/register/police",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"register",
+								"police"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "for contact us page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/users/getPoliceStationUserDetails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"getPoliceStationUserDetails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "Audit Logs",
+					"item": [
+						{
+							"name": "Get  Logs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/admin/auditlog",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"admin",
+										"auditlog"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Feedback",
+					"item": [
+						{
+							"name": "Get  Feedback",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/admin/feedback",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"admin",
+										"feedback"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/admin/user/details",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"admin",
+										"user",
+										"details"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Police station",
+					"item": [
+						{
+							"name": "update police station",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "stationCode",
+											"value": "586455",
+											"type": "text"
+										},
+										{
+											"key": "stationName",
+											"value": "Aundh Police Station",
+											"type": "text"
+										},
+										{
+											"key": "addressLine1",
+											"value": "Ward No. 8, Aundh Gaon,",
+											"type": "text"
+										},
+										{
+											"key": "addressLine2",
+											"value": " Aundh",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "Pune",
+											"type": "text"
+										},
+										{
+											"key": "state",
+											"value": "Maharashtra ",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "India",
+											"type": "text"
+										},
+										{
+											"key": "pinCode",
+											"value": "411067",
+											"type": "text"
+										},
+										{
+											"key": "latitude",
+											"value": "18.564520929495554",
+											"type": "text"
+										},
+										{
+											"key": "longitude",
+											"value": " 73.81307289879553",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/admin/updatePoliceStation",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"admin",
+										"updatePoliceStation"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AllPoliceStations",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcmFkeXVtbmFtYWhhamFuNTJAZ21haWwuY29tIiwiaWF0IjoxNzM4OTUyODA3LCJleHAiOjE3MzkwMzkyMDcsImF1dGhvcml0aWVzIjoiQURNSU4ifQ.vJWaz9yHetrkYBN4_FHDj7LwAFqjqNyOi1_9f_z35VYU2uOQJM5PqOvEy_zttRFMLZDLZOMAiw94qGItySUfcA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/admin/policeStations",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"admin",
+										"policeStations"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "AllUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8000/admin/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CrimeList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/admin/crimeList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"admin",
+								"crimeList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcmFkeXVtbmFtYWhhamFuNTJAZ21haWwuY29tIiwiaWF0IjoxNzM4Nzc1NzA5LCJleHAiOjE3Mzg4NjIxMDl9.gnzpjVSWqRBbMjJgRLnucBn1Xtpe2sqNEvDB-9KBYHchXdeEhK0a3GpMeVZjaiHpvHE42o5bd5EXhQtycnfGIg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "sendOtp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"jsmnkispotta@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/signin/email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"signin",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "VerifyOtp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"jsmnkispotta@gmail.com\",\r\n  \"otp\" : \"657262\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "New Reports",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqc21ua2lzcG90dGFAZ21haWwuY29tIiwiaWF0IjoxNzM5MDA1ODgwLCJleHAiOjE3MzkwOTIyODAsImF1dGhvcml0aWVzIjoiQ0lUSVpFTiJ9.1JFp1BycA2GodSsmu_NLbqY86VXBoXmYW58Uz8fbnoXxoHJfP1HJZLjw_sqELhPLSq14XjeyMlVcpMyBO_xEUw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "Kidnapped a child",
+									"type": "text"
+								},
+								{
+									"key": "crimeDate",
+									"value": "2024-02-04",
+									"type": "text"
+								},
+								{
+									"key": "addressLine1",
+									"value": "sunbeam ",
+									"type": "text"
+								},
+								{
+									"key": "addressLine2",
+									"value": "Hinjwadi Phase 2",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Pune",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "maharashtra",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "India",
+									"type": "text"
+								},
+								{
+									"key": "pinCode",
+									"value": "431010",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "18.589141614352126",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "73.70577991092131",
+									"type": "text"
+								},
+								{
+									"key": "evidences",
+									"type": "file",
+									"src": "/D:/jas wallpaper/wallpaperflare.com_wallpaper.jpg"
+								},
+								{
+									"key": "crimeCategoryId",
+									"value": "8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/crimereport/newreport",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"crimereport",
+								"newreport"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Reports",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "description",
+											"value": "Kidnapped a child",
+											"type": "text"
+										},
+										{
+											"key": "crimeDate",
+											"value": "2024-02-04",
+											"type": "text"
+										},
+										{
+											"key": "addressLine1",
+											"value": "sunbeam ",
+											"type": "text"
+										},
+										{
+											"key": "addressLine2",
+											"value": "Hinjwadi Phase 2",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "Pune",
+											"type": "text"
+										},
+										{
+											"key": "state",
+											"value": "maharashtra",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "India",
+											"type": "text"
+										},
+										{
+											"key": "pinCode",
+											"value": "431010",
+											"type": "text"
+										},
+										{
+											"key": "latitude",
+											"value": "18.589141614352126",
+											"type": "text"
+										},
+										{
+											"key": "longitude",
+											"value": "73.70577991092131",
+											"type": "text"
+										},
+										{
+											"key": "evidences",
+											"type": "file",
+											"src": "/D:/jas wallpaper/wallpaperflare.com_wallpaper.jpg"
+										},
+										{
+											"key": "crimeCategoryId",
+											"value": "8",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/crimereport/newreport",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"crimereport",
+										"newreport"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 08 Feb 2025 09:11:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timeStamp\": \"2025-02-08T14:41:47.8243925\",\n    \"message\": \"Crime Report Uploaded Successfully\",\n    \"data\": {\n        \"citizenId\": 23,\n        \"crimeReportId\": 22,\n        \"description\": \"Kidnapped a child\",\n        \"reportStatus\": \"SUBMITTED\",\n        \"nearByPoliceStationList\": [\n            {\n                \"policeStationId\": 8,\n                \"station_name\": \"Chinchwad Police Station\",\n                \"policeStationAddressLine1\": \"JQHJ+R26, Gandhi Peth\",\n                \"policeStationAddressLine2\": \" Chinchwad Gaon, Chinchwad\",\n                \"policeStationCity\": \"Pimpri-Chinchwad\",\n                \"policeStationState\": \"Maharashtra\",\n                \"latitude\": 18.63110511639062,\n                \"longitude\": 73.77929835417204,\n                \"distance\": 9.044082370182876\n            },\n            {\n                \"policeStationId\": 1,\n                \"station_name\": \"police station1\",\n                \"policeStationAddressLine1\": \"Raipur\",\n                \"policeStationAddressLine2\": \"Dhamtari\",\n                \"policeStationCity\": \"Raipur\",\n                \"policeStationState\": \"Chhattisgarh\",\n                \"latitude\": 21.23,\n                \"longitude\": 81.85,\n                \"distance\": 900.5054786617187\n            },\n            {\n                \"policeStationId\": 3,\n                \"station_name\": \"police station 2\",\n                \"policeStationAddressLine1\": \"pathalgaon\",\n                \"policeStationAddressLine2\": \"jashpur, chhattisgarh\",\n                \"policeStationCity\": \"Raipur\",\n                \"policeStationState\": \"Chhattisgarh\",\n                \"latitude\": 5347577,\n                \"longitude\": 38457834,\n                \"distance\": 12024.474047394111\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "CrimeStatus",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reports Evidence",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "crimeReportId",
+									"value": "34",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/crimereport/get-evidence",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"crimereport",
+								"get-evidence"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Reports Evidence",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "crimeReportId",
+											"value": "6",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/crimereport/get-evidence",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"crimereport",
+										"get-evidence"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Feb 2025 08:19:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timeStamp\": \"2025-02-09T13:49:19.7661954\",\n    \"message\": \"Evidences fetched sucessfully\",\n    \"data\": [\n        \"https://crime-report-storage.s3.ap-south-1.amazonaws.com/d0b419b4-5ce4-4bdc-b020-478a98fb7e71.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250209T081919Z&X-Amz-SignedHeaders=host&X-Amz-Expires=35999&X-Amz-Credential=AKIAU6GDYQPPND7MQMBI%2F20250209%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=166fbf4126e77c9258a780231f425aebc2ce09916d397f85f2b8357bfe258a97\",\n        \"https://crime-report-storage.s3.ap-south-1.amazonaws.com/c72e8428-4433-400a-b645-351f2191705e.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20250209T081919Z&X-Amz-SignedHeaders=host&X-Amz-Expires=36000&X-Amz-Credential=AKIAU6GDYQPPND7MQMBI%2F20250209%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Signature=40daac47e99568a91c1df7c5ee9cefa00384cb677a3e05b5d02683e041478346\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Report Update Police Stations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "crimeReportId",
+									"value": "40",
+									"type": "text"
+								},
+								{
+									"key": "policeStationId",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/crimereport/update-police-station",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"crimereport",
+								"update-police-station"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get report details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "crimeReportId",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/crimereport/get-reportDetails",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"crimereport",
+								"get-reportDetails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crime Category",
+			"item": [
+				{
+					"name": "Get Crime Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqc21ua2lzcG90dGFAZ21haWwuY29tIiwiaWF0IjoxNzM4Nzg2NTQxLCJleHAiOjE3Mzg4NzI5NDF9.PI-e-kgZv5Kybbjx4-lYeEOQQY-b3fG5A5XVbrj8EMmt2C-KhaCfBNcmQvtIFaAr_V7OGfMG4_cmfx0OB8d4Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/crimecategory/getCategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"crimecategory",
+								"getCategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Crime Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqc21ua2lzcG90dGFAZ21haWwuY29tIiwiaWF0IjoxNzM4Nzg2NTQxLCJleHAiOjE3Mzg4NzI5NDF9.PI-e-kgZv5Kybbjx4-lYeEOQQY-b3fG5A5XVbrj8EMmt2C-KhaCfBNcmQvtIFaAr_V7OGfMG4_cmfx0OB8d4Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/crimecategory/getCategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"crimecategory",
+								"getCategories"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Police",
+			"item": [
+				{
+					"name": "ReportDetails",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "ToGetEvidenceid",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "crimeReportId",
+									"value": "34",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/police/get-evidence",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"police",
+								"get-evidence"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCrimeStatus",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "crimeReportId",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "RESOLVED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/police/update-crime-status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"police",
+								"update-crime-status"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProfileUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/police/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"police",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Crime Category",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqc21uazEwMTFAZ21haWwuY29tIiwiaWF0IjoxNzM5MzMxMDY1LCJleHAiOjE3Mzk0MTc0NjUsImF1dGhvcml0aWVzIjoiUE9MSUNFIn0.aURjiLVIuagOGj_KNhkhEjJkWKGNqpb896K8axo7SI7mAOekbz1G7BmFzZ_IbbmXe87N0UTt7HniMOgckL12Uw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
