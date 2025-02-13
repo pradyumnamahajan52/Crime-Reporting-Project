@@ -100,6 +100,9 @@ public class AdminController {
 	
 	@PutMapping("/updatePoliceStation")
 	public ResponseEntity<?> updatePoliceStation(@ModelAttribute PoliceStationRegisterRequestDTO policeStationDataForUpdate){
+		System.out.println("policeStationDataForUpdate.getId: "+policeStationDataForUpdate.getPoliceStationId());
+		System.out.println("policeStationDataForUpdate.getId: "+policeStationDataForUpdate.getStationName());
+		System.out.println("policeStationDataForUpdate.getId: "+policeStationDataForUpdate.getStationCode());
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.updatePoliceStation(policeStationDataForUpdate));
 		
 	}

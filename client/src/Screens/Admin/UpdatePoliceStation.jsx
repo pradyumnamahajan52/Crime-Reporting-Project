@@ -1,10 +1,12 @@
-import React, { useState, Suspense } from "react";
+import React, { useState, Suspense, useEffect } from "react";
 import {
   useParams,
   useNavigate,
   useLoaderData,
   Await,
   useSubmit,
+  useActionData,
+  useNavigation,
 } from "react-router-dom";
 import { toast } from "react-toastify";
 import Spinner from "../../Components/Spinner";
@@ -13,9 +15,13 @@ const UpdatePoliceStation = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const submit = useSubmit();
+  const actionData = useActionData();
+  const navigation = useNavigation();
   const { policeStationData } = useLoaderData(); // This is already resolved inside <Await>
+  const isSubmitting = navigation.state === "submitting";
 
   const [formData, setFormData] = useState({
+    id:id,
     stationCode: "",
     stationName: "",
     addressLine1: "",
@@ -40,12 +46,32 @@ const UpdatePoliceStation = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData();
-    Object.entries(formData).forEach(([key, value]) => form.append(key, value));
+    form.append("policeStationId",id);
+    form.append("stationCode",formData.stationCode);
+    form.append("stationName",formData.stationName);
+    form.append("addressLine1",formData.addressLine1);
+    form.append("addressLine2",formData.addressLine2);
+    form.append("city",formData.city);
+    form.append("state",formData.state);
+    form.append("country",formData.country);
+    form.append("pinCode",formData.pinCode);
+    form.append("latitude",formData.latitude);
+    form.append("longitude",formData.longitude);
+
 
     submit(form, { method: "POST" });
-    toast.success("Police Station Updated Successfully!");
-    setTimeout(() => navigate("/admin/police-station"), 2000);
+
   };
+
+    useEffect(() => {
+      if (actionData?.error) {
+        toast.error(actionData.error);
+      }
+      if (actionData?.success) {
+        toast.success("Police Station Updated Successfully!");
+        setTimeout(() => navigate("/admin/police-station"), 1500);
+      }
+    }, [actionData]);
 
   const mapSrc =
     formData.latitude && formData.longitude
@@ -181,8 +207,10 @@ const UpdatePoliceStation = () => {
                     <button
                       type="submit"
                       className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    >
-                      Update Police Station
+                      disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Please Wait" : "Update Police Station"}
+                      
                     </button>
                   </div>
                 </form>
