@@ -4,6 +4,13 @@ This repository contains the **Crime Reporting System**, including backend and f
 
 ---
 
+## 🌐 Demo Links  
+
+- **Frontend**: [Crime Reporting System UI](https://crimereport.live/)  
+- **Backend API**: [Crime Reporting API](https://api.crimereport.live/)  
+
+---
+
 ## 📖 Table of Contents  
 - [Quick Links](#quick-links)  
 - [About](#about)  
