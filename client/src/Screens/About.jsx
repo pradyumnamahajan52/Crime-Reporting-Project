@@ -55,7 +55,7 @@ function About() {
             and real-time way to file complaints and seek justice.
           </p>
 
-          <h2 className="text-2xl font-semibold">✅ Key Features for Citizens</h2>
+          <h2 className="text-2xl font-semibold"> Key Features for Citizens</h2>
           <ul className="list-none list-inside space-y-1 md:space-y-2 text-lg">
             <li>📌 <strong>Report crimes online</strong> without visiting a police station.</li>
             <li>🔔 <strong>Track case progress</strong> and receive real-time updates.</li>

@@ -8,7 +8,7 @@ export async function loader() {
   return { auditData };
 }
 
-// ✅ Function to fetch audit logs (returns promise)
+//  Function to fetch audit logs (returns promise)
 async function loadAdminAuditLog() {
   try {
     const token = getAuthToken();

@@ -8,7 +8,7 @@ export async function loader() {
   return { dashboardData };
 }
 
-// ✅ Function to fetch dashboard details (returns promise)
+//  Function to fetch dashboard details (returns promise)
 async function loadDashboard() {
   try {
     const token = getAuthToken();

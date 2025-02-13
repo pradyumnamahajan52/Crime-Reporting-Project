@@ -9,9 +9,6 @@ import Contact from "./Screens/Contact";
 import PoliceLayout from "./Layout/PoliceLayout";
 
 
-
-
-
 import AdminUsers from "./Screens/Admin/Users";
 import AdminProfile from "./Screens/Admin/Profile";
 import AdminCrimeReports from "./Screens/Admin/CrimeReports";

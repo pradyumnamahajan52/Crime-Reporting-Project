@@ -15,22 +15,26 @@ const PoliceStation = () => {
     if (
       window.confirm("Are you sure you want to delete this police station?")
     ) {
-      const policeStationData = {
-        policeStationId: id,
-      };
+      let formData = new FormData();
+      formData.append("policeStationId", id)
+      
+      console.log('====================================');
+      console.log(id);
+      console.log('====================================');
       try {
-        await fetch(`${API}/admin/deletePoliceStation`, {
+        const response = await fetch(`${API}/admin/deletePoliceStation`, {
           method: "DELETE",
           headers: {
-            "Content-Type": "application/json",
+            // "Content-Type": "application/json",
             Authorization: `Bearer ${getAuthToken()}`,
           },
-          body: JSON.stringify(policeStationData),
+          body: formData,
         });
 
-        setTimeout(() => {
+
+
           window.location.reload();
-        }, 1000);
+
 
         // // Remove user from state after successful deletion
         // setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
@@ -101,6 +105,7 @@ const PoliceStation = () => {
                         station={station}
                         handleEdit={handleEdit}
                         handleDelete={handleDelete}
+                        navigate={navigate}
                       />
                     ))
                   ) : (
@@ -122,8 +127,8 @@ const PoliceStation = () => {
 
 export default PoliceStation;
 
-// ✅ Table Row Component
-const TableRow = ({ station, handleEdit, handleDelete }) => {
+
+const TableRow = ({ station, handleEdit, handleDelete,navigate }) => {
   return (
     <tr className="text-sm border-b-2">
       <td className="p-1.5 border border-gray-200">{station.id}</td>
@@ -149,13 +154,14 @@ const TableRow = ({ station, handleEdit, handleDelete }) => {
       <td className="p-1.5 flex items-center gap-2 border border-gray-200">
         <button
           className="text-primary-600 hover:underline"
-          onClick={() => alert("working on! Future Scope!")}
+          onClick={() => navigate(`/admin/update-police-station/${station.id}`)}
         >
           <FiEdit size={20} />
         </button>
         <button
           className="text-red-600 hover:underline"
-          onClick={() => alert("working on! Future Scope!")}
+
+          onClick={() => handleDelete(station.id)}
         >
           <FiTrash size={20} />
         </button>
