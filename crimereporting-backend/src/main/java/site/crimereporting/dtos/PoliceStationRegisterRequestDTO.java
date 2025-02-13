@@ -14,6 +14,7 @@ import lombok.ToString;
 @ToString
 public class PoliceStationRegisterRequestDTO {
 
+    private Long policeStationId;
     private Integer stationCode;
     private String stationName;
     private String addressLine1;
@@ -25,9 +26,7 @@ public class PoliceStationRegisterRequestDTO {
     private String country;
 
     private String pinCode;
-
     private Double latitude;
-
 
     private Double longitude;
 

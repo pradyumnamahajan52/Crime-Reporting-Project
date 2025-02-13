@@ -205,15 +205,14 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public ApiResponse<?> updatePoliceStation(PoliceStationRegisterRequestDTO policeStationForUpdate) {
-		
-		PoliceStation policeStation =  policeStationDao.findByStationCode(policeStationForUpdate.getStationCode()).orElseThrow(() -> new ResourceNotFoundException("police station with "+policeStationForUpdate.getStationCode() +"does not exist"));
-		
+		PoliceStation policeStation =  policeStationDao.findById(policeStationForUpdate.getPoliceStationId()).orElseThrow(() -> new ResourceNotFoundException("police station with id: "+ policeStationForUpdate.getPoliceStationId() +" does not exist"));
 		policeStation.setStationName(policeStationForUpdate.getStationName());
+		policeStation.setStationCode(policeStationForUpdate.getStationCode());
 		Address address = new Address(policeStationForUpdate.getAddressLine1(), policeStationForUpdate.getAddressLine2(), policeStationForUpdate.getCity(), policeStationForUpdate.getState(), policeStationForUpdate.getCountry(), policeStationForUpdate.getPinCode() ,policeStationForUpdate.getLatitude(), policeStationForUpdate.getLongitude());
 		policeStation.setAddress(address);
-		
-		
-		return new ApiResponse<>("police station updated successfully", policeStation);
+		PoliceStation policeStationTransient = policeStationDao.save(policeStation);
+
+		return new ApiResponse<>("police station updated successfully", policeStationTransient);
 	}
 
 	@Override
