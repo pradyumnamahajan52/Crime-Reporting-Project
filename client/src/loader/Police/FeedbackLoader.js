@@ -8,7 +8,7 @@ export async function loader() {
   return { policefeedbackData };
 }
 
-// ✅ Function to fetch users' feedbacks (returns promise)
+//  Function to fetch users' feedbacks (returns promise)
 async function loadPoliceFeedback() {
   try {
     const token = getAuthToken();

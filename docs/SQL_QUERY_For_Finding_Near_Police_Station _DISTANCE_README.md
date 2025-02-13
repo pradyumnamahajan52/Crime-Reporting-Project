@@ -142,7 +142,7 @@ ORDER BY distance
 LIMIT 3;
 ```
 
-✅ **Check if the output shows the nearest police stations!**
+ **Check if the output shows the nearest police stations!**
 
 ---
 
@@ -269,7 +269,7 @@ COS(RADIANS(73.7057) - RADIANS(73.7200)) + SIN(RADIANS(18.5891)) * SIN(RADIANS(1
 AS distance;
 ```
 
-✅ **This will return the distance in kilometers between two locations!**
+ **This will return the distance in kilometers between two locations!**
 
 ---
 
