@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import site.crimereporting.custom_exception.ApiException;
 import site.crimereporting.dao.PoliceStationUserDao;
+import site.crimereporting.dao.UserDao;
 import site.crimereporting.dtos.ApiResponse;
 import site.crimereporting.dtos.AuthRequest;
 import site.crimereporting.dtos.CitizenRegisterRequestDTO;
@@ -19,8 +20,11 @@ import site.crimereporting.dtos.PoliceRegisterRequestDTO;
 import site.crimereporting.dtos.RegisterResponseDTO;
 import site.crimereporting.dtos.*;
 import site.crimereporting.entity.Citizen;
+import site.crimereporting.entity.Feedback;
 import site.crimereporting.entity.PoliceStationUser;
+import site.crimereporting.entity.User;
 import site.crimereporting.service.CitizenService;
+import site.crimereporting.service.FeedbackService;
 import site.crimereporting.service.UserService;
 
 @RestController
@@ -29,10 +33,16 @@ import site.crimereporting.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private UserDao userDao;
 	
 
 	@Autowired
 	private CitizenService citizenService;
+
+	@Autowired
+	private FeedbackService feedbackService;
 
 
 	@PostMapping("/signin/email")
@@ -103,5 +113,23 @@ public class UserController {
 	public ResponseEntity<?> updateLoggedInCitizenDetails(@RequestBody @Valid CitizenDTO citizenDTO) {
 		return ResponseEntity.ok(citizenService.updateLoggedInCitizenDetails(citizenDTO));
 	}
+
+//	@PostMapping("/feedbacksubmit")
+//	public ResponseEntity<?> submitFeedback(@RequestBody @Valid FeedbackDTO feedbackDTO) {
+//
+//		return ResponseEntity.ok(feedbackService.saveFeedback(feedbackDTO));
+//	}
+
+//	@PostMapping("/submit")
+//	public ResponseEntity<?> submitFeedback(@RequestBody @Valid FeedbackResponse feedbackDTO) {
+//		// Find user by email
+//		User user = userDao.findByEmail(feedbackDTO.getEmail())
+//				.orElseThrow(() -> new RuntimeException("User not found"));
+//
+//		// Save feedback for the user
+//		Feedback savedFeedback = feedbackService.saveFeedback(feedbackDTO, user);
+//
+//		return ResponseEntity.ok(new FeedbackResponse(savedFeedback));
+//	}
 
 }
