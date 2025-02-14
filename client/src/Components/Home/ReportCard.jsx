@@ -27,11 +27,11 @@ import {
   </CardHeader>
   <CardBody className="flex-1">
     <div className="mb-3 flex items-center justify-between">
-      <Typography variant="h5" color="blue-gray" className="font-medium">
+      <Typography variant="h5" color="blue-gray" className="font-medium line-clamp-2 overflow-hidden h-[3rem]">
         {title}
       </Typography>
     </div>
-    <Typography color="gray" className="line-clamp-3 h-[4.5rem] overflow-hidden">
+    <Typography color="gray" className="line-clamp-3 h-[4.5rem] md:h-[4.5rem] sm:h-[4rem] overflow-hidden">
       {description}
     </Typography>
     

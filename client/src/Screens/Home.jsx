@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import img5 from "../assets/images/crime-categories/img7.jpg";
 import img1 from "../assets/images/crime-categories/img6.jpg";
 import img2 from "../assets/images/crime-categories/img2.jpg";
-import img3 from "../assets/images/crime-categories/img9.jpg";
+import img3 from "../assets/images/crime-categories/img11.jpg";
 import img4 from "../assets/images/crime-categories/img10.jpg";
 import rimg1 from "../assets/images/card/1.png";
 import rimg2 from "../assets/images/card/2.png";
@@ -120,80 +120,57 @@ function Home() {
     >
       {/* Hero Section */}
       <motion.section
-        className="w-full flex justify-center items-center py-10 overflow-hidden"
+        className="w-full flex flex-col md:flex-row justify-center items-center py-10 gap-10"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 1 }}
       >
-        <div className="w-full max-w-6xl flex flex-col md:flex-row items-center gap-20">
-          {/* Image Slider Section */}
-          <motion.div
-            className="w-full md:w-1/2 md:h-[80vh] flex justify-center items-center hover:scale-105 transition-transform overflow-hidden "
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <Carousel showThumbs={false} infiniteLoop autoPlay interval={3000} showStatus={false}>
-            <div whileHover={{ scale: 1.05 }} >
-               <img
-                src={img1}
-                alt="Crime Scene 1"
-                className="h-[50vh] w-full md:h-[75vh] object-cover rounded-2xl"
-              />
-            </div>
-            <div whileHover={{ scale: 1.05 }}>
-              <img
-                src={img2}
-                alt="Crime Scene 2"
-                className="h-[50vh] w-full md:h-[75vh] object-cover rounded-2xl"
-              />
-            </div>
-            <div whileHover={{ scale: 1.05 }} >
-              <img
-                src={img3}
-                alt="Crime Scene 3"
-                className="h-[50vh] w-full md:h-[75vh] object-cover rounded-2xl"
-              />
-            </div>
-            <div whileHover={{ scale: 1.05 }} >
-              <img
-                src={img4}
-                alt="Crime Scene 4"
-                className="h-[50vh] md:h-full w-full object-cover rounded-2xl"
-              />
-            </div>
-            <div whileHover={{ scale: 1.05 }} >
-              <img
-                src={img5}
-                alt="Crime Scene 5"
-                className="h-[50vh] w-full md:h-[75vh] object-cover rounded-2xl"
-              />
-            </div>
-            </Carousel>
-          </motion.div>
+        {/* Image Slider */}
+        <motion.div
+          className="w-full md:w-1/2 h-[60vh] md:h-[75vh] flex justify-center items-center overflow-hidden order-1 md:order-none"
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <Carousel showThumbs={false} infiniteLoop autoPlay interval={3000} showStatus={false}>
+            {[img1, img2, img3, img4, img5].map((img, index) => (
+              <div key={index} className="h-full w-full flex justify-center items-center">
+                <img
+                  src={img}
+                  alt={`Crime Scene ${index + 1}`}
+                  className="w-full h-full object-cover rounded-2xl"
+                />
+              </div>
+            ))}
+          </Carousel>
+        </motion.div>
 
-          {/* Crime Reporting Section */}
-          <motion.div
-            className="w-full md:w-1/2 space-y-5"
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
+        {/* Crime Reporting Section */}
+        <motion.div
+          className="w-full md:w-1/2 text-left space-y-6 order-2 md:order-none"
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+        >
+          <div className="flex justify-center md:justify-start">
+            <Lottie options={defaultOptions} height={120} width={120} />
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-bold">
+            Report Crimes with <span className="text-primary">Confidence</span>
+          </h1>
+          <p className="text-lg text-gray-600">
+            Your safety matters. Report crimes anonymously.
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            className="bg-primary text-white py-3 px-6 rounded-lg shadow-lg transition-all duration-300"
+            onClick={() => navigate("/citizen/reports")}
           >
-            <Lottie options={defaultOptions} height={150} width={150} />
-            <h1 className="text-4xl sm:text-5xl font-semibold">
-              Report Crimes with <span className="text-primary">Confidence</span>
-            </h1>
-            <p className="pb-12">Your safety matters. Report crimes anonymously.</p>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              className="bg-primary text-white py-3 px-6 rounded-lg shadow-lg transition-all duration-300"
-              onClick={() => navigate("/citizen/reports")}
-            >
-              Report a Crime
-            </motion.button>
-          </motion.div>
-        </div>
+            Report a Crime
+          </motion.button>
+        </motion.div>
       </motion.section>
+
   
      {/* About Us Section */}
      <motion.div
