@@ -9,9 +9,6 @@ import Contact from "./Screens/Contact";
 import PoliceLayout from "./Layout/PoliceLayout";
 
 
-
-
-
 import AdminUsers from "./Screens/Admin/Users";
 import AdminProfile from "./Screens/Admin/Profile";
 import AdminCrimeReports from "./Screens/Admin/CrimeReports";
@@ -84,8 +81,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import PoliceCrimeCategory from "./Screens/Police/PoliceCrimeCategory";
 
 import { NewFeedbackAction } from "./action/user/NewFeedbackAction";
+import { newCrimeCategory } from "./action/police/NewCrimeCategory";
 
-import Profile from "./Screens/Police/Profile";
+//import Profile from "./Screens/Police/Profile";
 
 
 
@@ -274,6 +272,7 @@ const router = createBrowserRouter([
         path: "crime-category",
         element: <PoliceCrimeCategory />,
         loader: loadPoliceCrimeCategory,
+        action:newCrimeCategory,
       },
       {
         path: "profile",

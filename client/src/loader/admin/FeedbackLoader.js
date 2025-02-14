@@ -8,7 +8,7 @@ export async function loader() {
   return { feedbackData };
 }
 
-// ✅ Function to fetch users' feedbacks (returns promise)
+//  Function to fetch users' feedbacks (returns promise)
 async function loadAdminFeedback() {
   try {
     const token = getAuthToken();

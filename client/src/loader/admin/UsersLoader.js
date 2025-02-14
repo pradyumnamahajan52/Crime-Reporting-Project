@@ -8,7 +8,7 @@ export async function loader() {
   return { usersData };
 }
 
-// ✅ Function to fetch users (returns promise)
+//  Function to fetch users (returns promise)
 async function loadUsers() {
   try {
     const token = getAuthToken();

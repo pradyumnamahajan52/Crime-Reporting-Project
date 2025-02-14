@@ -6,16 +6,16 @@ export default function Aboutus() {
   const navigate = useNavigate();
   return (
     <div className="w-full overflow-hidden">
-    <section className="bg-gray-100 transition-transform transform hover:scale-105 overflow-x-hidden">
-      <div className="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
+    <section className="bg-gray-100 transition-transform transform  overflow-x-hidden">
+      <div className="container mx-auto  py-10 md:py-16 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
           <div className="max-w-lg">
             <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">About Us</h2>
-            <p className="mt-4 text-gray-600 text-lg">
+            <p className="mt-4 text-gray-600 text-lg text-justify">
               At Crime Reporting System, we are dedicated to empowering individuals and communities to take a stand against crime. 
               Our platform provides a safe, secure, and user-friendly way to report crimes, locate assistance, and access valuable resources.
             </p>
-            <p className="mt-4 text-gray-600 text-lg">
+            <p className="mt-4 text-gray-600 text-lg text-justify">
               We believe that everyone has a role to play in creating safer neighborhoods. 
               By fostering collaboration between citizens and law enforcement, we aim to bridge the gap and ensure justice is within reach for all.
             </p>

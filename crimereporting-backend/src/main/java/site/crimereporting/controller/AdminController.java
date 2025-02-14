@@ -100,12 +100,16 @@ public class AdminController {
 	
 	@PutMapping("/updatePoliceStation")
 	public ResponseEntity<?> updatePoliceStation(@ModelAttribute PoliceStationRegisterRequestDTO policeStationDataForUpdate){
+		System.out.println("policeStationDataForUpdate.getId: "+policeStationDataForUpdate.getPoliceStationId());
+		System.out.println("policeStationDataForUpdate.getId: "+policeStationDataForUpdate.getStationName());
+		System.out.println("policeStationDataForUpdate.getId: "+policeStationDataForUpdate.getStationCode());
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.updatePoliceStation(policeStationDataForUpdate));
 		
 	}
 
 	@DeleteMapping("/deletePoliceStation")
-	public ResponseEntity<?> deletePoliceStation(@RequestBody Long policeStationId){
+	public ResponseEntity<?> deletePoliceStation(@RequestParam Long policeStationId){
+		System.out.println(policeStationId);
 		return ResponseEntity.status(HttpStatus.OK).body(adminService.deletePoliceStation(policeStationId));
 	}
 }

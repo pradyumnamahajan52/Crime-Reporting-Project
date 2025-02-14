@@ -4,7 +4,7 @@ import { getAuthToken } from "../user/Auth";
 export async function updatePoliceStationAction({ request }) {
   try {
     const formData = await request.formData();
-    console.log("in action " + formData)
+    console.log("in action updatePoliceStationAction" + formData)
 
     // Convert formData into JSON object
     // const stationData = {
@@ -24,7 +24,6 @@ export async function updatePoliceStationAction({ request }) {
     // Send request to backend
     const response = await fetch(`${API}/admin/updatePoliceStation`, {
       method: "PUT",
-      // headers: { "Content-Type": "application/json" },
       headers: { "Authorization": "Bearer" + " " + getAuthToken() },
       body: formData,
     });

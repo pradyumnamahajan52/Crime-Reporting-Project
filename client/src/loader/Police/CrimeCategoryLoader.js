@@ -2,7 +2,6 @@ import { getAuthToken } from "../../action/user/Auth";
 import { API } from "../../API";
 
 export async function loader() {
-  // Do NOT await; return promise directly
   const crimeCategoryList = fetchCrimeCategory();
   
   return { crimeCategoryList };
@@ -14,7 +13,7 @@ export async function loader() {
         {
             method:"GET",
             headers: {
-                "Content-Type": "application/jason",
+                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
         }
