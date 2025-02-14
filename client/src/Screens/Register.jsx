@@ -81,15 +81,17 @@ export default function Register() {
     //     setCitizenformData({...citizenformData,cpassword:e.target.value})
     //   }
     // },
-    {
-      type: "date",
-      placeholder: "Enter your Date of Birth",
-      name: "dateOfBirth",
-      value: citizenformData.dateOfBirth,
-      onchange: (e) => {
-        setCitizenformData({ ...citizenformData, dateOfBirth: e.target.value });
-      },
-    },
+    // {
+    //   type: "date",
+    //   placeholder: "Enter your Date of Birth",
+    //   name: "dateOfBirth",
+    //   value: citizenformData.dateOfBirth,
+    //   onchange: (e) => {
+    //     setCitizenformData({ ...citizenformData, dateOfBirth: e.target.value });
+    //   },
+    // },
+
+    
     {
       type: "text",
       placeholder: "Enter your Card Number",
