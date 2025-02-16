@@ -70,6 +70,7 @@ public class S3ImageUploaderImpl implements S3ImageUploader {
             GeneratePresignedUrlRequest generatePresignedUrlRequest = new GeneratePresignedUrlRequest(bucketName,file).withMethod(HttpMethod.GET).withExpiration(expirationDate);
             signedUrls.add(amazonS3.generatePresignedUrl(generatePresignedUrlRequest).toString());
         });
+//        signedUrls.forEach(System.out::println);
 
         return signedUrls;
     }
