@@ -7,6 +7,12 @@ export default function CrimeReports() {
   const { crimeReportsData } = useLoaderData(); // Data is still a Promise
   const navigate = useNavigate();
 
+  const trimDescription = (desc, length = 50) => {
+    if (!desc) return "No description available";
+    return desc.length > length ? `${desc.slice(0, length)}...` : desc;
+  };
+
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-3xl font-semibold text-gray-800 mb-6">
@@ -21,7 +27,7 @@ export default function CrimeReports() {
               {crimeReports.data?.map((report) => (
                 <div
                   key={report.id}
-                  className="bg-white shadow-lg rounded-lg p-6 flex flex-col  content-between gap-2   space-y-4 h-full"
+                  className="bg-white shadow-lg rounded-lg p-6 flex flex-col h-full"
                 >
                   <div>
                     <h2 className="text-xl font-semibold text-gray-800">
@@ -39,13 +45,13 @@ export default function CrimeReports() {
                       {new Date(report.crimeDate).toDateString()}
                     </p>
                   </div>
-                  <div>
+                  <div className="mb-4 flex-grow">
                     <h3 className="text-sm font-medium text-gray-700">
                       Description
                     </h3>
-                    <p className="text-gray-800">{report.description}</p>
+                    <p className="text-gray-800">{trimDescription(report.description, 70)}</p>
                   </div>
-                  <div className="mt-auto">
+                  <div className="mt-auto flex justify-between items-center">
                     <span
                       className={`px-4 py-1 text-sm font-medium rounded-full ${getStatusColor(
                         report.reportStatus
