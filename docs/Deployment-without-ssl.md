@@ -130,7 +130,7 @@ http {
   
   server {
     listen 80;
-    server_name crimereport.live www.crimereport.live;
+    server_name crimeReport.live www.crimeReport.live
 
     root /usr/share/nginx/html;
     index index.html;
@@ -139,41 +139,7 @@ http {
       try_files $uri /index.html;
     }
 
-    # Redirect HTTP to HTTPS
-    return 301 https://$host$request_uri;
-  }
-
-  server {
-    listen 80;
-    server_name api.crimereport.live www.api.crimereport.live;
-
-    location / {
-      proxy_pass http://backend:8000/;
-      proxy_set_header Host $host;
-      proxy_set_header X-Real-IP $remote_addr;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-
-    # Redirect API HTTP to HTTPS
-    return 301 https://$host$request_uri;
-  }
-
-  # Secure HTTPS Server for Frontend
-  server {
-    listen 443 ssl;
-    server_name crimereport.live www.crimereport.live;
-
-    ssl_certificate /etc/letsencrypt/live/crimereport.live/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/crimereport.live/privkey.pem;
-
-    root /usr/share/nginx/html;
-    index index.html;
-
-    location / {
-      try_files $uri /index.html;
-    }
-    
-    # Serve JS and CSS with correct MIME types
+       # Serve JS and CSS with correct MIME types
     location /assets/ {
         root /usr/share/nginx/html;
         add_header Content-Type application/javascript;
@@ -200,15 +166,15 @@ http {
 
     error_log /var/log/nginx/error.log;
     access_log /var/log/nginx/access.log;
+    
+
+    # Redirect HTTP to HTTPS
+    # return 301 https://$host$request_uri;
   }
 
-  # Secure HTTPS Server for Backend API
   server {
-    listen 443 ssl;
-    server_name api.crimereport.live www.api.crimereport.live;
-
-    ssl_certificate /etc/letsencrypt/live/api.crimereport.live/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/api.crimereport.live/privkey.pem;
+    listen 80;
+    server_name api.crimeReport.live www.api.crimeReport.live;
 
     location / {
       proxy_pass http://backend:8000/;
@@ -219,7 +185,10 @@ http {
 
     error_log /var/log/nginx/api-error.log;
     access_log /var/log/nginx/api-access.log;
+    # Redirect API HTTP to HTTPS
+    # return 301 https://$host$request_uri;
   }
+
 }
 ```
 ---
@@ -271,13 +240,9 @@ services:
     container_name: nginx_proxy
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./client/dist:/usr/share/nginx/html  # Serve built frontend
-      - /etc/letsencrypt/live:/etc/letsencrypt/live:ro  # Mount SSL certs
-      - /etc/letsencrypt/archive:/etc/letsencrypt/archive:ro  # Mount SSL archive
-      - /etc/letsencrypt/renewal:/etc/letsencrypt/renewal:ro  # Renewal config
     depends_on:
       - backend
     restart: always
@@ -332,39 +297,16 @@ docker-compose down && docker-compose up -d
 
 ---
 
-## **10. Apply SSL Certificate (Let’s Encrypt)**
-If you haven't issued an SSL certificate, run:
-```bash
-sudo certbot certonly --webroot -w /var/www/certbot -d crimereport.live -d www.crimereport.live
-sudo certbot certonly --webroot -w /var/www/certbot -d api.crimereport.live -d www.api.crimereport.live
-```
-
-Then restart **NGINX**:
-```bash
-docker exec -it nginx_proxy nginx -s reload
-```
-
-### **Auto-Renew SSL**
-```bash
-crontab -e
-```
-Add this line:
-```
-0 0 * * * certbot renew --quiet && docker restart nginx_proxy
-```
-
----
-
 ## **11. Final Testing & Debugging**
 
 ### **Verify Frontend Loads**
 ```bash
-curl -I https://crimereport.live
+curl -I http://crimereport.live
 ```
 
 ### **Check Backend API**
 ```bash
-curl -I https://api.crimereport.live
+curl -I http://api.crimereport.live
 ```
 
 ### **Check NGINX Logs for Errors**
