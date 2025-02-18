@@ -2,10 +2,11 @@ import { getAuthToken } from "../../action/user/Auth";
 import { API } from "../../API";
 
 export async function loader() {
-  return { userData: loadUserDetails() }; // ✅ Return promise directly for Suspense
+  
+  return { userData: loadUserDetails() }; //Return promise directly for Suspense
 }
 
-// ✅ Function to fetch user details (returns promise)
+//  Function to fetch user details (returns promise)
 async function loadUserDetails() {
   try {
     const token = getAuthToken();

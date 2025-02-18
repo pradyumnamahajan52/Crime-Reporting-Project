@@ -163,7 +163,7 @@ public class ReportServiceImpl implements ReportService {
 		}
 
 		// Fetch Crime Reports and Convert to DTOs
-		return crimeReportsDao.findByCitizen(citizen).stream().map(crime -> new CrimeReportStatusDTO(crime.getId(), // ✅
+		return crimeReportsDao.findByCitizen(citizen).stream().map(crime -> new CrimeReportStatusDTO(crime.getId(), // 
 																													// Include
 																													// crimeId
 				crime.getCrimeCategory(), crime.getCrimeDate(), crime.getReportStatus(), crime.getDescription()))

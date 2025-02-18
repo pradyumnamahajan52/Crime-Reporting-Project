@@ -44,7 +44,7 @@ const AuditLogs = () => {
 
 export default AuditLogs;
 
-// ✅ Table Row Component
+//  Table Row Component
 const TableRow = ({ log }) => {
   return (
     <tr className="text-sm border-b-2">

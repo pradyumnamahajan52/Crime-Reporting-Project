@@ -181,6 +181,7 @@ public class AdminServiceImpl implements AdminService {
 	public ApiResponse<?> getPoliceStationDetails(Long id) {
 		PoliceStation policeStation = policeStationDao.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Police Stations with id does not exist"));
+		System.out.println(policeStation.toString());
 		return new ApiResponse<>("Police Station retrieved successfully",mapper.map(policeStation, PoliceStationResponseDTO.class));
 	}
 
@@ -204,17 +205,23 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public ApiResponse<?> updatePoliceStation(PoliceStationRegisterRequestDTO policeStationForUpdate) {
-		
-		PoliceStation policeStation =  policeStationDao.findByStationCode(policeStationForUpdate.getStationCode()).orElseThrow(() -> new ResourceNotFoundException("police station with "+policeStationForUpdate.getStationCode() +"does not exist"));
-		
+		PoliceStation policeStation =  policeStationDao.findById(policeStationForUpdate.getPoliceStationId()).orElseThrow(() -> new ResourceNotFoundException("police station with id: "+ policeStationForUpdate.getPoliceStationId() +" does not exist"));
 		policeStation.setStationName(policeStationForUpdate.getStationName());
+		policeStation.setStationCode(policeStationForUpdate.getStationCode());
 		Address address = new Address(policeStationForUpdate.getAddressLine1(), policeStationForUpdate.getAddressLine2(), policeStationForUpdate.getCity(), policeStationForUpdate.getState(), policeStationForUpdate.getCountry(), policeStationForUpdate.getPinCode() ,policeStationForUpdate.getLatitude(), policeStationForUpdate.getLongitude());
 		policeStation.setAddress(address);
-		
-		
-		return new ApiResponse<>("police station updated successfully", policeStation);
+		PoliceStation policeStationTransient = policeStationDao.save(policeStation);
+
+		return new ApiResponse<>("police station updated successfully", policeStationTransient);
 	}
 
-	
-	
+	@Override
+	public ApiResponse<?> deletePoliceStation(Long policeStationId) {
+		PoliceStation policeStation = policeStationDao.findById(policeStationId).orElseThrow(() -> new ResourceNotFoundException("Police Stations with id does not exist"));
+		policeStation.setIsDeleted(true);
+		policeStation =policeStationDao.save(policeStation);
+		return new ApiResponse<>("police station deleted successfully", mapper.map(policeStation,PoliceStationResponseDTO.class));
+	}
+
+
 }

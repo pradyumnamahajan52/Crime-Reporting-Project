@@ -8,7 +8,7 @@ export async function loader() {
   return { crimeReportsData };
 }
 
-// ✅ Function to fetch reports (returns promise)
+//  Function to fetch reports (returns promise)
 async function fetchCrimeReports() {
   const token = getAuthToken();
   const response = await fetch(`${API}/admin/reports`, {

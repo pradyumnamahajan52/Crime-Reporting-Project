@@ -4,6 +4,7 @@ import {
   redirect,
   useActionData,
   useLoaderData,
+  useNavigate,
   useNavigation,
   useSubmit,
 } from "react-router-dom";
@@ -42,6 +43,7 @@ const Report = () => {
   const actionData = useActionData();
   const submit = useSubmit();
   const navigation = useNavigation();
+  const navigate = useNavigate();
 
   const isSubmitting = navigation.state === "submitting";
 
@@ -153,8 +155,8 @@ const Report = () => {
         setShowPoliceStationModal(true);
       }
       if (actionData.reportSubmitted && actionData.policeAssigned) {
- redirect("/citizen/crimestatus");
-
+        // navigate("/citizen/crimestatus");
+        redirect("/citizen/crimestatus");
       }
     } else if (actionData?.error) {
       toast.error(actionData.error);
@@ -222,7 +224,7 @@ const Report = () => {
                 {selectedCategory}
                 <HiChevronDown className="size-5 text-gray-400" />
               </MenuButton>
-              <MenuItems className="absolute w-full z-10 mt-2 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5">
+              <MenuItems className="absolute w-full z-10 mt-2 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 max-h-60 overflow-y-auto">
                 {crimeCategories.data?.map((cat, index) => (
                   <MenuItem key={index}>
                     {({ active }) => (

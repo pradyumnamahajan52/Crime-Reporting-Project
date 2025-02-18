@@ -3,6 +3,7 @@ import LaliniImg from "../../src/assets/images/Profile_Picture/Lalini.jpg";
 import PradyumnaImg from "../../src/assets/images/Profile_Picture/Pradyumna.jpg";
 import JasmineImg from "../../src/assets/images/Profile_Picture/Jasmine.jpg";
 import MitaliImg from "../../src/assets/images/Profile_Picture/Mitali.jpg";
+import PawanImg from "../../src/assets/images/Profile_Picture/Pawan.jpg";
 
 const teamMembers = [
   {
@@ -23,7 +24,7 @@ const teamMembers = [
   {
     name: "Pawan Kumar Gupta",
     linkedin: "https://www.linkedin.com/in/dcod3r/",
-    image: "https://dummyimage.com/94x94",
+    image: PawanImg,
   },
   {
     name: "Mitali Gupta",
@@ -54,7 +55,7 @@ function About() {
             and real-time way to file complaints and seek justice.
           </p>
 
-          <h2 className="text-2xl font-semibold">✅ Key Features for Citizens</h2>
+          <h2 className="text-2xl font-semibold"> Key Features for Citizens</h2>
           <ul className="list-none list-inside space-y-1 md:space-y-2 text-lg">
             <li>📌 <strong>Report crimes online</strong> without visiting a police station.</li>
             <li>🔔 <strong>Track case progress</strong> and receive real-time updates.</li>

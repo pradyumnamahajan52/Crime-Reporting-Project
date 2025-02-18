@@ -2,10 +2,10 @@ import { getAuthToken } from "../../action/user/Auth";
 import { API } from "../../API";
 
 export async function loader() {
-  return { categoryData: loadCrimeCategory() }; // ✅ Return promise directly
+  return { categoryData: loadCrimeCategory() }; //  Return promise directly
 }
 
-// ✅ Function to fetch crime categories (returns promise)
+//  Function to fetch crime categories (returns promise)
 async function loadCrimeCategory() {
   try {
     const token = getAuthToken();

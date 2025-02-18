@@ -25,9 +25,9 @@ async function loadReportDetails(id) {
   }
 }
 
-// ✅ Suspense-compatible loader
+//  Suspense-compatible loader
 export async function loader({ params }) {
   const { id } = params;
   if (!id) throw new Error("Crime report ID is required");
-  return { reportDetails: loadReportDetails(id) }; // ✅ Return a Promise
+  return { reportDetails: loadReportDetails(id) }; //  Return a Promise
 }
