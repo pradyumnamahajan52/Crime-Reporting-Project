@@ -2,7 +2,6 @@ package site.crimereporting.controller;
 
 import java.util.List;
 
-import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,7 @@ import site.crimereporting.dtos.CrimeCategoryDTO;
 import site.crimereporting.dtos.CrimeReportResponseDTO;
 import site.crimereporting.service.CrimeCategoryService;
 
-import static org.apache.http.HttpStatus.*;
+import static jakarta.servlet.http.HttpServletResponse.SC_OK;
 
 @RestController
 @RequestMapping("/crimecategory")

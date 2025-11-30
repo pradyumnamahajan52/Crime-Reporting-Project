@@ -30,7 +30,6 @@ import site.crimereporting.entity.Evidence;
 import site.crimereporting.entity.PoliceStation;
 import site.crimereporting.entity.Status;
 import site.crimereporting.entity.User;
-import site.crimereporting.utils.ExtractFileNameFromUrl;
 
 @Service
 @Transactional
@@ -63,9 +62,10 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private ModelMapper modelMapper;
 
+	// CHANGED: Using FileUploader instead of S3ImageUploader
 	@Autowired
-	private S3ImageUploader s3ImageUploader;
-	
+	private FileUploader fileUploader;
+
 	@Autowired
 	private EmailService emailService;
 
@@ -103,16 +103,19 @@ public class ReportServiceImpl implements ReportService {
 			throw new ApiException("Crime Reporting failed");
 		}
 
+		// CHANGED: Upload evidence files to local storage instead of S3
 		if (crimereport.getEvidences() != null) {
 			for (MultipartFile file : crimereport.getEvidences()) {
-				FileUploadInfoDTO fileUploadInfoDTO = s3ImageUploader.uploadImage(file);
+				// Upload to local storage
+				FileUploadInfoDTO fileUploadInfoDTO = fileUploader.uploadFile(file);
+
 				Evidence evidence = new Evidence();
 				evidence.setCrimeReports(persistentCrimeReports);
-				evidence.setFileUrl(fileUploadInfoDTO.getFileUrl());
+				// Store the relative file path (not full URL)
+				evidence.setFileUrl(fileUploadInfoDTO.getFileName()); // This is the relative path
 				evidence.setFileType(fileUploadInfoDTO.getFileType());
 				evidenceDao.save(evidence);
 			}
-
 		}
 
 		// finding near by police stations list
@@ -163,10 +166,8 @@ public class ReportServiceImpl implements ReportService {
 		}
 
 		// Fetch Crime Reports and Convert to DTOs
-		return crimeReportsDao.findByCitizen(citizen).stream().map(crime -> new CrimeReportStatusDTO(crime.getId(), // 
-																													// Include
-																													// crimeId
-				crime.getCrimeCategory(), crime.getCrimeDate(), crime.getReportStatus(), crime.getDescription()))
+		return crimeReportsDao.findByCitizen(citizen).stream().map(crime -> new CrimeReportStatusDTO(crime.getId(),
+						crime.getCrimeCategory(), crime.getCrimeDate(), crime.getReportStatus(), crime.getDescription()))
 				.collect(Collectors.toList());
 	}
 
@@ -188,49 +189,52 @@ public class ReportServiceImpl implements ReportService {
 
 		if (evidences == null)
 			throw new ApiException("evidences of this report not found");
-		List<String> fileNames = new ArrayList<>();
-//                List<EvidenceResponseDTO> evidenceResponseDTOList = new ArrayList<>();
-		evidences.forEach((evidence) -> {
-			ExtractFileNameFromUrl extractFileNameFromUrl = new ExtractFileNameFromUrl();
-			fileNames.add(extractFileNameFromUrl.extractFileName(evidence.getFileUrl()));
-		});
-		List<String> preSignedUrls = s3ImageUploader.preSignedUrl(fileNames);
 
-		return new ApiResponse("Evidences fetched sucessfully", preSignedUrls);
+		// CHANGED: Get file paths from evidence records
+		List<String> filePaths = new ArrayList<>();
+		evidences.forEach((evidence) -> {
+			// Evidence.fileUrl now stores the relative path (e.g., "evidence/uuid.jpg")
+			filePaths.add(evidence.getFileUrl());
+		});
+
+		// CHANGED: Get accessible URLs for local files (replaces S3 presigned URLs)
+		List<String> fileUrls = fileUploader.getFileUrls(filePaths);
+
+		return new ApiResponse("Evidences fetched sucessfully", fileUrls);
 	}
 
 	@Override
 	public ApiResponse<?> getReportDetails(Long crimeReportId) {
-		
-		CrimeReports crimeReports =  crimeReportsDao.findById(crimeReportId).orElseThrow(() -> new ResourceNotFoundException("Crime Report with id " + crimeReportId + " doesn't exist"));
-		
-		Address crimeAddress = addressDao.findById(crimeReports.getAddress().getId()).orElseThrow(()-> new ResourceNotFoundException("crime address not found"));
-		
-		CrimeCategory category = crimeCategoryDao.findById(crimeReports.getCrimeCategory().getId()).orElseThrow(()-> new ResourceNotFoundException("crime category not found"));
-		
-		String stationName = null;
-		
-		 PoliceStation policeStation = crimeReports.getPoliceStation();
-		 Address stationAddress = null;
-		 String stationAddressLine1 = null;
-		 String stationAddressLine2 = null;
-		 String	stationCity = null;
-		 String stationState = null;
-		 String stationCountry = null;
-		 String	stationPinCode = null;
-		 
-		 if(policeStation != null) {
-			 stationName  = policeStation.getStationName();
-			 stationAddress = addressDao.findById(policeStation.getAddress().getId()).orElseThrow(() -> new ResourceNotFoundException("station adress not found"));
-			 stationAddressLine1 = stationAddress.getAddressLine1();
-			 stationAddressLine2 = stationAddress.getAddressLine2();
-			 stationCity = stationAddress.getCity();
-			 stationState = stationAddress.getState();
-			 stationCountry =  stationAddress.getCountry();
-			 stationPinCode = stationAddress.getPinCode();
-		 }
 
-		
+		CrimeReports crimeReports =  crimeReportsDao.findById(crimeReportId).orElseThrow(() -> new ResourceNotFoundException("Crime Report with id " + crimeReportId + " doesn't exist"));
+
+		Address crimeAddress = addressDao.findById(crimeReports.getAddress().getId()).orElseThrow(()-> new ResourceNotFoundException("crime address not found"));
+
+		CrimeCategory category = crimeCategoryDao.findById(crimeReports.getCrimeCategory().getId()).orElseThrow(()-> new ResourceNotFoundException("crime category not found"));
+
+		String stationName = null;
+
+		PoliceStation policeStation = crimeReports.getPoliceStation();
+		Address stationAddress = null;
+		String stationAddressLine1 = null;
+		String stationAddressLine2 = null;
+		String	stationCity = null;
+		String stationState = null;
+		String stationCountry = null;
+		String	stationPinCode = null;
+
+		if(policeStation != null) {
+			stationName  = policeStation.getStationName();
+			stationAddress = addressDao.findById(policeStation.getAddress().getId()).orElseThrow(() -> new ResourceNotFoundException("station adress not found"));
+			stationAddressLine1 = stationAddress.getAddressLine1();
+			stationAddressLine2 = stationAddress.getAddressLine2();
+			stationCity = stationAddress.getCity();
+			stationState = stationAddress.getState();
+			stationCountry =  stationAddress.getCountry();
+			stationPinCode = stationAddress.getPinCode();
+		}
+
+
 		return new ApiResponse<CrimeReportDetailsDTO>("crime report details fetched successfully", new CrimeReportDetailsDTO(
 				crimeReports.getId(),
 				crimeReports.getCrimeDate(),
@@ -251,22 +255,22 @@ public class ReportServiceImpl implements ReportService {
 				stationState,
 				stationCountry,
 				stationPinCode
-				));
+		));
 	}
 
 	@Override
 	public ApiResponse<?> updateCrimeStatus(Long crimeReportId, String status) {
-		
+
 		CrimeReports crimeReports =  crimeReportDao.findById(crimeReportId).orElseThrow(() -> new ResourceNotFoundException("crime report with given id not found"));
-		
+
 		crimeReportsDao.updateCrimeReportStatus(Status.valueOf(status), crimeReportId);
-		
-		
-		//for sending crimereport email 
+
+
+		//for sending crimereport email
 		User user = crimeReports.getCitizen().getUser();
 
 		emailService.generateFIR(user.getEmail(), crimeReports);
-		
+
 		return new ApiResponse("Crime Report Status updated successfully", null);
 	}
 
