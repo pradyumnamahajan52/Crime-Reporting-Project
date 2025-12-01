@@ -1,4 +1,3 @@
-
 package site.crimereporting.service;
 
 import java.time.LocalDateTime;
@@ -82,6 +81,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AuditService auditService;
 
+    // CHANGED: Using LocalFileStorageService instead of storing bytes in database
+    @Autowired
+    private LocalFileStorageService fileStorageService;
+
     private final Random random = new Random();
     private static final int OTP_EXPIRY_MINUTES = 5;
 
@@ -93,11 +96,14 @@ public class UserServiceImpl implements UserService {
         // Create user object and set role as CITIZEN
         User user = mapper.map(userDto, User.class);
         user.setRole(UserRole.CITIZEN);
- 
 
-        // Create Aadhaar card and Address objects
+        // CHANGED: Upload Aadhaar image to local storage instead of storing bytes
+        String aadhaarImagePath = fileStorageService.uploadFile(citizen.getImage(), "aadhaar");
+
+        // Create Aadhaar card object
         AadhaarCard aadhaarCard = mapper.map(citizen, AadhaarCard.class);
-        aadhaarCard.setImage(citizen.getImage().getBytes());
+        // CHANGED: Store file path instead of byte array
+        aadhaarCard.setImagePath(aadhaarImagePath);
 
         Address address = mapper.map(citizen, Address.class);
 
@@ -113,8 +119,6 @@ public class UserServiceImpl implements UserService {
         if (registeredCitizen == null) {
             throw new ApiException("Citizen registration failed!");
         }
-        
-        
 
         return new ApiResponse<>("Citizen registered successfully!", new RegisterResponseDTO(user.getFullName(), user.getEmail(), user.getRole()));
     }
@@ -129,7 +133,7 @@ public class UserServiceImpl implements UserService {
         user.setRole(UserRole.POLICE);
 
         PoliceStation policeStation = policeStationDao.findByStationCode(police.getStationCode())
-        // Find police station by station code
+                // Find police station by station code
                 .orElseThrow(() -> new ResourceNotFoundException("Station code is not valid!"));
 
         // Create PoliceStationUser object
@@ -223,7 +227,7 @@ public class UserServiceImpl implements UserService {
 //        // Return AuthResponse with JWT token
 //        return new AuthResponse("User login successful!", token, loginUser);
 //    }
-    
+
     @Override
     public AuthResponse verifyOtp(String email, String otp) {
         Optional<User> userOptional = userDao.findByEmailAndOtp(email, otp);
@@ -233,7 +237,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User existingUser = userOptional.get();
-        
+
 
         // Check OTP expiry
         if (existingUser.getOtpExpiry() == null || existingUser.getOtpExpiry().isBefore(LocalDateTime.now())) {
@@ -261,25 +265,25 @@ public class UserServiceImpl implements UserService {
         return new AuthResponse("User login successful!", token, loginUser);
     }
 
-	@Override
-	public ApiResponse<?> getPoliceStationUserDetails() {
-		
-		List<PoliceStationUser> policeStationUsers =  policeStationUserDao.findAll();
-		
-		List<PoliceStationUserDTO> policeStationUserDTOs = new ArrayList<>();
-		
-		policeStationUsers.forEach((police) -> {
-			PoliceStationUserDTO policeDto =  mapper.map(police, PoliceStationUserDTO.class);
-			policeDto.setFullName(police.getUser().getFullName());
-			policeDto.setState(police.getPoliceStation().getStationName()+" " +police.getPoliceStation().getAddress().getAddressLine1() +" "+ police.getPoliceStation().getAddress().getAddressLine2()+" "+ police.getPoliceStation().getAddress().getCity() +" "+ police.getPoliceStation().getAddress().getState());
-			policeDto.setEmail(police.getUser().getEmail());
-			policeDto.setPhoneNumber(police.getUser().getPhoneNumber());
-			
-			policeStationUserDTOs.add(policeDto);
-		});
-		
-		return new ApiResponse<>("successfully fetched all police station users", policeStationUserDTOs );
-	}
+    @Override
+    public ApiResponse<?> getPoliceStationUserDetails() {
+
+        List<PoliceStationUser> policeStationUsers =  policeStationUserDao.findAll();
+
+        List<PoliceStationUserDTO> policeStationUserDTOs = new ArrayList<>();
+
+        policeStationUsers.forEach((police) -> {
+            PoliceStationUserDTO policeDto =  mapper.map(police, PoliceStationUserDTO.class);
+            policeDto.setFullName(police.getUser().getFullName());
+            policeDto.setState(police.getPoliceStation().getStationName()+" " +police.getPoliceStation().getAddress().getAddressLine1() +" "+ police.getPoliceStation().getAddress().getAddressLine2()+" "+ police.getPoliceStation().getAddress().getCity() +" "+ police.getPoliceStation().getAddress().getState());
+            policeDto.setEmail(police.getUser().getEmail());
+            policeDto.setPhoneNumber(police.getUser().getPhoneNumber());
+
+            policeStationUserDTOs.add(policeDto);
+        });
+
+        return new ApiResponse<>("successfully fetched all police station users", policeStationUserDTOs );
+    }
 
 
     @Override
@@ -292,4 +296,3 @@ public class UserServiceImpl implements UserService {
         return new ApiResponse<>("Logged Users Information", user);
     }
 }
-

@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+.env.old
 .env
 
 ### STS ###
@@ -33,3 +34,60 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# ==========================================
+# Database Files
+# ==========================================
+# SQLite database file
+*.db
+*.sqlite
+*.sqlite3
+crimereporting.db
+
+# MySQL dumps (if you create backups)
+*.sql
+*.dump
+
+# ==========================================
+# File Upload Directory
+# ==========================================
+# Don't commit uploaded files
+uploads/
+uploads/**
+
+# ==========================================
+# Environment Configuration
+# ==========================================
+.env.local
+.env.*.local
+
+# ==========================================
+# IDE and Build Files (if not already in your .gitignore)
+# ==========================================
+# IntelliJ IDEA
+.idea/
+
+# Eclipse
+.settings/
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# ==========================================
+# Logs
+# ==========================================
+*.log
+logs/
+
+# ==========================================
+# OS Files
+# ==========================================
+.DS_Store
+Thumbs.db
+
